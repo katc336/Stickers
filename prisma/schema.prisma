@@ -9,3 +9,63 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id Int     @id @default(autoincrement())
+  name      String
+  username  String
+  password  String
+  classes   Class[]
+}
+
+model Class {
+  classId   Int       @id @default(autoincrement())
+  name      String
+  teacher   User   @relation(fields: [teacherId], references: [id])
+  teacherId Int
+  students  Student[]
+  lessons   Lesson[]
+}
+
+model Student {
+  studentId       Int               @id @default(autoincrement())
+  name            String
+  class           Class             @relation(fields: [classId], references: [classId])
+  classId         Int
+  attendances     Attendance[]
+  studentProgress StudentProgress[]
+}
+
+model Lesson {
+  lessonId           Int                 @id @default(autoincrement())
+  lessonName         String
+  class              Class               @relation(fields: [classId], references: [classId])
+  classId            Int
+  learningObjectives LearningObjective[]
+  attendances        Attendance[]
+}
+
+model Attendance {
+  attendanceId Int     @id @default(autoincrement())
+  student      Student @relation(fields: [studentId], references: [studentId])
+  studentId    Int
+  lesson       Lesson  @relation(fields: [lessonId], references: [lessonId])
+  lessonId     Int
+}
+
+model LearningObjective {
+  objectiveId     Int               @id @default(autoincrement())
+  objectiveName   String
+  lesson          Lesson            @relation(fields: [lessonId], references: [lessonId])
+  lessonId        Int
+  studentProgress StudentProgress[]
+}
+
+model StudentProgress {
+  progressId        Int               @id @default(autoincrement())
+  student           Student           @relation(fields: [studentId], references: [studentId])
+  studentId         Int
+  learningObjective LearningObjective @relation(fields: [objectiveId], references: [objectiveId])
+  objectiveId       Int
+  progressPrecent   Int
+}
