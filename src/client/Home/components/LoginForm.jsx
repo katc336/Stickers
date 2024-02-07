@@ -1,3 +1,4 @@
+import Alert from '@mui/material/Alert';
 import Stack from "@mui/material/Stack";
 import Typograpgy from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -16,12 +17,22 @@ const LoginForm = ({ switchForm }) => {
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
-            const result = await login({ username, password })
-            console.log(result)
+            const result = await login({ username, password });
+            console.log(result);
+            if (result.data) {
+                setLoginError(false);
+                console.log("Success!");
+                navigate("/account");
+            } else {
+                setLoginError(true);
+                console.log("Incorrect login credentials");
+            }
         } catch (error) {
-            console.error(error)
+            console.error(error);
+            setLoginError(true);
         }
     }
+ 
     return (
         <div>
             <Card sx={{ p: 5, mx: 30 }}>
@@ -30,6 +41,7 @@ const LoginForm = ({ switchForm }) => {
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                     Login
                 </Typograpgy>
+                {loginError && <Alert severity="error">Incorrect username or password. Please try again</Alert>}
                 <form onSubmit={handleSubmit}>
                     <Stack direction="column">
                         <TextField
