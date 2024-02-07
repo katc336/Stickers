@@ -4,6 +4,7 @@ import { useGetUserQuery } from '../../redux/api';
 import HelloCard from './components/HelloCard';
 import NavDrawer from '../Navigation/NavDrawer';
 import ProgressChart from './components/ProgressChart';
+import MyClasses from './components/MyClasses';
 
 const WebDashboard = () => {
     const { data, error, isLoading } = useGetUserQuery();
@@ -20,6 +21,7 @@ const WebDashboard = () => {
                 <SearchBar />
                 <HelloCard name={data.name} />
                 <ProgressChart />
+                <MyClasses />
             </Box>
         </div>
     );

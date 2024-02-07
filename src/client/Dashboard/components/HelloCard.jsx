@@ -7,8 +7,8 @@ const HelloCard = ({ name }) => {
     return (
         <div>
             <Card
-            elevation={10}
-            sx={{ borderRadius: "20px", p: 3 }}>
+                elevation={10}
+                sx={{ borderRadius: "20px", p: 3 }}>
                 <Stack direction="row">
                     <Typography
                         variant="h4"

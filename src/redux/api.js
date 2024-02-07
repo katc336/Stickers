@@ -16,7 +16,7 @@ const api = createApi({
             return headers
         },
     }),
-    tagTypes: ["User"],
+    tagTypes: ["User", "Class"],
 
     endpoints: (builder) => ({
         //<-----------AUTHORIZATION----------->
@@ -46,7 +46,22 @@ const api = createApi({
                 method: 'GET',
             }),
             providesTags: ["User"]
-        })
+        }),
+        getClasses: builder.query({
+            query: () => ({
+                url: `/api/my_classes`,
+                method: 'GET'
+            }),
+            providesTags: ["Class"]
+        }),
+        postNewClass: builder.mutation({
+            query: (newClass) => ({
+                url: `/api/class`,
+                method: 'POST',
+                body: newClass,
+            }),
+            invalidatesTags: ["Class"]
+        }),
     })
 });
 export default api;
@@ -55,4 +70,7 @@ export const {
     useRegisterMutation,
     useLoginMutation,
     useGetUserQuery,
+    //User Information
+    useGetClassesQuery,
+    usePostNewClassMutation,
 } = api

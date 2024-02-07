@@ -57,7 +57,6 @@ const LoginForm = ({ switchForm }) => {
                             variant="filled"
                             sx={{ my: 1 }} />
                         <button
-                            onClick={() => { switchForm }}
                             className="auth-button"
                             type="submit">
                             Login
