@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typograpgy from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
+import { Link } from 'react-router-dom';
 import { useState } from "react";
 import { useLoginMutation } from "../../../redux/api";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ const LoginForm = ({ switchForm }) => {
             setLoginError(true);
         }
     }
- 
+
     return (
         <div>
             <Card sx={{ p: 5, mx: 30 }}>
@@ -70,12 +71,14 @@ const LoginForm = ({ switchForm }) => {
                 }}>
                     Don't have an account?
                 </Typograpgy>
-                <Typograpgy sx={{
-                    color: "#0A1D56",
-                    textAlign: "center"
-                }}>
-                    Sign Up!
-                </Typograpgy>
+                <Link to="/register">
+                    <Typograpgy sx={{
+                        color: "#0A1D56",
+                        textAlign: "center"
+                    }}>
+                        Sign Up!
+                    </Typograpgy>
+                </Link>
             </Card>
         </div>
     )

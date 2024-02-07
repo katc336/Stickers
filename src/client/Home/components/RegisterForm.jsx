@@ -3,29 +3,37 @@ import Typograpgy from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { useLoginMutation } from "../../../redux/api";
+import { useLoginMutation, useRegisterMutation } from "../../../redux/api";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [loginError, setLoginError] = useState(false);
-    const [login, { error }] = useLoginMutation();
+    const [registerError, setRegisterError] = useState(false);
+    const [signup, { error }] = useRegisterMutation();
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
-            const result = await login({ username, password })
+            const result = await signup({ name, username, password })
             console.log(result)
+            if (result.data) {
+                setRegisterError(false);
+                console.log("Success!");
+                navigate("/account");
+            } else {
+                setRegisterError(true);
+                console.log("Incorrect login credentials");
+            }
         } catch (error) {
             console.error(error)
         }
     }
     return (
         <div>
-            <Card sx={{ p: 5, mx: 30 }}>
+            <Card sx={{ p: 5, mx: 80 }}>
                 <Typograpgy
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
@@ -33,19 +41,22 @@ const RegisterForm = () => {
                 </Typograpgy>
                 <form onSubmit={handleSubmit}>
                     <TextField
-                        label="Username"
+                        fullWidth
+                        label="Name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         variant="filled"
                         sx={{ my: 1 }} />
                     <Stack direction="column">
                         <TextField
+                            fullWidth
                             label="Username"
                             value={username}
                             onChange={(event) => setUsername(event.target.value)}
                             variant="filled"
                             sx={{ my: 1 }} />
                         <TextField
+                            fullWidth
                             label="Password"
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
@@ -54,7 +65,7 @@ const RegisterForm = () => {
                         <button
                             className="auth-button"
                             type="submit">
-                            Login
+                            Sign Up
                         </button>
                     </Stack>
                 </form>
@@ -69,7 +80,7 @@ const RegisterForm = () => {
                     color: "#0A1D56",
                     textAlign: "center"
                 }}>
-                    Login!
+                    Go to Login
                 </Typograpgy>
             </Card>
         </div>
