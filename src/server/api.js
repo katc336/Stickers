@@ -61,7 +61,7 @@ apiRouter.post("/class/:id/add_student", requireUser, async (req, res, next) => 
     }
 });
 //<-----------------GET ALL STUDNETS----------------->
-apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
+apiRouter.get("/students", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.student.findMany({
             where: { teacherId: req.user.id }
@@ -100,8 +100,8 @@ apiRouter.post("/class/:id/lesson", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-//<-----------------GET ALL LESSONSS----------------->
-apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
+//<-----------------GET ALL LESSONS----------------->
+apiRouter.get("/lessons", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.class.findMany({
             where: { teacherId: req.user.id }
@@ -112,7 +112,7 @@ apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------GET A SINGLE LESSON----------------->
-apiRouter.get("/class/:id/lesson", requireUser, async (req, res, next) => {
+apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.class.findUnique({
             where: { id: Number(req.params.id) }
@@ -161,7 +161,7 @@ apiRouter.get("/lesson/:id/objective", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------GET A SINGLE OBJECTIVE----------------->
-apiRouter.get("/objective/:id", requireUser, async (req, res, next) => {
+apiRouter.get("/lesson/objective/:id", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.learningObjective.findUnique({
             where: { id: Number(req.params.id) }

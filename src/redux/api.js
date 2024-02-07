@@ -16,7 +16,7 @@ const api = createApi({
             return headers
         },
     }),
-    tagTypes: ["User", "Class"],
+    tagTypes: ["User", "Class", "Student", "Lesson", "Objective"],
 
     endpoints: (builder) => ({
         //<-----------AUTHORIZATION----------->
@@ -47,13 +47,7 @@ const api = createApi({
             }),
             providesTags: ["User"]
         }),
-        getClasses: builder.query({
-            query: () => ({
-                url: `/api/my_classes`,
-                method: 'GET'
-            }),
-            providesTags: ["Class"]
-        }),
+        //<------------CLASSES------------>
         postNewClass: builder.mutation({
             query: (newClass) => ({
                 url: `/api/class`,
@@ -62,6 +56,89 @@ const api = createApi({
             }),
             invalidatesTags: ["Class"]
         }),
+        getClasses: builder.query({
+            query: () => ({
+                url: `/api/my_classes`,
+                method: 'GET'
+            }),
+            providesTags: ["Class"]
+        }),
+        getSingleClass: builder.query({
+            query: (id) => ({
+                url: `/api/my_classes/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ["Class"]
+        }),
+        //<------------STUDENTS------------>
+        postNewStudent: builder.mutation({
+            query: (student, id) => ({
+                url: `/api/class/${id}/add_student`,
+                method: 'POST',
+                body: student,
+            }),
+            invalidatesTags: ["Student"]
+        }),
+        getAllStudents: builder.query({
+            query: () => ({
+                url: `/api/students`,
+                method: 'GET'
+            }),
+            providesTags: ["Student"]
+        }),
+        getSingleStudent: builder.query({
+            query: (id) => ({
+                url: `/api/student/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ["Student"]
+        }),
+        //<------------LESSONS------------>
+        postNewLesson: builder.mutation({
+            query: (lesson, id) => ({
+                url: `/api/class/${id}/lesson`,
+                method: 'POST',
+                body: lesson,
+            }),
+            invalidatesTags: ["Lesson"]
+        }),
+        getAllLessons: builder.query({
+            query: () => ({
+                url: `/api/lessons`,
+                method: 'GET'
+            }),
+            providesTags: ["Lesson"]
+        }),
+        getSingleLesson: builder.query({
+            query: (id) => ({
+                url: `/api/lesson/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ["Lesson"]
+        }),
+        //<------------LEARNING OBJECTIVES------------>
+        postNewObjective: builder.mutation({
+            query: (objective, id) => ({
+                url: `/api/lesson/${id}/objective`,
+                method: 'POST',
+                body: objective,
+            }),
+            invalidatesTags: ["Lesson"]
+        }),
+        getAllObjectives: builder.query({
+            query: (id) => ({
+                url: `/api/lesson/${id}/objective`,
+                method: 'GET'
+            }),
+            providesTags: ["Objective"]
+        }),
+        getSingleObjective: builder.query({
+            query: (id) => ({
+                url: `/api/lesson/objective/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ["Objective"]
+        }),
     })
 });
 export default api;
@@ -69,8 +146,18 @@ export const {
     //Authorization
     useRegisterMutation,
     useLoginMutation,
-    useGetUserQuery,
     //User Information
-    useGetClassesQuery,
+    useGetUserQuery,
+    //Classes
     usePostNewClassMutation,
+    useGetClassesQuery,
+    useGetSingleClassQuery,
+     //Students
+     usePostNewStudentMutation,
+     useGetAllStudentsQuery,
+     useGetSingleStudentQuery,
+     //Learning Objectives
+     usePostNewObjectiveMutation,
+     useGetAllObjectivesQuery,
+     useGetSingleObjectiveQuery,
 } = api
