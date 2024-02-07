@@ -1,9 +1,27 @@
+import Box from '@mui/material/Box';
+import SearchBar from './components/SearchBar';
+import { useGetUserQuery } from '../../redux/api';
+import HelloCard from './components/HelloCard';
+import NavDrawer from '../Navigation/NavDrawer';
+import ProgressChart from './components/ProgressChart';
 
 const WebDashboard = () => {
+    const { data, error, isLoading } = useGetUserQuery();
+    if (isLoading) {
+        return <div></div>
+    }
+    if (error) {
+        console.error(error)
+    }
     return (
         <div>
-            HELLO WORLD
+            <NavDrawer />
+            <Box sx={{ ml: 30, mr: 5 }}>
+                <SearchBar />
+                <HelloCard name={data.name} />
+                <ProgressChart />
+            </Box>
         </div>
-    )
+    );
 }
 export default WebDashboard

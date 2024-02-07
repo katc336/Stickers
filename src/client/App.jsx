@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./Home/HomePage";
 import Dashboard from "./Dashboard/Dashboard";
 import RegisterForm from "./Home/components/RegisterForm";
+import NavDrawer from "./Navigation/NavDrawer";
 function App() {
 
   return (
