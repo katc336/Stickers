@@ -18,7 +18,7 @@ const SALT_COUNT = 10;
 // POST /auth/register
 authRouter.post("/register", async (req, res, next) => {
     try {
-        const { name, username, password, } = req.body
+        const { username, name, password, } = req.body
         const hashedPassword = await bcrypt.hash(password, SALT_COUNT)
 
         const user = await prisma.user.create({
@@ -28,14 +28,14 @@ authRouter.post("/register", async (req, res, next) => {
                 password: hashedPassword
             }
         });
-        const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET);
         delete user.password
-        res.send({ user, token });
+        const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET);
+        res.send({ token });
+        console.log("Registration successful!");
     } catch (error) {
         next(error)
     }
-});
-
+})
 //<--------------------------------LOGIN USERS-------------------------------->
 //POST /auth/login
 authRouter.post("/login", async (req, res, next) => {
@@ -46,25 +46,27 @@ authRouter.post("/login", async (req, res, next) => {
                 username: username
             },
         });
-        const correctPassword = await bcrypt.compare(
+
+        const validPassword = await bcrypt.compare(
             password,
             user?.password ?? ""
         );
-        //Check user and password 
-        if(!user) {
-            return res.status(401).send("There is no user with that username")
-        } else if (!correctPassword){
-            return res.status(401).send("Incorrect password");
+        //Check user and password
+        if (!user) {
+            return res.status(401).send("There is no user with that username.");
+        } else if ( !validPassword) {
+            return res.status(401).send("Incorrect password.");
         }
-        const token = jwt.sign({ id: user.id}, process.env.JWT_SECRET);
-        delete user.password
-        delete user.hashedPassword
+
+        //Create token
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
         res.send({ token });
-        console.log("Successful login!")
+        console.log("Login successful!");
     } catch (error) {
-        next(error)
+        next(error);
     }
-});
+})
+
 //<--------------------------------GET USER ACCOUNT-------------------------------->
 //GET /auth/my_account
 authRouter.get("/account", requireUser, async (req, res, next) => {

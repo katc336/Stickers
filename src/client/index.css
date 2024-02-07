@@ -1,0 +1,9 @@
+html {
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+  background-attachment: fixed;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-image: linear-gradient(to right top, #d0cfed, #cedaf3, #d0e4f6, #d7edf8, #e1f5fa, #e0f8fb, #e0fcfb, #e1fff9, #d6fff2, #cfffe7, #ccffd8, #cfffc7);
+}
