@@ -72,10 +72,10 @@ const api = createApi({
         }),
         //<------------STUDENTS------------>
         postNewStudent: builder.mutation({
-            query: (student, id) => ({
-                url: `/api/class/${id}/add_student`,
+            query: ({ name, id }) => ({
+                url: `/api/add_student`,
                 method: 'POST',
-                body: student,
+                body: { name, id },
             }),
             invalidatesTags: ["Student"]
         }),

@@ -1,4 +1,5 @@
 import { useMediaQuery, useTheme } from "@mui/material";
+import WebAllClasses from "./WebAllClasses";
 
 const AllClasses = () => {
 
@@ -14,7 +15,7 @@ const AllClasses = () => {
                 </div>
                 :
                 <div>
-                  
+                  <WebAllClasses />
                 </div>}
         </div>
     )

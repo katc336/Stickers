@@ -22,7 +22,7 @@ apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
 apiRouter.get("/my_classes/:id", requireUser, async (req, res, next) => {
     try {
         const myClass = await prisma.class.findUnique({
-            where: { id: Number(req.params.id) }
+            where: { id: Number(req.params.id) },
         })
         res.send(myClass)
     } catch (error) {
@@ -45,10 +45,9 @@ apiRouter.post("/class", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------ADD STUDNETS TO A CLASS----------------->
-apiRouter.post("/class/:id/add_student", requireUser, async (req, res, next) => {
+apiRouter.post("/add_student", requireUser, async (req, res, next) => {
     try {
-        const { name } = req.body
-        const id = Number(req.params.id);
+        const { name, id } = req.body
         const newStudent = await prisma.student.create({
             data: {
                 name: name,
@@ -61,10 +60,10 @@ apiRouter.post("/class/:id/add_student", requireUser, async (req, res, next) => 
     }
 });
 //<-----------------GET ALL STUDNETS----------------->
-apiRouter.get("/students", requireUser, async (req, res, next) => {
+apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.student.findMany({
-            where: { teacherId: req.user.id }
+            where: { classId: Number(req.params.id) }
         })
         res.send(classes)
     } catch (error) {
