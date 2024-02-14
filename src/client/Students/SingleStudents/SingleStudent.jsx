@@ -1,4 +1,5 @@
 import { useMediaQuery, useTheme } from "@mui/material";
+import WebSingleStudent from "./WebSingleStudent";
 
 const SingleStudent = () => {
 
@@ -10,11 +11,11 @@ const SingleStudent = () => {
             {isMobile
                 ?
                 <div>
-                  
+
                 </div>
                 :
                 <div>
-                  
+                    <WebSingleStudent />
                 </div>}
         </div>
     )

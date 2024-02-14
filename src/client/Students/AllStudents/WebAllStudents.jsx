@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
+import Stack from "@mui/material/Stack"
+import { Link } from "react-router-dom"
 import { useGetAllStudentsByTeacherQuery } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 
@@ -20,19 +22,28 @@ const WebAllStudents = () => {
                 <Card
                     sx={{ p: 1 }}
                     elevation={10}>
-                        <Typography
+                    <Typography
                         sx={{ textAlign: "center" }}
                         variant="h3">
-                           All Students:
-                        </Typography>
+                        All Students:
+                    </Typography>
                     {data && data.map((student) => (
                         <div key={student.id}>
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
-                                <Typography>
-                                    {student.name}
-                                </Typography>
+                                <Stack direction="row">
+                                    <Typography sx={{ mr: 2 }}>
+                                        {student.name}
+                                    </Typography>
+                                    <Link
+                                        style={{ textDecoration: "none" }}
+                                        to={`/student/${student.id}`}>
+                                        <button>
+                                            See Details
+                                        </button>
+                                    </Link>
+                                </Stack>
                             </Card>
                         </div>
                     ))}

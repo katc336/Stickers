@@ -5,8 +5,10 @@ import Dashboard from "./Dashboard/Dashboard";
 import RegisterForm from "./Home/components/RegisterForm";
 import AllClasses from "./Classes/AllClasses/AllClasses";
 import AllStudents from "./Students/AllStudents/AllStudents";
+import SingleStudent from "./Students/SingleStudents/SingleStudent";
 import AllLessons from "./Lessons/AllLessons/AllLessons";
 import AllObjectives from "./LearningObjective/AllObjectives/AllObjectives";
+
 function App() {
 
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/account" element={<Dashboard />} />
         <Route path="/my_classes" element={<AllClasses />} />
         <Route path="/my_students" element={<AllStudents />} />
+        <Route path="/student/:id" element={<SingleStudent />} />
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/my_objectives" element={<AllObjectives />} />
       </Routes>
