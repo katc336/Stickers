@@ -164,6 +164,10 @@ export const {
     useGetAllStudentsByTeacherQuery,
     useGetAllStudentsByClassQuery,
     useGetSingleStudentQuery,
+    //Lessons
+    usePostNewLessonMutation,
+    useGetAllLessonsQuery,
+    useGetSingleLessonQuery,
     //Learning Objectives
     usePostNewObjectiveMutation,
     useGetAllObjectivesQuery,

@@ -1,18 +1,18 @@
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
-import { useGetAllStudentsByTeacherQuery } from "../../../redux/api"
+import { useGetAllLessonsQuery } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 
-
-const WebAllStudents = () => {
-    const { data, error, isLoading } = useGetAllStudentsByTeacherQuery();
+const WebAllLessons = () => {
+    const { data, error, isLoading } = useGetAllLessonsQuery();
     if (isLoading) {
         return <div></div>
     }
     if (error) {
-        console.error(error);
+        console.error(error)
     }
+    console.log(data);
     return (
         <div>
             <NavDrawer />
@@ -23,22 +23,23 @@ const WebAllStudents = () => {
                         <Typography
                         sx={{ textAlign: "center" }}
                         variant="h3">
-                           All Students:
+                           All Lessons:
                         </Typography>
-                    {data && data.map((student) => (
-                        <div key={student.id}>
+                    {data && data.map((lesson) => (
+                        <div key={lesson.id}>
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
                                 <Typography>
-                                    {student.name}
+                                    {lesson.lessonName}
                                 </Typography>
                             </Card>
                         </div>
                     ))}
                 </Card>
             </Box>
+
         </div>
     )
 }
-export default WebAllStudents
+export default WebAllLessons

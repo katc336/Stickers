@@ -1,4 +1,5 @@
 import { useMediaQuery, useTheme } from "@mui/material";
+import WebAllLessons from "./WebAllLessons";
 
 const AllLessons = () => {
 
@@ -14,7 +15,7 @@ const AllLessons = () => {
                 </div>
                 :
                 <div>
-                  
+                  <WebAllLessons />
                 </div>}
         </div>
     )

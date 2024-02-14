@@ -118,17 +118,27 @@ apiRouter.post("/lesson", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-//<-----------------GET ALL LESSONS----------------->
+//<-----------------GET ALL LESSONS PER TEACHER----------------->
 apiRouter.get("/lessons", requireUser, async (req, res, next) => {
     try {
-        const classes = await prisma.class.findMany({
-            where: { teacherId: req.user.id }
+        const teacher = await prisma.user.findUnique({
+            where: { id: req.user.id },
+            include: {
+                classes: {
+                    include: {
+                        lessons: true
+                    }
+                }
+            }
         })
-        res.send(classes)
+        // take the lessons from the classes and flatten them into a single array
+        const lessons = teacher.classes.flatMap((className) => className.lessons)
+        res.send(lessons);
     } catch (error) {
         next(error)
     }
-});
+ });
+ 
 //<-----------------GET A SINGLE LESSON----------------->
 apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
