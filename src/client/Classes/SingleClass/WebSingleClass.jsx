@@ -19,8 +19,7 @@ const WebSingleClass = ({ id }) => {
     if (error) {
         console.error(error)
     }
-    console.log(id);
-    console.log(name);
+
     const handleAdd = async (event) => {
         try {
             event.preventDefault();
@@ -47,6 +46,11 @@ const WebSingleClass = ({ id }) => {
                 <Typography>
                     {data.name}
                 </Typography>
+                {data.students.map((student) => (
+                    <Typography>
+                        {student.name}
+                    </Typography>
+                ))}
                 {addError &&
                     <Alert severity="error">There was a mistake adding the student.</Alert>}
                 {clearButton &&
