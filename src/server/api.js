@@ -60,7 +60,28 @@ apiRouter.post("/add_student", requireUser, async (req, res, next) => {
         next(error);
     }
 });
-//<-----------------GET ALL STUDNETS----------------->
+//<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
+apiRouter.get("/my_students", requireUser, async (req, res, next) => {
+    try {
+        const teacher = await prisma.user.findUnique({
+            where: { id: req.user.id },
+            include: {
+                classes: {
+                    include: {
+                        students: true
+                    }
+                }
+            }
+        })
+        //take the students from the classes at flatten them into a single array
+        const students = teacher.classes.flatMap((classes) => classes.students)
+        res.send(students)
+    } catch (error) {
+        next(error)
+    }
+});
+
+//<-----------------GET ALL STUDNETS FOR A CLASS----------------->
 apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.student.findMany({
@@ -83,16 +104,13 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------ADD A LESSON----------------->
-apiRouter.post("/class/:id/lesson", requireUser, async (req, res, next) => {
+apiRouter.post("/lesson", requireUser, async (req, res, next) => {
     try {
-        const myClass = await prisma.class.findUnique({
-            where: { id: Number(req.params.id) }
-        })
-        const { lessonName } = req.body
+        const { lessonName, id } = req.body
         const lesson = await prisma.lesson.create({
             data: {
                 lessonName: lessonName,
-                class: { connect: { id: myClass.id } }
+                class: { connect: { id: id } }
             }
         })
         res.send(lesson)
@@ -123,30 +141,47 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------ADD AN OBJECTIVE----------------->
-apiRouter.post("/lesson/:id/objective", requireUser, async (req, res, next) => {
+apiRouter.post("/objective", requireUser, async (req, res, next) => {
     try {
-        const myLesson = await prisma.lesson.findUnique({
-            where: { id: Number(req.params.id) }
-        });
-
-        if (!myLesson) {
-            return res.status(404).json({ error: "Lesson not found" });
-        }
-
-        const { objectiveName } = req.body;
+        const { objectiveName, id } = req.body;
         const lesson = await prisma.learningObjective.create({
             data: {
                 objectiveName: objectiveName,
-                lesson: { connect: { id: myLesson.id } }
+                lesson: { connect: { id: id } }
             }
         });
-
         res.send(lesson);
     } catch (error) {
         next(error);
     }
 });
-//<-----------------GET ALL OBJECTIVES----------------->
+//<-----------------GET ALL OBJECTIVES FOR A TEACHER----------------->
+apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
+    try {
+        const teacher = await prisma.user.findUnique({
+            where: { id: req.user.id },
+            include: {
+                classes: {
+                    include: {
+                        lessons: {
+                            include: {
+                                learningObjectives: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        //take the lessons from the classes, and the objectives from the lessons and flatten them into a single array
+        const objectives = teacher.classes.flatMap((className) => className.lessons.flatMap((lesson) => lesson.learningObjectives))
+
+        res.send(objectives)
+    } catch (error) {
+        next(error)
+    }
+});
+
+//<-----------------GET ALL OBJECTIVES BY LESSON----------------->
 apiRouter.get("/lesson/:id/objective", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.class.findUnique({

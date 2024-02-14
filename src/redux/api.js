@@ -79,7 +79,14 @@ const api = createApi({
             }),
             invalidatesTags: ["Student"]
         }),
-        getAllStudents: builder.query({
+        getAllStudentsByTeacher: builder.query({
+            query: () => ({
+                url: `/api/my_students`,
+                method: 'GET'
+            }),
+            providesTags: ["Student"]
+        }),
+        getAllStudentsByClass: builder.query({
             query: () => ({
                 url: `/api/students`,
                 method: 'GET'
@@ -152,12 +159,13 @@ export const {
     usePostNewClassMutation,
     useGetClassesQuery,
     useGetSingleClassQuery,
-     //Students
-     usePostNewStudentMutation,
-     useGetAllStudentsQuery,
-     useGetSingleStudentQuery,
-     //Learning Objectives
-     usePostNewObjectiveMutation,
-     useGetAllObjectivesQuery,
-     useGetSingleObjectiveQuery,
+    //Students
+    usePostNewStudentMutation,
+    useGetAllStudentsByTeacherQuery,
+    useGetAllStudentsByClassQuery,
+    useGetSingleStudentQuery,
+    //Learning Objectives
+    usePostNewObjectiveMutation,
+    useGetAllObjectivesQuery,
+    useGetSingleObjectiveQuery,
 } = api
