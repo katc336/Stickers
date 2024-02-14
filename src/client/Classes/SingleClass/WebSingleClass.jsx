@@ -47,9 +47,11 @@ const WebSingleClass = ({ id }) => {
                     {data.name}
                 </Typography>
                 {data.students.map((student) => (
-                    <Typography>
-                        {student.name}
-                    </Typography>
+                    <div key={student.id}>
+                        <Typography>
+                            {student.name}
+                        </Typography>
+                    </div>
                 ))}
                 {addError &&
                     <Alert severity="error">There was a mistake adding the student.</Alert>}
