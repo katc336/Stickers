@@ -23,7 +23,10 @@ apiRouter.get("/my_classes/:id", requireUser, async (req, res, next) => {
     try {
         const myClass = await prisma.class.findUnique({
             where: { id: Number(req.params.id) },
-            include: { students: true }
+            include: {
+                students: true,
+                lessons: true
+            }
         })
         res.send(myClass)
     } catch (error) {
@@ -137,12 +140,12 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
- });
- 
+});
+
 //<-----------------GET A SINGLE LESSON----------------->
 apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
-        const lesson = await prisma.class.findUnique({
+        const lesson = await prisma.lesson.findUnique({
             where: { id: Number(req.params.id) }
         })
         res.send(lesson)

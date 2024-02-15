@@ -8,6 +8,8 @@ import AllStudents from "./Students/AllStudents/AllStudents";
 import SingleStudent from "./Students/SingleStudents/SingleStudent";
 import AllLessons from "./Lessons/AllLessons/AllLessons";
 import AllObjectives from "./LearningObjective/AllObjectives/AllObjectives";
+import SingleClass from "./Classes/SingleClass/SingleClass";
+import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 
 function App() {
 
@@ -18,9 +20,11 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/account" element={<Dashboard />} />
         <Route path="/my_classes" element={<AllClasses />} />
+        <Route path="/class/:id" element={<SingleClass />} />
         <Route path="/my_students" element={<AllStudents />} />
         <Route path="/student/:id" element={<SingleStudent />} />
         <Route path="/my_lessons" element={<AllLessons />} />
+        <Route path="/lesson/:id" element={<SingleLesson />} />
         <Route path="/my_objectives" element={<AllObjectives />} />
       </Routes>
 

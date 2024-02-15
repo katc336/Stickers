@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
+import { Link } from "react-router-dom";
 import { useGetClassesQuery } from "../../../redux/api"
 import AddClassButton from "../../Dashboard/components/AddClass";
 import NavDrawer from "../../Navigation/NavDrawer";
@@ -38,12 +39,13 @@ const WebAllClasses = () => {
                                             sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                                             {myClass.name}
                                         </Typography>
-                                        <button onClick={() => setShowClass(myClass.id)}>
-                                            See Class
-                                        </button>
+                                        <Link to={`/class/${myClass.id}`}>
+                                            <button>
+                                                See Details
+                                            </button>
+                                        </Link>
                                     </Stack>
                                 </Card>
-                                {showClass === myClass.id && <WebSingleClass id={myClass.id} />}
                             </div>
                         ))}
                     </Stack>

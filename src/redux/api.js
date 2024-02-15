@@ -102,10 +102,10 @@ const api = createApi({
         }),
         //<------------LESSONS------------>
         postNewLesson: builder.mutation({
-            query: (lesson, id) => ({
-                url: `/api/class/${id}/lesson`,
+            query: ({ id, lessonName}) => ({
+                url: `/api/lesson`,
                 method: 'POST',
-                body: lesson,
+                body: { id, lessonName },
             }),
             invalidatesTags: ["Lesson"]
         }),

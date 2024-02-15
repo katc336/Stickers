@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
+import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 
@@ -20,11 +21,11 @@ const WebAllLessons = () => {
                 <Card
                     sx={{ p: 1 }}
                     elevation={10}>
-                        <Typography
+                    <Typography
                         sx={{ textAlign: "center" }}
                         variant="h3">
-                           All Lessons:
-                        </Typography>
+                        All Lessons:
+                    </Typography>
                     {data && data.map((lesson) => (
                         <div key={lesson.id}>
                             <Card
