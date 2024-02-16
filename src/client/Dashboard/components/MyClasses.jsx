@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
+import { Link } from "react-router-dom";
 import { useGetClassesQuery } from "../../../redux/api"
 import AddClassButton from "./AddClass";
 
@@ -38,9 +39,11 @@ const MyClasses = () => {
                                                 sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                                                     {myClass.name}
                                                 </Typography>
+                                                <Link to={`/class/${myClass.id}`}>
                                                 <button>
                                                     See Class
                                                 </button>
+                                                </Link>
                                             </Stack>
                                         </Card>
                                     </div>

@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
+import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery } from "../../../redux/api"
@@ -31,9 +32,16 @@ const WebAllLessons = () => {
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
-                                <Typography>
-                                    {lesson.lessonName}
-                                </Typography>
+                                <Stack direction="row">
+                                    <Typography sx={{ mr: 3 }}>
+                                        {lesson.lessonName}
+                                    </Typography>
+                                    <Link to={`/lesson/${lesson.id}`} >
+                                        <button>
+                                            See Details
+                                        </button>
+                                    </Link>
+                                </Stack>
                             </Card>
                         </div>
                     ))}

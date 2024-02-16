@@ -4,7 +4,7 @@ const apiRouter = express.Router();
 const { requireUser } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client");
-const { recipeBookItem, recipeBook, level, userPostedRecipe } = require('./client');
+const { recipeBookItem, recipeBook, level, userPostedRecipe, studentProgress } = require('./client');
 const prisma = new PrismaClient();
 
 //<-----------------GET ALL CLASSES----------------->
@@ -146,7 +146,8 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
 apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.lesson.findUnique({
-            where: { id: Number(req.params.id) }
+            where: { id: Number(req.params.id) },
+            include: { learningObjectives: true, }
         })
         res.send(lesson)
     } catch (error) {
@@ -186,7 +187,9 @@ apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
             }
         })
         //take the lessons from the classes, and the objectives from the lessons and flatten them into a single array
-        const objectives = teacher.classes.flatMap((className) => className.lessons.flatMap((lesson) => lesson.learningObjectives))
+        const objectives = teacher.classes.
+            flatMap((className) => className.lessons.
+                flatMap((lesson) => lesson.learningObjectives))
 
         res.send(objectives)
     } catch (error) {
@@ -217,6 +220,46 @@ apiRouter.get("/lesson/objective/:id", requireUser, async (req, res, next) => {
         res.send(lesson)
     } catch (error) {
         next(error)
+    }
+});
+//<-----------------GET ALL STUDNET'S PROGRESS----------------->
+apiRouter.get("/progress", requireUser, async (req, res, next) => {
+    try {
+        const teacher = await prisma.user.findUnique({
+            where: { id: req.user.id },
+            include: {
+                classes: {
+                    include: {
+                        students: {
+                            include : {
+                                studentProgress: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        const progress = teacher.classes.
+        flatMap((className) => className.students)
+        res.send(progress)
+    } catch (error) {
+        next(error);
+    }
+})
+//<-----------------POST STUDNET'S PROGRESS IN AN OBJECTIVE----------------->
+apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
+    const { studentId, objectiveId, progressPercent } = req.body;
+    try {
+        const newStudentProgress = await prisma.studentProgress.create({
+            data: {
+                student: { connect: { id: studentId } },
+                learningObjective: { connect: { id: objectiveId } },
+                progressPrecent: progressPercent
+            }
+        });
+        res.send(newStudentProgress);
+    } catch (error) {
+        next(error);
     }
 });
 

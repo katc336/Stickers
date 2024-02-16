@@ -16,7 +16,7 @@ const api = createApi({
             return headers
         },
     }),
-    tagTypes: ["User", "Class", "Student", "Lesson", "Objective"],
+    tagTypes: ["User", "Class", "Student", "Lesson", "Objective", "Progress"],
 
     endpoints: (builder) => ({
         //<-----------AUTHORIZATION----------->
@@ -102,7 +102,7 @@ const api = createApi({
         }),
         //<------------LESSONS------------>
         postNewLesson: builder.mutation({
-            query: ({ id, lessonName}) => ({
+            query: ({ id, lessonName }) => ({
                 url: `/api/lesson`,
                 method: 'POST',
                 body: { id, lessonName },
@@ -125,10 +125,10 @@ const api = createApi({
         }),
         //<------------LEARNING OBJECTIVES------------>
         postNewObjective: builder.mutation({
-            query: (objective, id) => ({
-                url: `/api/lesson/${id}/objective`,
+            query: ({ id, objectiveName }) => ({
+                url: `/api/objective`,
                 method: 'POST',
-                body: objective,
+                body: { id, objectiveName },
             }),
             invalidatesTags: ["Lesson"]
         }),
@@ -146,6 +146,14 @@ const api = createApi({
             }),
             providesTags: ["Objective"]
         }),
+        //<------------LEARNING OBJECTIVES------------>
+        getAllProgress: builder.query({
+            query: () => ({
+                url: `/api/progress`,
+                method: 'GET'
+            }),
+            providesTags: ["Progress"]
+        })
     })
 });
 export default api;
@@ -172,4 +180,6 @@ export const {
     usePostNewObjectiveMutation,
     useGetAllObjectivesQuery,
     useGetSingleObjectiveQuery,
+    //Student Progress
+    useGetAllProgressQuery,
 } = api

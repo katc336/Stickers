@@ -10,6 +10,7 @@ import AllLessons from "./Lessons/AllLessons/AllLessons";
 import AllObjectives from "./LearningObjective/AllObjectives/AllObjectives";
 import SingleClass from "./Classes/SingleClass/SingleClass";
 import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
+import AllProgress from "./AllProgress/AllProgress";
 
 function App() {
 
@@ -17,7 +18,9 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/progress" element={<AllProgress />} />
         <Route path="/account" element={<Dashboard />} />
         <Route path="/my_classes" element={<AllClasses />} />
         <Route path="/class/:id" element={<SingleClass />} />

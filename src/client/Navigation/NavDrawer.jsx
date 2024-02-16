@@ -11,12 +11,12 @@ const NavDrawer = () => {
                 variant="permanent"
                 anchor="left">
                 <Toolbar />
-                <Link to="/">
+                <Link to="/dashboard">
                     <Button sx={{ textTransform: "none", color: "#0A1D56", px: 10, py: 3 }}>
                         Home
                     </Button>
                 </Link>
-                <Link to="">
+                <Link to="/progress">
                     <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
                         Progress Overview
                     </Button>
