@@ -1,3 +1,4 @@
+import  Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Typograpgy from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -33,12 +34,13 @@ const RegisterForm = () => {
     }
     return (
         <div>
-            <Card sx={{ p: 5, mx: 80 }}>
+            <Card sx={{ p: 5, mx: 50 }}>
                 <Typograpgy
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                     Sign Up
                 </Typograpgy>
+                {registerError && <Alert severity="error" >Please try again with another username.</Alert> }
                 <form onSubmit={handleSubmit}>
                     <TextField
                         fullWidth
