@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 const seed = async () => {
     console.log("Seeding the database.");
+    await prisma.studentProgress.deleteMany();
+    await prisma.learningObjective.deleteMany();
     await prisma.lesson.deleteMany();
     await prisma.student.deleteMany();
     await prisma.class.deleteMany();
