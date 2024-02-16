@@ -15,9 +15,6 @@ const HelloCard = ({ name }) => {
                         sx={{ color: "#0A1D56" }}>
                         Hello {name}. Here's to a great school day!
                     </Typography>
-                    <button className="details-button">
-                        Add Today's Lesson
-                    </button>
                 </Stack>
             </Card>
         </div>

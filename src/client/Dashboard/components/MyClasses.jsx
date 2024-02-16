@@ -18,39 +18,34 @@ const MyClasses = () => {
         <div>
             <Card
                 elevation={10}
-                sx={{ borderRadius: "20px", p: 5, my: 3, height: 150 }}>
-                {
-                    data.length === 0
-                        ? //if there are no classes...
-                        <div>
-                            <AddClassButton />
-                        </div>
-                        : //if there are classes
-                        <div>
-                            <Stack direction="row">
-                                {data && data.map((myClass) => (
-                                    <div key={myClass.id}>
-                                        <Card
-                                            sx={{ p: 3, m: 1 }}
-                                            elevation={5}>
-                                            <Stack direction="column">
-                                                <Typography 
-                                                variant="h6"
-                                                sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
-                                                    {myClass.name}
-                                                </Typography>
-                                                <Link to={`/class/${myClass.id}`}>
-                                                <button className="details-button">
-                                                    See Class
-                                                </button>
-                                                </Link>
-                                            </Stack>
-                                        </Card>
-                                    </div>
-                                ))}
-                            </Stack>
-                        </div>
-                }
+                sx={{ borderRadius: "20px", p: 5, my: 3 }}>
+                <Stack direction="column">
+                    <AddClassButton />
+                    <Stack
+                        direction="row"
+                        useFlexGap flexWrap="wrap">
+                        {data && data.map((myClass) => (
+                            <div key={myClass.id}>
+                                <Card
+                                    sx={{ p: 3, m: 1 }}
+                                    elevation={5}>
+                                    <Stack direction="column">
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
+                                            {myClass.name}
+                                        </Typography>
+                                        <Link to={`/class/${myClass.id}`}>
+                                            <button className="details-button">
+                                                See Class Details
+                                            </button>
+                                        </Link>
+                                    </Stack>
+                                </Card>
+                            </div>
+                        ))}
+                    </Stack>
+                </Stack>
             </Card>
         </div>
     )
