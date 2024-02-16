@@ -24,7 +24,7 @@ const WebSingleStudent = () => {
             <NavDrawer />
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 30, mr: 5 }}>
+                sx={{ p: 3, ml: 20, mr: 3 }}>
                 <Typography>
                     {data.name}
                 </Typography>

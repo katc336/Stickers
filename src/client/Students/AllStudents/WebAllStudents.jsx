@@ -18,7 +18,7 @@ const WebAllStudents = () => {
     return (
         <div>
             <NavDrawer />
-            <Box sx={{ ml: 30 }}>
+            <Box sx={{ ml: 20, mr: 3 }}>
                 <Card
                     sx={{ p: 1 }}
                     elevation={10}>

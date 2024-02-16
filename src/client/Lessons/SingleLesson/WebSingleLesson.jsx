@@ -45,7 +45,7 @@ const WebSingleLesson = () => {
     return (
         <div>
             <NavDrawer />
-            <Card sx={{ ml: 30 }}>
+            <Card sx={{ ml: 20, mr: 3 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", mx: 3 }}>

@@ -75,7 +75,7 @@ const WebSingleClass = () => {
             <NavDrawer />
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 30 }}>
+                sx={{ p: 3, ml: 20 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>

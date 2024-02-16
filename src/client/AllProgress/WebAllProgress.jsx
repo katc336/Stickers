@@ -20,7 +20,7 @@ const WebAllProgress = () => {
             <NavDrawer />
             <Card
                 elevation={10}
-                sx={{ ml: 30, mr: 5, p: 3 }}>
+                sx={{ ml: 20, mr: 3, p: 3 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>

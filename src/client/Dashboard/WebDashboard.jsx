@@ -17,7 +17,7 @@ const WebDashboard = () => {
     return (
         <div>
             <NavDrawer />
-            <Box sx={{ ml: 30, mr: 5 }}>
+            <Box sx={{ ml: 20, mr: 3 }}>
                 <SearchBar />
                 <HelloCard name={data.name} />
                 <ProgressChart />
