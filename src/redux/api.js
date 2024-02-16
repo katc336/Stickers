@@ -68,7 +68,7 @@ const api = createApi({
                 url: `/api/my_classes/${id}`,
                 method: 'GET'
             }),
-            providesTags: ["Class"]
+            providesTags: ["Class", "Student", "Lesson"]
         }),
         //<------------STUDENTS------------>
         postNewStudent: builder.mutation({
@@ -77,7 +77,7 @@ const api = createApi({
                 method: 'POST',
                 body: { name, id },
             }),
-            invalidatesTags: ["Student"]
+            invalidatesTags: ["Class", "Student"]
         }),
         getAllStudentsByTeacher: builder.query({
             query: () => ({
@@ -107,7 +107,7 @@ const api = createApi({
                 method: 'POST',
                 body: { id, lessonName },
             }),
-            invalidatesTags: ["Lesson"]
+            invalidatesTags: ["Lesson", "Class"]
         }),
         getAllLessons: builder.query({
             query: () => ({

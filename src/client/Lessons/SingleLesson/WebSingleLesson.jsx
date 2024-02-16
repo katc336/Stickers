@@ -49,7 +49,7 @@ const WebSingleLesson = () => {
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", mx: 3 }}>
-                    {data.lessonName}
+                    { data && data.lessonName}
                 </Typography>
                 {addError &&
                     <Alert severity="error">There was a mistake adding this objective.</Alert>}
