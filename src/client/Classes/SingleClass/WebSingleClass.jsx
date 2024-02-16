@@ -39,8 +39,9 @@ const WebSingleClass = () => {
             const result = await addStudentToClass({ id: Number(id), name })
             console.log(result)
             if (result.data) {
-                setAddError(false);
+                setAddError(false)
                 setAddStudent(false)
+                setClearButton(true)
                 console.log("Success!");
             } else {
                 setAddError(true);
@@ -57,8 +58,9 @@ const WebSingleClass = () => {
             const result = await addLessonToClass({ id: Number(id), lessonName })
             console.log(result)
             if (result.data) {
-                setAddError(false);
+                setAddError(false)
                 setAddLesson(false)
+                setClearButton(true)
                 console.log("Success!");
             } else {
                 setAddError(true);
@@ -94,7 +96,7 @@ const WebSingleClass = () => {
                                             {student.name}
                                         </Typography>
                                         <Link to={`/student/${student.id}`}>
-                                            <button>
+                                            <button className="details-button">
                                                 See Details
                                             </button>
                                         </Link>
@@ -102,7 +104,9 @@ const WebSingleClass = () => {
                                 </div>
                             ))}
                             {clearButton &&
-                                <button onClick={() => { setAddStudent(true), setClearButton(false) }}>
+                                <button
+                                    className="details-button"
+                                    onClick={() => { setAddStudent(true), setClearButton(false) }}>
                                     Add Student
                                 </button>
                             }
@@ -115,7 +119,9 @@ const WebSingleClass = () => {
                                         onChange={(event) => setName(event.target.value)}
                                         variant="filled"
                                         sx={{ my: 1 }} />
-                                    <button type="submit">
+                                    <button
+                                        className="submit-button"
+                                        type="submit">
                                         Add Student
                                     </button>
                                 </form>}
@@ -133,9 +139,9 @@ const WebSingleClass = () => {
                                             {lesson.lessonName}
                                         </Typography>
                                         <Link to={`/lesson/${lesson.id}`}>
-                                        <button>
-                                            See Details
-                                        </button>
+                                            <button className="details-button">
+                                                See Details
+                                            </button>
                                         </Link>
                                     </Stack>
                                 </div>
@@ -143,7 +149,9 @@ const WebSingleClass = () => {
                             {addError &&
                                 <Alert severity="error">There was a mistake adding the student.</Alert>}
                             {clearButton &&
-                                <button onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                                <button
+                                    className="details-button"
+                                    onClick={() => { setAddLesson(true), setClearButton(false) }}>
                                     Add Lesson
                                 </button>
                             }
@@ -156,7 +164,9 @@ const WebSingleClass = () => {
                                         onChange={(event) => setLessonName(event.target.value)}
                                         variant="filled"
                                         sx={{ my: 1 }} />
-                                    <button type="submit">
+                                    <button
+                                        className="submit-button"
+                                        type="submit">
                                         Add Lesson
                                     </button>
                                 </form>}

@@ -40,7 +40,7 @@ const MyClasses = () => {
                                                     {myClass.name}
                                                 </Typography>
                                                 <Link to={`/class/${myClass.id}`}>
-                                                <button>
+                                                <button className="details-button">
                                                     See Class
                                                 </button>
                                                 </Link>

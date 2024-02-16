@@ -37,7 +37,7 @@ const WebAllLessons = () => {
                                         {lesson.lessonName}
                                     </Typography>
                                     <Link to={`/lesson/${lesson.id}`} >
-                                        <button>
+                                        <button className="details-button">
                                             See Details
                                         </button>
                                     </Link>

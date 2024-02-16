@@ -15,9 +15,9 @@ const HelloCard = ({ name }) => {
                         sx={{ color: "#0A1D56" }}>
                         Hello {name}. Here's to a great school day!
                     </Typography>
-                    <Button sx={{ textTransform: "none" }}>
+                    <button className="details-button">
                         Add Today's Lesson
-                    </Button>
+                    </button>
                 </Stack>
             </Card>
         </div>

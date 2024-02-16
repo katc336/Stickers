@@ -29,3 +29,46 @@
     color: #0A1D56;
     box-shadow: 3px 3px 10px rgb(68, 68, 68);
   }
+
+  .details-button {
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: none;
+    color: #0d0426;
+    background-image: linear-gradient(to right top, #b3b2c6, #b9c1d3, #c2d0dd, #cedfe7, #ddedf0, #d4f3f4, #ccf9f4, #c8fff0, #b4ffd7, #b8ffae, #d1ff7b, #f8f540);
+    background-size: 400%;
+    transition: 0.5s;
+    box-shadow: 2px 2px 2px #02011b;
+    ;
+  }
+  
+  .details-button:hover {
+    cursor: pointer;
+    transition: .5s;
+    transform: center;
+    background-size: 100%;
+    text-decoration: none;
+    scale: 1.1;
+  }
+  .submit-button {
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: none;
+    color: #E9E8E8;
+    background-image: linear-gradient(to right top, #7db856, #48bb7c, #00baa1, #00b6bf, #00afd1, #14a4d7, #3c97d7, #5d89d2, #7a74c0, #8f5da5, #9a4785, #9c3261);
+    transition: 0.5s;
+    box-shadow: 3px 3px 3px #02011b;
+    ;
+  }
+  
+  .submit-button:hover {
+    cursor: pointer;
+    transition: .5s;
+    transform: center;
+    background-size: 100%;
+    text-decoration: none;
+    scale: 1.1;
+  }

@@ -23,7 +23,8 @@ const AddClassButton = () => {
             {
                 addButton &&
                 <button
-                    onClick={() => {setClassForm(true), setAddButton(false)}}>
+                    className="details-button"
+                    onClick={() => { setClassForm(true), setAddButton(false) }}>
                     Add New Class
                 </button>
             }

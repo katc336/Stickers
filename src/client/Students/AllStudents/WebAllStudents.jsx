@@ -39,7 +39,7 @@ const WebAllStudents = () => {
                                     <Link
                                         style={{ textDecoration: "none" }}
                                         to={`/student/${student.id}`}>
-                                        <button>
+                                        <button className="details-button">
                                             See Details
                                         </button>
                                     </Link>

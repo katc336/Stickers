@@ -7,7 +7,6 @@ import { useGetClassesQuery } from "../../../redux/api"
 import AddClassButton from "../../Dashboard/components/AddClass";
 import NavDrawer from "../../Navigation/NavDrawer";
 import { useState } from "react";
-import WebSingleClass from "../SingleClass/WebSingleClass";
 
 const WebAllClasses = () => {
     const { data, error, isLoading } = useGetClassesQuery();
@@ -40,7 +39,7 @@ const WebAllClasses = () => {
                                             {myClass.name}
                                         </Typography>
                                         <Link to={`/class/${myClass.id}`}>
-                                            <button>
+                                            <button className="details-button">
                                                 See Details
                                             </button>
                                         </Link>

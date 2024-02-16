@@ -54,7 +54,9 @@ const WebSingleLesson = () => {
                 {addError &&
                     <Alert severity="error">There was a mistake adding this objective.</Alert>}
                 {clearButton &&
-                    <button onClick={() => { setAddLessonObjective(true), setClearButton(false) }}>
+                    <button
+                        className="details-button"
+                        onClick={() => { setAddLessonObjective(true), setClearButton(false) }}>
                         Add Lesson Objective
                     </button>
                 }
@@ -67,7 +69,9 @@ const WebSingleLesson = () => {
                             onChange={(event) => setObjectiveName(event.target.value)}
                             variant="filled"
                             sx={{ my: 1 }} />
-                        <button type="submit">
+                        <button
+                            className="submit-button"
+                            type="submit">
                             Add Lesson Objective
                         </button>
                     </form>}
