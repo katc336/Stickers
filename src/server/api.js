@@ -151,9 +151,15 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
         })
         const className = await prisma.class.findUnique({
             where: { id: lesson.classId },
-            include: { students: true }
+            include: {
+                students: {
+                    include: {
+                        studentProgress: true
+                    }
+                }
+            }
         })
-        res.send({className, lesson})
+        res.send({ className, lesson })
     } catch (error) {
         next(error)
     }
