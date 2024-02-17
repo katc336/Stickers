@@ -77,7 +77,7 @@ const api = createApi({
                 method: 'POST',
                 body: { name, id },
             }),
-            invalidatesTags: ["Class", "Student"]
+            invalidatesTags: ["Class", "Student", "Lesson"]
         }),
         getAllStudentsByTeacher: builder.query({
             query: () => ({
