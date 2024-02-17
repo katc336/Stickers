@@ -147,9 +147,13 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.lesson.findUnique({
             where: { id: Number(req.params.id) },
-            include: { learningObjectives: true, }
+            include: { learningObjectives: true }
         })
-        res.send(lesson)
+        const className = await prisma.class.findUnique({
+            where: { id: lesson.classId },
+            include: { students: true }
+        })
+        res.send({className, lesson})
     } catch (error) {
         next(error)
     }
@@ -231,7 +235,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
                 classes: {
                     include: {
                         students: {
-                            include : {
+                            include: {
                                 studentProgress: true
                             }
                         }
@@ -240,7 +244,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
             }
         })
         const progress = teacher.classes.
-        flatMap((className) => className.students)
+            flatMap((className) => className.students)
         res.send(progress)
     } catch (error) {
         next(error);

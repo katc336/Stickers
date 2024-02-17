@@ -49,7 +49,7 @@ const WebSingleLesson = () => {
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", mx: 3 }}>
-                    {data && data.lessonName}
+                    {data && data.lesson.lessonName}
                 </Typography>
                 {addError &&
                     <Alert severity="error">There was a mistake adding this objective.</Alert>}
@@ -81,7 +81,7 @@ const WebSingleLesson = () => {
                         <Card
                             elevation={10}
                             sx={{ m: 1, p: 1 }}>
-                            {data.learningObjectives.map((objective) => (
+                            {data.lesson.learningObjectives.map((objective) => (
                                 <div key={objective.id}>
                                     <Typography>
                                         {objective.objectiveName}
@@ -94,6 +94,13 @@ const WebSingleLesson = () => {
                         <Card
                             elevation={10}
                             sx={{ m: 1, p: 1 }}>
+                                {data.className.students.map((student) => (
+                                <div key={student.id}>
+                                    <Typography>
+                                        {student.name}
+                                    </Typography>
+                                </div>
+                            ))}
                         </Card>
                     </Grid>
                 </Grid>
