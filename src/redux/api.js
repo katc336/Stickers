@@ -153,7 +153,15 @@ const api = createApi({
                 method: 'GET'
             }),
             providesTags: ["Progress"]
-        })
+        }),
+        postProgress: builder.mutation({
+            query: ({ studentId, objectiveId, progressPercent  }) => ({
+                url: `/api/studentProgress`,
+                method: 'POST',
+                body: { studentId, objectiveId, progressPercent },
+            }),
+            invalidatesTags: ["Lesson"]
+        }),
     })
 });
 export default api;
@@ -182,4 +190,5 @@ export const {
     useGetSingleObjectiveQuery,
     //Student Progress
     useGetAllProgressQuery,
+    usePostProgressMutation,
 } = api
