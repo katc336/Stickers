@@ -65,7 +65,6 @@ const WebSingleLesson = () => {
             console.error(error);
         }
     };
-
     return (
         <div>
             <NavDrawer />
@@ -137,11 +136,16 @@ const WebSingleLesson = () => {
                                             {student.name}
                                         </Typography>
                                         {student.studentProgress.map((progress) => (
-                                            <Typography 
-                                            key={progress.id}
-                                            sx={{ mx: 1 }}>
-                                                {progress.progressPrecent}
-                                            </Typography>
+                                            <div key={progress.id}>
+                                                <Typography
+                                                    sx={{ mx: 1 }}>
+                                                    {progress.learningObjective.objectiveName}
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ mx: 1 }}>
+                                                    {progress.progressPrecent}
+                                                </Typography>
+                                            </div>
                                         ))}
                                         <Stack direction="column">
                                             <button

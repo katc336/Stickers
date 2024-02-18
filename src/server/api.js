@@ -147,30 +147,29 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
         const lesson = await prisma.lesson.findUnique({
             where: { id: Number(req.params.id) },
-             //GET student and student progress data...
             include: {
                 class: {
                     include: {
                         students: {
                             include: {
-                                studentProgress: true
+                                studentProgress: {
+                                    include: {
+                                        learningObjective: true
+                                    }
+                                }
                             }
                         }
                     },
                 },
-                //GET lesson objective data...
-                learningObjectives: {
-                    include: {
-                        studentProgress: true,
-                    },
-                },
+                learningObjectives: true
             },
         });
         res.send(lesson);
     } catch (error) {
         next(error)
     }
-});
+ });
+ 
 //<-----------------ADD AN OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
     try {
