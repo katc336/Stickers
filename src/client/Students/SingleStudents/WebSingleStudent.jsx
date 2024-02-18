@@ -1,4 +1,4 @@
-import Alert from "@mui/material/Alert"
+import Stack from "@mui/material/Stack"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
@@ -25,9 +25,26 @@ const WebSingleStudent = () => {
             <Card
                 elevation={10}
                 sx={{ p: 3, ml: 20, mr: 3 }}>
-                <Typography>
-                    {data.name}
+                <Typography
+                    variant="h3"
+                    sx={{ textAlign: "center" }}>
+                    {data && data.name}
                 </Typography>
+                {data.studentProgress.map((progress) => (
+                    <div key={progress.id}>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            sx={{ borderBottom: "solid black 1px" }}>
+                            <Typography>
+                                {progress.learningObjective.objectiveName}
+                            </Typography>
+                            <Typography>
+                                {progress.progressPrecent}
+                            </Typography>
+                        </Stack>
+                    </div>
+                ))}
             </Card>
         </div>
     )

@@ -71,7 +71,15 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
             include: {
                 classes: {
                     include: {
-                        students: true
+                        students: {
+                            include: {
+                                studentProgress: {
+                                    include: {
+                                        learningObjective: true
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -99,7 +107,14 @@ apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
 apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
     try {
         const student = await prisma.student.findUnique({
-            where: { id: Number(req.params.id) }
+            where: { id: Number(req.params.id) },
+            include: {
+                studentProgress: {
+                    include: {
+                        learningObjective: true
+                    }
+                }
+            }
         })
         res.send(student)
     } catch (error) {

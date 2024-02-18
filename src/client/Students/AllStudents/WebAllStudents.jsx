@@ -15,6 +15,7 @@ const WebAllStudents = () => {
     if (error) {
         console.error(error);
     }
+    console.log(data);
     return (
         <div>
             <NavDrawer />
@@ -32,8 +33,12 @@ const WebAllStudents = () => {
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
-                                <Stack direction="row">
-                                    <Typography sx={{ mr: 2 }}>
+                                <Stack
+                                    direction="row"
+                                    justifyContent="space-between">
+                                    <Typography
+                                        variant="h6"
+                                        sx={{ mr: 2, mt: 0.5 }}>
                                         {student.name}
                                     </Typography>
                                     <Link

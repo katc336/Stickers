@@ -131,7 +131,8 @@ const WebSingleLesson = () => {
                                 <div key={student.id}>
                                     <Stack
                                         direction="row"
-                                        sx={{ borderTop: "solid black 1px" }}>
+                                        justifyContent="space-between"
+                                        sx={{ borderBottom: "solid black 1px" }}>
                                         <Typography >
                                             {student.name}
                                         </Typography>
