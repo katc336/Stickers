@@ -83,7 +83,7 @@ const WebSingleClass = () => {
                     {data.name}
                 </Typography>
                 {addError &&
-                    <Alert severity="error">There was an error adding to your class.</Alert>}
+                    <Alert severity="error">There was an error updating your class.</Alert>}
                 <Grid container>
                     {/* <--------------------------STUDENTS FOR CLASS--------------------------> */}
                     <Grid item xs={6}>
@@ -92,8 +92,13 @@ const WebSingleClass = () => {
                             sx={{ p: 1, m: 1 }}>
                             {data.students.map((student) => (
                                 <div key={student.id}>
-                                    <Stack direction="row" sx={{ p: 1, borderBottom: "solid black 1px" }}>
-                                        <Typography sx={{ mx: 3 }}>
+                                    <Stack
+                                        direction="row"
+                                        justifyContent="space-between"
+                                        sx={{ borderBottom: "solid black 1px" }}>
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ mx: 3, mt: 0.5 }}>
                                             {student.name}
                                         </Typography>
                                         <Link to={`/student/${student.id}`}>
@@ -135,8 +140,13 @@ const WebSingleClass = () => {
                             sx={{ p: 1, m: 1 }}>
                             {data.lessons.map((lesson) => (
                                 <div key={lesson.id}>
-                                    <Stack direction="row" sx={{ p: 1, borderBottom: "solid black 1px" }}>
-                                        <Typography sx={{ mx: 3 }}>
+                                    <Stack
+                                        direction="row"
+                                        justifyContent="space-between"
+                                        sx={{ borderBottom: "solid black 1px" }}>
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ mx: 3, mt: 0.5 }}>
                                             {lesson.lessonName}
                                         </Typography>
                                         <Link to={`/lesson/${lesson.id}`}>
@@ -147,8 +157,6 @@ const WebSingleClass = () => {
                                     </Stack>
                                 </div>
                             ))}
-                            {addError &&
-                                <Alert severity="error">There was a mistake adding the student.</Alert>}
                             {clearButton &&
                                 <button
                                     className="details-button"
