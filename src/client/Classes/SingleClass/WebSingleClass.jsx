@@ -42,6 +42,7 @@ const WebSingleClass = () => {
                 setAddError(false)
                 setAddStudent(false)
                 setClearButton(true)
+                setName("");
                 console.log("Success!");
             } else {
                 setAddError(true);
