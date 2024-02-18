@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import { useState } from "react"
-import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation } from "../../../redux/api"
+import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery } from "../../../redux/api"
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
 
@@ -19,15 +19,16 @@ const WebSingleLesson = () => {
     const [progress, setProgress] = useState("");
 
     const { data, error, isLoading } = useGetSingleLessonQuery(id);
+    const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
     const [addLessonObjectiveMutation] = usePostNewObjectiveMutation();
     const [addProgressMutation] = usePostProgressMutation();
-    if (isLoading) {
+    if (isLoading || objLoading) {
         return <div></div>
     }
-    if (error) {
+    if (error || objError) {
         console.error(error)
     }
-    console.log(data)
+    console.log(objectiveName)
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
@@ -85,6 +86,33 @@ const WebSingleLesson = () => {
                 {addLessonObjective &&
                     <div style={{ float: "right" }}>
                         <form onSubmit={handleAddLessonObjective}>
+                            <Typography
+                                variant="h5">
+                                Select an existing objective:
+                            </Typography>
+                            {objData && objData.map((objective) => (
+                                <div key={objective.id}>
+                                    <Stack direction="row">
+                                        <input
+                                            type="checkbox"
+                                            value={objectiveName}
+                                            onChange={(event) => {
+                                                if (event.target.checked) {
+                                                    setObjectiveName(objective.objectiveName);
+                                                }
+                                            }}
+                                        />
+                                        <Typography sx={{ ml: 1 }}>
+                                            {objective.objectiveName}
+                                        </Typography>
+                                    </Stack>
+                                </div>
+                            ))}
+
+                            <Typography
+                                variant="h5">
+                                Or add a new one:
+                            </Typography>
                             <TextField
                                 multiline
                                 label="Lesson Objective"

@@ -133,8 +133,8 @@ const api = createApi({
             invalidatesTags: ["Lesson"]
         }),
         getAllObjectives: builder.query({
-            query: (id) => ({
-                url: `/api/lesson/${id}/objective`,
+            query: () => ({
+                url: `/api/my_lesson-objecives`,
                 method: 'GET'
             }),
             providesTags: ["Objective"]
