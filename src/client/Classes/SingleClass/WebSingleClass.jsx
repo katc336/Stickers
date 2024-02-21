@@ -16,7 +16,8 @@ const WebSingleClass = () => {
     const [addStudent, setAddStudent] = useState(false);
     const [addLesson, setAddLesson] = useState(false);
 
-    const [clearButton, setClearButton] = useState(true);
+    const [clearStudentButton, setClearStudentButton] = useState(true);
+    const [clearLessonButton, setClearLessonButton] = useState(true);
     const [addError, setAddError] = useState(null);
 
     const [name, setName] = useState("")
@@ -41,7 +42,7 @@ const WebSingleClass = () => {
             if (result.data) {
                 setAddError(false)
                 setAddStudent(false)
-                setClearButton(true)
+                setClearStudentButton(true)
                 setName("");
                 console.log("Success!");
             } else {
@@ -61,7 +62,7 @@ const WebSingleClass = () => {
             if (result.data) {
                 setAddError(false)
                 setAddLesson(false)
-                setClearButton(true)
+                setClearLessonButton(true)
                 console.log("Success!");
             } else {
                 setAddError(true);
@@ -109,10 +110,10 @@ const WebSingleClass = () => {
                                     </Stack>
                                 </div>
                             ))}
-                            {clearButton &&
+                            {clearStudentButton &&
                                 <button
                                     className="details-button"
-                                    onClick={() => { setAddStudent(true), setClearButton(false) }}>
+                                    onClick={() => { setAddStudent(true), setClearStudentButton(false) }}>
                                     Add Student
                                 </button>
                             }
@@ -157,10 +158,10 @@ const WebSingleClass = () => {
                                     </Stack>
                                 </div>
                             ))}
-                            {clearButton &&
+                            {clearLessonButton &&
                                 <button
                                     className="details-button"
-                                    onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                                    onClick={() => { setAddLesson(true), setClearLessonButton(false) }}>
                                     Add Lesson
                                 </button>
                             }
