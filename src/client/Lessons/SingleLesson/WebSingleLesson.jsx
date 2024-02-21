@@ -197,7 +197,7 @@ const WebSingleLesson = () => {
                                                                     onChange={(event) => {
                                                                         if (event.target.checked) {
                                                                             setSelectedObjectiveId(objective.id);
-                                                                            setSelectedCombinedObjectiveId(objective.combineObjectiveId);
+                                                                            setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
                                                                         }
                                                                     }}
                                                                 />

@@ -111,7 +111,8 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
             include: {
                 studentProgress: {
                     include: {
-                        learningObjective: true
+                        learningObjective: true,
+                        combinedObjective: true
                     }
                 }
             }
@@ -170,7 +171,7 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
                                 studentProgress: {
                                     include: {
                                         learningObjective: true,
-                                        combineObjective: true
+                                        combinedObjective: true
                                     }
                                 }
                             }
@@ -310,7 +311,7 @@ apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
                 student: { connect: { id: studentId } },
                 learningObjective: { connect: { id: objectiveId } },
                 progressPrecent: progressPercent,
-                combineObjective: { connect: { id: combinedObjectiveId }}
+                combinedObjective: { connect: { id: combinedObjectiveId }}
             }
         });
         res.send(newStudentProgress);

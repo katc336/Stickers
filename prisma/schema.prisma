@@ -40,7 +40,7 @@ model CombinedObjective {
   id                 Int                 @id @default(autoincrement())
   objectiveName      String              @unique
   learningObjectives LearningObjective[]
-  studentProgresss   StudentProgress[]
+  studentProgress   StudentProgress[]
 }
 
 model Lesson {N
@@ -65,8 +65,8 @@ model LearningObjective {
   objectiveName      String
   lesson             Lesson            @relation(fields: [lessonId], references: [id])
   lessonId           Int
-  combinedObjective  CombinedObjective @relation(fields: [combineObjectiveId], references: [id])
-  combineObjectiveId Int
+  combinedObjective  CombinedObjective @relation(fields: [combinedObjectiveId], references: [id])
+  combinedObjectiveId Int
   studentProgress    StudentProgress[]
 }
 
@@ -76,7 +76,7 @@ model StudentProgress {
   studentId          Int
   learningObjective  LearningObjective @relation(fields: [objectiveId], references: [id])
   objectiveId        Int
-  combineObjective   CombinedObjective @relation(fields: [combineObjectiveId], references: [id])
-  combineObjectiveId Int
+  combinedObjective   CombinedObjective @relation(fields: [combinedObjectiveId], references: [id])
+  combinedObjectiveId Int
   progressPrecent    Int
 }
