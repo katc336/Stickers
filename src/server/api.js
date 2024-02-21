@@ -185,21 +185,44 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     }
  });
  
-//<-----------------ADD AN OBJECTIVE----------------->
+//<-----------------ADD A LESSON OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
     try {
         const { objectiveName, id } = req.body;
-        const objective = await prisma.learningObjective.create({
-            data: {
+        const combinedObjective = await prisma.combinedObjective.findUnique({
+            where: {
                 objectiveName: objectiveName,
-                lesson: { connect: { id: id } }
             }
         });
-        res.send(objective);
+        if (combinedObjective) {
+            const objective = await prisma.learningObjective.create({
+                data: {
+                    objectiveName: objectiveName,
+                    lesson: { connect: { id: id } },
+                    combinedObjective: { connect: { id: combinedObjective.id } }
+                }
+            });
+            res.send(objective);
+        } else {
+            const newCombinedObjective = await prisma.combinedObjective.create({
+                data: {
+                    objectiveName: objectiveName
+                }
+            });
+            const objective = await prisma.learningObjective.create({
+                data: {
+                    objectiveName: objectiveName,
+                    lesson: { connect: { id: id } },
+                    combinedObjective: { connect: { id: newCombinedObjective.id } }
+                }
+            });
+            res.send({ objective, combinedObjectiveId: newCombinedObjective.id });
+        }
     } catch (error) {
         next(error);
     }
-});
+ });
+ 
 //<-----------------GET ALL OBJECTIVES FOR A TEACHER----------------->
 apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
     try {
