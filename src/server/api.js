@@ -169,7 +169,8 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
                             include: {
                                 studentProgress: {
                                     include: {
-                                        learningObjective: true
+                                        learningObjective: true,
+                                        combineObjective: true
                                     }
                                 }
                             }
@@ -222,7 +223,7 @@ apiRouter.post("/objective", requireUser, async (req, res, next) => {
         next(error);
     }
  });
- 
+
 //<-----------------GET ALL OBJECTIVES FOR A TEACHER----------------->
 apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
     try {
@@ -302,13 +303,14 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
 })
 //<-----------------POST STUDNET'S PROGRESS IN AN OBJECTIVE----------------->
 apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
-    const { studentId, objectiveId, progressPercent } = req.body;
+    const { studentId, objectiveId, progressPercent, combinedObjectiveId } = req.body;
     try {
         const newStudentProgress = await prisma.studentProgress.create({
             data: {
                 student: { connect: { id: studentId } },
                 learningObjective: { connect: { id: objectiveId } },
-                progressPrecent: progressPercent
+                progressPrecent: progressPercent,
+                combineObjective: { connect: { id: combinedObjectiveId }}
             }
         });
         res.send(newStudentProgress);

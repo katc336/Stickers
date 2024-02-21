@@ -146,7 +146,7 @@ const api = createApi({
             }),
             providesTags: ["Objective"]
         }),
-        //<------------LEARNING OBJECTIVES------------>
+        //<------------STUDNET PROGRESS------------>
         getAllProgress: builder.query({
             query: () => ({
                 url: `/api/progress`,
@@ -155,10 +155,10 @@ const api = createApi({
             providesTags: ["Progress"]
         }),
         postProgress: builder.mutation({
-            query: ({ studentId, objectiveId, progressPercent  }) => ({
+            query: ({ studentId, objectiveId, progressPercent, combinedObjectiveId }) => ({
                 url: `/api/studentProgress`,
                 method: 'POST',
-                body: { studentId, objectiveId, progressPercent },
+                body: { studentId, objectiveId, progressPercent, combinedObjectiveId },
             }),
             invalidatesTags: ["Lesson"]
         }),
