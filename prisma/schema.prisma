@@ -36,7 +36,14 @@ model Student {
   studentProgress StudentProgress[]
 }
 
-model Lesson {
+model CombinedObjective {
+  id                 Int                 @id @default(autoincrement())
+  objectiveName      String              @unique
+  learningObjectives LearningObjective[]
+  studentProgress   StudentProgress[]
+}
+
+model Lesson {N
   id                 Int                 @id @default(autoincrement())
   lessonName         String
   class              Class               @relation(fields: [classId], references: [id])
@@ -54,18 +61,22 @@ model Attendance {
 }
 
 model LearningObjective {
-  id              Int               @id @default(autoincrement())
-  objectiveName   String
-  lesson          Lesson            @relation(fields: [lessonId], references: [id])
-  lessonId        Int
-  studentProgress StudentProgress[]
+  id                 Int               @id @default(autoincrement())
+  objectiveName      String
+  lesson             Lesson            @relation(fields: [lessonId], references: [id])
+  lessonId           Int
+  combinedObjective  CombinedObjective @relation(fields: [combinedObjectiveId], references: [id])
+  combinedObjectiveId Int
+  studentProgress    StudentProgress[]
 }
 
 model StudentProgress {
-  id                Int               @id @default(autoincrement())
-  student           Student           @relation(fields: [studentId], references: [id])
-  studentId         Int
-  learningObjective LearningObjective @relation(fields: [objectiveId], references: [id])
-  objectiveId       Int
-  progressPrecent   Int
+  id                 Int               @id @default(autoincrement())
+  student            Student           @relation(fields: [studentId], references: [id])
+  studentId          Int
+  learningObjective  LearningObjective @relation(fields: [objectiveId], references: [id])
+  objectiveId        Int
+  combinedObjective   CombinedObjective @relation(fields: [combinedObjectiveId], references: [id])
+  combinedObjectiveId Int
+  progressPrecent    Int
 }

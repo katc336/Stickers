@@ -14,6 +14,7 @@ const WebSingleLesson = () => {
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [selectedObjectiveId, setSelectedObjectiveId] = useState("");
+    const [selectedCombinedObjectiveId, setSelectedCombinedObjectiveId] = useState("");
     const [addError, setAddError] = useState(null);
     const [objectiveName, setObjectiveName] = useState("");
     const [progress, setProgress] = useState("");
@@ -28,7 +29,7 @@ const WebSingleLesson = () => {
     if (error || objError) {
         console.error(error)
     }
-    console.log(objectiveName)
+    console.log(selectedCombinedObjectiveId)
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
@@ -52,7 +53,8 @@ const WebSingleLesson = () => {
             const result = await addProgressMutation({
                 studentId: Number(selectedStudentId),
                 objectiveId: Number(selectedObjectiveId),
-                progressPercent: Number(progress)
+                progressPercent: Number(progress),
+                combinedObjectiveId: Number(selectedCombinedObjectiveId)
             });
             if (result.data) {
                 setAddError(false);
@@ -76,7 +78,7 @@ const WebSingleLesson = () => {
                     {data && data.lessonName}
                 </Typography>
                 {addError &&
-                    <Alert severity="error">There was a mistake adding this objective.</Alert>}
+                    <Alert severity="error">There was an error updating this lesson.</Alert>}
                 <button
                     style={{ float: "right", marginBottom: "50px", width: "200px" }}
                     className="details-button"
@@ -191,10 +193,11 @@ const WebSingleLesson = () => {
                                                             <Stack direction="row">
                                                                 <input
                                                                     type="checkbox"
-                                                                    value={selectedObjectiveId}
+                                                                    value={""}
                                                                     onChange={(event) => {
                                                                         if (event.target.checked) {
                                                                             setSelectedObjectiveId(objective.id);
+                                                                            setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
                                                                         }
                                                                     }}
                                                                 />
