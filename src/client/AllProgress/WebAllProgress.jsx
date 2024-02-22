@@ -24,7 +24,7 @@ const WebAllProgress = () => {
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
-                    Student Progress:
+                    Student Progress Overview:
                 </Typography>
                 {data.map((student) => (
                     <div key={student.id}>

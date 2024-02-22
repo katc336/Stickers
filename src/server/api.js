@@ -4,7 +4,6 @@ const apiRouter = express.Router();
 const { requireUser } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client");
-const { recipeBookItem, recipeBook, level, userPostedRecipe, studentProgress } = require('./client');
 const prisma = new PrismaClient();
 
 //<-----------------GET ALL CLASSES----------------->
@@ -91,7 +90,6 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-
 //<-----------------GET ALL STUDNETS FOR A CLASS----------------->
 apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
@@ -103,7 +101,7 @@ apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-//<-----------------GET SINGLE STUDNET----------------->
+//<-----------------GET SINGLE STUDNET WITH AVERAGE FOR OBJECTIVES----------------->
 apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
     try {
         const student = await prisma.student.findUnique({
@@ -111,17 +109,48 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
             include: {
                 studentProgress: {
                     include: {
-                        learningObjective: true,
                         combinedObjective: true
                     }
                 }
             }
-        })
-        res.send(student)
+        });
+         // Array to hold combinedObjectives average data
+        let combinedObjectivesArray = [];
+        // Loop through each progress of the student
+        student.studentProgress.forEach((progress) => {
+            const combinedObjectiveId = progress.combinedObjective.id;
+            const progressPercent = progress.progressPrecent;
+             // Check if the objective already exists in the combinedObjectivesArray
+            const existingObjective = combinedObjectivesArray.find((objective) => objective.combinedObjectiveId === combinedObjectiveId);
+            // If it already exists, add the progressPercent to that objective
+            if (existingObjective) {
+                existingObjective.progress.push(progressPercent);
+            } 
+            // If not, make a new one with the id, the progress percent, and the objective name (the data that should be returned)
+            else {
+                combinedObjectivesArray.push({
+                    combinedObjectiveId,
+                    progress: [progressPercent],
+                    objectiveName: progress.combinedObjective.objectiveName
+                });
+            }
+        });
+        //Find the average from the combinedObjectives array 
+        //Loop through each objective in the combinedObjectivesArray array.
+        combinedObjectivesArray.forEach((objective) => {
+            let totalProgress = 0;
+            //Loop through the progress part of the data and add all the values together
+            for (let i=0; i < objective.progress.length; i++) {
+                totalProgress = totalProgress + objective.progress[i];
+            }
+            //Make a new average property and assign it the average
+            objective.average = totalProgress / objective.progress.length;
+        });
+        res.send({ student, averageObjectives: combinedObjectivesArray });
     } catch (error) {
-        next(error)
+        next(error);
     }
-});
+ }); 
 //<-----------------ADD A LESSON----------------->
 apiRouter.post("/lesson", requireUser, async (req, res, next) => {
     try {
@@ -157,7 +186,6 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-
 //<-----------------GET A SINGLE LESSON----------------->
 apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     try {
@@ -185,8 +213,7 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
- });
- 
+});
 //<-----------------ADD A LESSON OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
     try {
@@ -223,8 +250,7 @@ apiRouter.post("/objective", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
- });
-
+});
 //<-----------------GET ALL OBJECTIVES FOR A TEACHER----------------->
 apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
     try {
@@ -252,7 +278,6 @@ apiRouter.get("/my_lesson-objecives", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-
 //<-----------------GET ALL OBJECTIVES BY LESSON----------------->
 apiRouter.get("/lesson/:id/objective", requireUser, async (req, res, next) => {
     try {
@@ -278,7 +303,7 @@ apiRouter.get("/lesson/objective/:id", requireUser, async (req, res, next) => {
         next(error)
     }
 });
-//<-----------------GET ALL STUDNET'S PROGRESS----------------->
+//<-----------------GET ALL STUDNET'S PROGRESS FOR A LESSON----------------->
 apiRouter.get("/progress", requireUser, async (req, res, next) => {
     try {
         const teacher = await prisma.user.findUnique({
@@ -301,7 +326,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-})
+});
 //<-----------------POST STUDNET'S PROGRESS IN AN OBJECTIVE----------------->
 apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
     const { studentId, objectiveId, progressPercent, combinedObjectiveId } = req.body;
@@ -311,7 +336,7 @@ apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
                 student: { connect: { id: studentId } },
                 learningObjective: { connect: { id: objectiveId } },
                 progressPrecent: progressPercent,
-                combinedObjective: { connect: { id: combinedObjectiveId }}
+                combinedObjective: { connect: { id: combinedObjectiveId } }
             }
         });
         res.send(newStudentProgress);

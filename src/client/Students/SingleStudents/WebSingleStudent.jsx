@@ -28,10 +28,10 @@ const WebSingleStudent = () => {
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
-                    {data && data.name}
+                    {data && data.student.name}
                 </Typography>
                 {
-                    data.studentProgress.length === 0
+                    data.student.studentProgress.length === 0
                         ?
                         <div>
                             <Alert severity="info">
@@ -42,24 +42,23 @@ const WebSingleStudent = () => {
                         </div>
                         :
                         <div>
-                            {data.studentProgress.map((progress) => (
+                            {data.averageObjectives.map((progress) => (
                                 <div key={progress.id}>
                                     <Stack
                                         direction="row"
                                         justifyContent="space-between"
                                         sx={{ borderBottom: "solid black 1px" }}>
                                         <Typography>
-                                            {progress.learningObjective.objectiveName}
+                                            {progress.objectiveName}
                                         </Typography>
                                         <Typography>
-                                            {progress.progressPrecent}
+                                            {progress.average}
                                         </Typography>
                                     </Stack>
                                 </div>
                             ))}
                         </div>
                 }
-
             </Card>
         </div>
     )
