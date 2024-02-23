@@ -180,6 +180,12 @@ const WebSingleLesson = () => {
                                         </Typography>
                                         {student.studentProgress.map((progress) => (
                                             <div key={progress.id}>
+                                                <Card
+                                                sx={{ 
+                                                    p: 1,
+                                                    border: 1,
+                                                    borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 71 && progress.progressPrecent <= 80 ? "orange" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "yellow" : "green",
+                                                    backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 71 && progress.progressPrecent <= 80 ? "#FFC97C" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"}}>
                                                 <Stack direction="row">
                                                     <Typography
                                                         sx={{ mx: 1 }}>
@@ -190,11 +196,12 @@ const WebSingleLesson = () => {
                                                         {progress.progressPrecent}%
                                                     </Typography>
                                                 </Stack>
+                                                </Card>
                                             </div>
                                         ))}
                                         <Stack direction="column">
                                             <button
-                                                style={{ width: 170, marginLeft: "70%" }}
+                                                style={{ width: 170 }}
                                                 onClick={() => { setSelectedStudentId(student.id) }}
                                                 className="details-button">
                                                 Add New Progress

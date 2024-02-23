@@ -35,24 +35,22 @@ const WebAllProgress = () => {
                         Objective Average Accross All students:
                     </Typography>
                     {data.averageObjectives.map((average) => (
-                        <div key={average.id} >
+                        <div key={average.id}>
                             <Card
-                            sx={{ 
-                                m: 1, p: 1,
-                                border: 5,
-                                borderColor: average.average < 70 ? "red" : average.average >= 71 && average.average <= 80 ? "orange" : average.average >= 81 && average.average <= 89 ? "yellow" : "green",
-                                backgroundColor: average.average < 70 ? "#FEA1A1" : average.average >= 71 && average.average <= 80 ? "#FFC97C" : average.average >= 81 && average.average <= 89 ? "#F9DE79" : "#CDE990"}}>
-                            <Stack direction="row">
-                                <Typography sx={{ mr: 1 }}>
-                                    {average.objectiveName}:
-                                </Typography>
-                                <Typography>
-                                    {average.average}% success
-                                </Typography>
-                            </Stack>
+                                sx={{
+                                    p: 1,
+                                    border: `3px solid`,
+                                    borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <= 80 ? "orange" : average.average >= 81 && average.average <= 89 ? "yellow" : "green",
+                                    backgroundColor: average.average < 70 ? "#FEA1A1" : average.average >= 70 && average.average <= 80 ? "#FFC97C" : average.average >= 81 && average.average <= 89 ? "#F9DE79" : "#CDE990",
+                                }}>
+                                <Stack direction="row">
+                                    <Typography sx={{ mr: 1 }}>{average.objectiveName}:</Typography>
+                                    <Typography>{Math.floor(average.average)}% success</Typography>
+                                </Stack>
                             </Card>
                         </div>
                     ))}
+
                 </Card>
             </Card>
         </div>
