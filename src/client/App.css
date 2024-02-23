@@ -52,19 +52,19 @@
     text-decoration: none;
     scale: 1.1;
   }
-  .submit-button {
+  .add-button {
+    margin: 10px;
     padding: 5px;
     font-size: 18px;
     border-radius: 50px;
     border: none;
-    color: #E9E8E8;
-    background-image: linear-gradient(to right top, #7db856, #48bb7c, #00baa1, #00b6bf, #00afd1, #14a4d7, #3c97d7, #5d89d2, #7a74c0, #8f5da5, #9a4785, #9c3261);
+    background-image: linear-gradient(to left bottom, #c7fa00, #d0fb00, #d8fc00, #e1fd00, #e9fe01, #eefe30, #f3fe47, #f7fe59, #f9fd7b, #fafd99, #fbfcb5, #fbfbd0);
     transition: 0.5s;
     box-shadow: 3px 3px 3px #02011b;
     ;
   }
   
-  .submit-button:hover {
+  .add-button:hover {
     cursor: pointer;
     transition: .5s;
     transform: center;

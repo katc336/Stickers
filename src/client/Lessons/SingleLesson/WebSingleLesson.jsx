@@ -30,15 +30,7 @@ const WebSingleLesson = () => {
         console.error(error)
     }
     console.log(data)
-
-    const studentObjectiveMatch = () => {
-        data.class.students.map((student) => student.studentProgress.map((progress) => {
-            const matchedObjective = data.learningObjectives.find(
-                (obj) => obj.id === progress.objectiveId)
-                return matchedObjective
-        }));
-    }
-console.log(studentObjectiveMatch())
+          
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
@@ -90,7 +82,7 @@ console.log(studentObjectiveMatch())
                     <Alert severity="error">There was an error updating this lesson.</Alert>}
                 <button
                     style={{ float: "right", marginBottom: "50px", width: "200px" }}
-                    className="details-button"
+                    className="add-button"
                     onClick={() => { setAddLessonObjective(true) }}>
                     Add Lesson Objective
                 </button>
@@ -132,7 +124,7 @@ console.log(studentObjectiveMatch())
                                 variant="filled"
                                 sx={{ m: 3, width: 900 }} />
                             <button
-                                className="submit-button"
+                                className="add-button"
                                 type="submit">
                                 Add Lesson Objective
                             </button>
@@ -189,7 +181,7 @@ console.log(studentObjectiveMatch())
                                         ))}
 
 
-
+                                        
                                         <Stack direction="column">
                                             <button
                                                 style={{ width: 150 }}
@@ -200,7 +192,7 @@ console.log(studentObjectiveMatch())
                                             </button>
                                             {selectedStudentId === student.id &&
                                                 <form onSubmit={handleAddProgress}>
-                                                    {data.learningObjectives.map((objective) => (
+                                                    { data.learningObjectives.map((objective) => (
                                                         <div key={objective.id}>
                                                             <Stack direction="row">
                                                                 <input

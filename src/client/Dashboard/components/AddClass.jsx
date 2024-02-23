@@ -42,7 +42,7 @@ const AddClassButton = () => {
             {
                 addButton &&
                 <button
-                    className="details-button"
+                    className="add-button"
                     onClick={() => { setClassForm(true), setAddButton(false) }}
                     style={{ float: "right", marginBottom: "50px" }}>
                     Add New Class
@@ -60,7 +60,7 @@ const AddClassButton = () => {
                             sx={{ mr: 3, width: 1000 }}  // width is large number just to make it max: cannot use fullWidth without changing button
                         />
                         <button
-                            className="submit-button"
+                            className="add-button"
                             type="submit">
                             Add Class
                         </button>
