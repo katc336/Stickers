@@ -29,7 +29,16 @@ const WebSingleLesson = () => {
     if (error || objError) {
         console.error(error)
     }
-    console.log(selectedCombinedObjectiveId)
+    console.log(data)
+
+    const studentObjectiveMatch = () => {
+        data.class.students.map((student) => student.studentProgress.map((progress) => {
+            const matchedObjective = data.learningObjectives.find(
+                (obj) => obj.id === progress.objectiveId)
+                return matchedObjective
+        }));
+    }
+console.log(studentObjectiveMatch())
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
@@ -178,6 +187,9 @@ const WebSingleLesson = () => {
                                                 </Typography>
                                             </div>
                                         ))}
+
+
+
                                         <Stack direction="column">
                                             <button
                                                 style={{ width: 150 }}

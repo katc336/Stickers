@@ -52,7 +52,7 @@ const WebSingleStudent = () => {
                                             {progress.objectiveName}
                                         </Typography>
                                         <Typography>
-                                            {progress.average}
+                                            {Math.floor(progress.average)}
                                         </Typography>
                                     </Stack>
                                 </div>
