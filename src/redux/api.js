@@ -130,7 +130,7 @@ const api = createApi({
                 method: 'POST',
                 body: { id, objectiveName },
             }),
-            invalidatesTags: ["Lesson"]
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         getAllObjectives: builder.query({
             query: () => ({
