@@ -62,6 +62,7 @@ apiRouter.post("/add_student", requireUser, async (req, res, next) => {
         next(error);
     }
 });
+ 
 //<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
 apiRouter.get("/my_students", requireUser, async (req, res, next) => {
     try {
@@ -90,6 +91,59 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
         next(error)
     }
 });
+
+//<-----------------GET AVERAGE OF ALL STUDENTS FOR OBJECTIVES----------------->
+apiRouter.get("/students/average-objectives", requireUser, async (req, res, next) => {
+    try {
+        const students = await prisma.student.findMany({
+            include: {
+                studentProgress: {
+                    include: {
+                        combinedObjective: true
+                    }
+                }
+            }
+        });
+        // Array to hold combinedObjectives average data
+        let combinedObjectivesArray = [];
+        // Loop through each student
+        students.forEach((student) => {
+            // Loop through each progress of the student
+            student.studentProgress.forEach((progress) => {
+                const combinedObjectiveId = progress.combinedObjective.id;
+                const progressPercent = progress.progressPrecent;
+                // Check if the objective already exists in the combinedObjectivesArray
+                const existingObjective = combinedObjectivesArray.find((objective) => objective.combinedObjectiveId === combinedObjectiveId);
+                // If it already exists, add the progressPercent to that objective
+                if (existingObjective) {
+                    existingObjective.progress.push(progressPercent);
+                }
+                // If not, make a new one with the id, the progress percent, and the objective name (the data that should be returned)
+                else {
+                    combinedObjectivesArray.push({
+                        combinedObjectiveId,
+                        progress: [progressPercent],
+                        objectiveName: progress.combinedObjective.objectiveName
+                    });
+                }
+            });
+        });
+        //Find the average from the combinedObjectivesArray
+        //Loop through each objective in the combinedObjectivesArray array
+        combinedObjectivesArray.forEach((objective) => {
+            let totalProgress = 0;
+            //Loop through the progress part of the data and add all the values together
+            for (let i = 0; i < objective.progress.length; i++) {
+                totalProgress = totalProgress + objective.progress[i];
+            }
+            //Make a new average property and assign it the average
+            objective.average = totalProgress / objective.progress.length;
+        });
+        res.send({ averageObjectives: combinedObjectivesArray });
+    } catch (error) {
+        next(error);
+    }
+ });
 //<-----------------GET ALL STUDNETS FOR A CLASS----------------->
 apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
@@ -322,7 +376,11 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
                     include: {
                         students: {
                             include: {
-                                studentProgress: true
+                                studentProgress: {
+                                    include: {
+                                        combinedObjective: true
+                                    }
+                                }
                             }
                         }
                     }
@@ -331,7 +389,43 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
         })
         const progress = teacher.classes.
             flatMap((className) => className.students)
-        res.send(progress)
+            // Array to hold combinedObjectives average data
+        let combinedObjectivesArray = [];
+        // Loop through each student
+        progress.forEach((student) => {
+            // Loop through each progress of the student
+            student.studentProgress.forEach((progress) => {
+                const combinedObjectiveId = progress.combinedObjective.id;
+                const progressPercent = progress.progressPrecent;
+                // Check if the objective already exists in the combinedObjectivesArray
+                const existingObjective = combinedObjectivesArray.find((objective) => objective.combinedObjectiveId === combinedObjectiveId);
+                // If it already exists, add the progressPercent to that objective
+                if (existingObjective) {
+                    existingObjective.progress.push(progressPercent);
+                }
+                // If not, make a new one with the id, the progress percent, and the objective name (the data that should be returned)
+                else {
+                    combinedObjectivesArray.push({
+                        combinedObjectiveId,
+                        progress: [progressPercent],
+                        objectiveName: progress.combinedObjective.objectiveName
+                    });
+                }
+            });
+        });
+        //Find the average from the combinedObjectivesArray
+        //Loop through each objective in the combinedObjectivesArray array
+        combinedObjectivesArray.forEach((objective) => {
+            let totalProgress = 0;
+            //Loop through the progress part of the data and add all the values together
+            for (let i = 0; i < objective.progress.length; i++) {
+                totalProgress = totalProgress + objective.progress[i];
+            }
+            //Make a new average property and assign it the average
+            objective.average = totalProgress / objective.progress.length;
+        });
+
+        res.send({progress, averageObjectives: combinedObjectivesArray })
     } catch (error) {
         next(error);
     }
