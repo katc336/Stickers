@@ -490,5 +490,17 @@ apiRouter.delete("/delete_lesson/:id", requireUser, async (req, res, next) => {
     }
 });
 //<-----------------DELETE AN OBJECTIVE----------------->
-
+apiRouter.delete("/delete_objective/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteObjective = await prisma.learningObjective.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteObjective) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteObjective, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
 module.exports = apiRouter;
