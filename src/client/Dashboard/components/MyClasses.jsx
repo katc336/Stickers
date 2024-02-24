@@ -1,12 +1,18 @@
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert"
+import Button from "@mui/material/Button"
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Link } from "react-router-dom";
-import { useGetClassesQuery } from "../../../redux/api"
+import { useState } from "react";
+import { useGetClassesQuery, useDeleteClassMutation } from "../../../redux/api"
 import AddClassButton from "./AddClass";
 
 const MyClasses = () => {
+    const [deleteAlert, setDelteAlert] = useState(false);
     const { data, error, isLoading } = useGetClassesQuery();
+    const [deleteClass] = useDeleteClassMutation();
     if (isLoading) {
         return <div></div>
     }
@@ -31,7 +37,7 @@ const MyClasses = () => {
                                     elevation={5}>
                                     <Stack direction="column">
                                         <Typography
-                                            variant="h6"
+                                            variant="h4"
                                             sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                                             {myClass.name}
                                         </Typography>
@@ -40,8 +46,27 @@ const MyClasses = () => {
                                                 See Class Details
                                             </button>
                                         </Link>
+                                        <Button
+                                            onClick={() => setDelteAlert(true)}
+                                            sx={{ mt: 5 }}>
+                                            <DeleteForeverIcon sx={{ color: "red" }} />
+                                        </Button>
                                     </Stack>
                                 </Card>
+                                {deleteAlert &&
+                                    <Alert
+                                        severity="error"
+                                        sx={{ m: 1, maxWidth: 180 }}>
+                                        Are you sure you want to delete this class? Once you do it will be gone forever
+                                        <button className="add-button">
+                                            Keep Class
+                                        </button>
+                                        <button 
+                                         onClick={() => deleteClass(myClass.id)}
+                                        className="delete-button">
+                                            Delete Forever
+                                        </button>
+                                    </Alert>}
                             </div>
                         ))}
                     </Stack>

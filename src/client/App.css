@@ -72,3 +72,24 @@
     text-decoration: none;
     scale: 1.1;
   }
+  .delete-button {
+    margin: 5px;
+    padding: 5px;
+    font-size: 18px;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    background-image: linear-gradient(to right top, #850202, #930309, #a1030f, #b00315, #bf021b, #ca341e, #d54f24, #df672c, #e69244, #ebb968 );
+    transition: 0.5s;
+    box-shadow: 3px 3px 3px #02011b;
+    ;
+  }
+  
+  .delete-button:hover {
+    cursor: pointer;
+    transition: .5s;
+    transform: center;
+    background-size: 100%;
+    text-decoration: none;
+    scale: 1.1;
+  }
