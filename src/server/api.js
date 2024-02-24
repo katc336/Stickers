@@ -62,7 +62,7 @@ apiRouter.post("/add_student", requireUser, async (req, res, next) => {
         next(error);
     }
 });
- 
+
 //<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
 apiRouter.get("/my_students", requireUser, async (req, res, next) => {
     try {
@@ -143,7 +143,7 @@ apiRouter.get("/students/average-objectives", requireUser, async (req, res, next
     } catch (error) {
         next(error);
     }
- });
+});
 //<-----------------GET ALL STUDNETS FOR A CLASS----------------->
 apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
@@ -275,7 +275,7 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
- }); 
+});
 
 //<-----------------ADD A LESSON OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
@@ -389,7 +389,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
         })
         const progress = teacher.classes.
             flatMap((className) => className.students)
-            // Array to hold combinedObjectives average data
+        // Array to hold combinedObjectives average data
         let combinedObjectivesArray = [];
         // Loop through each student
         progress.forEach((student) => {
@@ -425,7 +425,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
             objective.average = totalProgress / objective.progress.length;
         });
 
-        res.send({progress, averageObjectives: combinedObjectivesArray })
+        res.send({ progress, averageObjectives: combinedObjectivesArray })
     } catch (error) {
         next(error);
     }
@@ -447,5 +447,22 @@ apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
         next(error);
     }
 });
+//<-----------------DELETE A CLASS----------------->
+apiRouter.delete("/delete_class/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteClass = await prisma.class.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteClass) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteClass, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------DELETE A STUDNET----------------->
+//<-----------------DELETE A LESSON----------------->
+//<-----------------DELETE AN OBJECTIVE----------------->
 
 module.exports = apiRouter;
