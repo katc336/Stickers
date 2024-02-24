@@ -12,6 +12,7 @@ import AddClassButton from "./AddClass";
 
 const MyClasses = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
+    const [selectedClass, setSelectedClass] = useState(false);
     const { data, error, isLoading } = useGetClassesQuery();
     const [deleteClass] = useDeleteClassMutation();
     if (isLoading) {
@@ -38,7 +39,7 @@ const MyClasses = () => {
                     {data && data.map((myClass) => (
                         <div key={myClass.id}>
                             <Card
-                                sx={{ p: 2 }}
+                                sx={{ p: 2, my: 1 }}
                                 elevation={5}>
                                 <Stack
                                     direction="row"
@@ -72,12 +73,15 @@ const MyClasses = () => {
                                     <button
                                         className="delete-button"
                                         style={{ width: "70px" }}
-                                        onClick={() => setDelteAlert(true)}>
+                                        onClick={() => {
+                                            setSelectedClass(myClass.id);
+                                            setDelteAlert(true)
+                                        }}>
                                         <DeleteForeverIcon sx={{ color: "white" }} />
                                     </button>
                                 </Stack>
                             </Card>
-                            {deleteAlert &&
+                            {deleteAlert && selectedClass === myClass.id &&
                                 <Alert
                                     severity="error"
                                     sx={{ m: 1 }}>
@@ -86,7 +90,7 @@ const MyClasses = () => {
                                             Are you sure you want to delete this class?
                                         </Typography>
                                         <Typography variant="h6">
-                                             Once you do it will be gone forever.
+                                            Once you do it will be gone forever.
                                         </Typography>
                                         <Stack direction="row">
                                             <button
