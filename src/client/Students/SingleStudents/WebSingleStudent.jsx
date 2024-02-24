@@ -44,17 +44,24 @@ const WebSingleStudent = () => {
                         <div>
                             {data.averageObjectives.map((progress) => (
                                 <div key={progress.id}>
-                                    <Stack
-                                        direction="row"
-                                        justifyContent="space-between"
-                                        sx={{ borderBottom: "solid black 1px" }}>
-                                        <Typography>
-                                            {progress.objectiveName}
-                                        </Typography>
-                                        <Typography>
-                                            {progress.average}
-                                        </Typography>
-                                    </Stack>
+                                   <Card
+                                    sx={{
+                                       p: 1,
+                                       border: `3px solid`,
+                                       borderColor: progress.average < 70 ? "red" : progress.average >= 70 && progress.average <= 80 ? "orange" : progress.average >= 81 && progress.average <= 89 ? "yellow" : "green",
+                                       backgroundColor: progress.average < 70 ? "#FEA1A1" : progress.average >= 70 && progress.average <= 80 ? "#FFC97C" : progress.average >= 81 && progress.average <= 89 ? "#F9DE79" : "#CDE990",
+                                     }}>
+                                        <Stack
+                                            direction="row"
+                                            justifyContent="space-between">
+                                            <Typography>
+                                                {progress.objectiveName}
+                                            </Typography>
+                                            <Typography>
+                                                {Math.floor(progress.average)}
+                                            </Typography>
+                                        </Stack>
+                                    </Card>
                                 </div>
                             ))}
                         </div>

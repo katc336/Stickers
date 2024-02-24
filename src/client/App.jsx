@@ -11,6 +11,8 @@ import AllObjectives from "./LearningObjective/AllObjectives/AllObjectives";
 import SingleClass from "./Classes/SingleClass/SingleClass";
 import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./AllProgress/AllProgress";
+import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted";
+import Story from "./InformationPages/Story/Story";
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/get_started" element={<HowToGetStarted />} />
+        <Route path="/story" element={<Story />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/progress" element={<AllProgress />} />

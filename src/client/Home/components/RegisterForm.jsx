@@ -1,4 +1,5 @@
 import  Alert from "@mui/material/Alert";
+import  Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typograpgy from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -6,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useLoginMutation, useRegisterMutation } from "../../../redux/api";
 import { useNavigate } from "react-router-dom";
+import HomeNav from "./HomeNav";
 
 const RegisterForm = () => {
     const [name, setName] = useState("");
@@ -34,6 +36,8 @@ const RegisterForm = () => {
     }
     return (
         <div>
+            <HomeNav />
+            <Box sx={{ mt: 10}}>
             <Card sx={{ p: 5, mx: 50 }}>
                 <Typograpgy
                     variant="h4"
@@ -85,6 +89,7 @@ const RegisterForm = () => {
                     Go to Login
                 </Typograpgy>
             </Card>
+            </Box>
         </div>
     )
 }

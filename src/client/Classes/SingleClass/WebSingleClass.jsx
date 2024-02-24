@@ -91,6 +91,11 @@ const WebSingleClass = () => {
                         <Card
                             elevation={10}
                             sx={{ p: 1, m: 1 }}>
+                                <Typography
+                                variant="h5"
+                                sx={{ mb: 3, textAlign:"center"}}>
+                                    Students:
+                                </Typography>
                             {data.students.map((student) => (
                                 <div key={student.id}>
                                     <Stack
@@ -104,7 +109,7 @@ const WebSingleClass = () => {
                                         </Typography>
                                         <Link to={`/student/${student.id}`}>
                                             <button className="details-button">
-                                                See Details
+                                                Student Details
                                             </button>
                                         </Link>
                                     </Stack>
@@ -112,9 +117,9 @@ const WebSingleClass = () => {
                             ))}
                             {clearStudentButton &&
                                 <button
-                                    className="details-button"
+                                    className="add-button"
                                     onClick={() => { setAddStudent(true), setClearStudentButton(false) }}>
-                                    Add Student
+                                    Add New Student
                                 </button>
                             }
                             {addStudent &&
@@ -127,7 +132,7 @@ const WebSingleClass = () => {
                                         variant="filled"
                                         sx={{ my: 1 }} />
                                     <button
-                                        className="submit-button"
+                                        className="add-button"
                                         type="submit">
                                         Add Student
                                     </button>
@@ -139,6 +144,11 @@ const WebSingleClass = () => {
                         <Card
                             elevation={10}
                             sx={{ p: 1, m: 1 }}>
+                                <Typography
+                                variant="h5"
+                                sx={{ mb: 3, textAlign:"center"}}>
+                                    Lessons:
+                                </Typography>
                             {data.lessons.map((lesson) => (
                                 <div key={lesson.id}>
                                     <Stack
@@ -152,7 +162,7 @@ const WebSingleClass = () => {
                                         </Typography>
                                         <Link to={`/lesson/${lesson.id}`}>
                                             <button className="details-button">
-                                                See Details
+                                                Lesson Details
                                             </button>
                                         </Link>
                                     </Stack>
@@ -160,9 +170,9 @@ const WebSingleClass = () => {
                             ))}
                             {clearLessonButton &&
                                 <button
-                                    className="details-button"
+                                    className="add-button"
                                     onClick={() => { setAddLesson(true), setClearLessonButton(false) }}>
-                                    Add Lesson
+                                    Add New Lesson
                                 </button>
                             }
                             {addLesson &&
@@ -175,7 +185,7 @@ const WebSingleClass = () => {
                                         variant="filled"
                                         sx={{ my: 1 }} />
                                     <button
-                                        className="submit-button"
+                                        className="add-button"
                                         type="submit">
                                         Add Lesson
                                     </button>
