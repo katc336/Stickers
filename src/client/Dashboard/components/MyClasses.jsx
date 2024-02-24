@@ -82,8 +82,11 @@ const MyClasses = () => {
                                     severity="error"
                                     sx={{ m: 1 }}>
                                     <Stack direction="column">
-                                        <Typography>
-                                            Are you sure you want to delete this class? Once you do it will be gone forever
+                                        <Typography variant="h6">
+                                            Are you sure you want to delete this class?
+                                        </Typography>
+                                        <Typography variant="h6">
+                                             Once you do it will be gone forever.
                                         </Typography>
                                         <Stack direction="row">
                                             <button
