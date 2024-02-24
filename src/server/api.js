@@ -10,7 +10,11 @@ const prisma = new PrismaClient();
 apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.class.findMany({
-            where: { teacherId: req.user.id }
+            where: { teacherId: req.user.id },
+            include: {
+                students: true,
+                lessons: true
+            }
         })
         res.send(classes)
     } catch (error) {
