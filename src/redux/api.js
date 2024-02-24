@@ -162,6 +162,35 @@ const api = createApi({
             }),
             invalidatesTags: ["Lesson"]
         }),
+        //<------------ALL DELETE------------>
+        deleteClass: builder.mutation({
+            query: (id) => ({
+                url: `/api/delete_class/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
+        deleteStudent: builder.mutation({
+            query: (id) => ({
+                url: `/api/delete_student/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
+        deleteLesson: builder.mutation({
+            query: (id) => ({
+                url: `/api/delete_lesson/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
+        deleteObjective: builder.mutation({
+            query: (id) => ({
+                url: `/api/delete_objective/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
     })
 });
 export default api;
@@ -191,4 +220,9 @@ export const {
     //Student Progress
     useGetAllProgressQuery,
     usePostProgressMutation,
+    //ALL DELETE
+    useDeleteClassMutation,
+    useDeleteStudentMutation,
+    useDeleteLessonMutation,
+    useDeleteObjectiveMutation,
 } = api
