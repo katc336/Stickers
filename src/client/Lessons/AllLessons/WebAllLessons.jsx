@@ -1,13 +1,19 @@
+import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useGetAllLessonsQuery } from "../../../redux/api"
+import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 
 const WebAllLessons = () => {
+    const [deleteAlert, setDelteAlert] = useState(false);
+    const [selectedLesson, setSelectedLesson] = useState(false);
     const { data, error, isLoading } = useGetAllLessonsQuery();
+    const [deleteLesson] = useDeleteLessonMutation();
     if (isLoading) {
         return <div></div>
     }
@@ -32,8 +38,13 @@ const WebAllLessons = () => {
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
-                                <Stack direction="row">
-                                    <Typography sx={{ mr: 3 }}>
+                                <Stack
+                                    direction="row"
+                                    justifyContent="space-between"
+                                >
+                                    <Typography 
+                                    variant="h6"
+                                    sx={{ mr: 3 }}>
                                         {lesson.lessonName}
                                     </Typography>
                                     <Link to={`/lesson/${lesson.id}`} >
@@ -41,7 +52,42 @@ const WebAllLessons = () => {
                                             See Details
                                         </button>
                                     </Link>
+                                    <button
+                                        className="delete-button"
+                                        style={{ width: "70px", margin: 0 }} //override CSS
+                                        onClick={() => {
+                                            setSelectedLesson(lesson.id);
+                                            setDelteAlert(true)
+                                        }}>
+                                        <DeleteForeverIcon sx={{ color: "white" }} />
+                                    </button>
                                 </Stack>
+                                {deleteAlert && selectedLesson === lesson.id &&
+                                    <Alert
+                                        severity="error"
+                                        sx={{ m: 1 }}>
+                                        <Stack direction="column">
+                                            <Typography variant="h6">
+                                                Are you sure you want to delete this lesson?
+                                            </Typography>
+                                            <Typography variant="h6">
+                                                Once you do it will be gone forever.
+                                            </Typography>
+                                            <Stack direction="row">
+                                                <button
+                                                    className="add-button"
+                                                    style={{ width: "150px" }}>
+                                                    Keep Lesson
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteLesson(lesson.id)}
+                                                    className="delete-button"
+                                                    style={{ width: "150px" }}>
+                                                    Delete Forever
+                                                </button>
+                                            </Stack>
+                                        </Stack>
+                                    </Alert>}
                             </Card>
                         </div>
                     ))}
