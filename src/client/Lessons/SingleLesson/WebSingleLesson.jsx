@@ -9,10 +9,11 @@ import { useState } from "react"
 import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery, useDeleteObjectiveMutation } from "../../../redux/api"
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
+import ClassLessonObjective from "./components/ClassLessonObjective"
 
 const WebSingleLesson = () => {
     const { id } = useParams()
-    const [deleteAlert, setDelteAlert] = useState(false);
+    const [deleteObjectiveAlert, setDelteObjectiveAlert] = useState(false);
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [selectedObjectiveId, setSelectedObjectiveId] = useState("");
@@ -142,63 +143,7 @@ const WebSingleLesson = () => {
                     </div>}
                 <Grid container>
                     <Grid item xs={6}>
-                        <Card
-                            elevation={10}
-                            sx={{ m: 1, p: 1 }}>
-                            <Typography
-                                variant="h5"
-                                sx={{ textAlign: "center", my: 1 }}>
-                                Lesson Objectives:
-                            </Typography>
-                            {data.learningObjectives.map((objective) => (
-                                <div key={objective.id}>
-                                    <Card
-                                        sx={{ m: 1, p: 1 }}
-                                        elevation={10}>
-                                        <Stack direction="row"
-                                            justifyContent="space-between">
-                                            <Typography
-                                                variant="h6"
-                                                sx={{ mr: 5 }}>
-                                                {objective.objectiveName}
-                                            </Typography>
-                                            <button
-                                                className="delete-button"
-                                                style={{ width: "70px", margin: 0 }} //override margin in CSS
-                                                onClick={() => setDelteAlert(true)}>
-                                                <DeleteForeverIcon sx={{ color: "white" }} />
-                                            </button>
-                                        </Stack>
-                                    </Card>
-                                    {deleteAlert &&
-                                        <Alert
-                                            severity="error"
-                                            sx={{ m: 1 }}>
-                                            <Stack direction="column">
-                                                <Typography variant="h6">
-                                                    Are you sure you want to delete this class?
-                                                </Typography>
-                                                <Typography variant="h6">
-                                                    Once you do it will be gone forever.
-                                                </Typography>
-                                                <Stack direction="row">
-                                                    <button
-                                                        className="add-button"
-                                                        style={{ width: "150px" }}>
-                                                        Keep Objective
-                                                    </button>
-                                                    <button
-                                                        onClick={() => deleteObjective(objective.id)}
-                                                        className="delete-button"
-                                                        style={{ width: "150px" }}>
-                                                        Delete Forever
-                                                    </button>
-                                                </Stack>
-                                            </Stack>
-                                        </Alert>}
-                                </div>
-                            ))}
-                        </Card>
+                      <ClassLessonObjective id={id}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Card
