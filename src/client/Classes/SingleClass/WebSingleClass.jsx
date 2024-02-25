@@ -37,17 +37,21 @@ const WebSingleClass = () => {
     const handleAddStudent = async (event) => {
         try {
             event.preventDefault();
-            const result = await addStudentToClass({ id: Number(id), name })
-            console.log(result)
-            if (result.data) {
-                setAddError(false)
-                setAddStudent(false)
-                setClearStudentButton(true)
-                setName("");
-                console.log("Success!");
-            } else {
+            if (name.trim() === "") {
                 setAddError(true);
-                console.log("Could not add student");
+            } else {
+                const result = await addStudentToClass({ id: Number(id), name })
+                console.log(result)
+                if (result.data) {
+                    setAddError(false)
+                    setAddStudent(false)
+                    setClearStudentButton(true)
+                    setName("");
+                    console.log("Success!");
+                } else {
+                    setAddError(true);
+                    console.log("Could not add student");
+                }
             }
         } catch (error) {
             console.error(error)
@@ -57,6 +61,9 @@ const WebSingleClass = () => {
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
+            if (lessonName.trim() === "") {
+                setAddError(true);
+            } else {
             const result = await addLessonToClass({ id: Number(id), lessonName })
             console.log(result)
             if (result.data) {
@@ -68,6 +75,7 @@ const WebSingleClass = () => {
                 setAddError(true);
                 console.log("Could not add lesson");
             }
+        }
         } catch (error) {
             console.error(error)
         }
@@ -91,11 +99,11 @@ const WebSingleClass = () => {
                         <Card
                             elevation={10}
                             sx={{ p: 1, m: 1 }}>
-                                <Typography
+                            <Typography
                                 variant="h5"
-                                sx={{ mb: 3, textAlign:"center"}}>
-                                    Students:
-                                </Typography>
+                                sx={{ mb: 3, textAlign: "center" }}>
+                                Students:
+                            </Typography>
                             {data.students.map((student) => (
                                 <div key={student.id}>
                                     <Stack
@@ -144,11 +152,11 @@ const WebSingleClass = () => {
                         <Card
                             elevation={10}
                             sx={{ p: 1, m: 1 }}>
-                                <Typography
+                            <Typography
                                 variant="h5"
-                                sx={{ mb: 3, textAlign:"center"}}>
-                                    Lessons:
-                                </Typography>
+                                sx={{ mb: 3, textAlign: "center" }}>
+                                Lessons:
+                            </Typography>
                             {data.lessons.map((lesson) => (
                                 <div key={lesson.id}>
                                     <Stack
