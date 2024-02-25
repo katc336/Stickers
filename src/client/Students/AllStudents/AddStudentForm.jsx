@@ -1,9 +1,8 @@
 import Alert from "@mui/material/Alert"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
+import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useGetClassesQuery, usePostNewStudentMutation } from "../../../redux/api"
 
@@ -52,21 +51,32 @@ const AddStudentForm = () => {
                 <Alert severity="error">
                     There was an error adding the student.
                 </Alert>}
-            {clearButton && data.length !== 0 
-            ? 
-            <div>
-                 <button
-                    className="add-button"
-                    onClick={() => { setAddLesson(true), setClearButton(false) }}>
-                    Add New Student
-                </button>
-            </div> 
-            : <div> 
-                <Alert severity="info">
-                    You need to add a class first before you add a student. 
-                </Alert>
-            </div>
-               
+            {clearButton && data.length !== 0
+                ?
+                <div>
+                    <button
+                        className="add-button"
+                        onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                        Add New Student
+                    </button>
+                </div>
+                : <div>
+                    <Alert severity="info">
+                        <Stack direction="row">
+                            <Typography variant="h5">
+                                You need to add a class first before you add a student.
+                            </Typography>
+                            <Link to="/my_classes">
+                                <button
+                                    style={{ marginTop: 0, marginLeft: "10px", marginBottom: 0, marginRight: "10px" }}
+                                    className="add-button">
+                                    Go Add Class
+                                </button>
+                            </Link>
+                        </Stack>
+                    </Alert>
+                </div>
+
             }
             {addStudent &&
                 <form onSubmit={handleAddStudent}>
