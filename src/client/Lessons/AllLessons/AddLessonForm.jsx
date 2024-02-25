@@ -52,19 +52,29 @@ const AddLessonForm = () => {
                 <Alert severity="error">
                     There was an error adding the lesson.
                 </Alert>}
-            {clearButton &&
-                <button
+            {clearButton && data.length !== 0 
+            ? 
+            <div>
+                 <button
                     className="add-button"
                     onClick={() => { setAddLesson(true), setClearButton(false) }}>
                     Add New Lesson
                 </button>
+            </div> 
+            : <div> 
+                <Alert severity="info">
+                    You need to add a class first before you add a lesson. 
+                </Alert>
+            </div>
+               
             }
             {addLesson &&
                 <form onSubmit={handleAddLesson}>
                     <Typography variant="h6">
                         Select Student's Class:
                     </Typography>
-                    {data.map((className) => (
+                    {
+                    data.map((className) => (
                         <div key={className.id}>
                             <Stack direction="row">
                                 <input

@@ -52,12 +52,21 @@ const AddStudentForm = () => {
                 <Alert severity="error">
                     There was an error adding the student.
                 </Alert>}
-            {clearButton &&
-                <button
+            {clearButton && data.length !== 0 
+            ? 
+            <div>
+                 <button
                     className="add-button"
-                    onClick={() => { setAddStudent(true), setClearButton(false) }}>
+                    onClick={() => { setAddLesson(true), setClearButton(false) }}>
                     Add New Student
                 </button>
+            </div> 
+            : <div> 
+                <Alert severity="info">
+                    You need to add a class first before you add a student. 
+                </Alert>
+            </div>
+               
             }
             {addStudent &&
                 <form onSubmit={handleAddStudent}>

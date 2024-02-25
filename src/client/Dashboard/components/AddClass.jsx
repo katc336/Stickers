@@ -47,29 +47,29 @@ const AddClassButton = () => {
                 <button
                     className="add-button"
                     onClick={() => { setClassForm(true), setAddButton(false) }}
-                    style={{ float: "right", marginBottom: "50px" }}>
+                >
                     Add New Class
                 </button>
             }
             {classForm &&
-                    <form onSubmit={handleAdd}>
-                        <Stack direction="row">
-                            <Textfield
-                                size="small"
-                                label="Class Name"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                                variant="filled"
-                                sx={{ mr: 3, width: "90%" }} 
-                            />
-                            <button
+                <form onSubmit={handleAdd}>
+                    <Stack direction="row">
+                        <Textfield
+                            size="small"
+                            label="Class Name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            variant="filled"
+                            sx={{ mr: 3, width: "90%" }}
+                        />
+                        <button
                             style={{ margin: "0px" }} //override margin styles for better alignent
-                                className="add-button"
-                                type="submit">
-                                Add Class
-                            </button>
-                        </Stack>
-                    </form>
+                            className="add-button"
+                            type="submit">
+                            Add Class
+                        </button>
+                    </Stack>
+                </form>
             }
         </div>
     )
