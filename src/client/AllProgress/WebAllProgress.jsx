@@ -35,11 +35,11 @@ const WebAllProgress = () => {
                         sx={{ textAlign: "center", p: 1 }}>
                         Lesson Objective Average Success Rate
                     </Typography>
-                    {/*VICTORY BAR*/}
+                    {/*<--------------------VICTORY BAR<--------------------*/}
                     <VictoryChart
                         theme={VictoryTheme.material}
                         horizontal  // Set the chart to run horizontally
-                        domainPadding={1}
+                        domainPadding={{ x: 1, y: 1 }}
                     >
                         horizontal
                         <VictoryAxis
@@ -64,7 +64,6 @@ const WebAllProgress = () => {
                                 label: `Objective:${average.objectiveName}: ${average.average}%`
                             }))}
                             labelComponent={<VictoryLabel dy={-20} angle={1800} textAnchor="end" style={{ fontSize: 10 }} />}
-
                         />
                     </VictoryChart>
 
