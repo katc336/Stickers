@@ -98,7 +98,7 @@ const api = createApi({
                 url: `/api/student/${id}`,
                 method: 'GET'
             }),
-            providesTags: ["Student"]
+            providesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         //<------------LESSONS------------>
         postNewLesson: builder.mutation({
@@ -160,7 +160,7 @@ const api = createApi({
                 method: 'POST',
                 body: { studentId, objectiveId, progressPercent, combinedObjectiveId },
             }),
-            invalidatesTags: ["Lesson"]
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         //<------------ALL DELETE------------>
         deleteClass: builder.mutation({
