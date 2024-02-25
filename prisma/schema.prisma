@@ -59,6 +59,7 @@ model Attendance {
   studentId Int
   lesson    Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   lessonId  Int
+  createdAt          DateTime            @default(now())
 }
 
 model LearningObjective {
@@ -80,4 +81,5 @@ model StudentProgress {
   combinedObjective   CombinedObjective @relation(fields: [combinedObjectiveId], references: [id], onDelete: Cascade)
   combinedObjectiveId Int
   progressPrecent     Int
+  createdAt          DateTime            @default(now())
 }

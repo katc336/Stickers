@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography"
 import Alert from "@mui/material/Alert"
 import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
+import { VictoryBar, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 import NavDrawer from "../../Navigation/NavDrawer"
 
 const WebSingleStudent = () => {
@@ -41,28 +42,27 @@ const WebSingleStudent = () => {
                         </div>
                         :
                         <div>
-                            {data.averageObjectives.map((progress) => (
-                                <div key={progress.id}>
-                                   <Card
-                                    sx={{
-                                       p: 1,
-                                       border: `3px solid`,
-                                       borderColor: progress.average < 70 ? "red" : progress.average >= 70 && progress.average <= 80 ? "orange" : progress.average >= 81 && progress.average <= 89 ? "yellow" : "green",
-                                       backgroundColor: progress.average < 70 ? "#FEA1A1" : progress.average >= 70 && progress.average <= 80 ? "#FFC97C" : progress.average >= 81 && progress.average <= 89 ? "#F9DE79" : "#CDE990",
-                                     }}>
-                                        <Stack
-                                            direction="row"
-                                            justifyContent="space-between">
-                                            <Typography>
-                                                {progress.objectiveName}
-                                            </Typography>
-                                            <Typography>
-                                                {Math.floor(progress.average)}
-                                            </Typography>
-                                        </Stack>
-                                    </Card>
-                                </div>
-                            ))}
+
+                            <VictoryChart
+                                theme={VictoryTheme.material}
+                                horizontal  // Set the chart to run horizontally
+                                domainPadding={{ x: 1, y: 1 }}
+                            >
+                                <VictoryAxis
+                                    dependentAxis
+                                    domain={[0, 100]}
+                                    tickFormat={ticket => `${ticket}%`}
+                                />
+                                <VictoryBar
+                                  data={data.averageObjectives.map(average => ({
+                                    x: average.objectiveName,
+                                    y: average.average,
+                                    label: `Objective:${average.objectiveName}: ${average.average}%`
+                                }))}
+                    
+                                    labelComponent={<VictoryLabel dy={-20} angle={1800} textAnchor="end" style={{ fontSize: 10 }} />}
+                                />
+                            </VictoryChart>
                         </div>
                 }
             </Card>

@@ -70,6 +70,7 @@ const WebSingleClass = () => {
                 setAddError(false)
                 setAddLesson(false)
                 setClearLessonButton(true)
+                setLessonName("");
                 console.log("Success!");
             } else {
                 setAddError(true);
