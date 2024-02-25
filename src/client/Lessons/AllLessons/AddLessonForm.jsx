@@ -5,16 +5,16 @@ import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
 import { useState } from "react"
-import { useGetClassesQuery, usePostNewStudentMutation } from "../../../redux/api"
+import { useGetClassesQuery,  usePostNewLessonMutation } from "../../../redux/api"
 
-const AddStudentForm = () => {
+const AddLessonForm = () => {
     const [addError, setAddError] = useState(null);
     const [selectedClassId, setSelectedClassId] = useState(null);
-    const [name, setName] = useState("")
-    const [addStudent, setAddStudent] = useState(false);
+    const [lessonName, setLessonName] = useState("")
+    const [addLesson, setAddLesson] = useState(false);
     const [clearButton, setClearButton] = useState(true);
     const { data, error, isLoading } = useGetClassesQuery();
-    const [addStudentToClass] = usePostNewStudentMutation();
+    const [addLessonToClass] = usePostNewLessonMutation();
     if (isLoading) {
         return <div></div>
     }
@@ -22,23 +22,23 @@ const AddStudentForm = () => {
         console.error(error)
     }
     console.log(data)
-    const handleAddStudent = async (event) => {
+    const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
-            if (name.trim() === "") {
+            if (lessonName.trim() === "") {
                 setAddError(true);
             } else {
-                const result = await addStudentToClass({ id: Number(selectedClassId), name })
+                const result = await addLessonToClass({ id: Number(selectedClassId), lessonName })
                 console.log(result)
                 if (result.data) {
                     setAddError(false)
-                    setAddStudent(false)
+                    setAddLesson(false)
                     setClearButton(true)
-                    setName("");
+                    setLessonName("");
                     console.log("Success!");
                 } else {
                     setAddError(true);
-                    console.log("Could not add student");
+                    console.log("Could not add lesson");
                 }
             }
         } catch (error) {
@@ -50,17 +50,17 @@ const AddStudentForm = () => {
         <div>
             {addError &&
                 <Alert severity="error">
-                    There was an error adding the student.
+                    There was an error adding the lesson.
                 </Alert>}
             {clearButton &&
                 <button
                     className="add-button"
-                    onClick={() => { setAddStudent(true), setClearButton(false) }}>
-                    Add New Student
+                    onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                    Add New Lesson
                 </button>
             }
-            {addStudent &&
-                <form onSubmit={handleAddStudent}>
+            {addLesson &&
+                <form onSubmit={handleAddLesson}>
                     <Typography variant="h6">
                         Select Student's Class:
                     </Typography>
@@ -85,19 +85,19 @@ const AddStudentForm = () => {
                     <Stack direction="column">
                         <TextField
                             label="Student Name"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
+                            value={lessonName}
+                            onChange={(event) => setLessonName(event.target.value)}
                             variant="filled"
                             sx={{ my: 1, width: "35%" }} />
                         <button
                             style={{ width: "150px" }}
                             className="add-button"
                             type="submit">
-                            Add Student
+                            Add Lesson
                         </button>
                     </Stack>
                 </form>}
         </div>
     )
 }
-export default AddStudentForm
+export default AddLessonForm

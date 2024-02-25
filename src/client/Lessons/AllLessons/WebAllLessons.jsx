@@ -8,6 +8,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
+import AddLessonForm from "./AddLessonForm"
 
 const WebAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -33,6 +34,7 @@ const WebAllLessons = () => {
                         variant="h3">
                         All Lessons:
                     </Typography>
+                    <AddLessonForm />
                     {data && data.map((lesson) => (
                         <div key={lesson.id}>
                             <Card
