@@ -22,6 +22,8 @@ const AddClassButton = () => {
                 if (result.data) {
                     console.log("Success!" + result.data);
                     setAddError(false);
+                    setAddButton(true);
+                    setClassForm(false);
                     setName("");
                 } else {
                     console.error("Cannot add class");
@@ -55,14 +57,13 @@ const AddClassButton = () => {
                             <Textfield
                                 size="small"
                                 label="Class Name"
-                                fullWidth
                                 value={name}
                                 onChange={(event) => setName(event.target.value)}
                                 variant="filled"
-                                sx={{ mr: 3 }} 
+                                sx={{ mr: 3, width: "90%" }} 
                             />
                             <button
-                            style={{ margin: "0px"}} //override margin styles for better alignent
+                            style={{ margin: "0px" }} //override margin styles for better alignent
                                 className="add-button"
                                 type="submit">
                                 Add Class
