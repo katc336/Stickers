@@ -4,13 +4,15 @@ import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
-import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery } from "../../../redux/api"
+import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery, useDeleteObjectiveMutation } from "../../../redux/api"
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
 
 const WebSingleLesson = () => {
     const { id } = useParams()
+    const [deleteAlert, setDelteAlert] = useState(false);
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [selectedObjectiveId, setSelectedObjectiveId] = useState("");
@@ -23,6 +25,7 @@ const WebSingleLesson = () => {
     const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
     const [addLessonObjectiveMutation] = usePostNewObjectiveMutation();
     const [addProgressMutation] = usePostProgressMutation();
+    const [deleteObjective] = useDeleteObjectiveMutation();
     if (isLoading || objLoading) {
         return <div></div>
     }
@@ -149,13 +152,50 @@ const WebSingleLesson = () => {
                             </Typography>
                             {data.learningObjectives.map((objective) => (
                                 <div key={objective.id}>
-                                    <Card 
-                                    sx={{ m: 1, p: 1 }}
-                                    elevation={10}>
-                                    <Typography>
-                                        {objective.objectiveName}
-                                    </Typography>
+                                    <Card
+                                        sx={{ m: 1, p: 1 }}
+                                        elevation={10}>
+                                        <Stack direction="row"
+                                            justifyContent="space-between">
+                                            <Typography
+                                                variant="h6"
+                                                sx={{ mr: 5 }}>
+                                                {objective.objectiveName}
+                                            </Typography>
+                                            <button
+                                                className="delete-button"
+                                                style={{ width: "70px", margin: 0 }} //override margin in CSS
+                                                onClick={() => setDelteAlert(true)}>
+                                                <DeleteForeverIcon sx={{ color: "white" }} />
+                                            </button>
+                                        </Stack>
                                     </Card>
+                                    {deleteAlert &&
+                                        <Alert
+                                            severity="error"
+                                            sx={{ m: 1 }}>
+                                            <Stack direction="column">
+                                                <Typography variant="h6">
+                                                    Are you sure you want to delete this class?
+                                                </Typography>
+                                                <Typography variant="h6">
+                                                    Once you do it will be gone forever.
+                                                </Typography>
+                                                <Stack direction="row">
+                                                    <button
+                                                        className="add-button"
+                                                        style={{ width: "150px" }}>
+                                                        Keep Objective
+                                                    </button>
+                                                    <button
+                                                        onClick={() => deleteObjective(objective.id)}
+                                                        className="delete-button"
+                                                        style={{ width: "150px" }}>
+                                                        Delete Forever
+                                                    </button>
+                                                </Stack>
+                                            </Stack>
+                                        </Alert>}
                                 </div>
                             ))}
                         </Card>
@@ -171,90 +211,91 @@ const WebSingleLesson = () => {
                             </Typography>
                             {data.class.students.map((student) => (
                                 <div key={student.id}>
-                                    <Card 
-                                    elevation={10}
-                                    sx={{ p: 1, m: 1}}>
-                                    <Stack justifyContent="space-between">
-                                        <Typography variant="h6">
-                                            {student.name}
-                                        </Typography>
-                                        {student.studentProgress.map((progress) => (
-                                            <div key={progress.id}>
-                                                <Card
-                                                sx={{ 
-                                                    p: 1,
-                                                    border: 1,
-                                                    borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "orange" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "yellow" : "green",
-                                                    backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "#FFC97C" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"}}>
-                                                <Stack direction="row">
-                                                    <Typography
-                                                        sx={{ mx: 1 }}>
-                                                        {progress.learningObjective.objectiveName}:
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{ mx: 1 }}>
-                                                        {progress.progressPrecent}%
-                                                    </Typography>
-                                                </Stack>
-                                                </Card>
-                                            </div>
-                                        ))}
-                                        <Stack direction="column">
-                                            <button
-                                                style={{ width: 170 }}
-                                                onClick={() => { setSelectedStudentId(student.id) }}
-                                                className="details-button">
-                                                Add New Progress
-                                            </button>
-                                            {selectedStudentId === student.id &&
-                                                <Card
-                                                    sx={{ p: 1, m: 3 }}
-                                                    elevation={10}>
-                                                    <form onSubmit={handleAddProgress}>
-                                                        <Stack direction="column">
-                                                            <Typography variant="h5" sx={{ my: 1 }}>
-                                                                Select Learning Objective:
+                                    <Card
+                                        elevation={10}
+                                        sx={{ p: 1, m: 1 }}>
+                                        <Stack justifyContent="space-between">
+                                            <Typography variant="h6">
+                                                {student.name}
+                                            </Typography>
+                                            {student.studentProgress.map((progress) => (
+                                                <div key={progress.id}>
+                                                    <Card
+                                                        sx={{
+                                                            p: 1,
+                                                            border: 1,
+                                                            borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "orange" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "yellow" : "green",
+                                                            backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "#FFC97C" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
+                                                        }}>
+                                                        <Stack direction="row">
+                                                            <Typography
+                                                                sx={{ mx: 1 }}>
+                                                                {progress.learningObjective.objectiveName}:
                                                             </Typography>
-                                                            {data.learningObjectives.map((objective) => (
-                                                                <div key={objective.id}>
-                                                                    <Stack direction="row">
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            value={""}
-                                                                            onChange={(event) => {
-                                                                                if (event.target.checked) {
-                                                                                    setSelectedObjectiveId(objective.id);
-                                                                                    setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
-                                                                                }
-                                                                            }}
-                                                                        />
-                                                                        <Typography>
-                                                                            {objective.objectiveName}
-                                                                        </Typography>
-                                                                    </Stack>
-                                                                </div>
-                                                            ))}
-                                                            <Typography variant="h5" sx={{ my: 1 }}>
-                                                                Enter Percentage of Success:
+                                                            <Typography
+                                                                sx={{ mx: 1 }}>
+                                                                {progress.progressPrecent}%
                                                             </Typography>
-                                                            <TextField
-                                                                multiline
-                                                                fullWidth
-                                                                label="Add a number from 1-100"
-                                                                value={progress}
-                                                                onChange={(event) => setProgress(event.target.value)}
-                                                                variant="filled"
-                                                                sx={{ my: 1 }}
-                                                            />
-                                                            <button className="add-button">
-                                                                Add {student.name}'s Progess
-                                                            </button>
                                                         </Stack>
-                                                    </form>
-                                                </Card>
-                                            }
+                                                    </Card>
+                                                </div>
+                                            ))}
+                                            <Stack direction="column">
+                                                <button
+                                                    style={{ width: 170 }}
+                                                    onClick={() => { setSelectedStudentId(student.id) }}
+                                                    className="details-button">
+                                                    Add New Progress
+                                                </button>
+                                                {selectedStudentId === student.id &&
+                                                    <Card
+                                                        sx={{ p: 1, m: 3 }}
+                                                        elevation={10}>
+                                                        <form onSubmit={handleAddProgress}>
+                                                            <Stack direction="column">
+                                                                <Typography variant="h5" sx={{ my: 1 }}>
+                                                                    Select Learning Objective:
+                                                                </Typography>
+                                                                {data.learningObjectives.map((objective) => (
+                                                                    <div key={objective.id}>
+                                                                        <Stack direction="row">
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                value={""}
+                                                                                onChange={(event) => {
+                                                                                    if (event.target.checked) {
+                                                                                        setSelectedObjectiveId(objective.id);
+                                                                                        setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
+                                                                                    }
+                                                                                }}
+                                                                            />
+                                                                            <Typography>
+                                                                                {objective.objectiveName}
+                                                                            </Typography>
+                                                                        </Stack>
+                                                                    </div>
+                                                                ))}
+                                                                <Typography variant="h5" sx={{ my: 1 }}>
+                                                                    Enter Percentage of Success:
+                                                                </Typography>
+                                                                <TextField
+                                                                    multiline
+                                                                    fullWidth
+                                                                    label="Add a number from 1-100"
+                                                                    value={progress}
+                                                                    onChange={(event) => setProgress(event.target.value)}
+                                                                    variant="filled"
+                                                                    sx={{ my: 1 }}
+                                                                />
+                                                                <button className="add-button">
+                                                                    Add {student.name}'s Progess
+                                                                </button>
+                                                            </Stack>
+                                                        </form>
+                                                    </Card>
+                                                }
+                                            </Stack>
                                         </Stack>
-                                    </Stack>
                                     </Card>
                                 </div>
                             ))}

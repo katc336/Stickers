@@ -10,7 +10,11 @@ const prisma = new PrismaClient();
 apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     try {
         const classes = await prisma.class.findMany({
-            where: { teacherId: req.user.id }
+            where: { teacherId: req.user.id },
+            include: {
+                students: true,
+                lessons: true
+            }
         })
         res.send(classes)
     } catch (error) {
@@ -62,7 +66,7 @@ apiRouter.post("/add_student", requireUser, async (req, res, next) => {
         next(error);
     }
 });
- 
+
 //<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
 apiRouter.get("/my_students", requireUser, async (req, res, next) => {
     try {
@@ -143,7 +147,7 @@ apiRouter.get("/students/average-objectives", requireUser, async (req, res, next
     } catch (error) {
         next(error);
     }
- });
+});
 //<-----------------GET ALL STUDNETS FOR A CLASS----------------->
 apiRouter.get("/class/:id/students", requireUser, async (req, res, next) => {
     try {
@@ -228,7 +232,11 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
             include: {
                 classes: {
                     include: {
-                        lessons: true
+                        lessons: {
+                            include: {
+                                learningObjectives: true
+                            }
+                        }
                     }
                 }
             }
@@ -275,7 +283,7 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
- }); 
+});
 
 //<-----------------ADD A LESSON OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
@@ -389,7 +397,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
         })
         const progress = teacher.classes.
             flatMap((className) => className.students)
-            // Array to hold combinedObjectives average data
+        // Array to hold combinedObjectives average data
         let combinedObjectivesArray = [];
         // Loop through each student
         progress.forEach((student) => {
@@ -425,7 +433,7 @@ apiRouter.get("/progress", requireUser, async (req, res, next) => {
             objective.average = totalProgress / objective.progress.length;
         });
 
-        res.send({progress, averageObjectives: combinedObjectivesArray })
+        res.send({ progress, averageObjectives: combinedObjectivesArray })
     } catch (error) {
         next(error);
     }
@@ -447,5 +455,60 @@ apiRouter.post('/studentProgress', requireUser, async (req, res, next) => {
         next(error);
     }
 });
-
+//<-----------------DELETE A CLASS----------------->
+apiRouter.delete("/delete_class/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteClass = await prisma.class.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteClass) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteClass, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------DELETE A STUDNET----------------->
+apiRouter.delete("/delete_student/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteStudent = await prisma.student.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteStudent) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteStudent, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------DELETE A LESSON----------------->
+apiRouter.delete("/delete_lesson/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteLesson = await prisma.lesson.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteLesson) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteLesson, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------DELETE AN OBJECTIVE----------------->
+apiRouter.delete("/delete_objective/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteObjective = await prisma.learningObjective.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteObjective) {
+            return res.status(404).send("Class not found!");
+        }
+        res.send({deleteObjective, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
 module.exports = apiRouter;

@@ -1,4 +1,5 @@
 import Textfield from "@mui/material/TextField"
+import Stack from "@mui/material/Stack"
 import { useState } from "react";
 import { usePostNewClassMutation } from "../../../redux/api"
 import Alert from "@mui/material/Alert";
@@ -21,6 +22,8 @@ const AddClassButton = () => {
                 if (result.data) {
                     console.log("Success!" + result.data);
                     setAddError(false);
+                    setAddButton(true);
+                    setClassForm(false);
                     setName("");
                 } else {
                     console.error("Cannot add class");
@@ -49,23 +52,24 @@ const AddClassButton = () => {
                 </button>
             }
             {classForm &&
-                <div style={{ float: "right", marginBottom: "50px" }}>
                     <form onSubmit={handleAdd}>
-                        <Textfield
-                            size="small"
-                            label="Class Name"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                            variant="filled"
-                            sx={{ mr: 3, width: 1000 }}  // width is large number just to make it max: cannot use fullWidth without changing button
-                        />
-                        <button
-                            className="add-button"
-                            type="submit">
-                            Add Class
-                        </button>
+                        <Stack direction="row">
+                            <Textfield
+                                size="small"
+                                label="Class Name"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                                variant="filled"
+                                sx={{ mr: 3, width: "90%" }} 
+                            />
+                            <button
+                            style={{ margin: "0px" }} //override margin styles for better alignent
+                                className="add-button"
+                                type="submit">
+                                Add Class
+                            </button>
+                        </Stack>
                     </form>
-                </div>
             }
         </div>
     )

@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 
-
 const WebSingleStudent = () => {
     const { id } = useParams()
     const { data, error, isLoading } = useGetSingleStudentQuery(id)
@@ -36,7 +35,7 @@ const WebSingleStudent = () => {
                         <div>
                             <Alert severity="info">
                                 <Typography>
-                                    There is no data entered for {data.name} yet.
+                                    There is no data entered yet. You can add student progress in a class's lesson.
                                 </Typography>
                             </Alert>
                         </div>

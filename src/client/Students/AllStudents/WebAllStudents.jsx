@@ -1,14 +1,21 @@
+import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useGetAllStudentsByTeacherQuery } from "../../../redux/api"
+import { useGetAllStudentsByTeacherQuery, useDeleteStudentMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
+import AddStudentForm from "./AddStudentForm"
 
 
 const WebAllStudents = () => {
+    const [deleteAlert, setDeleteAlert] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState(false);
     const { data, error, isLoading } = useGetAllStudentsByTeacherQuery();
+    const [deleteStudent] = useDeleteStudentMutation();
     if (isLoading) {
         return <div></div>
     }
@@ -28,6 +35,7 @@ const WebAllStudents = () => {
                         variant="h3">
                         All Students:
                     </Typography>
+                    <AddStudentForm />
                     {data && data.map((student) => (
                         <div key={student.id}>
                             <Card
@@ -48,7 +56,43 @@ const WebAllStudents = () => {
                                             See Details
                                         </button>
                                     </Link>
+                                    <button
+                                        className="delete-button"
+                                        style={{ width: "70px", margin: 0 }} //overrride CSS margin
+                                        onClick={() => {
+                                            setDeleteAlert(true);
+                                            setSelectedStudent(student.id)
+                                        }}>
+                                        <DeleteForeverIcon sx={{ color: "white" }} />
+                                    </button>
                                 </Stack>
+                                {deleteAlert && selectedStudent === student.id &&
+                                    <Alert
+                                        severity="error"
+                                        sx={{ m: 1 }}>
+                                        <Stack direction="column">
+                                            <Typography variant="h6">
+                                                Are you sure you want to delete this student?
+                                            </Typography>
+                                            <Typography variant="h6">
+                                                Once you do it will be gone forever.
+                                            </Typography>
+                                            <Stack direction="row">
+                                                <button
+                                                    className="add-button"
+                                                    style={{ width: "150px" }}>
+                                                    Keep Student
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteStudent(student.id)}
+                                                    className="delete-button"
+                                                    style={{ width: "150px" }}>
+                                                    Delete Forever
+                                                </button>
+                                            </Stack>
+                                        </Stack>
+                                    </Alert>
+                                }
                             </Card>
                         </div>
                     ))}
