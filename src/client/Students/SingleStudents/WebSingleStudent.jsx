@@ -59,7 +59,6 @@ const WebSingleStudent = () => {
                                     y: average.average,
                                     label: `Objective:${average.objectiveName}: ${average.average}%`
                                 }))}
-                    
                                     labelComponent={<VictoryLabel dy={-20} angle={1800} textAnchor="end" style={{ fontSize: 10 }} />}
                                 />
                             </VictoryChart>
