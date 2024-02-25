@@ -26,6 +26,7 @@ const AddProgress = ({ data, student }) => {
             if (result.data) {
                 setAddError(false);
                 setSelectedStudentId(null);
+                setProgress("");
                 console.log("Success!");
             } else {
                 setAddError(true);
