@@ -4,27 +4,24 @@ import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
 import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery, useDeleteObjectiveMutation } from "../../../redux/api"
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
 import ClassLessonObjective from "./components/ClassLessonObjective"
+import AddLesson from "./components/AddLesson"
 
 const WebSingleLesson = () => {
     const { id } = useParams()
-    const [deleteObjectiveAlert, setDelteObjectiveAlert] = useState(false);
-    const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [selectedObjectiveId, setSelectedObjectiveId] = useState("");
     const [selectedCombinedObjectiveId, setSelectedCombinedObjectiveId] = useState("");
     const [addError, setAddError] = useState(null);
-    const [objectiveName, setObjectiveName] = useState("");
     const [progress, setProgress] = useState("");
 
     const { data, error, isLoading } = useGetSingleLessonQuery(id);
     const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
-    const [addLessonObjectiveMutation] = usePostNewObjectiveMutation();
+
     const [addProgressMutation] = usePostProgressMutation();
     const [deleteObjective] = useDeleteObjectiveMutation();
     if (isLoading || objLoading) {
@@ -35,24 +32,6 @@ const WebSingleLesson = () => {
     }
     console.log(data)
 
-    const handleAddLessonObjective = async (event) => {
-        try {
-            event.preventDefault();
-            const result = await addLessonObjectiveMutation({ id: Number(id), objectiveName })
-            console.log(result)
-            if (result.data) {
-                setAddError(false);
-                setAddLessonObjective(false)
-                setObjectiveName("");
-                console.log("Success!");
-            } else {
-                setAddError(true);
-                console.log("Could not add objective");
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
     const handleAddProgress = async (event) => {
         try {
             event.preventDefault();
@@ -83,67 +62,10 @@ const WebSingleLesson = () => {
                     sx={{ textAlign: "center", mx: 3 }}>
                     {data && data.lessonName}
                 </Typography>
-                {addError &&
-                    <Alert severity="error">There was an error updating this lesson.</Alert>}
-                <button
-                    style={{ float: "right", marginBottom: "50px", width: "200px" }}
-                    className="add-button"
-                    onClick={() => { setAddLessonObjective(true) }}>
-                    Add Lesson Objective
-                </button>
-                {addLessonObjective &&
-                    <div style={{ float: "right" }}>
-                        <form onSubmit={handleAddLessonObjective}>
-                            {objData.length > 0
-                                ? //if there are already objectices...
-                                <div>
-                                    <Typography
-                                        variant="h5"
-                                        sx={{ mb: 1 }}>
-                                        Select an existing objective:
-                                    </Typography>
-                                    {objData && objData.map((objective) => (
-                                        <div key={objective.id}>
-                                            <Stack direction="row">
-                                                <input
-                                                    type="checkbox"
-                                                    value={objectiveName}
-                                                    onChange={(event) => {
-                                                        if (event.target.checked) {
-                                                            setObjectiveName(objective.objectiveName);
-                                                        }
-                                                    }}
-                                                />
-                                                <Typography sx={{ ml: 1 }}>
-                                                    {objective.objectiveName}
-                                                </Typography>
-                                            </Stack>
-                                        </div>
-                                    ))}
-                                </div>
-                                : //if there are no objectives, return an empty div
-                                <div></div>}
-                            <Typography
-                                variant="h5"
-                                sx={{ mt: 3 }}>
-                                Add New Ojective:
-                            </Typography>
-                            <TextField
-                                multiline
-                                label="Lesson Objective"
-                                value={objectiveName}
-                                onChange={(event) => setObjectiveName(event.target.value)}
-                                sx={{ m: 3, width: 900 }} />
-                            <button
-                                className="add-button"
-                                type="submit">
-                                Add to Class
-                            </button>
-                        </form>
-                    </div>}
+                <AddLesson  id={id}/>
                 <Grid container>
                     <Grid item xs={6}>
-                      <ClassLessonObjective id={id}/>
+                        <ClassLessonObjective id={id} />
                     </Grid>
                     <Grid item xs={6}>
                         <Card
