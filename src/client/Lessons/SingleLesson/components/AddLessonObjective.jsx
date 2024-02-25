@@ -6,8 +6,7 @@ import TextField from "@mui/material/TextField"
 import { useState } from "react"
 import { useGetAllObjectivesQuery, usePostNewObjectiveMutation } from "../../../../redux/api"
 
-const AddLesson = ({ id }) => {
-    const [deleteObjectiveAlert, setDelteObjectiveAlert] = useState(false);
+const AddLessonObjective = ({ id }) => {
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [addError, setAddError] = useState(null);
     const [objectiveName, setObjectiveName] = useState("");
@@ -19,6 +18,15 @@ const AddLesson = ({ id }) => {
     if (objError) {
         console.error(error)
     }
+//Filter to only show objective names once
+    const displayedObjectives = []
+    objData && objData.map((objective) => {
+        if(!displayedObjectives.includes(objective.objectiveName)) {
+            displayedObjectives.push(objective.objectiveName)
+        }
+    });
+
+    console.log(displayedObjectives)
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
@@ -50,7 +58,7 @@ const AddLesson = ({ id }) => {
             {addLessonObjective &&
                 <div style={{ float: "right" }}>
                     <form onSubmit={handleAddLessonObjective}>
-                        {objData.length > 0
+                        {objData.length !== 0
                             ? //if there are already objectices...
                             <div>
                                 <Typography
@@ -58,20 +66,20 @@ const AddLesson = ({ id }) => {
                                     sx={{ mb: 1 }}>
                                     Select an existing objective:
                                 </Typography>
-                                {objData && objData.map((objective) => (
-                                    <div key={objective.id}>
+                                {displayedObjectives.map((objective) => (
+                                    <div key={objective}>
                                         <Stack direction="row">
                                             <input
                                                 type="checkbox"
-                                                value={objectiveName}
+                                                value={objective}
                                                 onChange={(event) => {
                                                     if (event.target.checked) {
-                                                        setObjectiveName(objective.objectiveName);
+                                                        setObjectiveName(objective);
                                                     }
                                                 }}
                                             />
                                             <Typography sx={{ ml: 1 }}>
-                                                {objective.objectiveName}
+                                                {objective}
                                             </Typography>
                                         </Stack>
                                     </div>
@@ -100,4 +108,4 @@ const AddLesson = ({ id }) => {
         </div>
     )
 }
-export default AddLesson
+export default AddLessonObjective

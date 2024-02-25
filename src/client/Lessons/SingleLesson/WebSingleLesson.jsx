@@ -5,7 +5,7 @@ import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMu
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
 import ClassLessonObjective from "./components/ClassLessonObjective"
-import AddLesson from "./components/AddLesson"
+import AddLessonObjective from "./components/AddLessonObjective"
 import ClassStudentsProgress from "./components/ClassStudentsProgress";
 
 const WebSingleLesson = () => {
@@ -28,7 +28,7 @@ const WebSingleLesson = () => {
                     sx={{ textAlign: "center", mx: 3 }}>
                     {data && data.lessonName}
                 </Typography>
-                <AddLesson id={id} />
+                <AddLessonObjective id={id} />
                 <Grid container>
                     <Grid item xs={6}>
                         <ClassLessonObjective id={id} />
