@@ -42,19 +42,36 @@ const WebAllLessons = () => {
                                     direction="row"
                                     justifyContent="space-between"
                                 >
-                                    <Typography 
-                                    variant="h6"
-                                    sx={{ mr: 3 }}>
-                                        {lesson.lessonName}
-                                    </Typography>
-                                    <Link to={`/lesson/${lesson.id}`} >
-                                        <button className="details-button">
-                                            See Details
-                                        </button>
-                                    </Link>
+                                    <Stack direction="column">
+                                        <Typography
+                                            variant="h5"
+                                            sx={{ mr: 3, mt: .5 }}>
+                                            {lesson.lessonName}
+                                        </Typography>
+                                        <Link to={`/lesson/${lesson.id}`} >
+                                            <button className="details-button">
+                                                See Details
+                                            </button>
+                                        </Link>
+                                    </Stack>
+                                    <Stack direction="column">
+                                        <Typography
+                                        variant="h6">
+                                            Lesson Objectives:
+                                        </Typography>
+                                        <Stack direction="column">
+                                            {lesson.learningObjectives.map((objective) => (
+                                                <div key={objective.id}>
+                                                    <Typography>
+                                                        {objective.objectiveName}
+                                                    </Typography>
+                                                </div>
+                                            ))}
+                                        </Stack>
+                                    </Stack>
                                     <button
                                         className="delete-button"
-                                        style={{ width: "70px", margin: 0 }} //override CSS
+                                        style={{ width: "70px", height: "35px", marginTop: 0 }} //override CSS
                                         onClick={() => {
                                             setSelectedLesson(lesson.id);
                                             setDelteAlert(true)

@@ -232,7 +232,11 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
             include: {
                 classes: {
                     include: {
-                        lessons: true
+                        lessons: {
+                            include: {
+                                learningObjectives: true
+                            }
+                        }
                     }
                 }
             }
