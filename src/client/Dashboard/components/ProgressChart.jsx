@@ -38,16 +38,6 @@ const ProgressChart = () => {
                     </div>
                 ))}
             </Card>
-
-            {/* <Card
-                elevation={10}
-                sx={{ borderRadius: "20px", p: 3, my: 3 }}>
-                <Alert severity="info">
-                    <Typography variant="h5">
-                        There is not student data yet. Add a class to get started!
-                    </Typography>
-                </Alert>
-            </Card> */}
         </div>
     )
 }
