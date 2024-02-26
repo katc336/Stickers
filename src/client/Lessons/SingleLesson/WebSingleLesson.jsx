@@ -1,3 +1,4 @@
+import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
@@ -34,7 +35,20 @@ const WebSingleLesson = () => {
                         <ClassLessonObjective id={id} />
                     </Grid>
                     <Grid item xs={6}>
-                        <ClassStudentsProgress id={id}/>
+                        {data && data.learningObjectives.length === 0
+                            ?
+                            <div>
+                                <Alert severity="info">
+                                    <Typography variant="h5">
+                                        Add a lesson objective to add student's progress
+                                    </Typography>
+                                </Alert>
+                            </div>
+                            :
+                            <div>
+                                <ClassStudentsProgress id={id} />
+                            </div>}
+
                     </Grid>
                 </Grid>
             </Card>
