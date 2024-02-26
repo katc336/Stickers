@@ -4,11 +4,9 @@ import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
 import { Link } from "react-router-dom"
@@ -46,77 +44,101 @@ const WebAllLessons = () => {
                                         <ExpandMoreIcon />
                                     </Typography>
                                 </AccordionSummary>
-                                {className.lessons.map((lesson) => (
-                                    <div key={lesson.id}>
-                                        <AccordionDetails>
-                                            <Card
-                                                elevation={10}
-                                                sx={{ p: 1, m: 1 }} >
-                                                <Stack
-                                                    direction="row"
-                                                    justifyContent="space-between">
-                                                    <Stack direction="column">
-                                                        <Typography variant="h5">
-                                                            {lesson.lessonName}
-                                                        </Typography>
-                                                        <Link to={`/lesson/${lesson.id}`} >
-                                                            <button className="details-button">
-                                                                See Lesson Details
-                                                            </button>
-                                                        </Link>
-                                                    </Stack>
-                                                    <Stack direction="column">
-                                                        <Typography variant="h6">
-                                                            Objectives:
-                                                        </Typography>
-                                                        {lesson.learningObjectives.map((objective, index) => (
-                                                            <div key={index}>
-                                                                <Typography>
-                                                                    {objective.objectiveName}
-                                                                </Typography>
-                                                            </div>
-                                                        ))}
-                                                    </Stack>
-                                                    <button
-                                                        className="delete-button"
-                                                        style={{ width: "70px", height: "35px", marginTop: 0 }} //override CSS
-                                                        onClick={() => {
-                                                            setSelectedLesson(lesson.id);
-                                                            setDelteAlert(true)
-                                                        }}>
-                                                        <DeleteForeverIcon sx={{ color: "white" }} />
-                                                    </button>
-                                                </Stack>
-                                                {deleteAlert && selectedLesson === lesson.id &&
-                                                    <Alert
-                                                        severity="error"
-                                                        sx={{ m: 1 }}>
-                                                        <Stack direction="column">
-                                                            <Typography variant="h6">
-                                                                Are you sure you want to delete this lesson?
-                                                            </Typography>
-                                                            <Typography variant="h6">
-                                                                Once you do it will be gone forever.
-                                                            </Typography>
-                                                            <Stack direction="row">
-                                                                <button
-                                                                    className="add-button"
-                                                                    style={{ width: "150px" }}>
-                                                                    Keep Lesson
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => deleteLesson(lesson.id)}
-                                                                    className="delete-button"
-                                                                    style={{ width: "150px" }}>
-                                                                    Delete Forever
-                                                                </button>
-                                                            </Stack>
-                                                        </Stack>
-                                                    </Alert>}
-                                            </Card>
-                                        </AccordionDetails>
+                                {className.lessons.length === 0
+                                    ?
+                                    <div>
+                                        <Alert severity="info">
+                                            <Stack direction="row">
+                                            <Typography variant="h5">
+                                                There are no lessons added to this class yet.
+                                            </Typography>
+                                            <Link
+                                                to={`/class/${className.id}`}>
+                                                <button
+                                                style={{ marginBottom: 0, marginTop: 0 }}
+                                                    className="add-button">
+                                                    See Class
+                                                </button>
+                                            </Link>
+                                            </Stack>
+                                        </Alert>
                                     </div>
-                                ))}
+                                    : <div>
+                                        {className.lessons.map((lesson) => (
+                                            <div key={lesson.id}>
+                                                <AccordionDetails>
+                                                    <Card
+                                                        elevation={10}
+                                                        sx={{ p: 1, m: 1 }} >
+                                                        <Stack
+                                                            direction="row"
+                                                            justifyContent="space-between">
+                                                            <Stack direction="column">
+                                                                <Typography variant="h5">
+                                                                    {lesson.lessonName}
+                                                                </Typography>
+                                                                <Link to={`/lesson/${lesson.id}`} >
+                                                                    <button className="details-button">
+                                                                        See Lesson Details
+                                                                    </button>
+                                                                </Link>
+                                                            </Stack>
+                                                            <Stack direction="column">
+                                                                <Typography variant="h6">
+                                                                    Objectives:
+                                                                </Typography>
+                                                                {lesson.learningObjectives.map((objective, index) => (
+                                                                    <div key={index}>
+                                                                        <Typography>
+                                                                            {objective.objectiveName}
+                                                                        </Typography>
+                                                                    </div>
+                                                                ))}
+                                                            </Stack>
+                                                            <button
+                                                                className="delete-button"
+                                                                style={{ width: "70px", height: "35px", marginTop: 0 }} //override CSS
+                                                                onClick={() => {
+                                                                    setSelectedLesson(lesson.id);
+                                                                    setDelteAlert(true)
+                                                                }}>
+                                                                <DeleteForeverIcon sx={{ color: "white" }} />
+                                                            </button>
+                                                        </Stack>
+                                                        {deleteAlert && selectedLesson === lesson.id &&
+                                                            <Alert
+                                                                severity="error"
+                                                                sx={{ m: 1 }}>
+                                                                <Stack direction="column">
+                                                                    <Typography variant="h6">
+                                                                        Are you sure you want to delete this lesson?
+                                                                    </Typography>
+                                                                    <Typography variant="h6">
+                                                                        Once you do it will be gone forever.
+                                                                    </Typography>
+                                                                    <Stack direction="row">
+                                                                        <button
+                                                                            className="add-button"
+                                                                            style={{ width: "150px" }}>
+                                                                            Keep Lesson
+                                                                        </button>
+                                                                        <button
+                                                                            onClick={() => deleteLesson(lesson.id)}
+                                                                            className="delete-button"
+                                                                            style={{ width: "150px" }}>
+                                                                            Delete Forever
+                                                                        </button>
+                                                                    </Stack>
+                                                                </Stack>
+                                                            </Alert>}
+                                                    </Card>
+                                                </AccordionDetails>
+                                            </div>
+                                        ))}
+                                    </div>}
+
+
+
                             </Accordion>
                         </div>
                     ))}
