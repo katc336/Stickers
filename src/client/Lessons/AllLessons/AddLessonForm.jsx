@@ -53,16 +53,9 @@ const AddLessonForm = () => {
                 <Alert severity="error">
                     There was an error adding the lesson.
                 </Alert>}
-            {clearButton && data.length !== 0
+            {clearButton && data.length === 0
                 ?
                 <div>
-                    <button
-                        className="add-button"
-                        onClick={() => { setAddLesson(true), setClearButton(false) }}>
-                        Add New Lesson
-                    </button>
-                </div>
-                : <div>
                     <Alert severity="info">
                         <Stack direction="row">
                             <Typography variant="h5">
@@ -77,6 +70,13 @@ const AddLessonForm = () => {
                             </Link>
                         </Stack>
                     </Alert>
+                </div>
+                : <div>
+                    <button
+                        className="add-button"
+                        onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                        Add New Lesson
+                    </button>
                 </div>
 
             }
