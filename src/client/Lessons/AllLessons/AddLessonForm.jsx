@@ -1,6 +1,4 @@
 import Alert from "@mui/material/Alert"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
@@ -22,7 +20,6 @@ const AddLessonForm = () => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
@@ -46,7 +43,7 @@ const AddLessonForm = () => {
             console.error(error)
         }
     }
-
+console.log(selectedClassId);
     return (
         <div>
             {addError &&
@@ -95,15 +92,19 @@ const AddLessonForm = () => {
                                         onChange={(event) => {
                                             if (event.target.checked) {
                                                 setSelectedClassId(className.id);
+                                            } else {
+                                                setSelectedClassId(null);
                                             }
                                         }}
+                                        checked={selectedClassId === className.id}
                                     />
                                     <Typography>
                                         {className.name}
                                     </Typography>
                                 </Stack>
                             </div>
-                        ))}
+                        ))
+                    }
                     <Stack direction="column">
                         <TextField
                             label="Student Name"

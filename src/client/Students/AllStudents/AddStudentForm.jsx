@@ -92,9 +92,13 @@ const AddStudentForm = () => {
                                     onChange={(event) => {
                                         if (event.target.checked) {
                                             setSelectedClassId(className.id);
+                                        } else {
+                                            setSelectedClassId("");
                                         }
                                     }}
+                                    checked={selectedClassId === className.id}
                                 />
+
                                 <Typography>
                                     {className.name}
                                 </Typography>

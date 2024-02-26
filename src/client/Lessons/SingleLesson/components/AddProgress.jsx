@@ -64,8 +64,11 @@ const AddProgress = ({ data, student }) => {
                                                     if (event.target.checked) {
                                                         setSelectedObjectiveId(objective.id);
                                                         setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
+                                                    } else {
+                                                        setObjectiveName("");
                                                     }
                                                 }}
+                                                checked={selectedObjectiveId === objective.id}
                                             />
                                             <Typography>
                                                 {objective.objectiveName}

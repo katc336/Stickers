@@ -18,10 +18,10 @@ const AddLessonObjective = ({ id }) => {
     if (objError) {
         console.error(error)
     }
-//Filter to only show objective names once
+    //Filter to only show objective names once
     const displayedObjectives = []
     objData && objData.map((objective) => {
-        if(!displayedObjectives.includes(objective.objectiveName)) {
+        if (!displayedObjectives.includes(objective.objectiveName)) {
             displayedObjectives.push(objective.objectiveName)
         }
     });
@@ -75,8 +75,11 @@ const AddLessonObjective = ({ id }) => {
                                                 onChange={(event) => {
                                                     if (event.target.checked) {
                                                         setObjectiveName(objective);
+                                                    } else {
+                                                        setObjectiveName("");
                                                     }
                                                 }}
+                                                checked={objectiveName === objective}
                                             />
                                             <Typography sx={{ ml: 1 }}>
                                                 {objective}

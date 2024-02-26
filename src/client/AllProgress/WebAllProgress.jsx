@@ -53,13 +53,12 @@ const WebAllProgress = () => {
                     <div>
                         <Card
                             elevation={10}
-                            sx={{ ml: 20, mr: 3, p: 3 }}
-                        >
+                            sx={{ borderRadius: "20px", p: 3, m: 3 }}>
                             <Alert severity="info">
                                 <Stack direction="row">
                                     <Typography
                                         variant="h5">
-                                        There is no student data yet. Get started by going to a class.
+                                        There is no student data yet. Go to a class to get started!
                                     </Typography>
                                     <Link to="/my_classes">
                                         <button
@@ -106,7 +105,6 @@ const WebAllProgress = () => {
                         </Card>
                     </div>
             }
-
         </div>
     )
 }
