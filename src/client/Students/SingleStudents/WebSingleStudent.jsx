@@ -1,16 +1,20 @@
-import Stack from "@mui/material/Stack"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Alert from "@mui/material/Alert"
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box'
+import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
-import { VictoryBar, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 import NavDrawer from "../../Navigation/NavDrawer"
+import StudentAllProgressPercents from "./components/StudentAllProgressPercents";
+import StudentProgressOverTime from "./components/StudentProgressOverTime";
 
 const WebSingleStudent = () => {
+    const [value, setValue] = useState("");
     const { id } = useParams()
-    const { data, error, isLoading } = useGetSingleStudentQuery(id)
-
+    const { data, error, isLoading } = useGetSingleStudentQuery(id);
     if (isLoading) {
         return <div></div>
     }
@@ -18,7 +22,27 @@ const WebSingleStudent = () => {
         console.error(error)
     }
 
-    console.log(data)
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const CustomTabPanel = (props) => {
+        const { children, value, index, ...other } = props;
+        return (
+            <div>
+                {value === index && (
+                    <Box sx={{ p: 3 }}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    }
+    const a11yProps = (index) => {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
     return (
         <div>
             <NavDrawer />
@@ -42,26 +66,20 @@ const WebSingleStudent = () => {
                         </div>
                         :
                         <div>
-
-                            <VictoryChart
-                                theme={VictoryTheme.material}
-                                horizontal  // Set the chart to run horizontally
-                                domainPadding={{ x: 1, y: 1 }}
-                            >
-                                <VictoryAxis
-                                    dependentAxis
-                                    domain={[0, 100]}
-                                    tickFormat={ticket => `${ticket}%`}
-                                />
-                                <VictoryBar
-                                  data={data.averageObjectives.map(average => ({
-                                    x: average.objectiveName,
-                                    y: average.average,
-                                    label: `Objective:${average.objectiveName}: ${average.average}%`
-                                }))}
-                                    labelComponent={<VictoryLabel dy={-20} angle={1800} textAnchor="end" style={{ fontSize: 10 }} />}
-                                />
-                            </VictoryChart>
+                            <Box sx={{ width: '100%' }}>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                        <Tab label="Averaged Progress" {...a11yProps(0)} />
+                                        <Tab label="Progress Over Time" {...a11yProps(1)} />
+                                    </Tabs>
+                                </Box>
+                                <CustomTabPanel value={value} index={0}>
+                                    <StudentAllProgressPercents data={data} />
+                                </CustomTabPanel>
+                                <CustomTabPanel value={value} index={1}>
+                                    <StudentProgressOverTime data={data} />
+                                </CustomTabPanel>
+                            </Box>
                         </div>
                 }
             </Card>
