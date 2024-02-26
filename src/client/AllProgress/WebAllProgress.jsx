@@ -1,10 +1,16 @@
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box'
 import NavDrawer from "../Navigation/NavDrawer"
+import { useState } from "react";
 import { useGetAllProgressQuery } from "../../redux/api";
-import { VictoryBar, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
+import AllProgressPercents from "./components/AllProgressPercents";
+import CompareStudentProgress from "./components/CompareStudentProgress";
 
 const WebAllProgress = () => {
+    const [value, setValue] = useState("");
     const { data, error, isLoading } = useGetAllProgressQuery();
     if (isLoading) {
         return <div></div>
@@ -12,7 +18,29 @@ const WebAllProgress = () => {
     if (error) {
         console.error(error);
     }
-    console.log(data);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const CustomTabPanel = (props) => {
+        const { children, value, index, ...other } = props;
+        return (
+            <div>
+                {value === index && (
+                    <Box sx={{ p: 3 }}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    }
+    const a11yProps = (index) => {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+// console.log(data);
     return (
         <div>
             <NavDrawer />
@@ -30,43 +58,20 @@ const WebAllProgress = () => {
                     elevation={10}
                     sx={{ m: 1, p: 1 }}
                 >
-                    <Typography
-                        variant="h4"
-                        sx={{ textAlign: "center", p: 1 }}>
-                        Lesson Objective Average Success Rate
-                    </Typography>
-                    {/*<--------------------VICTORY BAR<--------------------*/}
-                    <VictoryChart
-                        theme={VictoryTheme.material}
-                        horizontal  // Set the chart to run horizontally
-                        domainPadding={{ x: 1, y: 1 }}
-                    >
-                        horizontal
-                        <VictoryAxis
-                            dependentAxis
-                            domain={[0, 100]}
-                            tickFormat={ticket => `${ticket}%`}
-                        />
-                        <VictoryBar
-                            style={{
-                                data: {
-                                    fill: data => {
-                                        if (data.y > 70) return "red";
-                                        else if (data.y >= 70 && data.y <= 80) return "orange";
-                                        else if (data.y >= 81 && data.y <= 89) return "yellow";
-                                        else return "green";
-                                    }
-                                }
-                            }}
-                            data={data.averageObjectives.map(average => ({
-                                x: average.objectiveName,
-                                y: average.average,
-                                label: `Objective:${average.objectiveName}: ${average.average}%`
-                            }))}
-                            labelComponent={<VictoryLabel dy={-20} angle={1800} textAnchor="end" style={{ fontSize: 10 }} />}
-                        />
-                    </VictoryChart>
-
+                    <Box sx={{ width: '100%' }}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                <Tab label="Averaged Progress" {...a11yProps(0)} />
+                                <Tab label="Compare Students" {...a11yProps(1)} />
+                            </Tabs>
+                        </Box>
+                        <CustomTabPanel value={value} index={0}>
+                            <AllProgressPercents data={data} />
+                        </CustomTabPanel>
+                        <CustomTabPanel value={value} index={1}>
+                            <CompareStudentProgress data={data}/>
+                        </CustomTabPanel>
+                    </Box>
                 </Card>
             </Card>
         </div>

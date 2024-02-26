@@ -56,7 +56,7 @@ const AddStudentForm = () => {
                 <div>
                     <button
                         className="add-button"
-                        onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                        onClick={() => { setAddStudent(true), setClearButton(false) }}>
                         Add New Student
                     </button>
                 </div>
