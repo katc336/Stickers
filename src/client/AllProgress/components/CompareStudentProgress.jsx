@@ -19,13 +19,18 @@ const CompareStudentProgress = ({ data }) => {
         const combinedObjectiveIds = student.studentProgress
             .filter((progress) => progress.combinedObjectiveId === selectedObjective)
             .map((progress) => progress.progressPrecent);
-        //Calculate the average
-        let totalProgress = 0;
-        for (let i = 0; i < combinedObjectiveIds.length; i++) {
-            totalProgress += combinedObjectiveIds[i];
+
+        if (combinedObjectiveIds.length > 0) {
+            let totalProgress = 0;
+            for (let i = 0; i < combinedObjectiveIds.length; i++) {
+                totalProgress += combinedObjectiveIds[i];
+            }
+            const averageProgress = totalProgress / combinedObjectiveIds.length;
+            averageForChart.push({ name: student.name, average: averageProgress });
+        } else {
+            averageForChart.push({ name: student.name, average: -10 });
+
         }
-        const averageProgress = totalProgress / combinedObjectiveIds.length;
-        averageForChart.push({ name: student.name, average: averageProgress });
     });
     console.log(averageForChart);
     return (
@@ -62,7 +67,7 @@ const CompareStudentProgress = ({ data }) => {
                         tickValues={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
                     />
                     <VictoryScatter
-                          style={{
+                        style={{
                             data: {
                                 fill: ({ datum }) => {
                                     if (datum.y < 70) return "#FF9280";
@@ -75,11 +80,12 @@ const CompareStudentProgress = ({ data }) => {
                         size={7}
                         data={averageForChart.map((progress) => ({
                             x: progress.name,
-                            y: Math.floor(progress.average),
-                            label: `${progress.name}: ${Math.floor(progress.average)}%`
+                            y: Math.max(Math.floor(progress.average), 0), // Ensure no negative values
+                            label: progress.average === -10 ? `${progress.name}:\nNo data` : `${progress.name}:\n${Math.floor(progress.average)}%`
                         }))}
-                        labelComponent={<VictoryLabel dy={20} dx={60} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
+                        labelComponent={<VictoryLabel dy={20} dx={40} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
                     />
+
                 </VictoryChart>
             </Stack>
         </div>

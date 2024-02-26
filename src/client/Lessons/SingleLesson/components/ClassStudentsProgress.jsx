@@ -2,14 +2,17 @@ import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-import TextField from "@mui/material/TextField"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import { useState } from "react"
-import { usePostProgressMutation, useGetSingleLessonQuery } from "../../../../redux/api"
+import { useGetSingleLessonQuery, useDeleteProgressMutation } from "../../../../redux/api"
 import AddProgress from "./AddProgress"
 
 
 const ClassStudentsProgress = ({ id }) => {
+    const [deleteProgressAlert, setDelteProgressAlert] = useState(false);
+    const [selectedProgress, setSelectedProgress] = useState(false);
     const { data, error, isLoading } = useGetSingleLessonQuery(id);
+    const [deleteProgress] = useDeleteProgressMutation();
 
     if (isLoading) {
         return <div></div>
@@ -49,15 +52,53 @@ const ClassStudentsProgress = ({ id }) => {
                                             }}>
                                             <Stack direction="row">
                                                 <Typography
+                                                    variant="h6"
                                                     sx={{ mx: 1 }}>
                                                     {progress.learningObjective.objectiveName}:
                                                 </Typography>
                                                 <Typography
+                                                    variant="h6"
                                                     sx={{ mx: 1 }}>
                                                     {progress.progressPrecent}%
                                                 </Typography>
+                                                <button
+                                                    className="delete-button"
+                                                    style={{ width: "70px", marginTop: 0, marginBottom: 0, marginLeft: "65%" }} //override margin in CSS
+                                                    onClick={() => {
+                                                        setDelteProgressAlert(true);
+                                                        setSelectedProgress(progress.id)
+                                                    }}>
+                                                    <DeleteForeverIcon sx={{ color: "white" }} />
+                                                </button>
                                             </Stack>
                                         </Card>
+                                        {deleteProgressAlert && selectedProgress === progress.id &&
+                                            <Alert
+                                                severity="error"
+                                                sx={{ m: 1 }}>
+                                                <Stack direction="column">
+                                                    <Typography variant="h6">
+                                                        Are you sure you want to delete this progress?
+                                                    </Typography>
+                                                    <Typography variant="h6">
+                                                        Once you do it will be gone forever.
+                                                    </Typography>
+                                                    <Stack direction="row">
+                                                        <button
+                                                            onClick={() => setDelteProgressAlert(false)}
+                                                            className="add-button"
+                                                            style={{ width: "150px" }}>
+                                                            Keep Progress
+                                                        </button>
+                                                        <button
+                                                            onClick={() => deleteProgress(progress.id)}
+                                                            className="delete-button"
+                                                            style={{ width: "150px" }}>
+                                                            Delete Forever
+                                                        </button>
+                                                    </Stack>
+                                                </Stack>
+                                            </Alert>}
                                     </div>
                                 ))}
                                 <AddProgress

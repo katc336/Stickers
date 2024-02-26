@@ -51,16 +51,9 @@ const AddStudentForm = () => {
                 <Alert severity="error">
                     There was an error adding the student.
                 </Alert>}
-            {clearButton && data.length !== 0
+            {clearButton && data.length === 0
                 ?
                 <div>
-                    <button
-                        className="add-button"
-                        onClick={() => { setAddStudent(true), setClearButton(false) }}>
-                        Add New Student
-                    </button>
-                </div>
-                : <div>
                     <Alert severity="info">
                         <Stack direction="row">
                             <Typography variant="h5">
@@ -75,6 +68,13 @@ const AddStudentForm = () => {
                             </Link>
                         </Stack>
                     </Alert>
+                </div>
+                : <div>
+                    <button
+                        className="add-button"
+                        onClick={() => { setAddStudent(true), setClearButton(false) }}>
+                        Add New Student
+                    </button>
                 </div>
 
             }
@@ -92,9 +92,13 @@ const AddStudentForm = () => {
                                     onChange={(event) => {
                                         if (event.target.checked) {
                                             setSelectedClassId(className.id);
+                                        } else {
+                                            setSelectedClassId("");
                                         }
                                     }}
+                                    checked={selectedClassId === className.id}
                                 />
+
                                 <Typography>
                                     {className.name}
                                 </Typography>

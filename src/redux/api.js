@@ -191,6 +191,13 @@ const api = createApi({
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
+        deleteProgress: builder.mutation({
+            query: (id) => ({
+                url: `/api/delete_progress/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
     })
 });
 export default api;
@@ -225,4 +232,5 @@ export const {
     useDeleteStudentMutation,
     useDeleteLessonMutation,
     useDeleteObjectiveMutation,
+    useDeleteProgressMutation,
 } = api

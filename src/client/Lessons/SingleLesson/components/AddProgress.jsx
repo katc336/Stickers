@@ -43,7 +43,7 @@ const AddProgress = ({ data, student }) => {
                     style={{ width: 170 }}
                     onClick={() => { setSelectedStudentId(student.id) }}
                     className="details-button">
-                    Add New Progress
+                    Add Progress
                 </button>
                 {selectedStudentId === student.id &&
                     <Card
@@ -64,8 +64,11 @@ const AddProgress = ({ data, student }) => {
                                                     if (event.target.checked) {
                                                         setSelectedObjectiveId(objective.id);
                                                         setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
+                                                    } else {
+                                                        setObjectiveName("");
                                                     }
                                                 }}
+                                                checked={selectedObjectiveId === objective.id}
                                             />
                                             <Typography>
                                                 {objective.objectiveName}
