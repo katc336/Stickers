@@ -1,10 +1,15 @@
-import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
-import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
+import { useState } from "react"
 import { useGetAllProgressQuery } from "../../../redux/api"
+import AllProgressPercents from "../../AllProgress/components/AllProgressPercents"
+import CompareStudentProgress from "../../AllProgress/components/CompareStudentProgress"
 
 const ProgressChart = () => {
+    const [value, setValue] = useState("");
     const { data, error, isLoading } = useGetAllProgressQuery();
     if (isLoading) {
         return <div></div>
@@ -12,31 +17,52 @@ const ProgressChart = () => {
     if (error) {
         console.error(error);
     }
-    console.log(data);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const CustomTabPanel = (props) => {
+        const { children, value, index, ...other } = props;
+        return (
+            <div>
+                {value === index && (
+                    <Box sx={{ p: 3 }}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    }
+    const a11yProps = (index) => {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
     return (
         <div>
             <Card
                 elevation={10}
                 sx={{ borderRadius: "20px", p: 3, m: 3 }}>
-                <Typography variant="h5">
-                    Objective Average Progress:
-                </Typography>
-                {data.averageObjectives.map((average) => (
-                    <div key={average.id}>
-                        <Card
-                            sx={{
-                                p: 1,
-                                border: `3px solid`,
-                                borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <= 80 ? "orange" : average.average >= 81 && average.average <= 89 ? "yellow" : "green",
-                                backgroundColor: average.average < 70 ? "#FEA1A1" : average.average >= 70 && average.average <= 80 ? "#FFC97C" : average.average >= 81 && average.average <= 89 ? "#F9DE79" : "#CDE990",
-                            }}>
-                            <Stack direction="row">
-                                <Typography sx={{ mr: 1 }}>{average.objectiveName}:</Typography>
-                                <Typography>{Math.floor(average.average)}% success</Typography>
-                            </Stack>
-                        </Card>
-                    </div>
-                ))}
+                <Card
+                    elevation={10}
+                    sx={{ m: 1, p: 1 }}
+                >
+                    <Box sx={{ width: '100%' }}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                <Tab label="Average Progress Across All Classes" {...a11yProps(0)} />
+                                <Tab label="Compare Students' Progress" {...a11yProps(1)} />
+                            </Tabs>
+                        </Box>
+                        <CustomTabPanel value={value} index={0}>
+                            <AllProgressPercents data={data} />
+                        </CustomTabPanel>
+                        <CustomTabPanel value={value} index={1}>
+                            <CompareStudentProgress data={data}/>
+                        </CustomTabPanel>
+                    </Box>
+                </Card>
             </Card>
         </div>
     )

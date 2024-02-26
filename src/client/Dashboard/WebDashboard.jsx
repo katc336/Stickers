@@ -18,7 +18,7 @@ const WebDashboard = () => {
         <div>
             <NavDrawer />
             <Box sx={{ ml: 20, mr: 3 }}>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 <HelloCard name={data.name} />
                 <ProgressChart />
                 <MyClasses />

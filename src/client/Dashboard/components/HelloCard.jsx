@@ -13,7 +13,7 @@ const HelloCard = ({ name }) => {
                     <Typography
                         variant="h4"
                         sx={{ color: "#0A1D56" }}>
-                        Hello {name}. Here's to a great school day!
+                        Hello {name}.
                     </Typography>
                 </Stack>
             </Card>
