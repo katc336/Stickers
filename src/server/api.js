@@ -234,16 +234,18 @@ apiRouter.get("/lessons", requireUser, async (req, res, next) => {
                     include: {
                         lessons: {
                             include: {
-                                learningObjectives: true
+                                learningObjectives: {
+                                    include: { combinedObjective: true }
+                                },
+                                class: true
                             }
                         }
                     }
                 }
             }
         })
-        // take the lessons from the classes and flatten them into a single array
-        const lessons = teacher.classes.flatMap((className) => className.lessons)
-        res.send(lessons);
+        const classes = teacher.classes
+        res.send(classes);
     } catch (error) {
         next(error)
     }
