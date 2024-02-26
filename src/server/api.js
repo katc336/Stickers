@@ -478,7 +478,7 @@ apiRouter.delete("/delete_student/:id", requireUser, async (req, res, next) => {
             where: { id: Number(req.params.id) },
         });
         if (!deleteStudent) {
-            return res.status(404).send("Class not found!");
+            return res.status(404).send("Student not found!");
         }
         res.send({deleteStudent, message: "Deleted"});
     } catch (error) {
@@ -492,7 +492,7 @@ apiRouter.delete("/delete_lesson/:id", requireUser, async (req, res, next) => {
             where: { id: Number(req.params.id) },
         });
         if (!deleteLesson) {
-            return res.status(404).send("Class not found!");
+            return res.status(404).send("Lesson not found!");
         }
         res.send({deleteLesson, message: "Deleted"});
     } catch (error) {
@@ -506,9 +506,23 @@ apiRouter.delete("/delete_objective/:id", requireUser, async (req, res, next) =>
             where: { id: Number(req.params.id) },
         });
         if (!deleteObjective) {
-            return res.status(404).send("Class not found!");
+            return res.status(404).send("Learning objective not found!");
         }
         res.send({deleteObjective, message: "Deleted"});
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------DELETE STUDENT'S PROGRESS----------------->
+apiRouter.delete("/delete_progress/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteProgress = await prisma.studentProgress.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteProgress) {
+            return res.status(404).send("Student progress not found!");
+        }
+        res.send({deleteProgress, message: "Deleted"});
     } catch (error) {
         next(error);
     }
