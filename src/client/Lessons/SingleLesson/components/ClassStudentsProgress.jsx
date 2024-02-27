@@ -2,6 +2,7 @@ import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
+import Grid from "@mui/material/Grid"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import { useState } from "react"
 import { useGetSingleLessonQuery, useDeleteProgressMutation } from "../../../../redux/api"
@@ -50,27 +51,33 @@ const ClassStudentsProgress = ({ id }) => {
                                                 borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "orange" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "yellow" : "green",
                                                 backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "#FFC97C" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
                                             }}>
-                                            <Stack direction="row">
-                                                <Typography
-                                                    variant="h6"
-                                                    sx={{ mx: 1 }}>
-                                                    {progress.learningObjective.objectiveName}:
-                                                </Typography>
-                                                <Typography
-                                                    variant="h6"
-                                                    sx={{ mx: 1 }}>
-                                                    {progress.progressPrecent}%
-                                                </Typography>
-                                                <button
-                                                    className="delete-button"
-                                                    style={{ width: "70px", marginTop: 0, marginBottom: 0, marginLeft: "65%" }} //override margin in CSS
-                                                    onClick={() => {
-                                                        setDelteProgressAlert(true);
-                                                        setSelectedProgress(progress.id)
-                                                    }}>
-                                                    <DeleteForeverIcon sx={{ color: "white" }} />
-                                                </button>
-                                            </Stack>
+                                            <Grid container>
+                                                <Grid item xs={5}>
+                                                    <Typography
+                                                        variant="h6"
+                                                        sx={{ mx: 1 }}>
+                                                        {progress.learningObjective.objectiveName}:
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={3}>
+                                                    <Typography
+                                                        variant="h6"
+                                                        sx={{ mx: 1 }}>
+                                                        {progress.progressPrecent}%
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={3}>
+                                                    <button
+                                                        className="delete-button"
+                                                        style={{ width: "70px", marginTop: 0, marginBottom: 0, marginLeft: "65%" }} //override margin in CSS
+                                                        onClick={() => {
+                                                            setDelteProgressAlert(true);
+                                                            setSelectedProgress(progress.id)
+                                                        }}>
+                                                        <DeleteForeverIcon sx={{ color: "white" }} />
+                                                    </button>
+                                                </Grid>
+                                            </Grid>
                                         </Card>
                                         {deleteProgressAlert && selectedProgress === progress.id &&
                                             <Alert

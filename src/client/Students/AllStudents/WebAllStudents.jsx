@@ -1,6 +1,7 @@
 import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
+import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -41,31 +42,37 @@ const WebAllStudents = () => {
                             <Card
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
-                                <Stack
-                                    direction="row"
-                                    justifyContent="space-between">
-                                    <Typography
-                                        variant="h6"
-                                        sx={{ mr: 2, mt: 0.5 }}>
-                                        {student.name}
-                                    </Typography>
-                                    <Link
-                                        style={{ textDecoration: "none" }}
-                                        to={`/student/${student.id}`}>
-                                        <button className="details-button">
-                                            See Details
+                                <Grid container>
+                                    <Grid item xs={5}>
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ mt: 0.5 }}>
+                                            {student.name}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <Link
+                                            style={{ textDecoration: "none" }}
+                                            to={`/student/${student.id}`}>
+                                            <button 
+                                            style={{ float: "none" }} //override float
+                                            className="details-button">
+                                                See Details
+                                            </button>
+                                        </Link>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <button
+                                            className="delete-button"
+                                            style={{ width: "70px", margin: 0 }} //overrride CSS margin
+                                            onClick={() => {
+                                                setDeleteAlert(true);
+                                                setSelectedStudent(student.id)
+                                            }}>
+                                            <DeleteForeverIcon sx={{ color: "white" }} />
                                         </button>
-                                    </Link>
-                                    <button
-                                        className="delete-button"
-                                        style={{ width: "70px", margin: 0 }} //overrride CSS margin
-                                        onClick={() => {
-                                            setDeleteAlert(true);
-                                            setSelectedStudent(student.id)
-                                        }}>
-                                        <DeleteForeverIcon sx={{ color: "white" }} />
-                                    </button>
-                                </Stack>
+                                    </Grid>
+                                </Grid>
                                 {deleteAlert && selectedStudent === student.id &&
                                     <Alert
                                         severity="error"
@@ -79,6 +86,7 @@ const WebAllStudents = () => {
                                             </Typography>
                                             <Stack direction="row">
                                                 <button
+                                                    onClick={() => setDeleteAlert(false)}
                                                     className="add-button"
                                                     style={{ width: "150px" }}>
                                                     Keep Student

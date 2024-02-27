@@ -14,7 +14,7 @@ const AllProgressPercents = ({ data }) => {
                     theme={VictoryTheme.material}
                     horizontal  // Set the chart to run horizontally
                     domainPadding={{ x: 100, y: 1 }}
-                    style={{ parent: { width: "500px" } }}
+                    style={{ parent: { width: 800 } }}
                 >
                     horizontal
                     <VictoryAxis
@@ -38,7 +38,7 @@ const AllProgressPercents = ({ data }) => {
                             y: average.average,
                             label: `${average.objectiveName}: ${Math.floor(average.average)}%`,
                         }))}
-                        labelComponent={<VictoryLabel dy={0} dx={-5} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
+                        labelComponent={<VictoryLabel dy={0} dx={40} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
                     />
                 </VictoryChart>
             </Card>
