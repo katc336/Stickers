@@ -1,4 +1,3 @@
-
 import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
@@ -30,16 +29,22 @@ const AddLessonObjective = ({ id }) => {
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
-            const result = await addLessonObjectiveMutation({ id: Number(id), objectiveName })
-            console.log(result)
-            if (result.data) {
-                setAddError(false);
-                setAddLessonObjective(false)
-                setObjectiveName("");
-                console.log("Success!");
-            } else {
+            if (objectiveName.length > 50) {
                 setAddError(true);
-                console.log("Could not add objective");
+                console.log("Progress percent must be between 0 and 100");
+                return;
+            } else {
+                const result = await addLessonObjectiveMutation({ id: Number(id), objectiveName })
+                console.log(result)
+                if (result.data) {
+                    setAddError(false);
+                    setAddLessonObjective(false)
+                    setObjectiveName("");
+                    console.log("Success!");
+                } else {
+                    setAddError(true);
+                    console.log("Could not add objective");
+                }
             }
         } catch (error) {
             console.error(error)
@@ -47,14 +52,16 @@ const AddLessonObjective = ({ id }) => {
     }
     return (
         <div>
-            {addError &&
-                <Alert severity="error">There was an error updating this lesson.</Alert>}
             <button
                 style={{ float: "right", marginBottom: "50px", width: "200px" }}
                 className="add-button"
                 onClick={() => { setAddLessonObjective(true) }}>
                 Add Lesson Objective
             </button>
+            {addError &&
+                <Alert severity="error">
+                    Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
+                </Alert>}
             {addLessonObjective &&
                 <div style={{ float: "right" }}>
                     <form onSubmit={handleAddLessonObjective}>
@@ -100,7 +107,12 @@ const AddLessonObjective = ({ id }) => {
                             label="Lesson Objective"
                             value={objectiveName}
                             onChange={(event) => setObjectiveName(event.target.value)}
-                            sx={{ m: 3, width: 900 }} />
+                            sx={{ m: 3, width: 900 }}
+                            helperText={
+                                objectiveName.length > 50
+                                    ? <Alert severity="error">Please enter a shorter objective</Alert>
+                                    : null
+                            } />
                         <button
                             className="add-button"
                             type="submit">
