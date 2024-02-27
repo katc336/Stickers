@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box"
 import LoginForm from "./LoginForm"
-import HomeNav from "./HomeNav"
+import HomeNav from "../../Navigation/HomeNav"
 
 const LoginPage = () => {
     return (

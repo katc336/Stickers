@@ -3,13 +3,11 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import LoginForm from "./components/LoginForm"
-import { useState } from "react"
 import teacherImg from "./images/Teacher.png"
 import Logo from "./images/Logo.png"
 import HomeNav from "../Navigation/HomeNav"
 
 const WebHomePage = () => {
-    const [form, setForm] = useState(false)
     return (
         <div>
             <HomeNav />
