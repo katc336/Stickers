@@ -13,6 +13,7 @@ import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./AllProgress/AllProgress";
 import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./InformationPages/Story/Story";
+import LoginPage from "./Home/components/LoginPage";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/story" element={<Story />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/progress" element={<AllProgress />} />
         <Route path="/account" element={<Dashboard />} />
         <Route path="/my_classes" element={<AllClasses />} />
