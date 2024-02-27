@@ -17,20 +17,27 @@ const AddProgress = ({ data, student }) => {
     const handleAddProgress = async (event) => {
         try {
             event.preventDefault();
-            const result = await addProgressMutation({
-                studentId: Number(selectedStudentId),
-                objectiveId: Number(selectedObjectiveId),
-                progressPercent: Number(progress),
-                combinedObjectiveId: Number(selectedCombinedObjectiveId)
-            });
-            if (result.data) {
-                setAddError(false);
-                setSelectedStudentId(null);
-                setProgress("");
-                console.log("Success!");
-            } else {
+            const progressValue = Number(progress);
+            if (progressValue < 0 || progressValue > 100) {
                 setAddError(true);
-                console.log("Could not add progress");
+                console.log("Progress percent must be between 0 and 100");
+                return;
+            } else {
+                const result = await addProgressMutation({
+                    studentId: Number(selectedStudentId),
+                    objectiveId: Number(selectedObjectiveId),
+                    progressPercent: Number(progress),
+                    combinedObjectiveId: Number(selectedCombinedObjectiveId)
+                });
+                if (result.data) {
+                    setAddError(false);
+                    setSelectedStudentId(null);
+                    setProgress("");
+                    console.log("Success!");
+                } else {
+                    setAddError(true);
+                    console.log("Could not add progress");
+                }
             }
         } catch (error) {
             console.error(error);
@@ -45,6 +52,10 @@ const AddProgress = ({ data, student }) => {
                     className="details-button">
                     Add Progress
                 </button>
+                {addError &&
+                    <Alert severity="error">
+                        Progress was not saved: Number needs to be 0-100.
+                    </Alert>}
                 {selectedStudentId === student.id &&
                     <Card
                         sx={{ p: 1, m: 3 }}
@@ -64,6 +75,7 @@ const AddProgress = ({ data, student }) => {
                                                     if (event.target.checked) {
                                                         setSelectedObjectiveId(objective.id);
                                                         setSelectedCombinedObjectiveId(objective.combinedObjectiveId);
+                                                        setAddError(false);
                                                     } else {
                                                         setObjectiveName("");
                                                     }
@@ -80,12 +92,16 @@ const AddProgress = ({ data, student }) => {
                                     Enter Percentage of Success:
                                 </Typography>
                                 <TextField
-                                    multiline
                                     fullWidth
                                     label="Add a number from 1-100"
                                     value={progress}
                                     onChange={(event) => setProgress(event.target.value)}
                                     variant="filled"
+                                    helperText={
+                                        progress > 100 || progress < 0
+                                            ? <Alert severity="error">Please enter a number from 0-100</Alert>
+                                            : null
+                                    }
                                     sx={{ my: 1 }}
                                 />
                                 <button className="add-button">
