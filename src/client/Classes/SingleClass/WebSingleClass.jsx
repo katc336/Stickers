@@ -1,14 +1,8 @@
-import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import Stack from "@mui/material/Stack"
-import TextField from "@mui/material/TextField"
-import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useGetSingleClassQuery } from "../../../redux/api"
-import { usePostNewLessonMutation } from "../../../redux/api"
-import { useState } from "react"
 import NavDrawer from "../../Navigation/NavDrawer"
 import StudentForClass from "./components/StudentsForClass"
 import AddStudentButton from "./components/AddStudentButton"
@@ -19,7 +13,6 @@ const WebSingleClass = () => {
     const { id } = useParams()
 
     const { data, error, isLoading } = useGetSingleClassQuery(id)
-    const [addLessonToClass] = usePostNewLessonMutation();
     if (isLoading) {
         return <div></div>
     }
