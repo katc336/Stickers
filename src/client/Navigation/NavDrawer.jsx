@@ -2,6 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import Logo from "./images/Logo.png"
 
 const NavDrawer = () => {
     return (
@@ -11,9 +12,13 @@ const NavDrawer = () => {
                 variant="permanent"
                 anchor="left">
                 <Toolbar />
+                <img
+                    src={Logo}
+                    width="110px"
+                    style={{ marginLeft: 10 }}/>
                 <Link to="/dashboard">
                     <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
-                       Home
+                        Home
                     </Button>
                 </Link>
                 <Link to="/progress">

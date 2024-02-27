@@ -1,10 +1,11 @@
-import HomeNav from "../../Home/components/HomeNav"
+import HomeNav from "../../Navigation/HomeNav"
 import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
 import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Link } from "react-router-dom";
+import KatSticker from "./KatSticker.png"
 
 const WebStory = () => {
     return (
@@ -12,17 +13,21 @@ const WebStory = () => {
             <HomeNav />
             <Box sx={{ mt: 10, p: 3 }}>
                 <Grid container>
-                    <Grid item xs={4}>
-                        PLACE HOLDER
+                    <Grid item xs={5}>
+                        <img
+                            src={KatSticker}
+                            width="550px" style={{ marginLeft: 20 }} />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
+                        <Typography variant="h4">
+                            Hello 👋 I’m Kat, the creator, and welcome to Stickers!
+                        </Typography>
                         <Typography
                             variant="h6"
                             sx={{ mb: 3 }}>
-                            Hello, I’m Kat, the creator, and welcome to Stickers!
                             As a teacher myself, I understand the frustration of trying to keep track of student data in a way that is simple,
-                            efficient, and visually appealing. That's why I created this app
-                            - to provide a free and user-friendly solution for teachers to track daily student progress.
+                            efficient, and visually appealing. That's why I created this app;
+                            to provide a free and user-friendly solution for teachers to track daily student progress.
                         </Typography>
                         <Typography
                             variant="h6"
