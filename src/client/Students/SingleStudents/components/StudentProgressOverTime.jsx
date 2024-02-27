@@ -9,9 +9,11 @@ import { VictoryScatter, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis }
 
 const StudentProgressOverTime = ({ data }) => {
     const [selectedObjective, setSelectedObjective] = useState("");
+    const [showChart, setShowChart] = useState(false)
 
     const handleChange = (event) => {
         setSelectedObjective(event.target.value);
+        setShowChart(true);
     };
     //Filter by selected learning objective for the Victory Chart
     const filterBySelect = data.student.studentProgress.filter((progress) => (
@@ -43,36 +45,38 @@ const StudentProgressOverTime = ({ data }) => {
                         </Select>
                     </FormControl>
                 </Box>
-                <VictoryChart
-                    theme={VictoryTheme.material}
-                    style={{ parent: { width: "500px" } }}
-                >
-                    <VictoryAxis
-                        dependentAxis
-                        domain={[0, 100]}
-                        tickValues={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
-                    />
-                    <VictoryScatter
-                        style={{
-                            data: {
-                                fill: ({ datum }) => {
-                                    if (datum.y < 70) return "#FF9280";
-                                    else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
-                                    else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
-                                    else return "#CDE990";
-                                }
-                            },
-                        }}
-                        size={7}
-                        data={filterBySelect.map((progress) => ({
-                            x: progress.createdAt,
-                            y: Math.floor(progress.progressPrecent),
-                            label: Math.floor(progress.progressPrecent)
-                        }))}
-                        labelComponent={<VictoryLabel dy={20} dx={5} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
-                    />
+                {showChart &&
+                    <VictoryChart
+                        theme={VictoryTheme.material}
+                    >
+                        <VictoryAxis
+                            dependentAxis
+                            domain={[0, 100]}
+                            tickValues={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+                        />
+                        <VictoryScatter
+                            style={{
+                                data: {
+                                    fill: ({ datum }) => {
+                                        if (datum.y < 70) return "#FF9280";
+                                        else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
+                                        else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
+                                        else return "#CDE990";
+                                    }
+                                },
+                            }}
+                            size={7}
+                            data={filterBySelect.map((progress) => ({
+                                symbol: "square",
+                                x: progress.createdAt,
+                                y: Math.floor(progress.progressPrecent),
+                                label: `${Math.floor(progress.progressPrecent)}%`
+                            }))}
+                            labelComponent={<VictoryLabel dy={3} dx={5} angle={0} textAnchor="end" style={{ fontSize: 5 }} />}
+                        />
 
-                </VictoryChart>
+                    </VictoryChart>
+                }
             </Stack>
         </div>
     )

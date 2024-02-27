@@ -5,13 +5,14 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useState } from "react"
-import { VictoryScatter, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryScatter, VictoryTooltip, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 
 const CompareStudentProgress = ({ data }) => {
     const [selectedObjective, setSelectedObjective] = useState(23);
-
+    const [showChart, setShowChart] = useState(false)
     const handleChange = (event) => {
         setSelectedObjective(event.target.value);
+        setShowChart(true);
     };
     const averageForChart = []
     const studentAverages = data.progress.map((student) => {
@@ -40,7 +41,7 @@ const CompareStudentProgress = ({ data }) => {
                 <Box>
                     <FormControl
                         fullWidth>
-                        <InputLabel>Learning Objective</InputLabel>
+                        <InputLabel>Select Learning Objective</InputLabel>
                         <Select
                             value={selectedObjective}
                             label="Learning Objective"
@@ -56,37 +57,41 @@ const CompareStudentProgress = ({ data }) => {
                         </Select>
                     </FormControl>
                 </Box>
+                {showChart &&
+                    <div style={{ overflowX: "auto"}}>
+                        <VictoryChart
+                            domain={{ x: [0, data.progress.length] }}
+                            theme={VictoryTheme.material}
+                        >
+                            <VictoryAxis
+                                dependentAxis
+                                domain={[0, 100]}
+                                tickValues={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
+                            />
+                            <VictoryScatter
+                                style={{
+                                    data: {
+                                        fill: ({ datum }) => {
+                                            if (datum.y < 70) return "#FF9280";
+                                            else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
+                                            else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
+                                            else return "#CDE990";
+                                        }
+                                    },
+                                }}
+                                size={10}
+                                data={averageForChart.map((progress) => ({
+                                    symbol: "square",
+                                    x: progress.name,
+                                    y: Math.max(Math.floor(progress.average), 0), // Ensure no negative values
+                                    label: progress.average === -10 ? `${progress.name}:\nNo data` : `${progress.name}:\n${Math.floor(progress.average)}%`
+                                }))}
+                                labelComponent={<VictoryLabel dy={7} dx={8} angle={0} textAnchor="end" style={{ fontSize: 4 }} />}
+                            />
 
-                <VictoryChart
-                    theme={VictoryTheme.material}
-                    style={{ parent: { width: "500px" } }}
-                >
-                    <VictoryAxis
-                        dependentAxis
-                        domain={[0, 100]}
-                        tickValues={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
-                    />
-                    <VictoryScatter
-                        style={{
-                            data: {
-                                fill: ({ datum }) => {
-                                    if (datum.y < 70) return "#FF9280";
-                                    else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
-                                    else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
-                                    else return "#CDE990";
-                                }
-                            },
-                        }}
-                        size={7}
-                        data={averageForChart.map((progress) => ({
-                            x: progress.name,
-                            y: Math.max(Math.floor(progress.average), 0), // Ensure no negative values
-                            label: progress.average === -10 ? `${progress.name}:\nNo data` : `${progress.name}:\n${Math.floor(progress.average)}%`
-                        }))}
-                        labelComponent={<VictoryLabel dy={20} dx={40} angle={0} textAnchor="end" style={{ fontSize: 10 }} />}
-                    />
-
-                </VictoryChart>
+                        </VictoryChart>
+                    </div>
+                }
             </Stack>
         </div>
     )
