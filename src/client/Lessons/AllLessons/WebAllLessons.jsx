@@ -1,6 +1,7 @@
 import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
+import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Accordion from '@mui/material/Accordion';
@@ -49,17 +50,17 @@ const WebAllLessons = () => {
                                     <div>
                                         <Alert severity="info">
                                             <Stack direction="row">
-                                            <Typography variant="h5">
-                                                There are no lessons added to this class yet.
-                                            </Typography>
-                                            <Link
-                                                to={`/class/${className.id}`}>
-                                                <button
-                                                style={{ marginBottom: 0, marginTop: 0 }}
-                                                    className="add-button">
-                                                    See Class
-                                                </button>
-                                            </Link>
+                                                <Typography variant="h5">
+                                                    There are no lessons added to this class yet.
+                                                </Typography>
+                                                <Link
+                                                    to={`/class/${className.id}`}>
+                                                    <button
+                                                        style={{ marginBottom: 0, marginTop: 0 }}
+                                                        className="add-button">
+                                                        See Class
+                                                    </button>
+                                                </Link>
                                             </Stack>
                                         </Alert>
                                     </div>
@@ -70,41 +71,47 @@ const WebAllLessons = () => {
                                                     <Card
                                                         elevation={10}
                                                         sx={{ p: 1, m: 1 }} >
-                                                        <Stack
-                                                            direction="row"
-                                                            justifyContent="space-between">
-                                                            <Stack direction="column">
-                                                                <Typography variant="h5">
-                                                                    {lesson.lessonName}
-                                                                </Typography>
-                                                                <Link to={`/lesson/${lesson.id}`} >
-                                                                    <button className="details-button">
-                                                                        See Lesson Details
-                                                                    </button>
-                                                                </Link>
-                                                            </Stack>
-                                                            <Stack direction="column">
-                                                                <Typography variant="h6">
-                                                                    Objectives:
-                                                                </Typography>
-                                                                {lesson.learningObjectives.map((objective, index) => (
-                                                                    <div key={index}>
-                                                                        <Typography>
-                                                                            {objective.objectiveName}
-                                                                        </Typography>
-                                                                    </div>
-                                                                ))}
-                                                            </Stack>
-                                                            <button
-                                                                className="delete-button"
-                                                                style={{ width: "70px", height: "35px", marginTop: 0 }} //override CSS
-                                                                onClick={() => {
-                                                                    setSelectedLesson(lesson.id);
-                                                                    setDelteAlert(true)
-                                                                }}>
-                                                                <DeleteForeverIcon sx={{ color: "white" }} />
-                                                            </button>
-                                                        </Stack>
+                                                        <Grid container>
+                                                            <Grid item xs={5}>
+                                                                <Stack direction="column">
+                                                                    <Typography variant="h6">
+                                                                        {lesson.lessonName}
+                                                                    </Typography>
+                                                                    <Link to={`/lesson/${lesson.id}`} >
+                                                                        <button 
+                                                                        style={{ float: "none" }}//override float
+                                                                        className="details-button">
+                                                                            See Lesson Details
+                                                                        </button>
+                                                                    </Link>
+                                                                </Stack>
+                                                            </Grid>
+                                                            <Grid item xs={5}>
+                                                                <Stack direction="column">
+                                                                    <Typography variant="h6">
+                                                                        Objectives:
+                                                                    </Typography>
+                                                                    {lesson.learningObjectives.map((objective, index) => (
+                                                                        <div key={index}>
+                                                                            <Typography>
+                                                                                {objective.objectiveName}
+                                                                            </Typography>
+                                                                        </div>
+                                                                    ))}
+                                                                </Stack>
+                                                            </Grid>
+                                                            <Grid item xs={1}>
+                                                                <button
+                                                                    className="delete-button"
+                                                                    style={{ width: "70px", height: "35px", marginTop: 0 }} //override CSS
+                                                                    onClick={() => {
+                                                                        setSelectedLesson(lesson.id);
+                                                                        setDelteAlert(true)
+                                                                    }}>
+                                                                    <DeleteForeverIcon sx={{ color: "white" }} />
+                                                                </button>
+                                                            </Grid>
+                                                        </Grid>
                                                         {deleteAlert && selectedLesson === lesson.id &&
                                                             <Alert
                                                                 severity="error"
@@ -118,6 +125,7 @@ const WebAllLessons = () => {
                                                                     </Typography>
                                                                     <Stack direction="row">
                                                                         <button
+                                                                            onClick={() => setDelteAlert(false)}
                                                                             className="add-button"
                                                                             style={{ width: "150px" }}>
                                                                             Keep Lesson
