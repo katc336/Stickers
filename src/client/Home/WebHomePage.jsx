@@ -6,7 +6,7 @@ import LoginForm from "./components/LoginForm"
 import { useState } from "react"
 import teacherImg from "./images/Teacher.png"
 import Logo from "./images/Logo.png"
-import HomeNav from "./components/HomeNav"
+import HomeNav from "../Navigation/HomeNav"
 
 const WebHomePage = () => {
     const [form, setForm] = useState(false)

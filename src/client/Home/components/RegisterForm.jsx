@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegisterMutation } from "../../../redux/api";
 import { useNavigate } from "react-router-dom";
-import HomeNav from "./HomeNav";
+import HomeNav from "../../Navigation/HomeNav";
 
 const RegisterForm = () => {
     const [name, setName] = useState("");

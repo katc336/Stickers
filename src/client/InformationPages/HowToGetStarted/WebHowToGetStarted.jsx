@@ -2,7 +2,7 @@ import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import GitHubIcon from '@mui/icons-material/GitHub';
-import HomeNav from "../../Home/components/HomeNav"
+import HomeNav from "../../Navigation/HomeNav"
 import AllLessonsPage from "./images/AllLessonsPage.png"
 import StudentProgressBarGraph from "./images/StudentProgressBarGraph.png"
 import StudentProgressScatterChart from "./images/StudentProgressScatterChart.png"
