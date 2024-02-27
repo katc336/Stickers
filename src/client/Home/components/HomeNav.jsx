@@ -13,10 +13,12 @@ const HomeNav = () => {
                 <Stack
                     direction="row"
                     justifyContent="space-between"
-                    >
-                    <img
-                        src={Logo}
-                        width="150px" style={{ marginLeft: 20}} />
+                >
+                    <Link to="/">
+                        <img
+                            src={Logo}
+                            width="150px" style={{ marginLeft: 20 }} />
+                    </Link>
                     <Link to="/get_started">
                         <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5 }}>
                             <Typography variant="h6">
@@ -25,7 +27,7 @@ const HomeNav = () => {
                         </Button>
                     </Link>
                     <Link to="/story">
-                        <Button sx={{ color: "white", textTransform: "none", mt: 1.5  }}>
+                        <Button sx={{ color: "white", textTransform: "none", mt: 1.5 }}>
                             <Typography variant="h6">
                                 Story
                             </Typography>
