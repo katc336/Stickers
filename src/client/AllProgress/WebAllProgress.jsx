@@ -53,7 +53,7 @@ const WebAllProgress = () => {
                     <div>
                         <Card
                             elevation={10}
-                            sx={{ borderRadius: "20px", p: 3, m: 3 }}>
+                            sx={{ borderRadius: "20px", p: 3, ml: 20, my: 3, mr: 3 }}>
                             <Alert severity="info">
                                 <Stack direction="row">
                                     <Typography
