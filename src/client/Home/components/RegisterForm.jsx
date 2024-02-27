@@ -1,7 +1,7 @@
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Typograpgy from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
@@ -40,11 +40,11 @@ const RegisterForm = () => {
             <HomeNav />
             <Box sx={{ mt: 10 }}>
                 <Card sx={{ p: 5, mx: 50 }}>
-                    <Typograpgy
+                    <Typography
                         variant="h4"
                         sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                         Sign Up
-                    </Typograpgy>
+                    </Typography>
                     {registerError && <Alert severity="error" >Please try again with another username.</Alert>}
                     <form onSubmit={handleSubmit}>
                         <TextField
@@ -76,21 +76,21 @@ const RegisterForm = () => {
                             </button>
                         </Stack>
                     </form>
-                    <Typograpgy sx={{
+                    <Typography sx={{
                         color: "#0A1D56",
                         textAlign: "center",
                         mt: 3
                     }}>
                         Already have an account?
-                    </Typograpgy>
-                    <Typograpgy sx={{
+                    </Typography>
+                    <Typography sx={{
                         color: "#0A1D56",
                         textAlign: "center"
                     }}>
                         <Link to="/login">
                             Go to Login
                         </Link>
-                    </Typograpgy>
+                    </Typography>
                 </Card>
             </Box>
         </div>
