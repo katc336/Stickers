@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { Link } from "react-router-dom";
+import KatSticker from "./KatSticker.png"
 
 const WebStory = () => {
     return (
@@ -12,10 +13,12 @@ const WebStory = () => {
             <HomeNav />
             <Box sx={{ mt: 10, p: 3 }}>
                 <Grid container>
-                    <Grid item xs={4}>
-                        PLACE HOLDER
+                    <Grid item xs={5}>
+                    <img
+                        src={KatSticker}
+                        width="550px" style={{ marginLeft: 20}} />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <Typography
                             variant="h6"
                             sx={{ mb: 3 }}>
