@@ -11,7 +11,6 @@ const AddLessonButton = ({ id, data }) => {
     const [lessonName, setLessonName] = useState("")
     const [addLessonToClass] = usePostNewLessonMutation();
 
-    console.log(data);
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
