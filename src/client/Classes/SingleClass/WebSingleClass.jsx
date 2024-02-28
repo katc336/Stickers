@@ -57,7 +57,10 @@ const WebSingleClass = () => {
                                 Lessons:
                             </Typography>
                             <LessonForClass data={data} />
-                            <AddLessonButton id={id} />
+                            <AddLessonButton
+                                id={id}
+                                data={data}
+                            />
                         </Card>
                     </Grid>
                 </Grid>

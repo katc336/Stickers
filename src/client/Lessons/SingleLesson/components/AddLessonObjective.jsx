@@ -25,7 +25,6 @@ const AddLessonObjective = ({ id, data }) => {
             uniqueObjective.push(objective.objectiveName)
         }
     });
-    
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();

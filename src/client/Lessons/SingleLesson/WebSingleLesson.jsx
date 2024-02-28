@@ -31,7 +31,8 @@ const WebSingleLesson = () => {
                 </Typography>
                 <AddLessonObjective
                     data={data}
-                    id={id} />
+                    id={id}
+                />
                 <Grid container>
                     <Grid item xs={6}>
                         <ClassLessonObjective id={id} />
@@ -50,7 +51,6 @@ const WebSingleLesson = () => {
                             <div>
                                 <ClassStudentsProgress id={id} />
                             </div>}
-
                     </Grid>
                 </Grid>
             </Card>

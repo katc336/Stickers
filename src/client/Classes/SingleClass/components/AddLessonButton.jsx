@@ -3,29 +3,41 @@ import TextField from "@mui/material/TextField"
 import { usePostNewLessonMutation } from "../../../../redux/api"
 import { useState } from "react"
 
-const AddLessonButton = ({ id }) => {
+const AddLessonButton = ({ id, data }) => {
     const [addLesson, setAddLesson] = useState(false);
     const [clearLessonButton, setClearLessonButton] = useState(true);
     const [addError, setAddError] = useState(null);
+    const [addAlreadyExistsError, setAddAlreadyExistsError] =useState(false)
     const [lessonName, setLessonName] = useState("")
     const [addLessonToClass] = usePostNewLessonMutation();
+
+    console.log(data);
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
             if (lessonName.trim() === "") {
                 setAddError(true);
             } else {
-                const result = await addLessonToClass({ id: Number(id), lessonName })
-                console.log(result)
-                if (result.data) {
-                    setAddError(false)
-                    setAddLesson(false)
-                    setClearLessonButton(true)
-                    setLessonName("");
-                    console.log("Success!");
-                } else {
-                    setAddError(true);
-                    console.log("Could not add lesson");
+                const lessonAlreadyExists = data.lessons.some((lesson) => lesson.lessonName === lessonName);
+                if (lessonAlreadyExists) {
+                    setAddAlreadyExistsError(true);
+                    console.log("Lesson already exists");
+                    return;
+                }
+                else {
+                    const result = await addLessonToClass({ id: Number(id), lessonName })
+                    console.log(result)
+                    if (result.data) {
+                        setAddError(false)
+                        setAddLesson(false)
+                        setAddAlreadyExistsError(false)
+                        setClearLessonButton(true)
+                        setLessonName("");
+                        console.log("Success!");
+                    } else {
+                        setAddError(true);
+                        console.log("Could not add lesson");
+                    }
                 }
             }
         } catch (error) {
@@ -41,8 +53,10 @@ const AddLessonButton = ({ id }) => {
                     Add New Lesson
                 </button>
             }
+             {addAlreadyExistsError &&
+                <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
             {addError &&
-                    <Alert severity="error">There was an error adding the lesson.</Alert>}
+                <Alert severity="error">There was an error adding the lesson.</Alert>}
             {addLesson &&
                 <form onSubmit={handleAddLesson}>
                     <TextField
