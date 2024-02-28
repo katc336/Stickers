@@ -88,12 +88,6 @@ const AddLessonForm = () => {
                             Add New Lesson
                         </button>
                     }
-                    {addError &&
-                        <Alert severity="error">
-                            There was an error adding the lesson.
-                        </Alert>}
-                    {addAlreadyExistsError &&
-                        <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
                 </div>
             }
             {addLesson &&
@@ -139,6 +133,12 @@ const AddLessonForm = () => {
                         </button>
                     </Stack>
                 </form>}
+            {addError &&
+                <Alert severity="error">
+                    There was an error adding the lesson.
+                </Alert>}
+            {addAlreadyExistsError &&
+                <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
         </div>
     )
 }

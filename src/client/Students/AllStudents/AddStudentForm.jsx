@@ -83,22 +83,6 @@ const AddStudentForm = ({ allStudedntData }) => {
                         </button>}
                 </div>
             }
-            {addError &&
-                <Alert severity="error">
-                    There was an error adding the student.
-                </Alert>}
-            {addAlreadyExistsError &&
-                <Alert severity="error">
-                    <Typography>
-                        There is already a student with this name.
-                    </Typography>
-                    <Typography>
-                        Please revise the name.
-                    </Typography>
-                    <Typography>
-                        Example: Add the first initial of their last name.
-                    </Typography>
-                </Alert>}
             {addStudent &&
                 <form onSubmit={handleAddStudent}>
                     <Typography variant="h6">
@@ -141,6 +125,22 @@ const AddStudentForm = ({ allStudedntData }) => {
                         </button>
                     </Stack>
                 </form>}
+            {addError &&
+                <Alert severity="error">
+                    There was an error adding the student.
+                </Alert>}
+            {addAlreadyExistsError &&
+                <Alert severity="error">
+                    <Typography>
+                        There is already a student with this name.
+                    </Typography>
+                    <Typography>
+                        Please revise the name.
+                    </Typography>
+                    <Typography>
+                        Example: Add the first initial of their last name.
+                    </Typography>
+                </Alert>}
         </div>
     )
 }
