@@ -19,7 +19,6 @@ const WebSingleClass = () => {
     if (error) {
         console.error(error)
     }
-
     return (
         <div>
             <NavDrawer />
@@ -43,7 +42,10 @@ const WebSingleClass = () => {
                                 Students:
                             </Typography>
                             <StudentForClass data={data} />
-                            <AddStudentButton id={id} />
+                            <AddStudentButton
+                                id={id}
+                                data={data}
+                            />
                         </Card>
                     </Grid>
                     {/* <--------------------------LESSONS FOR CLASS--------------------------> */}
@@ -57,7 +59,10 @@ const WebSingleClass = () => {
                                 Lessons:
                             </Typography>
                             <LessonForClass data={data} />
-                            <AddLessonButton id={id} />
+                            <AddLessonButton
+                                id={id}
+                                data={data}
+                            />
                         </Card>
                     </Grid>
                 </Grid>

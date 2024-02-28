@@ -8,6 +8,7 @@ import { useGetClassesQuery, usePostNewLessonMutation } from "../../../redux/api
 
 const AddLessonForm = () => {
     const [addError, setAddError] = useState(null);
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
     const [selectedClassId, setSelectedClassId] = useState(null);
     const [lessonName, setLessonName] = useState("")
     const [addLesson, setAddLesson] = useState(false);
@@ -20,36 +21,47 @@ const AddLessonForm = () => {
     if (error) {
         console.error(error)
     }
+    console.log(data)
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
             if (lessonName.trim() === "") {
                 setAddError(true);
             } else {
-                const result = await addLessonToClass({ id: Number(selectedClassId), lessonName })
-                console.log(result)
-                if (result.data) {
-                    setAddError(false)
-                    setAddLesson(false)
-                    setClearButton(true)
-                    setLessonName("");
-                    console.log("Success!");
+                //Check if the lesson already exists...
+                let lessonAlreadyExists = false;
+                data.forEach((item) => {
+                    if (item.lessons.some((lesson) => lesson.lessonName === lessonName)) {
+                        lessonAlreadyExists = true;
+                    }
+                });
+                if (lessonAlreadyExists) {
+                    setAddAlreadyExistsError(true);
+                    console.log("Lesson already exists");
+                    return;
                 } else {
-                    setAddError(true);
-                    console.log("Could not add lesson");
+                    const result = await addLessonToClass({ id: Number(selectedClassId), lessonName })
+                    console.log(result)
+                    if (result.data) {
+                        setAddError(false)
+                        setAddAlreadyExistsError(false);
+                        setAddLesson(false)
+                        setClearButton(true)
+                        setLessonName("");
+                        console.log("Success!");
+                    } else {
+                        setAddError(true);
+                        console.log("Could not add lesson");
+                    }
                 }
             }
         } catch (error) {
             console.error(error)
         }
     }
-console.log(selectedClassId);
+
     return (
         <div>
-            {addError &&
-                <Alert severity="error">
-                    There was an error adding the lesson.
-                </Alert>}
             {clearButton && data.length === 0
                 ?
                 <div>
@@ -69,18 +81,25 @@ console.log(selectedClassId);
                     </Alert>
                 </div>
                 : <div>
-                    <button
-                        className="add-button"
-                        onClick={() => { setAddLesson(true), setClearButton(false) }}>
-                        Add New Lesson
-                    </button>
+                    {clearButton &&
+                        <button
+                            className="add-button"
+                            onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                            Add New Lesson
+                        </button>
+                    }
+                    {addError &&
+                        <Alert severity="error">
+                            There was an error adding the lesson.
+                        </Alert>}
+                    {addAlreadyExistsError &&
+                        <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
                 </div>
-
             }
             {addLesson &&
                 <form onSubmit={handleAddLesson}>
                     <Typography variant="h6">
-                        Select Student's Class:
+                        Select the Lesson's Class:
                     </Typography>
                     {
                         data.map((className) => (

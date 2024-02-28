@@ -5,9 +5,10 @@ import TextField from "@mui/material/TextField"
 import { useState } from "react"
 import { useGetAllObjectivesQuery, usePostNewObjectiveMutation } from "../../../../redux/api"
 
-const AddLessonObjective = ({ id }) => {
+const AddLessonObjective = ({ id, data }) => {
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [addError, setAddError] = useState(null);
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false);
     const [objectiveName, setObjectiveName] = useState("");
     const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
     const [addLessonObjectiveMutation] = usePostNewObjectiveMutation();
@@ -18,26 +19,33 @@ const AddLessonObjective = ({ id }) => {
         console.error(error)
     }
     //Filter to only show objective names once
-    const displayedObjectives = []
+    const uniqueObjective = []
     objData && objData.map((objective) => {
-        if (!displayedObjectives.includes(objective.objectiveName)) {
-            displayedObjectives.push(objective.objectiveName)
+        if (!uniqueObjective.includes(objective.objectiveName)) {
+            uniqueObjective.push(objective.objectiveName)
         }
     });
-
-    console.log(displayedObjectives)
     const handleAddLessonObjective = async (event) => {
         try {
             event.preventDefault();
+            // Check if the objective is already added to the lesson...
+            const objectiveExists = data.learningObjectives.some((objective) => objective.objectiveName === objectiveName);
+            if (objectiveExists) {
+                setAddAlreadyExistsError(true);
+                console.log("Objective already exists");
+                return;
+            } 
+            // Check the objecitve length to make sure it's not too long...
             if (objectiveName.length > 50) {
                 setAddError(true);
-                console.log("Progress percent must be between 0 and 100");
+                console.log("Objective must be 50 characters or less");
                 return;
             } else {
                 const result = await addLessonObjectiveMutation({ id: Number(id), objectiveName })
                 console.log(result)
                 if (result.data) {
                     setAddError(false);
+                    setAddAlreadyExistsError(false)
                     setAddLessonObjective(false)
                     setObjectiveName("");
                     console.log("Success!");
@@ -47,9 +55,9 @@ const AddLessonObjective = ({ id }) => {
                 }
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
-    }
+     }
     return (
         <div>
             <button
@@ -62,6 +70,10 @@ const AddLessonObjective = ({ id }) => {
                 <Alert severity="error">
                     Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
                 </Alert>}
+            {addAlreadyExistsError &&
+                <Alert severity="error">
+                    This objective has already been added to the class.
+                </Alert>}
             {addLessonObjective &&
                 <div style={{ float: "right" }}>
                     <form onSubmit={handleAddLessonObjective}>
@@ -73,7 +85,7 @@ const AddLessonObjective = ({ id }) => {
                                     sx={{ mb: 1 }}>
                                     Select an existing objective:
                                 </Typography>
-                                {displayedObjectives.map((objective) => (
+                                {uniqueObjective.map((objective) => (
                                     <div key={objective}>
                                         <Stack direction="row">
                                             <input

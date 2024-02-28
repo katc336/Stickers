@@ -36,7 +36,8 @@ const WebAllStudents = () => {
                         variant="h3">
                         All Students:
                     </Typography>
-                    <AddStudentForm />
+                    <AddStudentForm
+                        allStudedntData={data} />
                     {data && data.map((student) => (
                         <div key={student.id}>
                             <Card
@@ -54,9 +55,9 @@ const WebAllStudents = () => {
                                         <Link
                                             style={{ textDecoration: "none" }}
                                             to={`/student/${student.id}`}>
-                                            <button 
-                                            style={{ float: "none" }} //override float
-                                            className="details-button">
+                                            <button
+                                                style={{ float: "none" }} //override float
+                                                className="details-button">
                                                 See Details
                                             </button>
                                         </Link>
