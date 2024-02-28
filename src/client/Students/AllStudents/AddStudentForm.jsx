@@ -6,8 +6,9 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useGetClassesQuery, usePostNewStudentMutation } from "../../../redux/api"
 
-const AddStudentForm = () => {
+const AddStudentForm = ({ allStudedntData }) => {
     const [addError, setAddError] = useState(null);
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
     const [selectedClassId, setSelectedClassId] = useState(null);
     const [name, setName] = useState("")
     const [addStudent, setAddStudent] = useState(false);
@@ -27,17 +28,25 @@ const AddStudentForm = () => {
             if (name.trim() === "") {
                 setAddError(true);
             } else {
-                const result = await addStudentToClass({ id: Number(selectedClassId), name })
-                console.log(result)
-                if (result.data) {
-                    setAddError(false)
-                    setAddStudent(false)
-                    setClearButton(true)
-                    setName("");
-                    console.log("Success!");
+                const studentAlreadyExists = allStudedntData.some((student) => student.name === name);
+                if (studentAlreadyExists) {
+                    setAddAlreadyExistsError(true);
+                    console.log("Student already exists");
+                    return;
                 } else {
-                    setAddError(true);
-                    console.log("Could not add student");
+                    const result = await addStudentToClass({ id: Number(selectedClassId), name })
+                    console.log(result)
+                    if (result.data) {
+                        setAddError(false)
+                        setAddAlreadyExistsError(false);
+                        setAddStudent(false)
+                        setClearButton(true)
+                        setName("");
+                        console.log("Success!");
+                    } else {
+                        setAddError(true);
+                        console.log("Could not add student");
+                    }
                 }
             }
         } catch (error) {
@@ -47,10 +56,6 @@ const AddStudentForm = () => {
 
     return (
         <div>
-            {addError &&
-                <Alert severity="error">
-                    There was an error adding the student.
-                </Alert>}
             {clearButton && data.length === 0
                 ?
                 <div>
@@ -70,14 +75,30 @@ const AddStudentForm = () => {
                     </Alert>
                 </div>
                 : <div>
-                    <button
-                        className="add-button"
-                        onClick={() => { setAddStudent(true), setClearButton(false) }}>
-                        Add New Student
-                    </button>
+                    {clearButton &&
+                        <button
+                            className="add-button"
+                            onClick={() => { setAddStudent(true), setClearButton(false) }}>
+                            Add New Student
+                        </button>}
                 </div>
-
             }
+            {addError &&
+                <Alert severity="error">
+                    There was an error adding the student.
+                </Alert>}
+            {addAlreadyExistsError &&
+                <Alert severity="error">
+                    <Typography>
+                        There is already a student with this name.
+                    </Typography>
+                    <Typography>
+                        Please revise the name.
+                    </Typography>
+                    <Typography>
+                        Example: Add the first initial of their last name.
+                    </Typography>
+                </Alert>}
             {addStudent &&
                 <form onSubmit={handleAddStudent}>
                     <Typography variant="h6">
