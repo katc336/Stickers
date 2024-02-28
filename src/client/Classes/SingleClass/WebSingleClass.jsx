@@ -19,7 +19,6 @@ const WebSingleClass = () => {
     if (error) {
         console.error(error)
     }
-
     return (
         <div>
             <NavDrawer />

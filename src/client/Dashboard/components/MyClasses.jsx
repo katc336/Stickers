@@ -7,7 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGetClassesQuery, useDeleteClassMutation } from "../../../redux/api"
-import AddClassButton from "./AddClass";
+import AddClassButton from "./AddClassButton";
 
 const MyClasses = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -33,7 +33,8 @@ const MyClasses = () => {
                         All Classes:
                     </Typography>
                     <Box sx={{ mb: 10 }}>
-                        <AddClassButton />
+                        <AddClassButton
+                            data={data} />
                     </Box>
                     {data && data.map((myClass) => (
                         <div key={myClass.id}>
