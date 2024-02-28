@@ -34,7 +34,7 @@ const AddLessonObjective = ({ id, data }) => {
                 setAddAlreadyExistsError(true);
                 console.log("Objective already exists");
                 return;
-            } 
+            }
             // Check the objecitve length to make sure it's not too long...
             if (objectiveName.length > 50) {
                 setAddError(true);
@@ -57,7 +57,7 @@ const AddLessonObjective = ({ id, data }) => {
         } catch (error) {
             console.error(error);
         }
-     }
+    }
     return (
         <div>
             <button
@@ -66,14 +66,6 @@ const AddLessonObjective = ({ id, data }) => {
                 onClick={() => { setAddLessonObjective(true) }}>
                 Add Lesson Objective
             </button>
-            {addError &&
-                <Alert severity="error">
-                    Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
-                </Alert>}
-            {addAlreadyExistsError &&
-                <Alert severity="error">
-                    This objective has already been added to the class.
-                </Alert>}
             {addLessonObjective &&
                 <div style={{ float: "right" }}>
                     <form onSubmit={handleAddLessonObjective}>
@@ -131,6 +123,14 @@ const AddLessonObjective = ({ id, data }) => {
                             Add to Class
                         </button>
                     </form>
+                    {addError &&
+                        <Alert severity="error">
+                            Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
+                        </Alert>}
+                    {addAlreadyExistsError &&
+                        <Alert severity="error">
+                            This objective has already been added to the class.
+                        </Alert>}
                 </div>}
         </div>
     )
