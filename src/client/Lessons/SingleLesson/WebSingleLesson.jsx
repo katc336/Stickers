@@ -2,7 +2,7 @@ import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import { useGetSingleLessonQuery, usePostNewObjectiveMutation, usePostProgressMutation, useGetAllObjectivesQuery, useDeleteObjectiveMutation } from "../../../redux/api"
+import { useGetSingleLessonQuery } from "../../../redux/api"
 import { useParams } from "react-router-dom";
 import NavDrawer from "../../Navigation/NavDrawer"
 import ClassLessonObjective from "./components/ClassLessonObjective"
@@ -29,7 +29,9 @@ const WebSingleLesson = () => {
                     sx={{ textAlign: "center", mx: 3 }}>
                     {data && data.lessonName}
                 </Typography>
-                <AddLessonObjective id={id} />
+                <AddLessonObjective
+                    data={data}
+                    id={id} />
                 <Grid container>
                     <Grid item xs={6}>
                         <ClassLessonObjective id={id} />
