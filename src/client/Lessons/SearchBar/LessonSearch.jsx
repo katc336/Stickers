@@ -1,34 +1,29 @@
-import TextField from "@mui/material/TextField";
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
-import { useGetAllLessonsQuery } from "../../../redux/api";
 import { useState } from 'react';
 import LessonSearchResults from "./LessonSearchResult";
 
-const LessonSearch = ({}) => {
+const LessonSearch = ({ data }) => {
     const [searchedLesson, setSearchedLesson] = useState("");
     const [showResult, setShowResult] = useState(false);
-    const { data, error, isLoading } = useGetAllLessonsQuery();
-    if (isLoading) {
-        return <div> </div>;
-    }
-    if (error) {
-        console.error(error)
-    }
-    console.log("Data:" + data)
-    const filteredLesson = () => data.lessons.forEach(filter((lesson) =>
-        lesson.lessonName.toLowerCase().includes(searchedLesson.toLowerCase())
-    ));
-    const filteredSearch = filteredLesson(searchedLesson)
-    console.log(filteredLesson(searchedLesson));
 
+    const filteredLesson = () => {
+        const allLessons = data.flatMap((classData) => classData.lessons);
+        return allLessons.filter((lesson) =>
+            lesson.lessonName.toLowerCase().includes(searchedLesson.toLowerCase())
+        );
+    }
+    const filteredSearch = filteredLesson();
+console.log(filteredSearch)
+    const handleSearch = (event) => {
+        event.preventDefault();
+        setShowResult(true)
+    }
     return (
         <>
-            <form>
+            <form onSubmit={handleSearch}>
                 <Grid container>
-                    <Grid
-                        sx={{ ml: 3 }}
-                        item xs={10}>
+                    <Grid sx={{ ml: 3 }} item xs={10}>
                         <input
                             className="search-input"
                             type="text"
@@ -40,20 +35,21 @@ const LessonSearch = ({}) => {
                                 if (showResult === true) {
                                     setShowResult(false);
                                 }
-                                setSearchedLesson(event.target.value)
-                            }} />
+                                setSearchedLesson(event.target.value);
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={1.5}>
                         <button
                             className="search-button"
-                            onClick={() => setShowResult(true)} >
+                            type="submit"
+                        >
                             <SearchIcon fontSize="large" />
                         </button>
                     </Grid>
                 </Grid>
             </form>
-            {showResult &&
-                <LessonSearchResults results={filteredSearch} />}
+            {showResult && <LessonSearchResults results={filteredSearch} />}
         </>
     );
 };

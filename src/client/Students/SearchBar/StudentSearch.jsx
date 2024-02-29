@@ -13,7 +13,6 @@ const StudentSearch = ({ data }) => {
         student.name.toLowerCase().includes(searchedStudent.toLowerCase())
     );
     const filteredSearch = filteredStudent(searchedStudent)
-    console.log(filteredStudent(searchedStudent));
 
     const handleSearch = (event) => {
         event.preventDefault();
