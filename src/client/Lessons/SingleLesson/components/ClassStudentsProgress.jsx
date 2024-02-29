@@ -49,7 +49,7 @@ const ClassStudentsProgress = ({ id }) => {
                                                 p: 1,
                                                 border: 1,
                                                 borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <=79 ? "orange" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "yellow" : "green",
-                                                backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <= 80 ? "#FFC97C" : progress.progressPrecent >= 81 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
+                                                backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <=79 ? "#FFC97C" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
                                             }}>
                                             <Grid container>
                                                 <Grid item xs={5}>

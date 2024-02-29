@@ -59,8 +59,8 @@ const StudentProgressOverTime = ({ data }) => {
                                 data: {
                                     fill: ({ datum }) => {
                                         if (datum.y < 70) return "#FF9280";
-                                        else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
-                                        else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
+                                        else if (datum.y >= 70 && datum.y <= 79) return "#F9B572";
+                                        else if (datum.y >= 80 && datum.y <= 89) return "#FFE194";
                                         else return "#CDE990";
                                     }
                                 },
