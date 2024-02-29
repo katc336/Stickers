@@ -26,7 +26,6 @@ const WebAllStudents = () => {
     if (error) {
         console.error(error);
     }
-    console.log(data);
     return (
         <div>
             <NavDrawer />
@@ -72,7 +71,7 @@ const WebAllStudents = () => {
                                             </Typography>
                                             {student.averagedAllProgress === null ?
                                                 <div>
-                                                     <Alert
+                                                    <Alert
                                                         severity="info"
                                                         sx={{ mt: 3, ml: 2 }}>
                                                         No Data

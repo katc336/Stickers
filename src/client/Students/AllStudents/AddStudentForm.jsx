@@ -21,7 +21,6 @@ const AddStudentForm = ({ allStudedntData }) => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     const handleAddStudent = async (event) => {
         try {
             event.preventDefault();
@@ -53,7 +52,6 @@ const AddStudentForm = ({ allStudedntData }) => {
             console.error(error)
         }
     }
-
     return (
         <div>
             {clearButton && data.length === 0

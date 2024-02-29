@@ -12,8 +12,6 @@ const AddStudentButton = ({ id, data }) => {
     const [addStudentToClass] = usePostNewStudentMutation();
     const [name, setName] = useState("")
 
-    console.log(data);
-
     const handleAddStudent = async (event) => {
         try {
             event.preventDefault();

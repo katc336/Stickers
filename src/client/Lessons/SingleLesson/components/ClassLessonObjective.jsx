@@ -17,7 +17,6 @@ const ClassLessonObjective = ({ id }) => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     return (
         <div>
             <Card

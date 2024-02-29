@@ -11,8 +11,6 @@ const AddClassButton = ({ data }) => {
     const [classForm, setClassForm] = useState(false);
     const [name, setName] = useState("");
     const [addClass] = usePostNewClassMutation();
-
-    console.log(data)
     const handleAdd = async (event) => {
         try {
             event.preventDefault();

@@ -19,12 +19,8 @@ const StudentProgressOverTime = ({ data }) => {
     const filterBySelect = data.student.studentProgress.filter((progress) => (
         progress.combinedObjectiveId === selectedObjective
     ));
-
-    console.log(filterBySelect)
-
     return (
         <div>
-
             <Stack direction="column">
                 <Box>
                     <FormControl
