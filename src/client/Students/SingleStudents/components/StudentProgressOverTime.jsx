@@ -74,7 +74,6 @@ const StudentProgressOverTime = ({ data }) => {
                             }))}
                             labelComponent={<VictoryLabel dy={3} dx={5} angle={0} textAnchor="end" style={{ fontSize: 5 }} />}
                         />
-
                     </VictoryChart>
                 }
             </Stack>

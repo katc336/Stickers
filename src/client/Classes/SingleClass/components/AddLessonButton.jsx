@@ -14,7 +14,7 @@ const AddLessonButton = ({ id, data }) => {
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
-            if (lessonName.trim() === "") {
+            if (lessonName.trim() === "" || lessonName.length > 50) {
                 setAddError(true);
             } else {
                 const lessonAlreadyExists = data.lessons.some((lesson) => lesson.lessonName === lessonName);
@@ -55,7 +55,7 @@ const AddLessonButton = ({ id, data }) => {
              {addAlreadyExistsError &&
                 <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
             {addError &&
-                <Alert severity="error">There was an error adding the lesson.</Alert>}
+                <Alert severity="error">Please make sure you enter a name that is 1 to 50 characters.</Alert>}
             {addLesson &&
                 <form onSubmit={handleAddLesson}>
                     <TextField

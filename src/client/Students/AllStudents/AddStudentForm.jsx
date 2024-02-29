@@ -25,7 +25,7 @@ const AddStudentForm = ({ allStudedntData }) => {
     const handleAddStudent = async (event) => {
         try {
             event.preventDefault();
-            if (name.trim() === "") {
+            if (name.trim() === "" || name.length > 30) {
                 setAddError(true);
             } else {
                 const studentAlreadyExists = allStudedntData.some((student) => student.name === name);
@@ -103,7 +103,6 @@ const AddStudentForm = ({ allStudedntData }) => {
                                     }}
                                     checked={selectedClassId === className.id}
                                 />
-
                                 <Typography>
                                     {className.name}
                                 </Typography>
@@ -127,7 +126,7 @@ const AddStudentForm = ({ allStudedntData }) => {
                 </form>}
             {addError &&
                 <Alert severity="error">
-                    There was an error adding the student.
+                    Please make sure you enter a name that is 1 to 30 characters.
                 </Alert>}
             {addAlreadyExistsError &&
                 <Alert severity="error">

@@ -16,7 +16,7 @@ const AddClassButton = ({ data }) => {
     const handleAdd = async (event) => {
         try {
             event.preventDefault();
-            if (name.trim() === "") {
+            if (name.trim() === "" || name.length > 50) {
                 setAddError(true);
             } else {
                 const classAlreadyExists = data.some((className) => className.name === name);
@@ -49,7 +49,7 @@ const AddClassButton = ({ data }) => {
                 <Alert
                     sx={{ mb: 5 }}
                     severity="error">
-                    Please make sure you fill out the name.
+                    Please make sure you enter a name that is 1 to 50 characters.
                 </Alert>
             }
             {addAlreadyExistsError &&

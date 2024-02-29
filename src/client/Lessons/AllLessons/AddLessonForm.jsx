@@ -25,7 +25,7 @@ const AddLessonForm = () => {
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
-            if (lessonName.trim() === "") {
+            if (lessonName.trim() === "" || lessonName.length > 50) {
                 setAddError(true);
             } else {
                 //Check if the lesson already exists...
@@ -135,7 +135,7 @@ const AddLessonForm = () => {
                 </form>}
             {addError &&
                 <Alert severity="error">
-                    There was an error adding the lesson.
+                    Please make sure you enter a name that is 1 to 50 characters.
                 </Alert>}
             {addAlreadyExistsError &&
                 <Alert severity="error">There is already a lesson with this name. Please revise the name to make it unique. </Alert>}
