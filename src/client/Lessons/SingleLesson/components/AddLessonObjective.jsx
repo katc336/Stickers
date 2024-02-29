@@ -37,7 +37,7 @@ const AddLessonObjective = ({ id, data }) => {
                 return;
             }
             // Check the objecitve length to make sure it's not too long...
-            if (objectiveName.length > 50) {
+            if (objectiveName.trim() === "" || objectiveName.length > 30) {
                 setAddError(true);
                 console.log("Objective must be 50 characters or less");
                 return;
@@ -129,7 +129,7 @@ const AddLessonObjective = ({ id, data }) => {
                     </form>
                     {addError &&
                         <Alert severity="error">
-                            Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
+                            Please make sure the objective is 1 to 30 characters to make sure they appear on the data visualization charts.
                         </Alert>}
                     {addAlreadyExistsError &&
                         <Alert severity="error">

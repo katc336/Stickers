@@ -5,8 +5,8 @@ import Stack from "@mui/material/Stack"
 import LoginForm from "./components/LoginForm"
 import teacherImg from "./images/Teacher.png"
 import Logo from "./images/Logo.png"
-import BottomBorder from "./images/BottomBorder.png"
 import HomeNav from "../Navigation/HomeNav"
+import HowToGetStarted from "../InformationPages/HowToGetStarted/HowToGetStarted"
 
 const WebHomePage = () => {
     return (
@@ -40,9 +40,9 @@ const WebHomePage = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <img
-                src={BottomBorder}
-                style={{ position: "absolute", zIndex: -10, marginLeft: 0, opacity: "40%" }} />
+            <Box sx={{ mt: 40 }}>
+           <HowToGetStarted />
+           </Box>
         </div>
     )
 }

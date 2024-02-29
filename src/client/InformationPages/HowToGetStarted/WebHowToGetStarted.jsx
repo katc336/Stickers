@@ -23,7 +23,7 @@ const WebHowToGetStarted = () => {
                 <Typography
                     variant="h4"
                     sx={{ mx: 3 }}>
-                    Welcome to Stickers, and this step-by-step guide on how to navigate it.
+                    Welcome to Stickers!
                     Getting started is simple and intuitive, allowing you to quickly organize your classes,
                     track student data with confidence, and gain valuable insights into your student's progress.
                 </Typography>

@@ -15,21 +15,33 @@ const RegisterForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [registerError, setRegisterError] = useState(false);
-    const [signup, { error }] = useRegisterMutation();
+    const [nameError, setNameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [signup] = useRegisterMutation();
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
-            const result = await signup({ name, username, password })
-            console.log(result)
-            if (result.data) {
-                setRegisterError(false);
-                console.log("Success!");
-                navigate("/account");
+            if (name.trim() === "" || username.trim() === "" || name.length > 30 || username.length > 30) {
+                setNameError(true);
+                setPasswordError(false);
+            } else if (password.trim() === "" || password.length < 8 || password.length > 30) {
+                setPasswordError(true);
+                setNameError(false);
             } else {
-                setRegisterError(true);
-                console.log("Incorrect login credentials");
+                const result = await signup({ name, username, password })
+                console.log(result)
+                if (result.data) {
+                    setRegisterError(false);
+                    setNameError(false);
+                    setPasswordError(false);
+                    console.log("Success!");
+                    navigate("/account");
+                } else {
+                    setRegisterError(true);
+                    console.log("Incorrect login credentials");
+                }
             }
         } catch (error) {
             console.error(error)
@@ -45,7 +57,24 @@ const RegisterForm = () => {
                         sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
                         Sign Up
                     </Typography>
-                    {registerError && <Alert severity="error" >Please try again with another username.</Alert>}
+                    {
+                        registerError &&
+                        <Alert severity="error" >
+                            There was an error. Please try again with another username.
+                        </Alert>
+                    }
+                    {
+                        nameError &&
+                        <Alert severity="error" >
+                            Please make sure your username and name are 1-30 characters long.
+                        </Alert>
+                    }
+                    {
+                        passwordError &&
+                        <Alert severity="error" >
+                            Please make sure your password is 8-30 characters long.
+                        </Alert>
+                    }
                     <form onSubmit={handleSubmit}>
                         <TextField
                             fullWidth

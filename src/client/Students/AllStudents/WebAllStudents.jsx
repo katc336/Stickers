@@ -9,6 +9,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllStudentsByTeacherQuery, useDeleteStudentMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
+import StudentSearch from "../SearchBar/StudentSearch"
 import AddStudentForm from "./AddStudentForm"
 import CookieSticker from "./images/CookieSticker.png"
 import GrapeSticker from "./images/GrapeSticker.png"
@@ -38,6 +39,7 @@ const WebAllStudents = () => {
                         variant="h3">
                         All Students:
                     </Typography>
+                    <StudentSearch data={data} />
                     <AddStudentForm
                         allStudedntData={data} />
                     {data && data.map((student) => (
@@ -81,7 +83,7 @@ const WebAllStudents = () => {
                                                     <Typography
                                                         variant="h6"
                                                         sx={{ mt: 5, ml: 2 }}>
-                                                        Average Progress: {student.averagedAllProgress}%
+                                                        Average Progress: {Math.floor(student.averagedAllProgress)}%
                                                     </Typography>
                                                 </div>}
                                         </Stack>

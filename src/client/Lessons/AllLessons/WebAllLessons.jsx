@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 import AddLessonForm from "./AddLessonForm"
+import LessonSearch from "../SearchBar/LessonSearch"
 
 const WebAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -35,6 +36,7 @@ const WebAllLessons = () => {
                     <Typography sx={{ textAlign: "center" }} variant="h3">
                         All Lessons:
                     </Typography>
+                    <LessonSearch data={data} />
                     <AddLessonForm />
                     {data.map((className) => (
                         <div key={className.id}>
@@ -78,9 +80,9 @@ const WebAllLessons = () => {
                                                                         {lesson.lessonName}
                                                                     </Typography>
                                                                     <Link to={`/lesson/${lesson.id}`} >
-                                                                        <button 
-                                                                        style={{ float: "none" }}//override float
-                                                                        className="details-button">
+                                                                        <button
+                                                                            style={{ float: "none" }}//override float
+                                                                            className="details-button">
                                                                             See Lesson Details
                                                                         </button>
                                                                     </Link>

@@ -18,7 +18,7 @@ const AddStudentButton = ({ id, data }) => {
         try {
             event.preventDefault();
 
-            if (name.trim() === "") {
+            if (name.trim() === "" || name.length > 30) {
                 setAddError(true);
             } else {
                 const studentAlreadyExists = data.students.some((student) => student.name === name);
@@ -68,7 +68,7 @@ const AddStudentButton = ({ id, data }) => {
                     </Typography>
                 </Alert>}
             {addError &&
-                <Alert severity="error">There was an error adding the student.</Alert>}
+                <Alert severity="error">Please make sure you enter a name that is 1 to 30 characters.</Alert>}
             {addStudent &&
                 <form onSubmit={handleAddStudent}>
                     <TextField
