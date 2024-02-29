@@ -45,9 +45,8 @@ const CompareStudentProgress = ({ data }) => {
         if (noData) {
             setNoDataAlert(true)
         }
-    }, [])
-
-    console.log(averageForChart);
+    }, []);
+    
     return (
         <div>
 

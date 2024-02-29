@@ -19,7 +19,6 @@ const WebSingleLesson = () => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     return (
         <div>
             <NavDrawer />

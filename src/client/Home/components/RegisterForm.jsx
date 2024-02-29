@@ -31,7 +31,6 @@ const RegisterForm = () => {
                 setNameError(false);
             } else {
                 const result = await signup({ name, username, password })
-                console.log(result)
                 if (result.data) {
                     setRegisterError(false);
                     setNameError(false);

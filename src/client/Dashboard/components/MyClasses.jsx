@@ -20,7 +20,6 @@ const MyClasses = () => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     return (
         <div>
             <Card

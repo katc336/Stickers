@@ -12,14 +12,13 @@ const LoginForm = ({ switchForm }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loginError, setLoginError] = useState(false);
-    const [login, { error }] = useLoginMutation();
+    const [login] = useLoginMutation();
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
             const result = await login({ username, password });
-            console.log(result);
             if (result.data) {
                 setLoginError(false);
                 console.log("Success!");
@@ -33,7 +32,6 @@ const LoginForm = ({ switchForm }) => {
             setLoginError(true);
         }
     }
-
     return (
         <div>
             <Card sx={{ p: 5 }}>

@@ -14,7 +14,6 @@ const LessonSearch = ({ data }) => {
         );
     }
     const filteredSearch = filteredLesson();
-console.log(filteredSearch)
     const handleSearch = (event) => {
         event.preventDefault();
         setShowResult(true)

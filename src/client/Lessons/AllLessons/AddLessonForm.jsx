@@ -21,7 +21,6 @@ const AddLessonForm = () => {
     if (error) {
         console.error(error)
     }
-    console.log(data)
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
@@ -59,7 +58,6 @@ const AddLessonForm = () => {
             console.error(error)
         }
     }
-
     return (
         <div>
             {clearButton && data.length === 0
