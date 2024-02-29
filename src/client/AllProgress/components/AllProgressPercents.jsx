@@ -52,7 +52,7 @@ const AllProgressPercents = ({ data }) => {
                             sx={{
                                 p: 1,
                                 border: `3px solid`,
-                                borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <= 80 ? "orange" : average.average >= 81 && average.average <= 89 ? "yellow" : "green",
+                                borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <= 79 ? "orange" : average.average >= 80 && average.average <= 89 ? "yellow" : "green",
                                 backgroundColor: average.average < 70 ? "#FEA1A1" : average.average >= 70 && average.average <= 80 ? "#FFC97C" : average.average >= 81 && average.average <= 89 ? "#F9DE79" : "#CDE990",
                             }}>
                             <Stack direction="row">

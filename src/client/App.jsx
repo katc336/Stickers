@@ -7,7 +7,6 @@ import AllClasses from "./Classes/AllClasses/AllClasses";
 import AllStudents from "./Students/AllStudents/AllStudents";
 import SingleStudent from "./Students/SingleStudents/SingleStudent";
 import AllLessons from "./Lessons/AllLessons/AllLessons";
-import AllObjectives from "./LearningObjective/AllObjectives/AllObjectives";
 import SingleClass from "./Classes/SingleClass/SingleClass";
 import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./AllProgress/AllProgress";
@@ -34,7 +33,6 @@ function App() {
         <Route path="/student/:id" element={<SingleStudent />} />
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
-        <Route path="/my_objectives" element={<AllObjectives />} />
       </Routes>
 
     </div>

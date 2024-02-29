@@ -10,7 +10,9 @@ import { Link } from "react-router-dom"
 import { useGetAllStudentsByTeacherQuery, useDeleteStudentMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
 import AddStudentForm from "./AddStudentForm"
-
+import CookieSticker from "./images/CookieSticker.png"
+import GrapeSticker from "./images/GrapeSticker.png"
+import RootSticker from "./images/RootSticker.png"
 
 const WebAllStudents = () => {
     const [deleteAlert, setDeleteAlert] = useState(false);
@@ -45,18 +47,51 @@ const WebAllStudents = () => {
                                 elevation={10}>
                                 <Grid container>
                                     <Grid item xs={5}>
-                                        <Typography
-                                            variant="h6"
-                                            sx={{ mt: 0.5 }}>
-                                            {student.name}
-                                        </Typography>
+                                        <Stack direction="row">
+                                            {student.averagedAllProgress === null ?
+                                                <div></div>
+                                                :
+                                                <div>
+                                                    <img
+                                                        width="100px"
+                                                        src={
+                                                            student.averagedAllProgress >= 90
+                                                                ? CookieSticker
+                                                                : student.averagedAllProgress >= 80
+                                                                    ? GrapeSticker
+                                                                    : RootSticker
+                                                        }
+                                                    />
+                                                </div>}
+                                            <Typography
+                                                variant="h4"
+                                                sx={{ mt: 4, ml: 2 }}>
+                                                {student.name}
+                                            </Typography>
+                                            {student.averagedAllProgress === null ?
+                                                <div>
+                                                     <Alert
+                                                        severity="info"
+                                                        sx={{ mt: 3, ml: 2 }}>
+                                                        No Data
+                                                    </Alert>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <Typography
+                                                        variant="h6"
+                                                        sx={{ mt: 5, ml: 2 }}>
+                                                        Average Progress: {student.averagedAllProgress}%
+                                                    </Typography>
+                                                </div>}
+                                        </Stack>
                                     </Grid>
                                     <Grid item xs={5}>
                                         <Link
                                             style={{ textDecoration: "none" }}
                                             to={`/student/${student.id}`}>
                                             <button
-                                                style={{ float: "none" }} //override float
+                                                style={{ float: "none", marginTop: 40 }} //override float
                                                 className="details-button">
                                                 See Details
                                             </button>
@@ -65,7 +100,7 @@ const WebAllStudents = () => {
                                     <Grid item xs={1}>
                                         <button
                                             className="delete-button"
-                                            style={{ width: "70px", margin: 0 }} //overrride CSS margin
+                                            style={{ width: "70px", marginTop: 30 }} //overrride CSS margin
                                             onClick={() => {
                                                 setDeleteAlert(true);
                                                 setSelectedStudent(student.id)

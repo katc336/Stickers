@@ -27,10 +27,23 @@ apiRouter.get("/my_classes/:id", requireUser, async (req, res, next) => {
         const myClass = await prisma.class.findUnique({
             where: { id: Number(req.params.id) },
             include: {
-                students: true,
+                students: {
+                    include: {
+                        studentProgress: true
+                    }
+                },
                 lessons: true
             }
         })
+          // average progress for all of student's progress...
+          myClass.students.forEach((student) => {
+            let totalProgress = 0;
+            student.studentProgress.forEach((progress) => {
+                totalProgress = totalProgress + progress.progressPrecent;
+            });
+            const averagedAllProgress = totalProgress / student.studentProgress.length;
+            student.averagedAllProgress = averagedAllProgress;
+        });
         res.send(myClass)
     } catch (error) {
         next(error)
@@ -90,12 +103,21 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
         })
         //take the students from the classes at flatten them into a single array
         const students = teacher.classes.flatMap((classes) => classes.students)
+ 
+        // average progress for all of student's progress...
+        students.forEach(student => {
+            let totalProgress = 0;
+            student.studentProgress.forEach(progress => {
+                totalProgress = totalProgress + progress.progressPrecent;
+            });
+            const averagedAllProgress = totalProgress / student.studentProgress.length;
+            student.averagedAllProgress = averagedAllProgress;
+        });
         res.send(students)
     } catch (error) {
         next(error)
     }
-});
-
+ }); 
 //<-----------------GET AVERAGE OF ALL STUDENTS FOR OBJECTIVES----------------->
 apiRouter.get("/students/average-objectives", requireUser, async (req, res, next) => {
     try {

@@ -27,8 +27,8 @@ const StudentAllProgressPercents = ({ data }) => {
                             data: {
                                 fill: ({ datum }) => {
                                     if (datum.y < 70) return "#FF9280";
-                                    else if (datum.y >= 70 && datum.y <= 80) return "#F9B572";
-                                    else if (datum.y >= 81 && datum.y <= 89) return "#FFE194";
+                                    else if (datum.y >= 70 && datum.y <= 79) return "#F9B572";
+                                    else if (datum.y >= 80 && datum.y <= 89) return "#FFE194";
                                     else return "#CDE990";
                                 }
                             },
@@ -52,7 +52,7 @@ const StudentAllProgressPercents = ({ data }) => {
                             sx={{
                                 p: 1,
                                 border: `3px solid`,
-                                borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <= 80 ? "orange" : average.average >= 81 && average.average <= 89 ? "yellow" : "green",
+                                borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <=79 ? "orange" : average.average >= 80 && average.average <= 89 ? "yellow" : "green",
                                 backgroundColor: average.average < 70 ? "#FEA1A1" : average.average >= 70 && average.average <= 80 ? "#FFC97C" : average.average >= 81 && average.average <= 89 ? "#F9DE79" : "#CDE990",
                             }}>
                             <Stack direction="row">
