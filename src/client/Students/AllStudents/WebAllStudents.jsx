@@ -81,7 +81,7 @@ const WebAllStudents = () => {
                                                     <Typography
                                                         variant="h6"
                                                         sx={{ mt: 5, ml: 2 }}>
-                                                        Average Progress: {student.averagedAllProgress}%
+                                                        Average Progress: {Math.floor(student.averagedAllProgress)}%
                                                     </Typography>
                                                 </div>}
                                         </Stack>

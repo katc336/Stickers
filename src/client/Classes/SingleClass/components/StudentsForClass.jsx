@@ -52,7 +52,7 @@ const StudentForClass = ({ data }) => {
                                 <div>
                                     <Typography
                                         sx={{ mt: 1.5, ml: 2 }}>
-                                        Average Progress: {student.averagedAllProgress}%
+                                        Average Progress: {Math.floor(student.averagedAllProgress)}%
                                     </Typography>
                                 </div>
                             }
