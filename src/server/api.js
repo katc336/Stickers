@@ -35,8 +35,8 @@ apiRouter.get("/my_classes/:id", requireUser, async (req, res, next) => {
                 lessons: true
             }
         })
-          // average progress for all of student's progress...
-          myClass.students.forEach((student) => {
+        // average progress for all of student's progress...
+        myClass.students.forEach((student) => {
             let totalProgress = 0;
             student.studentProgress.forEach((progress) => {
                 totalProgress = totalProgress + progress.progressPrecent;
@@ -44,6 +44,9 @@ apiRouter.get("/my_classes/:id", requireUser, async (req, res, next) => {
             const averagedAllProgress = totalProgress / student.studentProgress.length;
             student.averagedAllProgress = averagedAllProgress;
         });
+        // Sort students in alphabetical order...
+        myClass.students.sort((a, b) => a.name.localeCompare(b.name));
+
         res.send(myClass)
     } catch (error) {
         next(error)
@@ -103,7 +106,7 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
         })
         //take the students from the classes at flatten them into a single array
         const students = teacher.classes.flatMap((classes) => classes.students)
- 
+
         // average progress for all of student's progress...
         students.forEach(student => {
             let totalProgress = 0;
@@ -113,11 +116,14 @@ apiRouter.get("/my_students", requireUser, async (req, res, next) => {
             const averagedAllProgress = totalProgress / student.studentProgress.length;
             student.averagedAllProgress = averagedAllProgress;
         });
+        // Sort students in alphabetical order...
+        students.sort((a, b) => a.name.localeCompare(b.name));
+
         res.send(students)
     } catch (error) {
         next(error)
     }
- }); 
+});
 //<-----------------GET AVERAGE OF ALL STUDENTS FOR OBJECTIVES----------------->
 apiRouter.get("/students/average-objectives", requireUser, async (req, res, next) => {
     try {
@@ -303,6 +309,9 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
                 });
             });
         });
+        // Sort students in alphabetical order...
+        lesson.class.students.sort((a, b) => a.name.localeCompare(b.name));
+
         res.send(lesson);
     } catch (error) {
         next(error)
@@ -488,7 +497,7 @@ apiRouter.delete("/delete_class/:id", requireUser, async (req, res, next) => {
         if (!deleteClass) {
             return res.status(404).send("Class not found!");
         }
-        res.send({deleteClass, message: "Deleted"});
+        res.send({ deleteClass, message: "Deleted" });
     } catch (error) {
         next(error);
     }
@@ -502,7 +511,7 @@ apiRouter.delete("/delete_student/:id", requireUser, async (req, res, next) => {
         if (!deleteStudent) {
             return res.status(404).send("Student not found!");
         }
-        res.send({deleteStudent, message: "Deleted"});
+        res.send({ deleteStudent, message: "Deleted" });
     } catch (error) {
         next(error);
     }
@@ -516,7 +525,7 @@ apiRouter.delete("/delete_lesson/:id", requireUser, async (req, res, next) => {
         if (!deleteLesson) {
             return res.status(404).send("Lesson not found!");
         }
-        res.send({deleteLesson, message: "Deleted"});
+        res.send({ deleteLesson, message: "Deleted" });
     } catch (error) {
         next(error);
     }
@@ -530,7 +539,7 @@ apiRouter.delete("/delete_objective/:id", requireUser, async (req, res, next) =>
         if (!deleteObjective) {
             return res.status(404).send("Learning objective not found!");
         }
-        res.send({deleteObjective, message: "Deleted"});
+        res.send({ deleteObjective, message: "Deleted" });
     } catch (error) {
         next(error);
     }
@@ -544,7 +553,7 @@ apiRouter.delete("/delete_progress/:id", requireUser, async (req, res, next) => 
         if (!deleteProgress) {
             return res.status(404).send("Student progress not found!");
         }
-        res.send({deleteProgress, message: "Deleted"});
+        res.send({ deleteProgress, message: "Deleted" });
     } catch (error) {
         next(error);
     }
