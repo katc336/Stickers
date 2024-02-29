@@ -20,11 +20,15 @@ const WebHowToGetStarted = () => {
                 elevation={10}
                 sx={{ mt: 15, mb: 1, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
             >
+                 <Typography
+                    variant="h3"
+                    sx={{ mx: 3, textAlign: "center" }}>
+                    Welcome to Stickers!
+                </Typography>
                 <Typography
                     variant="h4"
                     sx={{ mx: 3 }}>
-                    Welcome to Stickers!
-                    Getting started is simple and intuitive, allowing you to quickly organize your classes,
+                    Getting started is simple and intuitive, allowing you to quickly 
                     track student data with confidence, and gain valuable insights into your student's progress.
                 </Typography>
             </Card>
@@ -62,7 +66,7 @@ const WebHowToGetStarted = () => {
                 writing={
                     `The progress overview feature allows you to view the overall progression of
                         all your students in relation to learning standards/objectives, giving you a
-                        comprehensive understanding of your overall students' development and teaching success.`
+                        comprehensive understanding of your overall students' development and your teaching success.`
                 }
                 alert1={`Compare all students' average progress for a selected learning objective.`}
                 img1={ScatterChart}
@@ -75,7 +79,7 @@ const WebHowToGetStarted = () => {
             <InfoCard
                 writing={
                     `For a more detailed look at individual student progress,
-                        simply navigate to the "my students" tab. Here, you can easily
+                        simply navigate to the "My Students" tab. Here, you can easily
                         access and monitor the growth of each student, ensuring that
                         every learner receives the attention and support they need.`
                 }

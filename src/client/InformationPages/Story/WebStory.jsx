@@ -35,13 +35,13 @@ const WebStory = () => {
                             I was inspired to create this app after seeing my colleagues spending hours creating and updating
                             large spreadsheets to calculate and track student data.
                             I knew there had to be a better way, so I set out to develop a tool that would streamline the tracking
-                            process and provide a digital solution that could be accessed and updated on-the-go.
+                            process and provide a digital solution.
                         </Typography>
                         <Typography
                             variant="h6"
                             sx={{ mb: 3 }}>
                             With this app, you can easily input and update student data, and track specific learning objectives over time.
-                            It also analyzes trends and helps you identify learning gaps across entire classes, or for individualized students.
+                            It also analyzes trends and helps you identify learning gaps across entire classes, or for individual students.
                         </Typography>
                         <Typography
                             variant="h6"
