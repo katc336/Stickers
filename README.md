@@ -8,20 +8,20 @@ With this app, you can easily input and update student data, and track specific 
 This app is a free resource for educators, and I hope it helps to simplify and improve the student data tracking process so you can focus on teaching and all the important work educators do. I welcome any feedback or suggestions for future improvements. If you would like to contribute to the app, suggest a feature, or report a bug, please do!
 
 ## Technologies Used:
-Bcrypt
-Dotenv
-Express.js
-Jsonwebtoken
-Morgan
-MUI Library
-Node.js
-PostgreSQL
-Prisma
-React.js
-Redux Toolkit
-React Router Dom
-Victory 
-Vite
+1. Bcrypt
+2. Dotenv
+3. Express.js
+4. Jsonwebtoken
+4. Morgan
+5. MUI Library
+6. Node.js
+7. PostgreSQL
+8. Prisma
+8. React.js
+10. Redux Toolkit
+11. React Router Dom
+12. Victory 
+13. Vite
 
 ## How to run this code on your computer:
 1. Copy the 'clone' link from the <> Code button
