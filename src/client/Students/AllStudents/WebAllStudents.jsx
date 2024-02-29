@@ -9,6 +9,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllStudentsByTeacherQuery, useDeleteStudentMutation } from "../../../redux/api"
 import NavDrawer from "../../Navigation/NavDrawer"
+import StudentSearch from "../SearchBar/StudentSearch"
 import AddStudentForm from "./AddStudentForm"
 import CookieSticker from "./images/CookieSticker.png"
 import GrapeSticker from "./images/GrapeSticker.png"
@@ -38,6 +39,7 @@ const WebAllStudents = () => {
                         variant="h3">
                         All Students:
                     </Typography>
+                    <StudentSearch />
                     <AddStudentForm
                         allStudedntData={data} />
                     {data && data.map((student) => (
