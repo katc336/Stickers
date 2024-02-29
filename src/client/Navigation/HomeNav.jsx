@@ -19,10 +19,10 @@ const HomeNav = () => {
                             src={Logo}
                             width="150px" style={{ marginLeft: 20 }} />
                     </Link>
-                    <Link to="/get_started">
+                    <Link to="/about">
                         <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5 }}>
                             <Typography variant="h6">
-                                How to Get Started
+                                About 
                             </Typography>
                         </Button>
                     </Link>
