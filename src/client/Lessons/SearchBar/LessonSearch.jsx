@@ -1,27 +1,30 @@
 import TextField from "@mui/material/TextField";
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
-
+import { useGetAllLessonsQuery } from "../../../redux/api";
 import { useState } from 'react';
-import StudentSearchResults from "./StudentSearchResult";
+import LessonSearchResults from "./LessonSearchResult";
 
-const StudentSearch = ({ data }) => {
-    const [searchedStudent, setSearchedStudent] = useState("");
+const LessonSearch = ({}) => {
+    const [searchedLesson, setSearchedLesson] = useState("");
     const [showResult, setShowResult] = useState(false);
-
-    const filteredStudent = () => data.filter((student) =>
-        student.name.toLowerCase().includes(searchedStudent.toLowerCase())
-    );
-    const filteredSearch = filteredStudent(searchedStudent)
-    console.log(filteredStudent(searchedStudent));
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-        setShowResult(true)
+    const { data, error, isLoading } = useGetAllLessonsQuery();
+    if (isLoading) {
+        return <div> </div>;
     }
+    if (error) {
+        console.error(error)
+    }
+    console.log("Data:" + data)
+    const filteredLesson = () => data.lessons.forEach(filter((lesson) =>
+        lesson.lessonName.toLowerCase().includes(searchedLesson.toLowerCase())
+    ));
+    const filteredSearch = filteredLesson(searchedLesson)
+    console.log(filteredLesson(searchedLesson));
+
     return (
         <>
-            <form onSubmit={handleSearch}>
+            <form>
                 <Grid container>
                     <Grid
                         sx={{ ml: 3 }}
@@ -30,27 +33,28 @@ const StudentSearch = ({ data }) => {
                             className="search-input"
                             type="text"
                             variant="filled"
-                            label="Search Student By Name"
-                            value={searchedStudent}
+                            label="Search Lesson By Name"
+                            fullWidth
+                            value={searchedLesson}
                             onChange={(event) => {
                                 if (showResult === true) {
                                     setShowResult(false);
                                 }
-                                setSearchedStudent(event.target.value)
+                                setSearchedLesson(event.target.value)
                             }} />
                     </Grid>
                     <Grid item xs={1.5}>
                         <button
                             className="search-button"
-                            type="submit">
+                            onClick={() => setShowResult(true)} >
                             <SearchIcon fontSize="large" />
                         </button>
                     </Grid>
                 </Grid>
             </form>
             {showResult &&
-                <StudentSearchResults results={filteredSearch} />}
+                <LessonSearchResults results={filteredSearch} />}
         </>
     );
 };
-export default StudentSearch;
+export default LessonSearch;

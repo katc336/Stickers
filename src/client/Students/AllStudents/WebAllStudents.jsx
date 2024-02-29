@@ -39,7 +39,7 @@ const WebAllStudents = () => {
                         variant="h3">
                         All Students:
                     </Typography>
-                    <StudentSearch />
+                    <StudentSearch data={data} />
                     <AddStudentForm
                         allStudedntData={data} />
                     {data && data.map((student) => (
