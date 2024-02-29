@@ -1,15 +1,18 @@
 import Stack from "@mui/material/Stack"
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from "react"
-import { VictoryScatter, VictoryTooltip, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
+import { useState, useEffect } from "react"
+import { VictoryScatter, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 
 const CompareStudentProgress = ({ data }) => {
-    const [selectedObjective, setSelectedObjective] = useState(23);
+    const [selectedObjective, setSelectedObjective] = useState(null);
     const [showChart, setShowChart] = useState(false)
+    const [noDataAlert, setNoDataAlert] = useState(false);
     const handleChange = (event) => {
         setSelectedObjective(event.target.value);
         setShowChart(true);
@@ -33,6 +36,17 @@ const CompareStudentProgress = ({ data }) => {
 
         }
     });
+    if(selectedObjective){
+        
+    }
+    //Inside useEffect to avoid infinite loop...
+    useEffect(() => {
+        const noData = averageForChart.some((data) => data.average === -10);
+        if (noData) {
+            setNoDataAlert(true)
+        }
+    }, [])
+
     console.log(averageForChart);
     return (
         <div>
@@ -57,8 +71,17 @@ const CompareStudentProgress = ({ data }) => {
                         </Select>
                     </FormControl>
                 </Box>
+                {noDataAlert &&
+                    <Alert severity="info">
+                        <Typography>
+                        There are some student's without progress added from some learning objectives.
+                        </Typography>
+                        <Typography>
+                        They will appear on the bottom of the chart.
+                        </Typography>
+                    </Alert>}
                 {showChart &&
-                    <div style={{ overflowX: "auto"}}>
+                    <div style={{ overflowX: "auto" }}>
                         <VictoryChart
                             domain={{ x: [0, data.progress.length] }}
                             theme={VictoryTheme.material}
@@ -88,7 +111,6 @@ const CompareStudentProgress = ({ data }) => {
                                 }))}
                                 labelComponent={<VictoryLabel dy={7} dx={8} angle={0} textAnchor="end" style={{ fontSize: 4 }} />}
                             />
-
                         </VictoryChart>
                     </div>
                 }

@@ -8,6 +8,7 @@ import { useGetAllObjectivesQuery, usePostNewObjectiveMutation } from "../../../
 const AddLessonObjective = ({ id, data }) => {
     const [addLessonObjective, setAddLessonObjective] = useState(false);
     const [addError, setAddError] = useState(null);
+    const [clearButton, setClearButton] = useState(true);
     const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false);
     const [objectiveName, setObjectiveName] = useState("");
     const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
@@ -34,7 +35,7 @@ const AddLessonObjective = ({ id, data }) => {
                 setAddAlreadyExistsError(true);
                 console.log("Objective already exists");
                 return;
-            } 
+            }
             // Check the objecitve length to make sure it's not too long...
             if (objectiveName.length > 50) {
                 setAddError(true);
@@ -44,6 +45,7 @@ const AddLessonObjective = ({ id, data }) => {
                 const result = await addLessonObjectiveMutation({ id: Number(id), objectiveName })
                 console.log(result)
                 if (result.data) {
+                    setClearButton(true);
                     setAddError(false);
                     setAddAlreadyExistsError(false)
                     setAddLessonObjective(false)
@@ -57,23 +59,17 @@ const AddLessonObjective = ({ id, data }) => {
         } catch (error) {
             console.error(error);
         }
-     }
+    }
     return (
         <div>
-            <button
-                style={{ float: "right", marginBottom: "50px", width: "200px" }}
-                className="add-button"
-                onClick={() => { setAddLessonObjective(true) }}>
-                Add Lesson Objective
-            </button>
-            {addError &&
-                <Alert severity="error">
-                    Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
-                </Alert>}
-            {addAlreadyExistsError &&
-                <Alert severity="error">
-                    This objective has already been added to the class.
-                </Alert>}
+            {clearButton &&
+                <button
+                    style={{ float: "right", marginBottom: "50px", width: "200px" }}
+                    className="add-button"
+                    onClick={() => { setAddLessonObjective(true), setClearButton(false) }}>
+                    Add Lesson Objective
+                </button>
+            }
             {addLessonObjective &&
                 <div style={{ float: "right" }}>
                     <form onSubmit={handleAddLessonObjective}>
@@ -131,6 +127,14 @@ const AddLessonObjective = ({ id, data }) => {
                             Add to Class
                         </button>
                     </form>
+                    {addError &&
+                        <Alert severity="error">
+                            Please make sure the objective is 50 characters or less to make sure they appear on the data visualization charts.
+                        </Alert>}
+                    {addAlreadyExistsError &&
+                        <Alert severity="error">
+                            This objective has already been added to the class.
+                        </Alert>}
                 </div>}
         </div>
     )

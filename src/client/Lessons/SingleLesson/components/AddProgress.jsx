@@ -9,11 +9,15 @@ import { usePostProgressMutation } from "../../../../redux/api"
 const AddProgress = ({ data, student }) => {
     const [selectedStudentId, setSelectedStudentId] = useState("");
     const [selectedObjectiveId, setSelectedObjectiveId] = useState("");
+    const [clearButton, setClearButton] = useState(true);
     const [selectedCombinedObjectiveId, setSelectedCombinedObjectiveId] = useState("");
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
     const [addError, setAddError] = useState(null);
     const [progress, setProgress] = useState("");
     const [addProgressMutation] = usePostProgressMutation();
 
+    console.log(data);
+    console.log(student);
     const handleAddProgress = async (event) => {
         try {
             event.preventDefault();
@@ -23,20 +27,29 @@ const AddProgress = ({ data, student }) => {
                 console.log("Progress percent must be between 0 and 100");
                 return;
             } else {
-                const result = await addProgressMutation({
-                    studentId: Number(selectedStudentId),
-                    objectiveId: Number(selectedObjectiveId),
-                    progressPercent: Number(progress),
-                    combinedObjectiveId: Number(selectedCombinedObjectiveId)
-                });
-                if (result.data) {
-                    setAddError(false);
-                    setSelectedStudentId(null);
-                    setProgress("");
-                    console.log("Success!");
+                const progressAlreadyExists = student.studentProgress.some((objective) => objective.objectiveId === selectedObjectiveId);
+                if (progressAlreadyExists) {
+                    setAddAlreadyExistsError(true);
+                    console.log("Student's progress already exists");
+                    return;
                 } else {
-                    setAddError(true);
-                    console.log("Could not add progress");
+                    const result = await addProgressMutation({
+                        studentId: Number(selectedStudentId),
+                        objectiveId: Number(selectedObjectiveId),
+                        progressPercent: Number(progress),
+                        combinedObjectiveId: Number(selectedCombinedObjectiveId)
+                    });
+                    if (result.data) {
+                        setClearButton(true);
+                        setAddError(false);
+                        setAddAlreadyExistsError(false);
+                        setSelectedStudentId(null);
+                        setProgress("");
+                        console.log("Success!");
+                    } else {
+                        setAddError(true);
+                        console.log("Could not add progress");
+                    }
                 }
             }
         } catch (error) {
@@ -46,12 +59,14 @@ const AddProgress = ({ data, student }) => {
     return (
         <div>
             <Stack direction="column">
-                <button
-                    style={{ width: 170 }}
-                    onClick={() => { setSelectedStudentId(student.id) }}
-                    className="details-button">
-                    Add Progress
-                </button>
+                {clearButton &&
+                    <button
+                        style={{ width: 170 }}
+                        onClick={() => { setSelectedStudentId(student.id), setClearButton(false) }}
+                        className="details-button">
+                        Add Progress
+                    </button>
+                }
                 {addError &&
                     <Alert severity="error">
                         Progress was not saved: Number needs to be 0-100.
@@ -104,6 +119,15 @@ const AddProgress = ({ data, student }) => {
                                     }
                                     sx={{ my: 1 }}
                                 />
+                                {addAlreadyExistsError &&
+                                    <Alert severity="error">
+                                        <Typography>
+                                            This student already has progress entered for this objective.
+                                        </Typography>
+                                        <Typography sx={{ mt: 1 }}>
+                                            To edit their progress, delete their current progress, and enter a new percentage.
+                                        </Typography>
+                                    </Alert>}
                                 <button className="add-button">
                                     Add {student.name}'s Progess
                                 </button>
