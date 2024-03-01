@@ -93,6 +93,7 @@ const MyClasses = () => {
                                         </Typography>
                                         <Stack direction="row">
                                             <button
+                                                onClick={() => { setDelteAlert(false) }}
                                                 className="add-button"
                                                 style={{ width: "150px" }}>
                                                 Keep Class
