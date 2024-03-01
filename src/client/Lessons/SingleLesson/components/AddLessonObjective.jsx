@@ -108,7 +108,7 @@ const AddLessonObjective = ({ id, data }) => {
                         <Typography
                             variant="h5"
                             sx={{ mt: 3 }}>
-                            Add New Ojective:
+                            Add New Objective:
                         </Typography>
                         <TextField
                             multiline
