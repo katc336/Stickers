@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
-import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from "react-router-dom"
 
 const CallToAction = () => {
@@ -43,19 +43,19 @@ const CallToAction = () => {
                     <Typography
                         variant="h6"
                         sx={{ mb: 3, textAlign: "center" }}>
-                        If you would like to contribute to the app, suggest a feature, or report a bug, please do so on GitHub.
+                        If you would like to contribute to the app, suggest a feature, or report a bug, please reach out on LinkedIn.
                     </Typography>
                     <Link
                         target="_blank"
-                        to="https://github.com/katc336/Stickers">
+                        to="https://www.linkedin.com/in/katcwebdeveloper/">
                         <button
                             className="auth-button"
                             style={{ padding: "5px" }} //override styles for button size
                         >
                             <Stack direction="row">
-                                <GitHubIcon sx={{ mx: 1 }} />
+                                <LinkedInIcon sx={{ mx: 1 }} />
                                 <Typography>
-                                    See GitHub Here
+                                    See LinkedIn Here
                                 </Typography>
                             </Stack>
                         </button>

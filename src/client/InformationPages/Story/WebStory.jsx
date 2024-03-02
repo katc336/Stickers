@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
 import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography"
-import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from "react-router-dom";
 import KatSticker from "./KatSticker.png"
 
@@ -48,16 +48,17 @@ const WebStory = () => {
                             sx={{ mb: 3 }}>
                             This app is a free resource for educators, and I hope it helps to simplify and improve the student data tracking process so
                             you can focus on teaching and all the important work educators do. Thank you for choosing Sticker, and I welcome any feedback
-                            or suggestions for future improvements. If you would like to contribute to the app, suggest a feature, or report a bug, please do so on GitHub.
+                            or suggestions for future improvements. If you would like to contribute to the app, suggest a feature, or report a bug, 
+                            reach out to me on LinkedIn.
                         </Typography>
                         <Link
                             target="_blank"
-                            to="https://github.com/katc336/Stickers">
+                            to="https://www.linkedin.com/in/katcwebdeveloper/">
                             <button className="auth-button">
                                 <Stack direction="row">
-                                    <GitHubIcon sx={{ mx: 1 }} />
+                                    <LinkedInIcon sx={{ mx: 1 }} />
                                     <Typography>
-                                        See GitHub Here
+                                        See LinkedIn Here
                                     </Typography>
                                 </Stack>
                             </button>
