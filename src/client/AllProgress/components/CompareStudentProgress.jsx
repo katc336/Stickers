@@ -101,7 +101,7 @@ const CompareStudentProgress = ({ data }) => {
                                         }
                                     },
                                 }}
-                                size={10}
+                                size={13}
                                 data={averageForChart.map((progress) => ({
                                     symbol: "square",
                                     x: progress.name,
