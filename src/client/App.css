@@ -1,126 +1,186 @@
+/* <---------------------------AUTH FORM BUTTON---------------------------> */
 .auth-button {
-    margin-left: 20%;
-    margin-right: 20%;
-    padding: 15px;
-    font-size: 20px;
-    border-radius: 50px;
-    border: none;
-    color: #E9E8E8;
-    background-image: linear-gradient(to right top, #6c5d8b, #62709e, #5a83aa, #5995b1, #63a5b4, #56b3ba, #4dc0bb, #51cdb5, #2ddba9, #1be794, #39f275, #61fb47);
-    background-size: 400%;
-    transition: 0.5s;
-    box-shadow: 3px 3px 3px #02011b;
-    ;
-  }
-  
-  .auth-button:hover {
-    cursor: pointer;
-    transition: .5s;
-    transform: center;
-    background-size: 100%;
-    text-decoration: none;
-    scale: 1.1;
-  }
-  #search {
-    padding: 20px;
-    border-radius: 50px;
-    border: none;
-    width: 90%;
-    color: #0A1D56;
-    box-shadow: 3px 3px 10px rgb(68, 68, 68);
-  }
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 50px;
+  border: none;
+  color: #E9E8E8;
+  background-image: linear-gradient(to right top, #6c5d8b, #62709e, #5a83aa, #5995b1, #63a5b4, #56b3ba, #4dc0bb, #51cdb5, #2ddba9, #1be794, #39f275, #61fb47);
+  background-size: 400%;
+  transition: 0.5s;
+  box-shadow: 3px 3px 3px #02011b;
+  ;
+}
 
-  .details-button {
-    float: right;
-    margin: 5px;
-    padding: 5px;
-    font-size: 18px;
-    border-radius: 50px;
-    border: none;
-    color: #0d0426;
-    background-image: linear-gradient(to right top, #b3b2c6, #b9c1d3, #c2d0dd, #cedfe7, #ddedf0, #d4f3f4, #ccf9f4, #c8fff0, #b4ffd7, #b8ffae, #d1ff7b, #f8f540);
-    background-size: 400%;
-    transition: 0.5s;
-    box-shadow: 2px 2px 2px #02011b;
-  }
-  
-  .details-button:hover {
-    cursor: pointer;
-    transition: .5s;
-    transform: center;
-    background-size: 100%;
-    text-decoration: none;
-    scale: 1.1;
-  }
-  .add-button {
-    margin: 20px;
-    padding: 5px;
-    font-size: 18px;
-    border-radius: 50px;
-    border: none;
-    background-image: linear-gradient(to left bottom, #c7fa00, #d0fb00, #d8fc00, #e1fd00, #e9fe01, #eefe30, #f3fe47, #f7fe59, #f9fd7b, #fafd99, #fbfcb5, #fbfbd0);
-    transition: 0.5s;
-    box-shadow: 3px 3px 3px #02011b;
-    ;
-  }
-  
-  .add-button:hover {
-    cursor: pointer;
-    transition: .5s;
-    transform: center;
-    background-size: 100%;
-    text-decoration: none;
-    scale: 1.1;
-  }
-  .delete-button {
-    margin: 20px;
-    padding: 5px;
-    font-size: 18px;
-    color: white;
-    border-radius: 50px;
-    border: none;
-    background-image: linear-gradient(to right top, #850202, #930309, #a1030f, #b00315, #bf021b, #ca341e, #d54f24, #df672c, #e69244, #ebb968 );
-    transition: 0.5s;
-    box-shadow: 3px 3px 3px #02011b;
-    ;
-  }
-  
-  .delete-button:hover {
-    cursor: pointer;
-    transition: .5s;
-    transform: center;
-    background-size: 100%;
-    text-decoration: none;
-    scale: 1.1;
-  }
-  .search-input {
-    width: 90%;
-    padding: 15px;
-    margin: 0;
-    border: 3px solid #a8dce5;
-    border-radius: 50px;
-  }
-  .search-button {
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    width: 50%;
-    font-size: 18px;
-    color: white;
-    border-radius: 50px;
-    border: none;
-    background-image: linear-gradient(to right top, #6c5d8b, #62709e, #5a83aa, #5995b1, #63a5b4, #56b3ba, #4dc0bb, #51cdb5, #2ddba9, #1be794, #39f275, #61fb47);
-    transition: 0.5s;
-    box-shadow: 3px 3px 3px #02011b;
-    ;
-  }
-  
-  .search-button:hover {
-    cursor: pointer;
-    transition: .5s;
-    transform: center;
-    background-size: 100%;
-    text-decoration: none;
-    scale: 1.1;
-  }
+.auth-button:hover {
+  cursor: pointer;
+  transition: .5s;
+  transform: center;
+  background-size: 100%;
+  text-decoration: none;
+  scale: 1.1;
+}
+
+/* <---------------------------SEE DETAILS BUTTON---------------------------> */
+.details-button {
+  float: right;
+  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 50px;
+  border: none;
+  color: #0d0426;
+  background-image: linear-gradient(to right top, #b3b2c6, #b9c1d3, #c2d0dd, #cedfe7, #ddedf0, #d4f3f4, #ccf9f4, #c8fff0, #b4ffd7, #b8ffae, #d1ff7b, #f8f540);
+  background-size: 400%;
+  transition: 0.5s;
+  box-shadow: 2px 2px 2px #02011b;
+}
+
+.details-button:hover {
+  cursor: pointer;
+  transition: .5s;
+  transform: center;
+  background-size: 100%;
+  text-decoration: none;
+  scale: 1.1;
+}
+
+/* <---------------------------ADD BUTTON---------------------------> */
+.add-button {
+  margin: 20px;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 50px;
+  border: none;
+  background-image: linear-gradient(to left bottom, #c7fa00, #d0fb00, #d8fc00, #e1fd00, #e9fe01, #eefe30, #f3fe47, #f7fe59, #f9fd7b, #fafd99, #fbfcb5, #fbfbd0);
+  transition: 0.5s;
+  box-shadow: 3px 3px 3px #02011b;
+  ;
+}
+
+.add-button:hover {
+  cursor: pointer;
+  transition: .5s;
+  transform: center;
+  background-size: 100%;
+  text-decoration: none;
+  scale: 1.1;
+}
+
+/* <---------------------------DELETE BUTTON---------------------------> */
+.delete-button {
+  margin: 20px;
+  padding: 5px;
+  font-size: 18px;
+  color: white;
+  border-radius: 50px;
+  border: none;
+  background-image: linear-gradient(to right top, #850202, #930309, #a1030f, #b00315, #bf021b, #ca341e, #d54f24, #df672c, #e69244, #ebb968);
+  transition: 0.5s;
+  box-shadow: 3px 3px 3px #02011b;
+  ;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  transition: .5s;
+  transform: center;
+  background-size: 100%;
+  text-decoration: none;
+  scale: 1.1;
+}
+/* <---------------------------SEARCH BAR STYLES---------------------------> */
+.search-input {
+  width: 90%;
+  padding: 15px;
+  margin: 0;
+  border: 3px solid #a8dce5;
+  border-radius: 50px;
+}
+
+/* <---------------------------SEARCH BUTTON---------------------------> */
+.search-button {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 50%;
+  font-size: 18px;
+  color: white;
+  border-radius: 50px;
+  border: none;
+  background-image: linear-gradient(to right top, #6c5d8b, #62709e, #5a83aa, #5995b1, #63a5b4, #56b3ba, #4dc0bb, #51cdb5, #2ddba9, #1be794, #39f275, #61fb47);
+  transition: 0.5s;
+  box-shadow: 3px 3px 3px #02011b;
+  ;
+}
+
+.search-button:hover {
+  cursor: pointer;
+  transition: .5s;
+  transform: center;
+  background-size: 100%;
+  text-decoration: none;
+  scale: 1.1;
+}
+
+/* <---------------------------DROP DOWN MENU STYLES---------------------------> */
+.click {
+  position: absolute;
+  top: .1px;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+  width: 55px;
+  height: 55px;
+}
+.click:checked~.div1 {
+  transition: 0.5s;
+  transform: rotate(-45deg);/* Rotate div on checked*/
+  top: 30px; /*Positions the X shape to be directly on top of the check box*/
+  background-color: white;
+}
+.click:checked~.div2 {
+  transition: 0s;
+  opacity: 0; /* Turn invisible*/
+}
+.click:checked~.div3 {
+  transition: 0.5s;
+  transform: rotate(45deg);/* Rotate div on checked*/
+  top: 30px;  /*Positions the X shape to be directly on top of the check box*/
+  background-color: white
+  /* Changes color to ornage on checked*/
+}
+/* Lines from div */
+.div1 {
+  background-color: black;
+  position: absolute;
+  width: 50px;
+  height: 8px;
+  top: 11px;
+  left: 10px;
+  transition: 0.5s;
+  border-radius: 50px;
+}
+.div2 {
+  background-color: black;
+  position: absolute;
+  width: 50px;
+  height: 8px;
+  top: 30px;
+  left: 10px;
+  transition: 0.5s;
+  border-radius: 50px;
+}
+.div3 {
+  background-color: black;
+  position: absolute;
+  width: 50px;
+  height: 8px;
+  top: 50px;
+  left: 10px;
+  transition: 0.5s;
+  border-radius: 50px;
+}

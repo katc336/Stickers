@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import SearchBar from './components/SearchBar';
 import { useGetUserQuery } from '../../redux/api';
 import HelloCard from './components/HelloCard';
 import NavDrawer from '../Navigation/NavDrawer';
