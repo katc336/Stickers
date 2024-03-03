@@ -6,13 +6,15 @@ import Stack from "@mui/material/Stack"
 import teacherImg from "./images/Teacher.png"
 import Logo from "./images/Logo.png"
 import MobileAuth from "./components/MobileAuth"
+import MobileNav from "../Navigation/MobileNav"
 
 const MobileHomePage = () => {
     return (
         <div>
+            <MobileNav />
             <Card
                 elevation={10}
-                sx={{ m: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ mt: 10, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
             >
                 <Stack direction="column">
                     <img
