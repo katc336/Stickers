@@ -55,7 +55,7 @@ const MobileNav = () => {
                             <div>
                                 <Stack direction="column">
                                     <Link to="/dashboard">
-                                        <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 3 }}>
+                                        <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mt: 5, mb: 3 }}>
                                             Home
                                         </Button>
                                     </Link>

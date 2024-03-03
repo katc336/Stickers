@@ -11,7 +11,35 @@ import MobileNav from "../Navigation/MobileNav"
 const MobileHomePage = () => {
     return (
         <div>
-            <MobileNav />
+             <Card
+                elevation={10}
+                sx={{ m: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+            >
+                <Stack direction="column">
+                    <img
+                        src={Logo}
+                        width="250px"
+                    />
+                    <Alert severity="info">
+                        <Typography
+                            sx={{ textAlign: "center" }}
+                            variant="h4">
+                            Welcome to Stickers!
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            sx={{ my: 1 }}>
+                            Sorry, but Stickers is not available on mobile devices yet.
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            sx={{ my: 1 }}>
+                            Please use a desktop or laptop to stat tracking your student's progress, and to make sure your learning objectives stick!
+                        </Typography>
+                    </Alert>
+                </Stack>
+            </Card>
+            {/* <MobileNav />
             <Card
                 elevation={10}
                 sx={{ mt: 10, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
@@ -28,7 +56,7 @@ const MobileHomePage = () => {
                     </Typography>
                     <MobileAuth />
                 </Stack>
-            </Card>
+            </Card> */}
         </div>
     )
 }
