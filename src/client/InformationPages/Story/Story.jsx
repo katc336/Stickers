@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import WebStory from "./WebStory";
+import MobileStory from "./MobileStory";
 
 const Story = () => {
 
@@ -11,7 +12,7 @@ const Story = () => {
             {isMobile
                 ?
                 <div>
-                  
+                 <MobileStory />
                 </div>
                 :
                 <div>
