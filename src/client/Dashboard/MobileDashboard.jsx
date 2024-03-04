@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import { useGetUserQuery } from '../../redux/api';
 import HelloCard from './components/HelloCard';
-import NavDrawer from '../Navigation/NavDrawer';
 import ProgressChart from './components/ProgressChart';
-import MyClasses from './components/MyClasses';
 import MobileNav from "../Navigation/MobileNav"
+import MobileMyClasses from './components/MobileMyClasses';
+
 const MobileDashboard = () => {
     const { data, error, isLoading } = useGetUserQuery();
     if (isLoading) {
@@ -19,7 +19,7 @@ const MobileDashboard = () => {
             <Box sx={{ mt: 10 }}>
                 <HelloCard name={data.name} />
                 <ProgressChart />
-                <MyClasses />
+                <MobileMyClasses />
             </Box>
         </div>
     )
