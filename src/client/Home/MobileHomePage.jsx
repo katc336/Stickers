@@ -11,7 +11,7 @@ import MobileNav from "../Navigation/MobileNav"
 const MobileHomePage = () => {
     return (
         <div>
-             <Card
+             {/* <Card
                 elevation={10}
                 sx={{ m: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
             >
@@ -38,8 +38,8 @@ const MobileHomePage = () => {
                         </Typography>
                     </Alert>
                 </Stack>
-            </Card>
-            {/* <MobileNav />
+            </Card> */}
+            <MobileNav />
             <Card
                 elevation={10}
                 sx={{ mt: 10, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
@@ -56,7 +56,7 @@ const MobileHomePage = () => {
                     </Typography>
                     <MobileAuth />
                 </Stack>
-            </Card> */}
+            </Card>
         </div>
     )
 }

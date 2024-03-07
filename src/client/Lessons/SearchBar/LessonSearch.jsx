@@ -1,11 +1,16 @@
 import SearchIcon from '@mui/icons-material/Search';
+import Box from "@mui/material/Box"
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
+import { useMediaQuery, useTheme } from "@mui/material";
 import LessonSearchResults from "./LessonSearchResult";
 
 const LessonSearch = ({ data }) => {
     const [searchedLesson, setSearchedLesson] = useState("");
     const [showResult, setShowResult] = useState(false);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const filteredLesson = () => {
         const allLessons = data.flatMap((classData) => classData.lessons);
@@ -22,7 +27,7 @@ const LessonSearch = ({ data }) => {
         <>
             <form onSubmit={handleSearch}>
                 <Grid container>
-                    <Grid sx={{ ml: 3 }} item xs={10}>
+                    <Grid item xs={isMobile ? 8 : 10}>
                         <input
                             className="search-input"
                             type="text"
@@ -38,13 +43,15 @@ const LessonSearch = ({ data }) => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={1.5}>
+                    <Grid item xs={isMobile ? 4 : 1.5}>
+                        <Box sx={{ ml: 2 }}>
                         <button
                             className="search-button"
                             type="submit"
                         >
                             <SearchIcon fontSize="large" />
                         </button>
+                        </Box>
                     </Grid>
                 </Grid>
             </form>
