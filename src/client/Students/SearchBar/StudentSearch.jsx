@@ -1,13 +1,16 @@
-import TextField from "@mui/material/TextField";
 import SearchIcon from '@mui/icons-material/Search';
 import Grid from '@mui/material/Grid';
-
+import Box from '@mui/material/Box';
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useState } from 'react';
 import StudentSearchResults from "./StudentSearchResult";
 
 const StudentSearch = ({ data }) => {
     const [searchedStudent, setSearchedStudent] = useState("");
     const [showResult, setShowResult] = useState(false);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const filteredStudent = () => data.filter((student) =>
         student.name.toLowerCase().includes(searchedStudent.toLowerCase())
@@ -22,9 +25,7 @@ const StudentSearch = ({ data }) => {
         <>
             <form onSubmit={handleSearch}>
                 <Grid container>
-                    <Grid
-                        sx={{ ml: 3 }}
-                        item xs={10}>
+                    <Grid item xs={isMobile ? 8 : 10}>
                         <input
                             className="search-input"
                             type="text"
@@ -38,12 +39,14 @@ const StudentSearch = ({ data }) => {
                                 setSearchedStudent(event.target.value)
                             }} />
                     </Grid>
-                    <Grid item xs={1.5}>
-                        <button
-                            className="search-button"
-                            type="submit">
-                            <SearchIcon fontSize="large" />
-                        </button>
+                    <Grid item xs={isMobile ? 4 : 1.5}>
+                        <Box sx={{ ml: 2 }}>
+                            <button
+                                className="search-button"
+                                type="submit">
+                                <SearchIcon fontSize="large" />
+                            </button>
+                        </Box>
                     </Grid>
                 </Grid>
             </form>
