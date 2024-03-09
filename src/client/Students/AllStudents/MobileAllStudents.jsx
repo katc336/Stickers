@@ -46,13 +46,13 @@ const MobileAllStudents = () => {
                                 sx={{ m: 1, p: 1 }}
                                 elevation={10}>
                                 <Grid container>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={1}>
                                         {student.averagedAllProgress === null ?
                                             <div></div>
                                             :
                                             <div>
                                                 <img
-                                                    width="60px"
+                                                    width="40px"
                                                     src={
                                                         student.averagedAllProgress >= 90
                                                             ? CookieSticker
@@ -63,19 +63,19 @@ const MobileAllStudents = () => {
                                                 />
                                             </div>}
                                     </Grid>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={6}>
                                         <Typography
                                             variant="h5"
-                                            sx={{ mt: 2, mx: 2 }}>
+                                            sx={{ mt: 1, mx: 2 }}>
                                             {student.name}
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={5}>
                                         <Link
                                             style={{ textDecoration: "none" }}
                                             to={`/student/${student.id}`}>
                                             <button
-                                                style={{ float: "none", marginTop: 15 }} //override float
+                                                style={{ float: "none", marginTop: 5 }} //override float
                                                 className="details-button">
                                                 See Details
                                             </button>
