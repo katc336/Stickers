@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import WebAllProgress from "./WebAllProgress";
+import MobileAllProgress from "./MobileAllProgress";
 
 const AllProgress = () => {
 
@@ -11,7 +12,7 @@ const AllProgress = () => {
             {isMobile
                 ?
                 <div>
-
+                    <MobileAllProgress />
                 </div>
                 :
                 <div>

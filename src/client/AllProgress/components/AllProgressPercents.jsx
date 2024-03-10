@@ -1,20 +1,23 @@
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
+import { useMediaQuery, useTheme } from "@mui/material";
 import { VictoryBar, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 
 const AllProgressPercents = ({ data }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     return (
         <div>
             {/* <--------------------------------------VICTORY CHART--------------------------------------> */}
             <Card
                 elevation={10}
-                sx={{ borderRadius: "20px", p: 3, m: 3 }}>
+                sx={{ borderRadius: "20px", p: isMobile ? 0 : 3, m: isMobile ? 0 : 3 }}>
                 <VictoryChart
                     theme={VictoryTheme.material}
                     horizontal  // Set the chart to run horizontally
                     domainPadding={{ x: 100, y: 1 }}
-                    style={{ parent: { width: 800 } }}
+                    style={{ parent: { width: isMobile ? 300 : 800 } }}
                 >
                     horizontal
                     <VictoryAxis
