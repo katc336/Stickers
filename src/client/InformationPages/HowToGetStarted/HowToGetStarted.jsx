@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import WebHowToGetStarted from "./WebHowToGetStarted";
+import MobileHowToGetStarted from "./MobileHowToGetStarted";
 
 const HowToGetStarted = () => {
 
@@ -11,7 +12,7 @@ const HowToGetStarted = () => {
             {isMobile
                 ?
                 <div>
-                  
+                  <MobileHowToGetStarted />
                 </div>
                 :
                 <div>

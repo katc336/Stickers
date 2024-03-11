@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react"
 import { useGetSingleLessonQuery, useDeleteProgressMutation } from "../../../../redux/api"
 import AddProgress from "./AddProgress"
@@ -21,6 +22,8 @@ const ClassStudentsProgress = ({ id }) => {
     if (error) {
         console.error(error)
     }
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     return (
         <div>
             <Card
@@ -57,7 +60,7 @@ const ClassStudentsProgress = ({ id }) => {
                                                         {progress.learningObjective.objectiveName}:
                                                     </Typography>
                                                 </Grid>
-                                                <Grid item xs={3}>
+                                                <Grid item xs={isMobile ? 2 : 3}>
                                                     <Typography
                                                         variant="h6"
                                                         sx={{ mx: 1 }}>

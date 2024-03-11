@@ -2,6 +2,8 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import MyClasses from "../../Dashboard/components/MyClasses";
 import NavDrawer from "../../Navigation/NavDrawer";
+import MobileNav from "../../Navigation/MobileNav";
+import MobileMyClasses from "../../Dashboard/components/MobileMyClasses";
 
 const AllClasses = () => {
 
@@ -13,7 +15,10 @@ const AllClasses = () => {
             {isMobile
                 ?
                 <div>
-
+                    <MobileNav />
+                    <Box sx={{ mt: 10 }}>
+                        <MobileMyClasses />
+                    </Box>
                 </div>
                 :
                 <div>

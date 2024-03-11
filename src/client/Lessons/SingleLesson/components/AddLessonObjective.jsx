@@ -1,5 +1,6 @@
 import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
+import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import { useState } from "react"
@@ -13,6 +14,7 @@ const AddLessonObjective = ({ id, data }) => {
     const [objectiveName, setObjectiveName] = useState("");
     const { data: objData, error: objError, isLoading: objLoading } = useGetAllObjectivesQuery();
     const [addLessonObjectiveMutation] = usePostNewObjectiveMutation();
+  
     if (objLoading) {
         return <div></div>
     }
@@ -64,69 +66,72 @@ const AddLessonObjective = ({ id, data }) => {
         <div>
             {clearButton &&
                 <button
-                    style={{ float: "right", marginBottom: "50px", width: "200px" }}
+                    style={{ float: "right", marginBottom: 50, width: 200 }}
                     className="add-button"
                     onClick={() => { setAddLessonObjective(true), setClearButton(false) }}>
                     Add Lesson Objective
                 </button>
             }
             {addLessonObjective &&
-                <div style={{ float: "right" }}>
-                    <form onSubmit={handleAddLessonObjective}>
-                        {objData.length !== 0
-                            ? //if there are already objectices...
-                            <div>
-                                <Typography
-                                    variant="h5"
-                                    sx={{ mb: 1 }}>
-                                    Select an existing objective:
-                                </Typography>
-                                {uniqueObjective.map((objective) => (
-                                    <div key={objective}>
-                                        <Stack direction="row">
-                                            <input
-                                                type="checkbox"
-                                                value={objective}
-                                                onChange={(event) => {
-                                                    if (event.target.checked) {
-                                                        setObjectiveName(objective);
-                                                    } else {
-                                                        setObjectiveName("");
-                                                    }
-                                                }}
-                                                checked={objectiveName === objective}
-                                            />
-                                            <Typography sx={{ ml: 1 }}>
-                                                {objective}
-                                            </Typography>
-                                        </Stack>
-                                    </div>
-                                ))}
-                            </div>
-                            : //if there are no objectives, return an empty div
-                            <div></div>}
-                        <Typography
-                            variant="h5"
-                            sx={{ mt: 3 }}>
-                            Add New Objective:
-                        </Typography>
-                        <TextField
-                            multiline
-                            label="Lesson Objective"
-                            value={objectiveName}
-                            onChange={(event) => setObjectiveName(event.target.value)}
-                            sx={{ m: 3, width: 900 }}
-                            helperText={
-                                objectiveName.length > 50
-                                    ? <Alert severity="error">Please enter a shorter objective</Alert>
-                                    : null
-                            } />
-                        <button
-                            className="add-button"
-                            type="submit">
-                            Add to Class
-                        </button>
-                    </form>
+                <div>
+                    <Card
+                        elevation={10}
+                        sx={{ p: 3, m: 1 }}>
+                        <form onSubmit={handleAddLessonObjective}>
+                            {objData.length !== 0
+                                ? //if there are already objectices...
+                                <div>
+                                    <Typography
+                                        variant="h5"
+                                        sx={{ mb: 1 }}>
+                                        Select an existing objective:
+                                    </Typography>
+                                    {uniqueObjective.map((objective) => (
+                                        <div key={objective}>
+                                            <Stack direction="row">
+                                                <input
+                                                    type="checkbox"
+                                                    value={objective}
+                                                    onChange={(event) => {
+                                                        if (event.target.checked) {
+                                                            setObjectiveName(objective);
+                                                        } else {
+                                                            setObjectiveName("");
+                                                        }
+                                                    }}
+                                                    checked={objectiveName === objective}
+                                                />
+                                                <Typography sx={{ ml: 1 }}>
+                                                    {objective}
+                                                </Typography>
+                                            </Stack>
+                                        </div>
+                                    ))}
+                                </div>
+                                : //if there are no objectives, return an empty div
+                                <div></div>}
+                            <Typography
+                                variant="h5"
+                                sx={{ mt: 3 }}>
+                                Add New Objective:
+                            </Typography>
+                            <TextField
+                                fullWidth
+                                label="Lesson Objective"
+                                value={objectiveName}
+                                onChange={(event) => setObjectiveName(event.target.value)}
+                                helperText={
+                                    objectiveName.length > 50
+                                        ? <Alert severity="error">Please enter a shorter objective</Alert>
+                                        : null
+                                } />
+                            <button
+                                className="add-button"
+                                type="submit">
+                                Add to Class
+                            </button>
+                        </form>
+                    </Card>
                     {addError &&
                         <Alert severity="error">
                             Please make sure the objective is 1 to 30 characters to make sure they appear on the data visualization charts.
