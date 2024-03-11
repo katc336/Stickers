@@ -1,8 +1,10 @@
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Alert from "@mui/material/Alert"
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Box from '@mui/material/Box'
 import { useState } from "react"
 import { useParams } from "react-router-dom"
@@ -20,28 +22,6 @@ const MobileSingleStudent = () => {
     }
     if (error) {
         console.error(error)
-    }
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const CustomTabPanel = (props) => {
-        const { children, value, index, ...other } = props;
-        return (
-            <div>
-                {value === index && (
-                    <Box sx={{ p: 3 }}>
-                        <Typography>{children}</Typography>
-                    </Box>
-                )}
-            </div>
-        );
-    }
-    const a11yProps = (index) => {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`,
-        };
     }
     return (
         <div>
@@ -67,18 +47,34 @@ const MobileSingleStudent = () => {
                         :
                         <div>
                             <Box sx={{ width: '100%' }}>
-                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                        <Tab label="Averaged Progress" {...a11yProps(0)} />
-                                        <Tab label="Progress Over Time" {...a11yProps(1)} />
-                                    </Tabs>
-                                </Box>
-                                <CustomTabPanel value={value} index={0}>
+                                <Accordion
+                                    elevation={10}
+                                    sx={{ my: 1 }}>
+                                    <AccordionSummary
+                                        expandIcon={<ArrowDownwardIcon />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header">
+                                        <Typography>
+                                            Averaged Progress
+                                        </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
                                     <StudentAllProgressPercents data={data} />
-                                </CustomTabPanel>
-                                <CustomTabPanel value={value} index={1}>
+                                    </AccordionDetails>
+                                </Accordion>
+                                <Accordion elevation={10}>
+                                    <AccordionSummary
+                                        expandIcon={<ArrowDownwardIcon />}
+                                        aria-controls="panel1-content"
+                                        id="panel1-header">
+                                        <Typography>
+                                            Progress Over Time
+                                        </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
                                     <StudentProgressOverTime data={data} />
-                                </CustomTabPanel>
+                                    </AccordionDetails>
+                                </Accordion>
                             </Box>
                         </div>
                 }

@@ -4,12 +4,16 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react"
 import { VictoryScatter, VictoryTheme, VictoryLabel, VictoryChart, VictoryAxis } from 'victory';
 
 const StudentProgressOverTime = ({ data }) => {
     const [selectedObjective, setSelectedObjective] = useState("");
     const [showChart, setShowChart] = useState(false)
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleChange = (event) => {
         setSelectedObjective(event.target.value);
@@ -44,6 +48,7 @@ const StudentProgressOverTime = ({ data }) => {
                 {showChart &&
                     <VictoryChart
                         theme={VictoryTheme.material}
+                        style={{ parent: { width: isMobile ? 300 : 800 } }}
                     >
                         <VictoryAxis
                             dependentAxis
