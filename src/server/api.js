@@ -558,4 +558,5 @@ apiRouter.delete("/delete_progress/:id", requireUser, async (req, res, next) => 
         next(error);
     }
 });
+
 module.exports = apiRouter;
