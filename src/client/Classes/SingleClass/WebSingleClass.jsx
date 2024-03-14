@@ -23,7 +23,7 @@ const WebSingleClass = () => {
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeIn" }}>
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ p: 3, ml: 20 }}>

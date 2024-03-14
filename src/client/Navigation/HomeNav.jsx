@@ -9,11 +9,11 @@ import Logo from "./images/Logo.png"
 
 const HomeNav = () => {
     const [activePage, setActivePage] = useState("");
+
     const location = useLocation();
     useEffect(() => {
         setActivePage(location.pathname);
     }, [location]);
-
     return (
         <div>
             <AppBar

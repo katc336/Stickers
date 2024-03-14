@@ -16,7 +16,7 @@ const MobileHowToGetStarted = () => {
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeIn" }}>
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ mt: 15, mb: 1, mx: 1, p: 1, borderRadius: 10, backgroundColor: "transparent" }}

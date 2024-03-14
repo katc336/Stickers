@@ -15,7 +15,7 @@ const WebStory = () => {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeIn" }}>
+                transition={{ duration: 1, ease: "easeIn" }}>
                 <Box sx={{ mt: 10, p: 3 }}>
                     <Grid container>
                         <Grid item xs={5}>

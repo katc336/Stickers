@@ -30,7 +30,7 @@ const MobileAllLessons = () => {
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeIn" }}>
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card sx={{ mt: 10, p: 1 }} elevation={10}>
                 <Typography sx={{ textAlign: "center" }} variant="h3">
                     All Lessons:
