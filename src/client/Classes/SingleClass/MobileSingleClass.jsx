@@ -1,11 +1,10 @@
 import Card from "@mui/material/Card"
-import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import { motion } from "framer-motion"
 import { useParams } from "react-router-dom"
 import { useGetSingleClassQuery } from "../../../redux/api"
 import AddStudentButton from "./components/AddStudentButton"
 import AddLessonButton from "./components/AddLessonButton"
-import MobileNav from "../../Navigation/MobileNav"
 import MobileStudentForClass from "./components/MobileStudentsForClass"
 import MobileLessonForClass from "./components/MobileLessonForClass"
 
@@ -20,8 +19,10 @@ const MobileSingleClass = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ p: 1, mt: 10 }}>
@@ -61,7 +62,7 @@ const MobileSingleClass = () => {
                     <MobileLessonForClass data={data} />
                 </Card>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileSingleClass

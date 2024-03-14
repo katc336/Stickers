@@ -12,9 +12,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import AddLessonForm from "./AddLessonForm"
 import LessonSearch from "../SearchBar/LessonSearch"
+import { motion } from "framer-motion"
 
 const WebAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -28,8 +28,10 @@ const WebAllLessons = () => {
         console.error(error)
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Box sx={{ ml: 20, mr: 3 }}>
                 <Card sx={{ p: 1 }} elevation={10}>
                     <Typography sx={{ textAlign: "center" }} variant="h3">
@@ -153,7 +155,7 @@ const WebAllLessons = () => {
                     ))}
                 </Card>
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default WebAllLessons

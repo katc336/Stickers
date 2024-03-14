@@ -6,11 +6,11 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useGetAllProgressQuery } from "../../redux/api";
 import AllProgressPercents from "./components/AllProgressPercents";
 import CompareStudentProgress from "./components/CompareStudentProgress";
-import MobileNav from "../Navigation/MobileNav";
 
 const MobileAllProgress = () => {
     const { data, error, isLoading } = useGetAllProgressQuery();
@@ -20,11 +20,11 @@ const MobileAllProgress = () => {
     if (error) {
         console.error(error);
     }
-
-
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             {
                 data.progress.length === 0
                     ?
@@ -92,7 +92,7 @@ const MobileAllProgress = () => {
                         </Card>
                     </div>
             }
-        </div>
+        </motion.div>
     )
 }
 export default MobileAllProgress

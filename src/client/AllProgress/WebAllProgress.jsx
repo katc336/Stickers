@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack"
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box'
-import NavDrawer from "../Navigation/NavDrawer"
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGetAllProgressQuery } from "../../redux/api";
@@ -44,8 +44,10 @@ const WebAllProgress = () => {
         };
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             {
                 data.progress.length === 0
                     ?
@@ -104,7 +106,7 @@ const WebAllProgress = () => {
                         </Card>
                     </div>
             }
-        </div>
+        </motion.div>
     )
 }
 export default WebAllProgress

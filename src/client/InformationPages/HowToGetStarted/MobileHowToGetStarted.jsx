@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
-import MobileNav from "../../Navigation/MobileNav"
 import AllLessonsPage from "./images/AllLessonsPage.png"
 import StudentProgressBarGraph from "./images/StudentProgressBarGraph.png"
 import StudentProgressScatterChart from "./images/StudentProgressScatterChart.png"
@@ -11,11 +10,13 @@ import LessonPage from "./images/LessonPage.png"
 import ScatterChart from "./images/ScatterChart.png"
 import MobileInfoCard from "./components/MobileInfoCard"
 import CallToAction from "./components/CallToAction";
-
+import { motion } from "framer-motion"
 const MobileHowToGetStarted = () => {
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ mt: 15, mb: 1, mx: 1, p: 1, borderRadius: 10, backgroundColor: "transparent" }}
@@ -92,7 +93,7 @@ const MobileHowToGetStarted = () => {
             />
             {/* <---------------------ROW 5---------------------> */}
             <CallToAction />
-        </div >
+        </motion.div>
     )
 }
 export default MobileHowToGetStarted

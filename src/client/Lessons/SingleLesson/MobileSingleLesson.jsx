@@ -4,10 +4,10 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { useGetSingleLessonQuery } from "../../../redux/api"
 import { useParams } from "react-router-dom";
-import MobileNav from "../../Navigation/MobileNav"
 import ClassLessonObjective from "./components/ClassLessonObjective"
 import AddLessonObjective from "./components/AddLessonObjective"
 import ClassStudentsProgress from "./components/ClassStudentsProgress";
+import { motion } from "framer-motion"
 
 const MobileSingleLesson = () => {
     const { id } = useParams()
@@ -20,8 +20,10 @@ const MobileSingleLesson = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card sx={{ mt: 10 }}>
                 <Stack direction="column" >
                 <Typography
@@ -49,7 +51,7 @@ const MobileSingleLesson = () => {
                         <ClassStudentsProgress id={id} />
                     </div>}
             </Card>
-        </div>
+            </motion.div>
     )
 }
 export default MobileSingleLesson

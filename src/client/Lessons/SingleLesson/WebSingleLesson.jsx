@@ -4,10 +4,10 @@ import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import { useGetSingleLessonQuery } from "../../../redux/api"
 import { useParams } from "react-router-dom";
-import NavDrawer from "../../Navigation/NavDrawer"
 import ClassLessonObjective from "./components/ClassLessonObjective"
 import AddLessonObjective from "./components/AddLessonObjective"
 import ClassStudentsProgress from "./components/ClassStudentsProgress";
+import { motion } from "framer-motion"
 
 const WebSingleLesson = () => {
     const { id } = useParams()
@@ -20,8 +20,10 @@ const WebSingleLesson = () => {
         console.error(error)
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card sx={{ ml: 20, mr: 3, p: 3 }}>
                 <Typography
                     variant="h3"
@@ -53,7 +55,7 @@ const WebSingleLesson = () => {
                     </Grid>
                 </Grid>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default WebSingleLesson

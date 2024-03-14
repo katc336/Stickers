@@ -13,7 +13,7 @@ import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
 import AddLessonForm from "./AddLessonForm"
 import LessonSearch from "../SearchBar/LessonSearch"
-import MobileNav from "../../Navigation/MobileNav"
+import { motion } from "framer-motion"
 
 const MobileAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -27,9 +27,11 @@ const MobileAllLessons = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
-            <Card sx={{mt: 10, p: 1 }} elevation={10}>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
+            <Card sx={{ mt: 10, p: 1 }} elevation={10}>
                 <Typography sx={{ textAlign: "center" }} variant="h3">
                     All Lessons:
                 </Typography>
@@ -137,7 +139,7 @@ const MobileAllLessons = () => {
                     </div>
                 ))}
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileAllLessons

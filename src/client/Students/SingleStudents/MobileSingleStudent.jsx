@@ -9,9 +9,9 @@ import Box from '@mui/material/Box'
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
-import MobileNav from "../../Navigation/MobileNav"
 import StudentAllProgressPercents from "./components/StudentAllProgressPercents";
 import StudentProgressOverTime from "./components/StudentProgressOverTime";
+import { motion } from "framer-motion";
 
 const MobileSingleStudent = () => {
     const [value, setValue] = useState("");
@@ -24,8 +24,10 @@ const MobileSingleStudent = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ mt: 10 }}>
@@ -59,7 +61,7 @@ const MobileSingleStudent = () => {
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <StudentAllProgressPercents data={data} />
+                                        <StudentAllProgressPercents data={data} />
                                     </AccordionDetails>
                                 </Accordion>
                                 <Accordion elevation={10}>
@@ -72,14 +74,14 @@ const MobileSingleStudent = () => {
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <StudentProgressOverTime data={data} />
+                                        <StudentProgressOverTime data={data} />
                                     </AccordionDetails>
                                 </Accordion>
                             </Box>
                         </div>
                 }
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileSingleStudent

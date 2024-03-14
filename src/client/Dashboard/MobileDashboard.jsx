@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
+import { motion } from 'framer-motion';
 import { useGetUserQuery } from '../../redux/api';
 import HelloCard from './components/HelloCard';
 import ProgressChart from './components/ProgressChart';
-import MobileNav from "../Navigation/MobileNav"
 import MobileMyClasses from './components/MobileMyClasses';
 
 const MobileDashboard = () => {
@@ -14,14 +14,16 @@ const MobileDashboard = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Box sx={{ mt: 10 }}>
                 <HelloCard name={data.name} />
                 <ProgressChart />
                 <MobileMyClasses />
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default MobileDashboard

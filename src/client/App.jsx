@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useMediaQuery, useTheme } from "@mui/material";
 import HomePage from "./Home/HomePage";
 import Dashboard from "./Dashboard/Dashboard";
 import RegisterForm from "./Home/components/RegisterForm";
@@ -13,11 +14,15 @@ import AllProgress from "./AllProgress/AllProgress";
 import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./InformationPages/Story/Story";
 import LoginPage from "./Home/components/LoginPage";
+import MobileNav from "./Navigation/MobileNav";
+import NavDrawer from "./Navigation/NavDrawer";
 
 function App() {
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div>
+      {isMobile ? <MobileNav /> : <NavDrawer />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<HowToGetStarted />} />

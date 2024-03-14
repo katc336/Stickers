@@ -12,7 +12,7 @@ import AddStudentForm from "./AddStudentForm"
 import CookieSticker from "./images/CookieSticker.png"
 import GrapeSticker from "./images/GrapeSticker.png"
 import RootSticker from "./images/RootSticker.png"
-import MobileNav from "../../Navigation/MobileNav"
+import { motion } from "framer-motion"
 
 const MobileAllStudents = () => {
     const [deleteAlert, setDeleteAlert] = useState(false);
@@ -26,8 +26,10 @@ const MobileAllStudents = () => {
         console.error(error);
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Box sx={{ mt: 10 }}>
                 <Card
                     sx={{ p: 1 }}
@@ -138,7 +140,7 @@ const MobileAllStudents = () => {
                     ))}
                 </Card>
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default MobileAllStudents

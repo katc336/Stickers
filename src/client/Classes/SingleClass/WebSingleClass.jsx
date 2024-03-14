@@ -1,9 +1,9 @@
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import { motion } from "framer-motion"
 import { useParams } from "react-router-dom"
 import { useGetSingleClassQuery } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import StudentForClass from "./components/StudentsForClass"
 import AddStudentButton from "./components/AddStudentButton"
 import LessonForClass from "./components/LessonForClass"
@@ -20,8 +20,10 @@ const WebSingleClass = () => {
         console.error(error)
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}>
             <Card
                 elevation={10}
                 sx={{ p: 3, ml: 20 }}>
@@ -67,7 +69,7 @@ const WebSingleClass = () => {
                     </Grid>
                 </Grid>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default WebSingleClass
