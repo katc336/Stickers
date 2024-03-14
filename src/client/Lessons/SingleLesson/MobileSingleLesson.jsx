@@ -24,7 +24,7 @@ const MobileSingleLesson = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeIn" }}>
-            <Card sx={{ mt: 10 }}>
+            <Card sx={{ borderRadius: "20px", mt: 10 }}>
                 <Stack direction="column" >
                 <Typography
                     variant="h3"

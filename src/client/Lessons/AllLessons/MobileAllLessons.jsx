@@ -31,7 +31,7 @@ const MobileAllLessons = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeIn" }}>
-            <Card sx={{ mt: 10, p: 1 }} elevation={10}>
+            <Card sx={{ borderRadius: "20px", mt: 10, p: 1 }} elevation={10}>
                 <Typography sx={{ textAlign: "center" }} variant="h3">
                     All Lessons:
                 </Typography>
@@ -71,7 +71,7 @@ const MobileAllLessons = () => {
                                             <AccordionDetails>
                                                 <Card
                                                     elevation={10}
-                                                    sx={{ p: 1, m: 1 }} >
+                                                    sx={{ borderRadius: "20px", p: 1, m: 1 }} >
                                                     <Typography
                                                         variant="h5"
                                                         sx={{ textAlign: "center" }}>

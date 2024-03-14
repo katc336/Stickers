@@ -71,7 +71,7 @@ const AddProgress = ({ data, student }) => {
                     </Alert>}
                 {selectedStudentId === student.id &&
                     <Card
-                        sx={{ p: 1, m: 3 }}
+                        sx={{ borderRadius: "20px", p: 1, m: 3 }}
                         elevation={10}>
                         <form onSubmit={handleAddProgress}>
                             <Stack direction="column">

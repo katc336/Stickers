@@ -38,7 +38,7 @@ const MobileMyClasses = () => {
                     {data && data.map((myClass) => (
                         <div key={myClass.id}>
                             <Card
-                                sx={{ p: 2, my: 1 }}
+                                sx={{ borderRadius: "20px", p: 2, my: 1 }}
                                 elevation={5}>
                                 <Typography
                                     variant="h4"

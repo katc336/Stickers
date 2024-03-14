@@ -33,7 +33,7 @@ const WebAllStudents = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Box sx={{ ml: 20, mr: 3 }}>
                 <Card
-                    sx={{ p: 1 }}
+                    sx={{ borderRadius: "20px", p: 1 }}
                     elevation={10}>
                     <Typography
                         sx={{ textAlign: "center" }}
@@ -46,7 +46,7 @@ const WebAllStudents = () => {
                     {data && data.map((student) => (
                         <div key={student.id}>
                             <Card
-                                sx={{ m: 1, p: 1 }}
+                                sx={{ borderRadius: "20px", m: 1, p: 1 }}
                                 elevation={10}>
                                 <Grid container>
                                     <Grid item xs={5}>

@@ -11,7 +11,7 @@ const MobileAuth = () => {
     return (
         <div>
             {login &&
-                <Card sx={{ p: 3, height: 430  }}>
+                <Card sx={{ borderRadius: "20px", p: 3, height: 430  }}>
                     <MobileLoginForm />
                     <Typography sx={{ mt: 3, mb: 1, textAlign: "center" }}>
                         Don't have an account?
@@ -30,7 +30,7 @@ const MobileAuth = () => {
                 </Card>
             }
             {register &&
-                <Card sx={{ p: 3, height: 430 }}>
+                <Card sx={{ borderRadius: "20px", p: 3, height: 430 }}>
                     <MobileRegisterForm />
                     <Typography sx={{ mt: 3, mb: 1, textAlign: "center" }}>
                         Already have an account?

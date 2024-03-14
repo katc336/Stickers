@@ -13,7 +13,7 @@ const MobileHomePage = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ mt: 10, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", mt: 10, mx: 1, p: 3, backgroundColor: "transparent" }}
             >
                 <Stack direction="column">
                     <img

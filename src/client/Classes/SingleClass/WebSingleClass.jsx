@@ -26,7 +26,7 @@ const WebSingleClass = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 20 }}>
+                sx={{ borderRadius: "20px", p: 3, ml: 20 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
@@ -37,7 +37,7 @@ const WebSingleClass = () => {
                     <Grid item xs={6}>
                         <Card
                             elevation={10}
-                            sx={{ p: 1, m: 1 }}>
+                            sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                             <Typography
                                 variant="h5"
                                 sx={{ mb: 3, textAlign: "center" }}>
@@ -54,7 +54,7 @@ const WebSingleClass = () => {
                     <Grid item xs={6}>
                         <Card
                             elevation={10}
-                            sx={{ p: 1, m: 1 }}>
+                            sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                             <Typography
                                 variant="h5"
                                 sx={{ mb: 3, textAlign: "center" }}>

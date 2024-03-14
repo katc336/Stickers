@@ -50,7 +50,7 @@ const RegisterForm = () => {
         <div>
             <HomeNav />
             <Box sx={{ mt: 10 }}>
-                <Card sx={{ p: 5, mx: 50 }}>
+                <Card sx={{ borderRadius: "20px", p: 5, mx: 50 }}>
                     <Typography
                         variant="h4"
                         sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>

@@ -24,7 +24,7 @@ const WebSingleLesson = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeIn" }}>
-            <Card sx={{ ml: 20, mr: 3, p: 3 }}>
+            <Card sx={{ borderRadius: "20px", ml: 20, mr: 3, p: 3 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center", mx: 3 }}>

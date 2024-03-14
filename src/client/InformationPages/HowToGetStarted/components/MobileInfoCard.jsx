@@ -8,7 +8,7 @@ const MobileInfoCard = ({ writing, alert1, alert2, img1, alt1, img2, alt2 }) => 
         <div>
             <Card
                 elevation={10}
-                sx={{ m: 1, p: 1, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", m: 1, p: 1, backgroundColor: "transparent" }}
             >
                 <Typography
                     variant="h6"

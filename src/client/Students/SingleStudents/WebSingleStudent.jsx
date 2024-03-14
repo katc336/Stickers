@@ -49,7 +49,7 @@ const WebSingleStudent = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 20, mr: 3 }}>
+                sx={{ borderRadius: "20px", p: 3, ml: 20, mr: 3 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>

@@ -19,7 +19,7 @@ const MobileHowToGetStarted = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ mt: 15, mb: 1, mx: 1, p: 1, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", mt: 15, mb: 1, mx: 1, p: 1, backgroundColor: "transparent" }}
             >
                 <Typography
                     variant="h3"

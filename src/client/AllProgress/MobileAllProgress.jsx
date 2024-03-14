@@ -53,7 +53,7 @@ const MobileAllProgress = () => {
                     <div>
                         <Card
                             elevation={10}
-                            sx={{ mt: 10, p: 1 }}
+                            sx={{ borderRadius: "20px", mt: 10, p: 1 }}
                         >
                             <Typography
                                 variant="h4"

@@ -9,7 +9,7 @@ const InfoCard = ({ writing, alert1, alert2, img1, alt1, img2, alt2 }) => {
         <div>
             <Card
                 elevation={10}
-                sx={{ m: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", m: 1, p: 3, backgroundColor: "transparent" }}
             >
                 <Grid container>
                     <Grid item xs={3}>

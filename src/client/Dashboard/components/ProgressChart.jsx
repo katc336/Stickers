@@ -76,7 +76,7 @@ const ProgressChart = () => {
                             sx={{ borderRadius: "20px", p: 3, m: 3 }}>
                             <Card
                                 elevation={10}
-                                sx={{ m: 1, p: 1 }}
+                                sx={{ borderRadius: "20px", m: 1, p: 1 }}
                             >
                                 <Box sx={{ width: '100%' }}>
                                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

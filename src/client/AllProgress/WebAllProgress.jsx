@@ -76,7 +76,7 @@ const WebAllProgress = () => {
                     <div>
                         <Card
                             elevation={10}
-                            sx={{ ml: 20, mr: 3, p: 3 }}
+                            sx={{ borderRadius: "20px", ml: 20, mr: 3, p: 3 }}
                         >
                             <Typography
                                 variant="h3"
@@ -86,7 +86,7 @@ const WebAllProgress = () => {
                             </Typography>
                             <Card
                                 elevation={10}
-                                sx={{ m: 1, p: 1 }}
+                                sx={{ borderRadius: "20px", m: 1, p: 1 }}
                             >
                                 <Box sx={{ width: '100%' }}>
                                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

@@ -52,6 +52,7 @@ const StudentAllProgressPercents = ({ data }) => {
                     <div key={average.id}>
                         <Card
                             sx={{
+                                borderRadius: "20px",
                                 p: 1,
                                 border: `3px solid`,
                                 borderColor: average.average < 70 ? "red" : average.average >= 70 && average.average <=79 ? "orange" : average.average >= 80 && average.average <= 89 ? "yellow" : "green",

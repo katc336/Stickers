@@ -30,7 +30,7 @@ const MobileSingleStudent = () => {
             transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ mt: 10 }}>
+                sx={{ borderRadius: "20px", mt: 10 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>

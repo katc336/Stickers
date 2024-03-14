@@ -9,7 +9,7 @@ const CallToAction = () => {
         <div>
             <Card
                 elevation={10}
-                sx={{ my: 3, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", my: 3, mx: 1, p: 3, backgroundColor: "transparent" }}
             >
                 <Typography sx={{ textAlign: "center" }}>
                     <Typography

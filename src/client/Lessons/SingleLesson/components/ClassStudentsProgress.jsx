@@ -29,7 +29,7 @@ const ClassStudentsProgress = ({ id }) => {
         <div>
             <Card
                 elevation={10}
-                sx={{ m: 1, p: 1 }}>
+                sx={{ borderRadius: "20px", m: 1, p: 1 }}>
                 <Typography
                     variant="h5"
                     sx={{ textAlign: "center", my: 1 }}>
@@ -39,7 +39,7 @@ const ClassStudentsProgress = ({ id }) => {
                     <div key={student.id}>
                         <Card
                             elevation={10}
-                            sx={{ p: 1, m: 1 }}>
+                            sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                             <Stack justifyContent="space-between">
                                 <Typography variant="h6">
                                     {student.name}
@@ -52,6 +52,7 @@ const ClassStudentsProgress = ({ id }) => {
                                     <div key={progress.id}>
                                         <Card
                                             sx={{
+                                                borderRadius: "20px",
                                                 p: 1,
                                                 border: 1,
                                                 borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <= 79 ? "orange" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "yellow" : "green",
