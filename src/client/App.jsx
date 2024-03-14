@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useSelector } from "react-redux";
 import HomePage from "./Home/HomePage";
 import Dashboard from "./Dashboard/Dashboard";
 import RegisterForm from "./Home/components/RegisterForm";
@@ -18,11 +19,12 @@ import MobileNav from "./Navigation/MobileNav";
 import NavDrawer from "./Navigation/NavDrawer";
 
 function App() {
+  const token = useSelector((state) => state.auth.token);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div>
-      {isMobile ? <MobileNav /> : <NavDrawer />}
+      {isMobile ? <MobileNav /> : <div> {!token ? <div/> : <NavDrawer /> } </div> }
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<HowToGetStarted />} />
