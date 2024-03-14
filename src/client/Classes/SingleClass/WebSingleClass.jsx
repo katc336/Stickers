@@ -1,9 +1,9 @@
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import { motion } from "framer-motion"
 import { useParams } from "react-router-dom"
 import { useGetSingleClassQuery } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import StudentForClass from "./components/StudentsForClass"
 import AddStudentButton from "./components/AddStudentButton"
 import LessonForClass from "./components/LessonForClass"
@@ -20,11 +20,13 @@ const WebSingleClass = () => {
         console.error(error)
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 20 }}>
+                sx={{ borderRadius: "20px", p: 3, ml: 20 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
@@ -35,7 +37,7 @@ const WebSingleClass = () => {
                     <Grid item xs={6}>
                         <Card
                             elevation={10}
-                            sx={{ p: 1, m: 1 }}>
+                            sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                             <Typography
                                 variant="h5"
                                 sx={{ mb: 3, textAlign: "center" }}>
@@ -52,7 +54,7 @@ const WebSingleClass = () => {
                     <Grid item xs={6}>
                         <Card
                             elevation={10}
-                            sx={{ p: 1, m: 1 }}>
+                            sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                             <Typography
                                 variant="h5"
                                 sx={{ mb: 3, textAlign: "center" }}>
@@ -67,7 +69,7 @@ const WebSingleClass = () => {
                     </Grid>
                 </Grid>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default WebSingleClass

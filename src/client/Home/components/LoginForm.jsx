@@ -34,7 +34,7 @@ const LoginForm = ({ switchForm }) => {
     }
     return (
         <div>
-            <Card sx={{ p: 5 }}>
+            <Card sx={{ borderRadius: "20px", p: 5 }}>
                 <Typograpgy
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>

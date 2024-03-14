@@ -1,11 +1,10 @@
 import Card from "@mui/material/Card"
-import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import { motion } from "framer-motion"
 import { useParams } from "react-router-dom"
 import { useGetSingleClassQuery } from "../../../redux/api"
 import AddStudentButton from "./components/AddStudentButton"
 import AddLessonButton from "./components/AddLessonButton"
-import MobileNav from "../../Navigation/MobileNav"
 import MobileStudentForClass from "./components/MobileStudentsForClass"
 import MobileLessonForClass from "./components/MobileLessonForClass"
 
@@ -20,11 +19,13 @@ const MobileSingleClass = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ p: 1, mt: 10 }}>
+                sx={{ borderRadius: "20px", p: 1, mt: 10 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
@@ -33,7 +34,7 @@ const MobileSingleClass = () => {
                 {/* <--------------------------STUDENTS FOR CLASS--------------------------> */}
                 <Card
                     elevation={10}
-                    sx={{ p: 1, m: 1 }}>
+                    sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                     <Typography
                         variant="h5"
                         sx={{ mb: 3, textAlign: "center" }}>
@@ -48,7 +49,7 @@ const MobileSingleClass = () => {
                 {/* <--------------------------LESSONS FOR CLASS--------------------------> */}
                 <Card
                     elevation={10}
-                    sx={{ p: 1, m: 1 }}>
+                    sx={{ borderRadius: "20px", p: 1, m: 1 }}>
                     <Typography
                         variant="h5"
                         sx={{ mb: 3, textAlign: "center" }}>
@@ -61,7 +62,7 @@ const MobileSingleClass = () => {
                     <MobileLessonForClass data={data} />
                 </Card>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileSingleClass

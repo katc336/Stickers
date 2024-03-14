@@ -198,6 +198,14 @@ const api = createApi({
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
+        //<------------ATTENDENCE------------>
+        updateAttendence: builder.mutation({
+            query: ({ studentId, lessonId, attendance }) => ({
+                url: `/api/attendance`,
+                method: "PATCH",
+                body: { attendance, lessonId, studentId }
+            })
+        })
     })
 });
 export default api;
@@ -233,4 +241,6 @@ export const {
     useDeleteLessonMutation,
     useDeleteObjectiveMutation,
     useDeleteProgressMutation,
+    //ATTENDENCE
+    useUpdateAttendenceMutation,
 } = api

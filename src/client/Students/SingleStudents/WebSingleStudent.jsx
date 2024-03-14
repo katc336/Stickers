@@ -7,9 +7,9 @@ import Box from '@mui/material/Box'
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import StudentAllProgressPercents from "./components/StudentAllProgressPercents";
 import StudentProgressOverTime from "./components/StudentProgressOverTime";
+import { motion } from "framer-motion";
 
 const WebSingleStudent = () => {
     const [value, setValue] = useState("");
@@ -21,7 +21,6 @@ const WebSingleStudent = () => {
     if (error) {
         console.error(error)
     }
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -44,11 +43,13 @@ const WebSingleStudent = () => {
         };
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ p: 3, ml: 20, mr: 3 }}>
+                sx={{ borderRadius: "20px", p: 3, ml: 20, mr: 3 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
@@ -83,7 +84,7 @@ const WebSingleStudent = () => {
                         </div>
                 }
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default WebSingleStudent

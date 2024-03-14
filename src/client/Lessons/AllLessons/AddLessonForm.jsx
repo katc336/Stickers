@@ -118,7 +118,7 @@ const AddLessonForm = () => {
                     }
                     <Stack direction="column">
                         <TextField
-                            label="Student Name"
+                            label="Lesson Name"
                             value={lessonName}
                             onChange={(event) => setLessonName(event.target.value)}
                             variant="filled"

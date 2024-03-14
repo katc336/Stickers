@@ -21,7 +21,7 @@ const ClassLessonObjective = ({ id }) => {
         <div>
             <Card
                 elevation={10}
-                sx={{ m: 1, p: 1 }}>
+                sx={{ borderRadius: "20px", m: 1, p: 1 }}>
                 <Typography
                     variant="h5"
                     sx={{ textAlign: "center", my: 1 }}>
@@ -30,7 +30,7 @@ const ClassLessonObjective = ({ id }) => {
                 {data.learningObjectives.map((objective) => (
                     <div key={objective.id}>
                         <Card
-                            sx={{ m: 1, p: 1 }}
+                            sx={{ borderRadius: "20px", m: 1, p: 1 }}
                             elevation={10}>
                             <Stack direction="row"
                                 justifyContent="space-between">

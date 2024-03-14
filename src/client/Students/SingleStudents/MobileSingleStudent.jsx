@@ -6,15 +6,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Box from '@mui/material/Box'
-import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { useGetSingleStudentQuery } from "../../../redux/api"
-import MobileNav from "../../Navigation/MobileNav"
 import StudentAllProgressPercents from "./components/StudentAllProgressPercents";
 import StudentProgressOverTime from "./components/StudentProgressOverTime";
+import { motion } from "framer-motion";
 
 const MobileSingleStudent = () => {
-    const [value, setValue] = useState("");
     const { id } = useParams()
     const { data, error, isLoading } = useGetSingleStudentQuery(id);
     if (isLoading) {
@@ -24,11 +22,13 @@ const MobileSingleStudent = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ mt: 10 }}>
+                sx={{ borderRadius: "20px", mt: 10 }}>
                 <Typography
                     variant="h3"
                     sx={{ textAlign: "center" }}>
@@ -49,7 +49,7 @@ const MobileSingleStudent = () => {
                             <Box sx={{ width: '100%' }}>
                                 <Accordion
                                     elevation={10}
-                                    sx={{ my: 1 }}>
+                                    sx={{ my: 3, mx: 1 }}>
                                     <AccordionSummary
                                         expandIcon={<ArrowDownwardIcon />}
                                         aria-controls="panel1-content"
@@ -59,10 +59,12 @@ const MobileSingleStudent = () => {
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <StudentAllProgressPercents data={data} />
+                                        <StudentAllProgressPercents data={data} />
                                     </AccordionDetails>
                                 </Accordion>
-                                <Accordion elevation={10}>
+                                <Accordion
+                                    elevation={10}
+                                    sx={{ my: 3, mx: 1 }}>
                                     <AccordionSummary
                                         expandIcon={<ArrowDownwardIcon />}
                                         aria-controls="panel1-content"
@@ -72,14 +74,14 @@ const MobileSingleStudent = () => {
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <StudentProgressOverTime data={data} />
+                                        <StudentProgressOverTime data={data} />
                                     </AccordionDetails>
                                 </Accordion>
                             </Box>
                         </div>
                 }
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileSingleStudent

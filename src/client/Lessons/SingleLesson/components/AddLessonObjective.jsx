@@ -76,7 +76,7 @@ const AddLessonObjective = ({ id, data }) => {
                 <div>
                     <Card
                         elevation={10}
-                        sx={{ p: 3, m: 1 }}>
+                        sx={{ borderRadius: "20px", p: 3, m: 1 }}>
                         <form onSubmit={handleAddLessonObjective}>
                             {objData.length !== 0
                                 ? //if there are already objectices...

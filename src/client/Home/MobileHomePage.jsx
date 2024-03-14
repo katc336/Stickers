@@ -3,15 +3,17 @@ import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import Logo from "./images/Logo.png"
 import MobileAuth from "./components/MobileAuth"
-import MobileNav from "../Navigation/MobileNav"
+import { motion } from "framer-motion"
 
 const MobileHomePage = () => {
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Card
                 elevation={10}
-                sx={{ mt: 10, mx: 1, p: 3, borderRadius: 10, backgroundColor: "transparent" }}
+                sx={{ borderRadius: "20px", mt: 10, mx: 1, p: 3, backgroundColor: "transparent" }}
             >
                 <Stack direction="column">
                     <img
@@ -26,7 +28,7 @@ const MobileHomePage = () => {
                     <MobileAuth />
                 </Stack>
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileHomePage

@@ -12,9 +12,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import AddLessonForm from "./AddLessonForm"
 import LessonSearch from "../SearchBar/LessonSearch"
+import { motion } from "framer-motion"
 
 const WebAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -28,10 +28,12 @@ const WebAllLessons = () => {
         console.error(error)
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Box sx={{ ml: 20, mr: 3 }}>
-                <Card sx={{ p: 1 }} elevation={10}>
+                <Card sx={{ borderRadius: "20px", p: 1 }} elevation={10}>
                     <Typography sx={{ textAlign: "center" }} variant="h3">
                         All Lessons:
                     </Typography>
@@ -39,7 +41,9 @@ const WebAllLessons = () => {
                     <AddLessonForm />
                     {data.map((className) => (
                         <div key={className.id}>
-                            <Accordion>
+                            <Accordion
+                                elevation={10}
+                                sx={{ m: 3 }}>
                                 <AccordionSummary>
                                     <Typography variant="h4">
                                         {className.name} Lessons
@@ -71,7 +75,7 @@ const WebAllLessons = () => {
                                                 <AccordionDetails>
                                                     <Card
                                                         elevation={10}
-                                                        sx={{ p: 1, m: 1 }} >
+                                                        sx={{ borderRadius: "20px", p: 1, m: 1 }} >
                                                         <Grid container>
                                                             <Grid item xs={5}>
                                                                 <Stack direction="column">
@@ -153,7 +157,7 @@ const WebAllLessons = () => {
                     ))}
                 </Card>
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default WebAllLessons

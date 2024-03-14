@@ -1,4 +1,3 @@
-import MobileNav from "../../Navigation/MobileNav"
 import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
 import Grid from '@mui/material/Grid';
@@ -6,10 +5,14 @@ import Typography from "@mui/material/Typography"
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from "react-router-dom";
 import KatSticker from "./KatSticker.png"
+import { motion } from "framer-motion";
+
 const MobileStory = () => {
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Grid
                 container
                 sx={{ mt: 15 }}>
@@ -20,10 +23,10 @@ const MobileStory = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Typography variant="h4">
-                        Hello 👋 
+                        Hello 👋
                     </Typography>
                     <Typography variant="h4">
-                      I’m Kat, the creator, and welcome to Stickers!
+                        I’m Kat, the creator, and welcome to Stickers!
                     </Typography>
                 </Grid>
             </Grid>
@@ -71,7 +74,7 @@ const MobileStory = () => {
                     </button>
                 </Link>
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default MobileStory

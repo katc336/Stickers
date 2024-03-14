@@ -1,10 +1,17 @@
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
+import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Logo from "./images/Logo.png"
 
 const NavDrawer = () => {
+    const [activePage, setActivePage] = useState("");
+    const location = useLocation();
+    useEffect(() => {
+        setActivePage(location.pathname);
+    }, [location]);
     return (
         <div>
             <Drawer
@@ -17,27 +24,27 @@ const NavDrawer = () => {
                     width="110px"
                     style={{ marginLeft: 10 }}/>
                 <Link to="/dashboard">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/dashboard" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         Home
                     </Button>
                 </Link>
                 <Link to="/progress">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/progress" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         Progress Overview
                     </Button>
                 </Link>
                 <Link to="/my_classes">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_classes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Classes
                     </Button>
                 </Link>
                 <Link to="/my_students">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_students" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Students
                     </Button>
                 </Link>
                 <Link to="/my_lessons">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", py: 3 }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_lessons" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Lessons
                     </Button>
                 </Link>

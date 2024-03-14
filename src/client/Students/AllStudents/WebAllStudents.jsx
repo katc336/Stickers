@@ -8,12 +8,12 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetAllStudentsByTeacherQuery, useDeleteStudentMutation } from "../../../redux/api"
-import NavDrawer from "../../Navigation/NavDrawer"
 import StudentSearch from "../SearchBar/StudentSearch"
 import AddStudentForm from "./AddStudentForm"
 import CookieSticker from "./images/CookieSticker.png"
 import GrapeSticker from "./images/GrapeSticker.png"
 import RootSticker from "./images/RootSticker.png"
+import { motion } from "framer-motion"
 
 const WebAllStudents = () => {
     const [deleteAlert, setDeleteAlert] = useState(false);
@@ -27,11 +27,13 @@ const WebAllStudents = () => {
         console.error(error);
     }
     return (
-        <div>
-            <NavDrawer />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             <Box sx={{ ml: 20, mr: 3 }}>
                 <Card
-                    sx={{ p: 1 }}
+                    sx={{ borderRadius: "20px", p: 1 }}
                     elevation={10}>
                     <Typography
                         sx={{ textAlign: "center" }}
@@ -44,7 +46,7 @@ const WebAllStudents = () => {
                     {data && data.map((student) => (
                         <div key={student.id}>
                             <Card
-                                sx={{ m: 1, p: 1 }}
+                                sx={{ borderRadius: "20px", m: 1, p: 1 }}
                                 elevation={10}>
                                 <Grid container>
                                     <Grid item xs={5}>
@@ -143,7 +145,7 @@ const WebAllStudents = () => {
                     ))}
                 </Card>
             </Box>
-        </div>
+        </motion.div>
     )
 }
 export default WebAllStudents

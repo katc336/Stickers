@@ -6,11 +6,11 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useGetAllProgressQuery } from "../../redux/api";
 import AllProgressPercents from "./components/AllProgressPercents";
 import CompareStudentProgress from "./components/CompareStudentProgress";
-import MobileNav from "../Navigation/MobileNav";
 
 const MobileAllProgress = () => {
     const { data, error, isLoading } = useGetAllProgressQuery();
@@ -20,11 +20,11 @@ const MobileAllProgress = () => {
     if (error) {
         console.error(error);
     }
-
-
     return (
-        <div>
-            <MobileNav />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
             {
                 data.progress.length === 0
                     ?
@@ -53,7 +53,7 @@ const MobileAllProgress = () => {
                     <div>
                         <Card
                             elevation={10}
-                            sx={{ mt: 10, p: 1 }}
+                            sx={{ borderRadius: "20px", mt: 10, p: 1 }}
                         >
                             <Typography
                                 variant="h4"
@@ -63,7 +63,7 @@ const MobileAllProgress = () => {
                             </Typography>
                             <Accordion
                                 elevation={10}
-                                sx={{ my: 1 }}>
+                                sx={{ my: 3, mx: 1 }}>
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
@@ -76,7 +76,9 @@ const MobileAllProgress = () => {
                                     <AllProgressPercents data={data} />
                                 </AccordionDetails>
                             </Accordion>
-                            <Accordion elevation={10}>
+                            <Accordion
+                                elevation={10}
+                                sx={{ my: 3, mx: 1 }}>
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
@@ -92,7 +94,7 @@ const MobileAllProgress = () => {
                         </Card>
                     </div>
             }
-        </div>
+        </motion.div>
     )
 }
 export default MobileAllProgress

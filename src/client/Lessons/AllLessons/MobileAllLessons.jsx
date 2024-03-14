@@ -13,7 +13,7 @@ import { Link } from "react-router-dom"
 import { useGetAllLessonsQuery, useDeleteLessonMutation } from "../../../redux/api"
 import AddLessonForm from "./AddLessonForm"
 import LessonSearch from "../SearchBar/LessonSearch"
-import MobileNav from "../../Navigation/MobileNav"
+import { motion } from "framer-motion"
 
 const MobileAllLessons = () => {
     const [deleteAlert, setDelteAlert] = useState(false);
@@ -27,9 +27,11 @@ const MobileAllLessons = () => {
         console.error(error)
     }
     return (
-        <div>
-            <MobileNav />
-            <Card sx={{mt: 10, p: 1 }} elevation={10}>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeIn" }}>
+            <Card sx={{ borderRadius: "20px", mt: 10, p: 1 }} elevation={10}>
                 <Typography sx={{ textAlign: "center" }} variant="h3">
                     All Lessons:
                 </Typography>
@@ -37,7 +39,9 @@ const MobileAllLessons = () => {
                 <AddLessonForm />
                 {data.map((className) => (
                     <div key={className.id}>
-                        <Accordion>
+                        <Accordion
+                            elevation={10}
+                            sx={{ my: 3, mx: 1 }}>
                             <AccordionSummary>
                                 <Typography variant="h4">
                                     {className.name} Lessons
@@ -69,7 +73,7 @@ const MobileAllLessons = () => {
                                             <AccordionDetails>
                                                 <Card
                                                     elevation={10}
-                                                    sx={{ p: 1, m: 1 }} >
+                                                    sx={{ borderRadius: "20px", p: 1, m: 1 }} >
                                                     <Typography
                                                         variant="h5"
                                                         sx={{ textAlign: "center" }}>
@@ -137,7 +141,7 @@ const MobileAllLessons = () => {
                     </div>
                 ))}
             </Card>
-        </div>
+        </motion.div>
     )
 }
 export default MobileAllLessons

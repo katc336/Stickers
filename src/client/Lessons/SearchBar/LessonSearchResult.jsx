@@ -23,7 +23,7 @@ const LessonSearchResult = ({ results }) => {
                         <Grid item xs={3}>
                             <Card
                                 elevation={10}
-                                sx={{ width: 250, height: 150, p: 3, m: 3 }}
+                                sx={{ borderRadius: "20px", width: 250, height: 150, p: 3, m: 3 }}
                                 className="all-card">
                                 <Stack direction="column">
                                     <Typography
