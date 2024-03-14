@@ -63,7 +63,7 @@ const MobileAllProgress = () => {
                             </Typography>
                             <Accordion
                                 elevation={10}
-                                sx={{ my: 1 }}>
+                                sx={{ my: 3, mx: 1 }}>
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"
@@ -76,7 +76,9 @@ const MobileAllProgress = () => {
                                     <AllProgressPercents data={data} />
                                 </AccordionDetails>
                             </Accordion>
-                            <Accordion elevation={10}>
+                            <Accordion
+                                elevation={10}
+                                sx={{ my: 3, mx: 1 }}>
                                 <AccordionSummary
                                     expandIcon={<ArrowDownwardIcon />}
                                     aria-controls="panel1-content"

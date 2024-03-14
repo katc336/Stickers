@@ -41,7 +41,9 @@ const WebAllLessons = () => {
                     <AddLessonForm />
                     {data.map((className) => (
                         <div key={className.id}>
-                            <Accordion sx={{ m: 3}}>
+                            <Accordion
+                                elevation={10}
+                                sx={{ m: 3 }}>
                                 <AccordionSummary>
                                     <Typography variant="h4">
                                         {className.name} Lessons

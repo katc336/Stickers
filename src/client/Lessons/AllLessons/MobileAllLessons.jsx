@@ -39,7 +39,9 @@ const MobileAllLessons = () => {
                 <AddLessonForm />
                 {data.map((className) => (
                     <div key={className.id}>
-                        <Accordion>
+                        <Accordion
+                            elevation={10}
+                            sx={{ my: 3, mx: 1 }}>
                             <AccordionSummary>
                                 <Typography variant="h4">
                                     {className.name} Lessons
