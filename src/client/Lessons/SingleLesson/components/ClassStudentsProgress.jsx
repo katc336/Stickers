@@ -8,6 +8,7 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react"
 import { useGetSingleLessonQuery, useDeleteProgressMutation } from "../../../../redux/api"
 import AddProgress from "./AddProgress"
+import AttendenceToggle from "./AttendenceToggle"
 
 
 const ClassStudentsProgress = ({ id }) => {
@@ -43,14 +44,18 @@ const ClassStudentsProgress = ({ id }) => {
                                 <Typography variant="h6">
                                     {student.name}
                                 </Typography>
+                                <AttendenceToggle
+                                    studentData={student}
+                                    studentId={student.id}
+                                    lessonId={id} />
                                 {student.studentProgress.map((progress) => (
                                     <div key={progress.id}>
                                         <Card
                                             sx={{
                                                 p: 1,
                                                 border: 1,
-                                                borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <=79 ? "orange" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "yellow" : "green",
-                                                backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <=79 ? "#FFC97C" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
+                                                borderColor: progress.progressPrecent < 70 ? "red" : progress.progressPrecent >= 70 && progress.progressPrecent <= 79 ? "orange" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "yellow" : "green",
+                                                backgroundColor: progress.progressPrecent < 70 ? "#FEA1A1" : progress.progressPrecent >= 70 && progress.progressPrecent <= 79 ? "#FFC97C" : progress.progressPrecent >= 80 && progress.progressPrecent <= 89 ? "#F9DE79" : "#CDE990"
                                             }}>
                                             <Grid container>
                                                 <Grid item xs={5}>

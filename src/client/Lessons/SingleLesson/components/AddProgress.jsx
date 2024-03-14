@@ -16,7 +16,6 @@ const AddProgress = ({ data, student }) => {
     const [progress, setProgress] = useState("");
     const [addProgressMutation] = usePostProgressMutation();
 
-    console.log(student);
     const handleAddProgress = async (event) => {
         try {
             event.preventDefault();

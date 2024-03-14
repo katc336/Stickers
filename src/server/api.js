@@ -288,6 +288,11 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
                     include: {
                         students: {
                             include: {
+                                attendances: {
+                                    where: {
+                                        lessonId: Number(req.params.id)
+                                    }
+                                },
                                 studentProgress: {
                                     include: {
                                         learningObjective: true
@@ -311,12 +316,12 @@ apiRouter.get("/lesson/:id", requireUser, async (req, res, next) => {
         });
         // Sort students in alphabetical order...
         lesson.class.students.sort((a, b) => a.name.localeCompare(b.name));
-
         res.send(lesson);
     } catch (error) {
         next(error)
     }
 });
+
 
 //<-----------------ADD A LESSON OBJECTIVE----------------->
 apiRouter.post("/objective", requireUser, async (req, res, next) => {
@@ -497,7 +502,7 @@ apiRouter.delete("/delete_class/:id", requireUser, async (req, res, next) => {
         if (!deleteClass) {
             return res.status(404).send("Class not found!");
         }
-        res.send({ deleteClass, message: "Deleted" });
+        res.send({ deleteClass, message: "Deleted!" });
     } catch (error) {
         next(error);
     }
@@ -511,7 +516,7 @@ apiRouter.delete("/delete_student/:id", requireUser, async (req, res, next) => {
         if (!deleteStudent) {
             return res.status(404).send("Student not found!");
         }
-        res.send({ deleteStudent, message: "Deleted" });
+        res.send({ deleteStudent, message: "Deleted!" });
     } catch (error) {
         next(error);
     }
@@ -525,7 +530,7 @@ apiRouter.delete("/delete_lesson/:id", requireUser, async (req, res, next) => {
         if (!deleteLesson) {
             return res.status(404).send("Lesson not found!");
         }
-        res.send({ deleteLesson, message: "Deleted" });
+        res.send({ deleteLesson, message: "Deleted!" });
     } catch (error) {
         next(error);
     }
@@ -539,7 +544,7 @@ apiRouter.delete("/delete_objective/:id", requireUser, async (req, res, next) =>
         if (!deleteObjective) {
             return res.status(404).send("Learning objective not found!");
         }
-        res.send({ deleteObjective, message: "Deleted" });
+        res.send({ deleteObjective, message: "Deleted!" });
     } catch (error) {
         next(error);
     }
@@ -553,10 +558,37 @@ apiRouter.delete("/delete_progress/:id", requireUser, async (req, res, next) => 
         if (!deleteProgress) {
             return res.status(404).send("Student progress not found!");
         }
-        res.send({ deleteProgress, message: "Deleted" });
+        res.send({ deleteProgress, message: "Deleted!" });
     } catch (error) {
         next(error);
     }
 });
+//<-----------------UPDATE STUDENT'S PROGRESS----------------->
+apiRouter.patch("/attendance", requireUser, async (req, res, next) => {
+    try {
+        const { studentId, lessonId, attendance } = req.body;
+        let attendanceRecord = await prisma.attendance.findFirst({
+            where: { studentId: studentId, lessonId: lessonId }
+        });
+        if (attendanceRecord) {
+            const updatedAttendance = await prisma.attendance.update({
+                where: { id: attendanceRecord.id },
+                data: { present: attendance }
+            });
+            res.send({ updatedAttendance, message: "Attendance updated!" });
+        } else {
+            const newAttendance = await prisma.attendance.create({
+                data: {
+                    present: attendance,
+                    student: { connect: { id: studentId } },
+                    lesson: { connect: { id: lessonId } }
+                }
+            });
+            res.send({ newAttendance, message: "New attendance created!" });
+        }
+    } catch (error) {
+        next(error);
+    }
+ });
 
 module.exports = apiRouter;

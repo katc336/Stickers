@@ -6,7 +6,6 @@ import { useState } from "react"
 
 const SearchBar = () => {
     const [search, setSearch] = useState("")
-    console.log(search)
     return (
         <div>
             <Box sx={{ my: 3}}>
