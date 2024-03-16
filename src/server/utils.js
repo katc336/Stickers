@@ -6,39 +6,44 @@ const prisma = new PrismaClient();
 
 //<--------------------------------AUTHORIZATION MIDDLEWARE-------------------------------->
 const authMiddleware = async (req, res, next) => {
-  const prefix = 'Bearer ';
-  const auth = req.header('Authorization');
-
-  if (!auth) {
-    // continue...
-    next();
-  } else if (auth.startsWith(prefix)) {
-    const token = auth.slice(prefix.length);
-    try {
-      const { id } = jwt.verify(token, JWT_SECRET);
-
-      if (id) {
-        req.user = await prisma.user.findUnique({
-          where: { id }
-        });
-        next();
-      } else {
-        next({
-          name: 'AuthorizationHeaderError',
-          message: 'Authorization token malformed',
-        });
+    const prefix = 'Bearer ';
+    const auth = req.header('Authorization');
+   
+    if (!auth) {
+      // continue...
+      next();
+    } else if (auth.startsWith(prefix)) {
+      const token = auth.slice(prefix.length);
+      try {
+        const { id, role } = jwt.verify(token, JWT_SECRET);
+        if (id) {
+          if (role === "user") {
+            req.user = await prisma.user.findUnique({
+              where: { id }
+            });
+          } else if (role === "parent") {
+            req.parent = await prisma.parent.findUnique({
+              where: { id }
+            });
+          }
+          next();
+        } else {
+          next({
+            name: 'AuthorizationHeaderError',
+            message: 'Authorization token malformed',
+          });
+        }
+      } catch ({ name, message }) {
+        next({ name, message });
       }
-    } catch ({ name, message }) {
-      next({ name, message });
+    } else {
+      next({
+        name: 'AuthorizationHeaderError',
+        message: `Authorization token must start with ${prefix}`,
+      });
     }
-  } else {
-    next({
-      name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${prefix}`,
-    });
-  }
-};
-
+   };
+   
 // requireUser error
 const requireUser = (req, res, next) => {
   if (!req.user) {
@@ -46,8 +51,15 @@ const requireUser = (req, res, next) => {
   }
   else next();
 };
+const requireParent = (req, res, next) => {
+  if (!req.parent) {
+    res.status(401).send("Parents only!")
+  }
+  else next();
+};
 
 module.exports = {
   requireUser,
+  requireParent,
   authMiddleware
 }

@@ -35,7 +35,7 @@ const MobileRegisterForm = () => {
                     navigate("/account");
                 } else {
                     setRegisterError(true);
-                    console.log("Incorrect login credentials");
+                    console.log("Register failed");
                 }
             }
         } catch (error) {

@@ -30,10 +30,12 @@ model Class {
 model Student {
   id              Int               @id @default(autoincrement())
   name            String
+  studentCode     String @unique
   class           Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId         Int
   attendances     Attendance[]
   studentProgress StudentProgress[]
+  parents         Parent[]
 }
 
 model CombinedObjective {
@@ -83,4 +85,13 @@ model StudentProgress {
   combinedObjectiveId Int
   progressPrecent     Int
   createdAt           DateTime          @default(now())
+}
+
+model Parent {
+  id          Int     @id @default(autoincrement())
+  username    String  @unique
+  password    String
+  studentCode String  
+  student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId   Int
 }

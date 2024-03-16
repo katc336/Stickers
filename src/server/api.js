@@ -69,20 +69,29 @@ apiRouter.post("/class", requireUser, async (req, res, next) => {
 });
 //<-----------------ADD STUDNETS TO A CLASS----------------->
 apiRouter.post("/add_student", requireUser, async (req, res, next) => {
+    const generateRandomCode = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = "";
+        for (let i = 0; i < 8; i++) {
+            code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return code;
+    }
     try {
-        const { name, id } = req.body
+        const { name, id } = req.body;
+        studentCode = generateRandomCode();
         const newStudent = await prisma.student.create({
             data: {
                 name: name,
-                class: { connect: { id: id } }
+                class: { connect: { id: id } },
+                studentCode: studentCode
             }
-        })
-        res.send(newStudent)
+        });
+        res.send(newStudent);
     } catch (error) {
         next(error);
     }
 });
-
 //<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
 apiRouter.get("/my_students", requireUser, async (req, res, next) => {
     try {
@@ -589,6 +598,6 @@ apiRouter.patch("/attendance", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
- });
+});
 
 module.exports = apiRouter;

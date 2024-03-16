@@ -16,7 +16,7 @@ const api = createApi({
             return headers
         },
     }),
-    tagTypes: ["User", "Class", "Student", "Lesson", "Objective", "Progress"],
+    tagTypes: ["User", "Parent", "Class", "Student", "Lesson", "Objective", "Progress"],
 
     endpoints: (builder) => ({
         //<-----------AUTHORIZATION----------->
@@ -37,6 +37,25 @@ const api = createApi({
                 body: user,
             }),
             providesTags: ["User"]
+        }),
+        //<-----------PARENT AUTHORIZATION----------->
+        //REGISTER ACCOUNT ENDPOINT
+        parentRegister: builder.mutation({
+            query: (parent) => ({
+                url: `/auth/register_parent`,
+                method: 'POST',
+                body: parent,
+            }),
+            providesTags: ["Parent"]
+        }),
+        //LOGIN ACCOUNT 
+        parentLogin: builder.mutation({
+            query: (parent) => ({
+                url: `/auth/login_parent`,
+                method: 'POST',
+                body: parent,
+            }),
+            providesTags: ["Parent"]
         }),
         //<------------GET USER INFO------------>
         //GET USER

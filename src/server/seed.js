@@ -8,6 +8,15 @@ const passwordHash = async () => {
     return adminPass;
 }
 
+const generateRandomCode = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let code = "";
+    for (let i = 0; i < 8; i++) {
+        code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return code;
+}
+
 passwordHash();
 
 const seed = async () => {
@@ -36,26 +45,26 @@ const seed = async () => {
                 teacher: { connect: { id: testAccount.id } },
                 students: {
                     create: [
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
                     ]
                 },
                 lessons: {
