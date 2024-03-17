@@ -27,10 +27,17 @@ const HomeNav = () => {
                             src={Logo}
                             width="150px" style={{ marginLeft: 20 }} />
                     </Link>
-                    <Link to="/about">
-                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, border: activePage === "/about" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                    <Link to="/about_teachers">
+                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
-                                About
+                                Teachers
+                            </Typography>
+                        </Button>
+                    </Link>
+                    <Link to="/about_parents">
+                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, border: activePage === "/about_parents" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                            <Typography variant="h6">
+                                Parents
                             </Typography>
                         </Button>
                     </Link>

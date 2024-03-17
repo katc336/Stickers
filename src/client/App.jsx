@@ -17,6 +17,10 @@ import Story from "./InformationPages/Story/Story";
 import LoginPage from "./Home/components/LoginPage";
 import MobileNav from "./Navigation/MobileNav";
 import NavDrawer from "./Navigation/NavDrawer";
+import ParentRegisterForm from "./Parents/ParentAuth/ParentRegisterForm";
+import ParentLoginForm from "./Parents/ParentAuth/ParentLoginForm";
+import ParentAuthPage from "./Parents/ParentAuth/ParentAuhtPage";
+import StudentCodes from "./StudentCodes.jsx/StudentCodes";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -24,12 +28,17 @@ function App() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div>
-      {isMobile ? <MobileNav /> : <div> {!token ? <div/> : <NavDrawer /> } </div> }
+      {isMobile ? <MobileNav /> : <div> {!token ? <div /> : <NavDrawer />} </div>}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<HowToGetStarted />} />
+        <Route path="/about_teachers" element={<HowToGetStarted />} />
+        <Route path="/about_parents" element={<HowToGetStarted />} />
         <Route path="/story" element={<Story />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/student_codes" element={<StudentCodes />} />
+        <Route path="/parent_auth" element={<ParentAuthPage />} />
+        <Route path="/login_parent" element={<ParentLoginForm />} />
+        <Route path="/register_parent" element={<ParentRegisterForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/progress" element={<AllProgress />} />

@@ -69,9 +69,14 @@ const MobileNav = () => {
                                                 Home
                                             </Button>
                                         </Link>
-                                        <Link to="/about">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 7, border: activePage === "/about" ? "5px solid orange" : "", borderRadius: "50px" }}>
-                                                About
+                                        <Link to="/about_teachers">
+                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 7, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                                Teachers
+                                            </Button>
+                                        </Link>
+                                        <Link to="/about_parents">
+                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 7, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                                Parents
                                             </Button>
                                         </Link>
                                         <Link to="/story">

@@ -54,7 +54,8 @@
   font-size: 18px;
   border-radius: 50px;
   border: none;
-  background-image: linear-gradient(to left bottom, #c7fa00, #d0fb00, #d8fc00, #e1fd00, #e9fe01, #eefe30, #f3fe47, #f7fe59, #f9fd7b, #fafd99, #fbfcb5, #fbfbd0);
+  background-size: 200%;
+  background-image: linear-gradient(to left bottom,#2ee0b4,#2ee0b4,#2ee0b4, #1be794, #39f275, #61fb47, #c7fa00, #d0fb00, #d8fc00, #e1fd00, #e9fe01, #eefe30, #f3fe47, #f7fe59, #f9fd7b, #fafd99, #fbfcb5, #fbfbd0);
   transition: 0.5s;
   box-shadow: 3px 3px 3px #02011b;
   ;

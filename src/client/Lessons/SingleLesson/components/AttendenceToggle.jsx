@@ -2,11 +2,11 @@ import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { useUpdateAttendenceMutation } from '../../../../redux/api';
+import { useUpdateAttendanceMutation } from '../../../../redux/api';
 
 const AttendenceToggle = ({ studentData, studentId, lessonId }) => {
     const [attendance, setAttendence] = useState(studentData.attendances[0]?.present || false);
-    const [updateAttendence] = useUpdateAttendenceMutation();
+    const [updateAttendence] = useUpdateAttendanceMutation();
    
     return (
         <div>
