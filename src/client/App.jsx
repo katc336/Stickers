@@ -22,14 +22,18 @@ import ParentLoginForm from "./Parents/ParentAuth/ParentLoginForm";
 import ParentAuthPage from "./Parents/ParentAuth/ParentAuhtPage";
 import StudentCodes from "./StudentCodes.jsx/StudentCodes";
 import ParentDashboard from "./Parents/ParentDashboard/ParentDashboard";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const location = useLocation();
+  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story"];
+  const hideNavDrawer = NoNavDrawerPages.includes(location.pathname);
   return (
     <div>
-      {isMobile ? <MobileNav /> : <div> {!token ? <div /> : <NavDrawer />} </div>}
+      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <NavDrawer /> : null}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about_teachers" element={<HowToGetStarted />} />
@@ -52,7 +56,6 @@ function App() {
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
       </Routes>
-
     </div>
   );
 }
