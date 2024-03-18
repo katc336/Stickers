@@ -17,10 +17,10 @@ const authSlice = createSlice({
             api.endpoints.register.matchFulfilled, storeToken);
         builder.addMatcher(
             api.endpoints.login.matchFulfilled, storeToken);
-        // builder.addMatcher(
-        //     api.endpoints.parentLogin.matchFulfilled, storeToken);
-        // builder.addMatcher(
-        //     api.endpoints.parentRegister.matchFulfilled, storeToken);
+        builder.addMatcher(
+            api.endpoints.parentLogin.matchFulfilled, storeToken);
+        builder.addMatcher(
+            api.endpoints.parentRegister.matchFulfilled, storeToken);
     }
 });
 

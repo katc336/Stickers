@@ -21,6 +21,7 @@ import ParentRegisterForm from "./Parents/ParentAuth/ParentRegisterForm";
 import ParentLoginForm from "./Parents/ParentAuth/ParentLoginForm";
 import ParentAuthPage from "./Parents/ParentAuth/ParentAuhtPage";
 import StudentCodes from "./StudentCodes.jsx/StudentCodes";
+import ParentDashboard from "./Parents/ParentDashboard/ParentDashboard";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -43,6 +44,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/progress" element={<AllProgress />} />
         <Route path="/account" element={<Dashboard />} />
+        <Route path="/account_parent" element={<ParentDashboard />} />
         <Route path="/my_classes" element={<AllClasses />} />
         <Route path="/class/:id" element={<SingleClass />} />
         <Route path="/my_students" element={<AllStudents />} />

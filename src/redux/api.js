@@ -57,6 +57,14 @@ const api = createApi({
             }),
             providesTags: ["Parent"]
         }),
+        //<------------GET PARENT INFO------------>
+        getParent: builder.query({
+            query: () => ({
+                url: `/auth/account_parent`,
+                method: 'GET',
+            }),
+            providesTags: ["Parent"]
+        }),
         //<------------GET USER INFO------------>
         //GET USER
         getUser: builder.query({
@@ -235,6 +243,8 @@ export const {
     //Parent Authorization
     useParentLoginMutation,
     useParentRegisterMutation,
+    //Parent Information
+    useGetParentQuery,
     //User Information
     useGetUserQuery,
     //Classes

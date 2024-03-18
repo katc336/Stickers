@@ -130,13 +130,26 @@ authRouter.post("/login_parent", async (req, res, next) => {
 authRouter.get("/account_parent", requireParent, async (req, res, next) => {
     try {
         const parent = await prisma.parent.findUnique({
-            where: { id: req.parent.id }
+            where: { id: req.parent.id },
+            include: {
+                student: {
+                    include: {
+                        studentProgress: {
+                            include: {
+                                 learningObjective: {
+                                    include: {lesson: true }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         });
         delete parent.password
         res.send(parent);
     } catch (error) {
         next(error)
     }
- });
- 
+});
+
 module.exports = authRouter;
