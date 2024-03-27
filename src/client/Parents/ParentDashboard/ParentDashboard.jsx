@@ -1,3 +1,4 @@
+import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
 import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
@@ -22,9 +23,9 @@ const ParentDashboard = () => {
             <Card
                 elevation={10}
                 sx={{ borderRadius: "20px", ml: 20, mr: 3, p: 3 }}>
-                <Typography 
-                sx={{ textAlign: "center" }}
-                variant="h3">
+                <Typography
+                    sx={{ textAlign: "center" }}
+                    variant="h3">
                     Welcome parent/guardian of {data.student.name}!
                 </Typography>
                 {data.student.studentProgress.map((objective) => (
@@ -34,9 +35,33 @@ const ParentDashboard = () => {
                             sx={{ borderRadius: "20px", m: 1, px: 3, py: 1 }}
                         >
                             <Grid container>
-                            <Grid item xs={1}>
+                                <Grid item xs={1}>
                                     <Typography >
-                                    {new Date(objective.learningObjective.lesson.createdAt).toLocaleDateString('en-US')}
+                                        {new Date(objective.learningObjective.lesson.createdAt).toLocaleDateString('en-US')}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Typography >
+                                        {objective.learningObjective.lesson.attendances.map((attendance) => (
+                                            !attendance.present
+                                                ?
+                                                <div>
+                                                    <Alert
+                                                        sx={{ mx: 4, p: 0 }}
+                                                        severity="error">
+                                                        Absent
+                                                    </Alert>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <Alert
+                                                        severity="success"
+                                                        sx={{ mx: 4, p: 0 }}>
+                                                        Present
+                                                    </Alert>
+                                                </div>
+
+                                        ))}
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={5}>
@@ -44,12 +69,12 @@ const ParentDashboard = () => {
                                         {objective.learningObjective.lesson.lessonName}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={3}>
+                                <Grid item xs={2}>
                                     <Typography>
                                         {objective.learningObjective.objectiveName}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={3}>
+                                <Grid item xs={2}>
                                     <Typography variant="h6">
                                         {objective.progressPrecent}%
                                     </Typography>

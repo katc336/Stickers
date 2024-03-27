@@ -136,8 +136,12 @@ authRouter.get("/account_parent", requireParent, async (req, res, next) => {
                     include: {
                         studentProgress: {
                             include: {
-                                 learningObjective: {
-                                    include: {lesson: true }
+                                learningObjective: {
+                                    include: {
+                                        lesson: {
+                                            include: { attendances: true }
+                                        }
+                                    }
                                 }
                             }
                         }
