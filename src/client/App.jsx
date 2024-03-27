@@ -29,7 +29,7 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
-  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story"];
+  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent" ];
   const hideNavDrawer = NoNavDrawerPages.includes(location.pathname);
   return (
     <div>
