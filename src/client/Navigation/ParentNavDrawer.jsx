@@ -28,7 +28,16 @@ const ParentNavDrawer = () => {
                         Home
                     </Button>
                 </Link>
-              
+                <Link to="/parent_stuedent_attendence-score">
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/parent_stuedent_attendence-score" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                        Daily Score
+                    </Button>
+                </Link>
+                <Link to="/parent_student_objective-score">
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/parent_student_attendance-score" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                        Score by Objective
+                    </Button>
+                </Link>
             </Drawer>
         </div>
     );

@@ -11,6 +11,7 @@ const AddLessonForm = () => {
     const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
     const [selectedClassId, setSelectedClassId] = useState(null);
     const [lessonName, setLessonName] = useState("")
+    const [date, setDate] = useState("")
     const [addLesson, setAddLesson] = useState(false);
     const [clearButton, setClearButton] = useState(true);
     const { data, error, isLoading } = useGetClassesQuery();
@@ -26,7 +27,8 @@ const AddLessonForm = () => {
             event.preventDefault();
             if (lessonName.trim() === "" || lessonName.length > 50) {
                 setAddError(true);
-            } else {
+            }
+            else {
                 //Check if the lesson already exists...
                 let lessonAlreadyExists = false;
                 data.forEach((item) => {
@@ -39,7 +41,7 @@ const AddLessonForm = () => {
                     console.log("Lesson already exists");
                     return;
                 } else {
-                    const result = await addLessonToClass({ id: Number(selectedClassId), lessonName })
+                    const result = await addLessonToClass({ id: Number(selectedClassId), lessonName, date })
                     console.log(result)
                     if (result.data) {
                         setAddError(false)
@@ -117,6 +119,12 @@ const AddLessonForm = () => {
                         ))
                     }
                     <Stack direction="column">
+                    <TextField
+                            label="Lesson's Date: dd/mm/yyyy"
+                            value={date}
+                            onChange={(event) => setDate(event.target.value)}
+                            variant="filled"
+                            sx={{ my: 1, width: "35%" }} />
                         <TextField
                             label="Lesson Name"
                             value={lessonName}

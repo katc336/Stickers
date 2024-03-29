@@ -23,6 +23,7 @@ import ParentAuthPage from "./Parents/ParentAuth/ParentAuhtPage";
 import StudentCodes from "./StudentCodes.jsx/StudentCodes";
 import ParentDashboard from "./Parents/ParentDashboard/ParentDashboard";
 import { useLocation } from "react-router-dom";
+import ParentAttendanceScore from "./Parents/ParentDashboard/ParentAttendanceScore";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -55,6 +56,8 @@ function App() {
         <Route path="/student/:id" element={<SingleStudent />} />
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
+        <Route path="/parent_student_attendance-score" element={<ParentAttendanceScore />} />
+        <Route path="/parent_student_objective-score" element={<ParentAttendanceScore />} />
       </Routes>
     </div>
   );

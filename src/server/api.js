@@ -204,9 +204,11 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
             include: {
                 studentProgress: {
                     include: {
-                        combinedObjective: true
+                        combinedObjective: true,
                     }
-                }
+                },
+                class: true, 
+                attendances: true 
             }
         });
         // Array to hold combinedObjectives average data

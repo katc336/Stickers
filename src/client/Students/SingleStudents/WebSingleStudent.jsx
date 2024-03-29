@@ -10,11 +10,13 @@ import { useGetSingleStudentQuery } from "../../../redux/api"
 import StudentAllProgressPercents from "./components/StudentAllProgressPercents";
 import StudentProgressOverTime from "./components/StudentProgressOverTime";
 import { motion } from "framer-motion";
+import StudentAttendances from "./components/StudentAttendances";
 
 const WebSingleStudent = () => {
     const [value, setValue] = useState("");
     const { id } = useParams()
     const { data, error, isLoading } = useGetSingleStudentQuery(id);
+    console.log(data)
     if (isLoading) {
         return <div></div>
     }
@@ -70,14 +72,18 @@ const WebSingleStudent = () => {
                             <Box sx={{ width: '100%' }}>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                        <Tab label="Averaged Progress" {...a11yProps(0)} />
-                                        <Tab label="Progress Over Time" {...a11yProps(1)} />
+                                        <Tab label="Attendance" {...a11yProps(0)} />
+                                        <Tab label="Averaged Progress" {...a11yProps(1)} />
+                                        <Tab label="Progress Over Time" {...a11yProps(2)} />
                                     </Tabs>
                                 </Box>
                                 <CustomTabPanel value={value} index={0}>
-                                    <StudentAllProgressPercents data={data} />
+                                    <StudentAttendances data={data} />
                                 </CustomTabPanel>
                                 <CustomTabPanel value={value} index={1}>
+                                    <StudentAllProgressPercents data={data} />
+                                </CustomTabPanel>
+                                <CustomTabPanel value={value} index={2}>
                                     <StudentProgressOverTime data={data} />
                                 </CustomTabPanel>
                             </Box>
