@@ -2,9 +2,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import AvatarEditor from 'react-avatar-editor';
 import axios from 'axios';
-import { useGetUserQuery } from '../../../redux/api';
+import { useGetUserQuery, usePostNewUserProfileMutation } from '../../../redux/api';
 import { useState } from 'react';
 
 const UploadAvatar = () => {
@@ -14,6 +13,7 @@ const UploadAvatar = () => {
     const [displaySave, setDisplaySave] = useState(false); //shows save button when image is uploaded
     const [loading, setLoading] = useState(false); //sets loading when image is uploading
     const [error, setError] = useState(false); //sets loading when image is uploading
+    const [updateUserImage] = usePostNewUserProfileMutation();
 
     const { data, error: dataError, isLoading } = useGetUserQuery();
     if (isLoading) {
@@ -22,11 +22,8 @@ const UploadAvatar = () => {
     if (error) {
         console.error(error);
     }
-
-    console.log(data)
-    const upload_preset = import.meta.env.REACT_APP_UPLOAD_PRESET
-
-    console.log(imageSelected)
+    console.log(data.profile)
+    // const upload_preset = import.meta.env.REACT_APP_UPLOAD_PRESET
 
     const upLoadImage = (event) => {
         event.preventDefault();
@@ -36,14 +33,23 @@ const UploadAvatar = () => {
             console.log(formData)
             formData.append("file", imageSelected)
             formData.append("cloud_name", "dtje7easn");
-            formData.append("upload_preset", upload_preset); //NOTE: do not what to show this for real
+            formData.append("upload_preset", "SOME PRESET"); //NOTE: do not what to share this for real code-add to .env
             // //Make axios post to send to route
             axios.post("https://api.cloudinary.com/v1_1/dtje7easn/image/upload", formData)
-                .then((res) => {
+                .then(async (res) => {
                     console.log(res)
-                    setProfile(res.data.secure_url)
+                    const imageUrl = res.data.secure_url;
+                    console.log(imageUrl);
+                    const result = await updateUserImage({ profileImg: imageUrl })
+                    console.log(result)
+                    setPreview(null);
+                    setLoading(false);
                 })
-                .catch((error) => console.error(error))
+                .catch((error) => {
+                    console.error(error);
+                    setLoading(false);
+                    setError(true);
+                });
             setLoading(false);
         } catch (error) {
             console.error(error)
@@ -56,7 +62,7 @@ const UploadAvatar = () => {
             <Stack direction="row">
                 <Avatar
                     alt="Profile Picture"
-                    src={preview}
+                    src={preview ? preview : data.profile}
                     sx={{ width: 100, height: 100, mb: 3, border: "3px solid #63a5b4" }}
                 />
                 <form onSubmit={upLoadImage}>

@@ -74,6 +74,15 @@ const api = createApi({
             }),
             providesTags: ["User"]
         }),
+        //<------------UPDATE USER INFO------------>
+        postNewUserProfile: builder.mutation({
+            query: (newImg) => ({
+                url: `/api/add_profile`,
+                method: 'PATCH',
+                body: newImg,
+            }),
+            invalidatesTags: ["User"]
+        }),
         //<------------CLASSES------------>
         postNewClass: builder.mutation({
             query: (newClass) => ({
@@ -247,6 +256,8 @@ export const {
     useGetParentQuery,
     //User Information
     useGetUserQuery,
+    //Update User Information
+    usePostNewUserProfileMutation,
     //Classes
     usePostNewClassMutation,
     useGetClassesQuery,

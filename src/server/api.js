@@ -6,6 +6,28 @@ const { requireUser } = require("./utils")
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+//<-----------------ADD PROFILE IMAGE----------------->
+apiRouter.patch("/add_profile", requireUser, async (req, res, next) => {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: req.user.id }
+        });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const { profileImg } = req.body;
+        const updatedUser = await prisma.user.update({
+            where: { id: req.user.id },
+            data: {
+                profile: profileImg
+            }
+        });
+        delete updatedUser.password;
+        res.json({ message: "Profile image added successfully" });
+    } catch (error) {
+        next(error);
+    }
+ });
 //<-----------------GET ALL CLASSES----------------->
 apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     try {
@@ -207,8 +229,8 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
                         combinedObjective: true,
                     }
                 },
-                class: true, 
-                attendances: true 
+                class: true,
+                attendances: true
             }
         });
         // Array to hold combinedObjectives average data
