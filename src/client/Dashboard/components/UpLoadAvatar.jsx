@@ -1,13 +1,92 @@
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AvatarEditor from 'react-avatar-editor';
+import axios from 'axios';
+import { useGetUserQuery } from '../../../redux/api';
+import { useState } from 'react';
 
 const UploadAvatar = () => {
+    const [imageSelected, setImageSelected] = useState(null); // sets the selected image
+    const [preview, setPreview] = useState(null) //sets the previewed uploaded file
+    const [profile, setProfile] = useState(null) //shows/fetches user's profile
+    const [displaySave, setDisplaySave] = useState(false); //shows save button when image is uploaded
+    const [loading, setLoading] = useState(false); //sets loading when image is uploading
+    const [error, setError] = useState(false); //sets loading when image is uploading
+
+    const { data, error: dataError, isLoading } = useGetUserQuery();
+    if (isLoading) {
+        return <div></div>
+    }
+    if (error) {
+        console.error(error);
+    }
+
+    console.log(data)
+    const upload_preset = import.meta.env.REACT_APP_UPLOAD_PRESET
+
+    console.log(imageSelected)
+
+    const upLoadImage = (event) => {
+        event.preventDefault();
+        setLoading(true);
+        try {
+            const formData = new FormData();
+            console.log(formData)
+            formData.append("file", imageSelected)
+            formData.append("cloud_name", "dtje7easn");
+            formData.append("upload_preset", upload_preset); //NOTE: do not what to show this for real
+            // //Make axios post to send to route
+            axios.post("https://api.cloudinary.com/v1_1/dtje7easn/image/upload", formData)
+                .then((res) => {
+                    console.log(res)
+                    setProfile(res.data.secure_url)
+                })
+                .catch((error) => console.error(error))
+            setLoading(false);
+        } catch (error) {
+            console.error(error)
+            setLoading(false);
+            setError(true);
+        }
+    }
     return (
         <div>
-            <Avatar
-                alt="Profile Picture"
-                src=""
-                sx={{ width: 70, height: 70 }}
-            />
+            <Stack direction="row">
+                <Avatar
+                    alt="Profile Picture"
+                    src={preview}
+                    sx={{ width: 100, height: 100, mb: 3, border: "3px solid #63a5b4" }}
+                />
+                <form onSubmit={upLoadImage}>
+                    <Stack direction="column">
+                        <label className='file-upload'>
+                            <input
+                                type="file"
+                                accept='image/*'
+                                onChange={(event) => {
+                                    setImageSelected(event.target.files[0])
+                                    setPreview(URL.createObjectURL(event.target.files[0]))
+                                    setDisplaySave(true);
+                                }} />
+                            <AddAPhotoIcon sx={{ color: "#63a5b4" }} />
+                        </label>
+                        {displaySave &&
+                            <Button
+                                type="submit"
+                                sx={{
+                                    mt: 5,
+                                    backgroundImage: "linear-gradient(to right top, #b3b2c6, #b9c1d3, #c2d0dd, #cedfe7, #ddedf0, #d4f3f4, #ccf9f4, #c8fff0, #b4ffd7, #b8ffae, #d1ff7b, #f8f540)",
+                                    textTransform: "none",
+                                    borderRadius: "20px"
+                                }} >
+                                Save Picture
+                            </Button>
+                        }
+                    </Stack>
+                </form>
+            </Stack>
         </div>
     )
 }

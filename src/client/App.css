@@ -185,3 +185,12 @@
   transition: 0.5s;
   border-radius: 50px;
 }
+
+/* <---------------------------UPLOAD FILE---------------------------> */
+input[type="file"] {
+  display: none;
+}
+.file-upload {
+  padding: 100;
+  cursor: pointer;
+}
