@@ -24,7 +24,9 @@ const WebStory = () => {
                                 width="550px" style={{ marginLeft: 20 }} />
                         </Grid>
                         <Grid item xs={7}>
-                            <Typography variant="h4">
+                            <Typography
+                                variant="h4"
+                                sx={{ mb: 3 }}>
                                 Hello 👋 I’m Kat, the creator, and welcome to Stickers!
                             </Typography>
                             <Typography
@@ -52,22 +54,8 @@ const WebStory = () => {
                                 variant="h6"
                                 sx={{ mb: 3 }}>
                                 This app is a free resource for educators, and I hope it helps to simplify and improve the student data tracking process so
-                                you can focus on teaching and all the important work educators do. Thank you for choosing Sticker, and I welcome any feedback
-                                or suggestions for future improvements. If you would like to contribute to the app, suggest a feature, or report a bug,
-                                reach out to me on LinkedIn.
+                                you can focus on teaching and all the important work educators do.
                             </Typography>
-                            <Link
-                                target="_blank"
-                                to="https://www.linkedin.com/in/katcwebdeveloper/">
-                                <button className="auth-button">
-                                    <Stack direction="row">
-                                        <LinkedInIcon sx={{ mx: 1 }} />
-                                        <Typography>
-                                            See LinkedIn Here
-                                        </Typography>
-                                    </Stack>
-                                </button>
-                            </Link>
                         </Grid>
                     </Grid>
                 </Box>

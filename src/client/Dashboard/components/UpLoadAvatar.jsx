@@ -3,13 +3,13 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useGetUserQuery, usePostNewUserProfileMutation } from '../../../redux/api';
 import { useState } from 'react';
 
 const UploadAvatar = () => {
     const [imageSelected, setImageSelected] = useState(null); // sets the selected image
     const [preview, setPreview] = useState(null) //sets the previewed uploaded file
-    const [profile, setProfile] = useState(null) //shows/fetches user's profile
     const [displaySave, setDisplaySave] = useState(false); //shows save button when image is uploaded
     const [loading, setLoading] = useState(false); //sets loading when image is uploading
     const [error, setError] = useState(false); //sets loading when image is uploading
@@ -19,7 +19,7 @@ const UploadAvatar = () => {
     if (isLoading) {
         return <div></div>
     }
-    if (error) {
+    if (dataError) {
         console.error(error);
     }
     console.log(data.profile)
@@ -29,28 +29,28 @@ const UploadAvatar = () => {
         event.preventDefault();
         setLoading(true);
         try {
-            const formData = new FormData();
+            const formData = new FormData(); //new form data object to send to api
             console.log(formData)
-            formData.append("file", imageSelected)
-            formData.append("cloud_name", "dtje7easn");
-            formData.append("upload_preset", "SOME PRESET"); //NOTE: do not what to share this for real code-add to .env
+            formData.append("file", imageSelected) // add key: file, value: imageSelected
+            formData.append("cloud_name", "dtje7easn");// add key: "cloud_name", value: name of cloud
+            formData.append("upload_preset", "kv7hzalq"); // add key: "upload_preset", value: preset (NOTE: do not what to share this for real code-add to .env)
             // //Make axios post to send to route
             axios.post("https://api.cloudinary.com/v1_1/dtje7easn/image/upload", formData)
                 .then(async (res) => {
                     console.log(res)
-                    const imageUrl = res.data.secure_url;
+                    const imageUrl = res.data.secure_url; //url of the image posted
                     console.log(imageUrl);
-                    const result = await updateUserImage({ profileImg: imageUrl })
+                    const result = await updateUserImage({ profileImg: imageUrl }) //patch user profileImg with the new imgURL
                     console.log(result)
-                    setPreview(null);
-                    setLoading(false);
+                    setPreview(null); //clear preview
+                    setLoading(false);// clear loading
+                    setDisplaySave(false);
                 })
                 .catch((error) => {
                     console.error(error);
                     setLoading(false);
-                    setError(true);
+                    setError(true); //set error if image upload fails
                 });
-            setLoading(false);
         } catch (error) {
             console.error(error)
             setLoading(false);
@@ -62,7 +62,7 @@ const UploadAvatar = () => {
             <Stack direction="row">
                 <Avatar
                     alt="Profile Picture"
-                    src={preview ? preview : data.profile}
+                    src={preview ? preview : data.profile} //if preview img, set it, if not, show the user's profile
                     sx={{ width: 100, height: 100, mb: 3, border: "3px solid #63a5b4" }}
                 />
                 <form onSubmit={upLoadImage}>
@@ -78,6 +78,8 @@ const UploadAvatar = () => {
                                 }} />
                             <AddAPhotoIcon sx={{ color: "#63a5b4" }} />
                         </label>
+                        {loading &&
+                              <CircularProgress sx={{ mx: 1 }}/>}
                         {displaySave &&
                             <Button
                                 type="submit"

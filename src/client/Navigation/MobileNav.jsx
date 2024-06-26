@@ -65,23 +65,33 @@ const MobileNav = () => {
                                         sx={{ ml: 1 }}
                                         direction="column">
                                         <Link to="/">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mt: 10, mb: 7, border: activePage === "/" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 5,  textDecoration: activePage === "/" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Home
                                             </Button>
                                         </Link>
                                         <Link to="/about_teachers">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 7, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 1, textDecoration: activePage === "/about_teachers" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Teachers
                                             </Button>
                                         </Link>
                                         <Link to="/about_parents">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 7, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white",  mt: 1,textDecoration: activePage === "/about_parents" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Parents
                                             </Button>
                                         </Link>
                                         <Link to="/story">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", border: activePage === "/story" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white",  mt: 1,textDecoration: activePage === "/story" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Story
+                                            </Button>
+                                        </Link>
+                                        <Link to="/login">
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white",  mt: 1,textDecoration: activePage === "/login" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                                Login
+                                            </Button>
+                                        </Link>
+                                        <Link to="/register">
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white",mt: 1, textDecoration: activePage === "/register" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                                Sign Up
                                             </Button>
                                         </Link>
                                     </Stack>

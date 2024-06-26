@@ -28,29 +28,38 @@ const HomeNav = () => {
                             width="150px" style={{ marginLeft: 20 }} />
                     </Link>
                     <Link to="/about_teachers">
-                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, border: activePage === "/about_teachers" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, textDecoration: activePage === "/about_teachers" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
                                 Teachers
                             </Typography>
                         </Button>
                     </Link>
                     <Link to="/about_parents">
-                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, border: activePage === "/about_parents" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                        <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, textDecoration: activePage === "/about_parents" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
                                 Parents
                             </Typography>
                         </Button>
                     </Link>
                     <Link to="/story">
-                        <Button sx={{ color: "white", textTransform: "none", mt: 1.5, border: activePage === "/story" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                        <Button sx={{ color: "white", textTransform: "none", mt: 1.5, textDecoration: activePage === "/story" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
                                 Story
                             </Typography>
                         </Button>
                     </Link>
+                    <Link to="/login">
+                        <button
+                            style={{ width: 80 }}
+                            className="add-button">
+                            Login
+                        </button>
+                    </Link>
                     <Link to="/register">
-                        <button className="add-button">
-                            Sign Up for Free
+                        <button
+                            style={{ width: 80 }}
+                            className="add-button">
+                            Sign Up
                         </button>
                     </Link>
                 </Stack>

@@ -15,11 +15,6 @@ const ParentLoginButton = () => {
                 <Stack
                     style={{ marginTop: "10%", marginLeft: "25%" }}
                     direction="column">
-                    <Typography
-                        sx={{ mb: 3 }}
-                        variant="h5">
-                        Are you a parent?
-                    </Typography>
                     <Link to="/parent_auth">
                         <button
                             className="auth-button"

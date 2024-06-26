@@ -15,11 +15,6 @@ const TeacherLoginButton = () => {
                 <Stack
                     style={{ marginTop: "10%", marginLeft: "25%" }}
                     direction="column">
-                    <Typography
-                        sx={{ mb: 3 }}
-                        variant="h5">
-                        Start tracking student's progress
-                    </Typography>
                     <Link to="/login">
                         <button
                             className="auth-button"
