@@ -41,7 +41,7 @@ const ClassLessonObjective = ({ id }) => {
                                 </Typography>
                                 <button
                                     className="delete-button"
-                                    style={{ width: "70px", margin: 0 }} //override margin in CSS
+                                    style={{ maxHeight: "40px"}} //override margin in CSS
                                     onClick={() => {
                                         setDelteObjectiveAlert(true);
                                         setSelectedObjective(objective.id)

@@ -1,4 +1,5 @@
 import Alert from "@mui/material/Alert";
+import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -44,6 +45,7 @@ const MobileRegisterForm = () => {
     }
     return (
         <div>
+            <Card sx={{ mt: 15, borderRadius: "20px", p: 5, mx: 3 }}>
                 <Typography
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
@@ -97,6 +99,7 @@ const MobileRegisterForm = () => {
                         </button>
                     </Stack>
                 </form>
+                </Card>
         </div>
     )
 }

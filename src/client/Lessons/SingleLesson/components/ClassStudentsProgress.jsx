@@ -60,10 +60,8 @@ const ClassStudentsProgress = ({ id }) => {
                                             }}>
                                             <Grid container>
                                                 <Grid item xs={5}>
-                                                    <Typography
-                                                        variant="h6"
-                                                        sx={{ mx: 1 }}>
-                                                        {progress.learningObjective.objectiveName}:
+                                                    <Typography  sx={{ mx: 1 }}>
+                                                        {progress.learningObjective.objectiveName}
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={isMobile ? 2 : 3}>

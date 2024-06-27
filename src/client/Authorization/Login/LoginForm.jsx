@@ -5,8 +5,9 @@ import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-import { useLoginMutation } from "../../../redux/api";
+import { useLoginMutation } from '../../../redux/api';
 import { useNavigate } from "react-router-dom";
+import HomeNav from '../../Navigation/HomeNav';
 
 const LoginForm = ({ switchForm }) => {
     const [username, setUsername] = useState("");
@@ -34,6 +35,7 @@ const LoginForm = ({ switchForm }) => {
     }
     return (
         <div>
+            <HomeNav />
             <Card sx={{ borderRadius: "20px", p: 5 }}>
                 <Typograpgy
                     variant="h4"

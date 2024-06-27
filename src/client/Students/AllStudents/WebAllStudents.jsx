@@ -117,13 +117,13 @@ const WebAllStudents = () => {
                                         severity="error"
                                         sx={{ m: 1 }}>
                                         <Stack direction="column">
-                                            <Typography variant="h6">
+                                            <Typography 
+                                            sx={{ mb: 1 }}
+                                            variant="h6">
                                                 Are you sure you want to delete this student?
-                                            </Typography>
-                                            <Typography variant="h6">
                                                 Once you do it will be gone forever.
                                             </Typography>
-                                            <Stack direction="row">
+                                            <Stack sx={{ ml: "50%"}}spacing={5} direction="row">
                                                 <button
                                                     onClick={() => setDeleteAlert(false)}
                                                     className="add-button"

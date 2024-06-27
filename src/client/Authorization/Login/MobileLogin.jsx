@@ -1,4 +1,5 @@
 import Alert from '@mui/material/Alert';
+import Card from '@mui/material/Card';
 import Stack from "@mui/material/Stack";
 import Typograpgy from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -32,6 +33,7 @@ const MobileLoginForm = ({ switchForm }) => {
     }
     return (
         <div>
+             <Card sx={{ mt: 15, borderRadius: "20px", p: 5, mx: 3 }}>
                 <Typograpgy
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
@@ -59,6 +61,7 @@ const MobileLoginForm = ({ switchForm }) => {
                         </button>
                     </Stack>
                 </form>
+                </Card>
         </div>
     )
 }

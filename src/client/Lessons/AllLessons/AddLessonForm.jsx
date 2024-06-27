@@ -1,19 +1,24 @@
 import Alert from "@mui/material/Alert"
+import Box from '@mui/material/Box';
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
+import ClearIcon from '@mui/icons-material/Clear';
+import Dialog from '@mui/material/Dialog';
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useGetClassesQuery, usePostNewLessonMutation } from "../../../redux/api"
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const AddLessonForm = () => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const [open, setOpen] = useState(false);
     const [addError, setAddError] = useState(null);
-    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false);
     const [selectedClassId, setSelectedClassId] = useState(null);
-    const [lessonName, setLessonName] = useState("")
-    const [date, setDate] = useState("")
-    const [addLesson, setAddLesson] = useState(false);
-    const [clearButton, setClearButton] = useState(true);
+    const [lessonName, setLessonName] = useState("");
+    const [date, setDate] = useState("");
     const { data, error, isLoading } = useGetClassesQuery();
     const [addLessonToClass] = usePostNewLessonMutation();
     if (isLoading) {
@@ -25,6 +30,7 @@ const AddLessonForm = () => {
     const handleAddLesson = async (event) => {
         try {
             event.preventDefault();
+            setOpen(false);
             if (lessonName.trim() === "" || lessonName.length > 50) {
                 setAddError(true);
             }
@@ -46,8 +52,6 @@ const AddLessonForm = () => {
                     if (result.data) {
                         setAddError(false)
                         setAddAlreadyExistsError(false);
-                        setAddLesson(false)
-                        setClearButton(true)
                         setLessonName("");
                         console.log("Success!");
                     } else {
@@ -60,9 +64,16 @@ const AddLessonForm = () => {
             console.error(error)
         }
     }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <div>
-            {clearButton && data.length === 0
+            {data.length === 0
                 ?
                 <div>
                     <Alert severity="info">
@@ -81,24 +92,34 @@ const AddLessonForm = () => {
                     </Alert>
                 </div>
                 : <div>
-                    {clearButton &&
+                    <Box sx={{ my: isMobile ? 3 : 5, mx: 1 }}>
                         <button
                             className="add-button"
-                            onClick={() => { setAddLesson(true), setClearButton(false) }}>
+                            onClick={handleClickOpen}>
                             Add New Lesson
                         </button>
-                    }
+                    </Box>
                 </div>
             }
-            {addLesson &&
-                <form onSubmit={handleAddLesson}>
-                    <Typography variant="h6">
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose} >
+                    <ClearIcon
+                        sx={{ my: 3,  ml: "80%" }}
+                        className="delete-button"
+                        onClick={handleClose} />
+                    <Typography
+                        sx={{ px: isMobile ? 1 : 3 }}
+                        variant="h5">
                         Select the Lesson's Class:
                     </Typography>
-                    {
-                        data.map((className) => (
+                    <form onSubmit={handleAddLesson}>
+                        {data.map((className) => (
                             <div key={className.id}>
-                                <Stack direction="row">
+                                <Stack
+                                    sx={{ px: isMobile ? 1 : 5 }}
+                                    direction="row">
                                     <input
                                         type="checkbox"
                                         value={""}
@@ -108,37 +129,46 @@ const AddLessonForm = () => {
                                             } else {
                                                 setSelectedClassId(null);
                                             }
-                                        }}
-                                        checked={selectedClassId === className.id}
+                                        }} checked={selectedClassId === className.id}
                                     />
                                     <Typography>
                                         {className.name}
                                     </Typography>
                                 </Stack>
                             </div>
-                        ))
-                    }
-                    <Stack direction="column">
-                    <TextField
-                            label="Lesson's Date: dd/mm/yyyy"
-                            value={date}
-                            onChange={(event) => setDate(event.target.value)}
-                            variant="filled"
-                            sx={{ my: 1, width: "35%" }} />
-                        <TextField
-                            label="Lesson Name"
-                            value={lessonName}
-                            onChange={(event) => setLessonName(event.target.value)}
-                            variant="filled"
-                            sx={{ my: 1, width: "35%" }} />
-                        <button
-                            style={{ width: "150px" }}
-                            className="add-button"
-                            type="submit">
-                            Add Lesson
-                        </button>
-                    </Stack>
-                </form>}
+                        ))}
+                        <Typography
+                            sx={{ mt: 3, px: isMobile ? 1 : 3 }}
+                            variant="h5">
+                            Add Lesson's Objective:
+                        </Typography>
+                        <Stack
+                            sx={{ px: isMobile ? 1 : 3 }}
+                            direction="column">
+                            <TextField
+                                label="Lesson's Date: dd/mm/yyyy"
+                                value={date}
+                                onChange={(event) => setDate(event.target.value)}
+                                variant="filled"
+                                sx={{ m: 1 }} />
+                            <TextField
+                                label="Lesson Name"
+                                value={lessonName}
+                                onChange={(event) => setLessonName(event.target.value)}
+                                variant="filled"
+                                sx={{ m: 1 }} />
+                        </Stack>
+                        <Typography sx={{ my: 3, textAlign: "center" }}>
+                            <button
+                                style={{ width: "150px" }}
+                                className="add-button"
+                                type="submit">
+                                Add Lesson
+                            </button>
+                        </Typography>
+                    </form>
+                </Dialog>
+            </div>
             {addError &&
                 <Alert severity="error">
                     Please make sure you enter a name that is 1 to 50 characters.

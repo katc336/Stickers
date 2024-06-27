@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
@@ -44,10 +45,12 @@ const WebSingleClass = () => {
                                 Students:
                             </Typography>
                             <StudentForClass data={data} />
+                            <Box sx={{ my: 3 }}>
                             <AddStudentButton
                                 id={id}
                                 data={data}
                             />
+                            </Box>
                         </Card>
                     </Grid>
                     {/* <--------------------------LESSONS FOR CLASS--------------------------> */}
@@ -61,10 +64,12 @@ const WebSingleClass = () => {
                                 Lessons:
                             </Typography>
                             <LessonForClass data={data} />
+                            <Box sx={{ ml: 3, my: 2 }}>
                             <AddLessonButton
                                 id={id}
                                 data={data}
                             />
+                            </Box>
                         </Card>
                     </Grid>
                 </Grid>

@@ -4,7 +4,6 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import HomePage from "./Home/HomePage";
 import Dashboard from "./Dashboard/Dashboard";
-import RegisterForm from "./Home/components/RegisterForm";
 import AllClasses from "./Classes/AllClasses/AllClasses";
 import AllStudents from "./Students/AllStudents/AllStudents";
 import SingleStudent from "./Students/SingleStudents/SingleStudent";
@@ -14,7 +13,7 @@ import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./AllProgress/AllProgress";
 import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./InformationPages/Story/Story";
-import LoginPage from "./Home/components/LoginPage";
+import LoginPage from "./Authorization/Login/LoginPage";
 import MobileNav from "./Navigation/MobileNav";
 import NavDrawer from "./Navigation/NavDrawer";
 import ParentRegisterForm from "./Parents/ParentAuth/ParentRegisterForm";
@@ -24,6 +23,7 @@ import StudentCodes from "./StudentCodes.jsx/StudentCodes";
 import ParentDashboard from "./Parents/ParentDashboard/ParentDashboard";
 import { useLocation } from "react-router-dom";
 import ParentAttendanceScore from "./Parents/ParentDashboard/ParentAttendanceScore";
+import RegisterPage from "./Authorization/Register/RegisterPage";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -45,7 +45,7 @@ function App() {
         <Route path="/parent_auth" element={<ParentAuthPage />} />
         <Route path="/login_parent" element={<ParentLoginForm />} />
         <Route path="/register_parent" element={<ParentRegisterForm />} />
-        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/register" element={<RegisterPage/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/progress" element={<AllProgress />} />
         <Route path="/account" element={<Dashboard />} />

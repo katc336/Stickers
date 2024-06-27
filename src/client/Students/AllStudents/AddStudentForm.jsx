@@ -2,17 +2,22 @@ import Alert from "@mui/material/Alert"
 import Typography from "@mui/material/Typography"
 import TextField from "@mui/material/TextField"
 import Stack from "@mui/material/Stack"
+import Box from "@mui/material/Box"
+import ClearIcon from '@mui/icons-material/Clear';
+import Dialog from '@mui/material/Dialog';
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useGetClassesQuery, usePostNewStudentMutation } from "../../../redux/api"
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const AddStudentForm = ({ allStudedntData }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const [open, setOpen] = useState(false);
     const [addError, setAddError] = useState(null);
-    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
+    const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false);
     const [selectedClassId, setSelectedClassId] = useState(null);
-    const [name, setName] = useState("")
-    const [addStudent, setAddStudent] = useState(false);
-    const [clearButton, setClearButton] = useState(true);
+    const [name, setName] = useState("");
     const { data, error, isLoading } = useGetClassesQuery();
     const [addStudentToClass] = usePostNewStudentMutation();
     if (isLoading) {
@@ -36,10 +41,8 @@ const AddStudentForm = ({ allStudedntData }) => {
                     const result = await addStudentToClass({ id: Number(selectedClassId), name })
                     console.log(result)
                     if (result.data) {
-                        setAddError(false)
+                        setAddError(false);
                         setAddAlreadyExistsError(false);
-                        setAddStudent(false)
-                        setClearButton(true)
                         setName("");
                         console.log("Success!");
                     } else {
@@ -52,9 +55,15 @@ const AddStudentForm = ({ allStudedntData }) => {
             console.error(error)
         }
     }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <div>
-            {clearButton && data.length === 0
+            {data.length === 0
                 ?
                 <div>
                     <Alert severity="info">
@@ -73,15 +82,21 @@ const AddStudentForm = ({ allStudedntData }) => {
                     </Alert>
                 </div>
                 : <div>
-                    {clearButton &&
-                        <button
-                            className="add-button"
-                            onClick={() => { setAddStudent(true), setClearButton(false) }}>
-                            Add New Student
-                        </button>}
+                    <Box sx={{ mx: isMobile ? 0 : 3, my: isMobile ? 2 : 3 }}>
+                    <button
+                        className="add-button"
+                        onClick={handleClickOpen}>
+                        Add New Student
+                    </button>
+                    </Box>
                 </div>
             }
-            {addStudent &&
+            <Dialog open={open}>
+                <Box sx={{ px: 3}}>
+                <ClearIcon
+                    sx={{ my: 3, ml: "80%" }}
+                    className="delete-button"
+                    onClick={handleClose} />
                 <form onSubmit={handleAddStudent}>
                     <Typography variant="h6">
                         Select Student's Class:
@@ -113,15 +128,19 @@ const AddStudentForm = ({ allStudedntData }) => {
                             value={name}
                             onChange={(event) => setName(event.target.value)}
                             variant="filled"
-                            sx={{ my: 1, width: "35%" }} />
-                        <button
-                            style={{ width: "150px" }}
-                            className="add-button"
-                            type="submit">
-                            Add Student
-                        </button>
+                            sx={{ my: 1 }} />
+                        <Box sx={{ ml: "15%", my: 3 }}>
+                            <button
+                                style={{ width: "150px" }}
+                                className="add-button"
+                                type="submit">
+                                Add Student
+                            </button>
+                        </Box>
                     </Stack>
-                </form>}
+                </form>
+                </Box>
+            </Dialog>
             {addError &&
                 <Alert severity="error">
                     Please make sure you enter a name that is 1 to 30 characters.

@@ -1,8 +1,8 @@
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react"
-import MobileLoginForm from "./MobileLogin";
-import MobileRegisterForm from "./MobileRegister";
+import MobileLoginForm from "./Login/MobileLogin";
+import MobileRegisterForm from "./Register/MobileRegister";
 
 const MobileAuth = () => {
     const [login, setLogin] = useState(true);

@@ -1,17 +1,23 @@
 import Textfield from "@mui/material/TextField"
-import Grid from "@mui/material/Grid"
+import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Stack from "@mui/material/Stack"
+import ClearIcon from '@mui/icons-material/Clear';
+import Dialog from '@mui/material/Dialog';
 import { useState } from "react";
 import { usePostNewClassMutation } from "../../../redux/api"
-import Alert from "@mui/material/Alert";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const AddClassButton = ({ data }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const [open, setOpen] = useState(false);
     const [addError, setAddError] = useState(false);
     const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false);
-    const [addButton, setAddButton] = useState(true);
-    const [classForm, setClassForm] = useState(false);
     const [name, setName] = useState("");
     const [addClass] = usePostNewClassMutation();
-    const handleAdd = async (event) => {
+    const handleAddClass = async (event) => {
         try {
             event.preventDefault();
             if (name.trim() === "" || name.length > 50) {
@@ -29,8 +35,6 @@ const AddClassButton = ({ data }) => {
                         console.log("Success!" + result.data);
                         setAddError(false);
                         setAddAlreadyExistsError(false);
-                        setAddButton(true);
-                        setClassForm(false);
                         setName("");
                     } else {
                         console.error("Cannot add class");
@@ -40,6 +44,13 @@ const AddClassButton = ({ data }) => {
         } catch (error) {
             return error.message;
         }
+    };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
     return (
         <div>
@@ -54,39 +65,46 @@ const AddClassButton = ({ data }) => {
                 <Alert severity="error">
                     There is already a class with this name. Please revise the name to make it unique.
                 </Alert>}
-            {
-                addButton &&
-                <button
-                    className="add-button"
-                    onClick={() => { setClassForm(true), setAddButton(false) }}
-                >
-                    Add New Class
-                </button>
-            }
-            {classForm &&
-                <form onSubmit={handleAdd}>
-                    <Grid container>
-                        <Grid item xs={10}>
-                            <Textfield
-                                fullWidth
-                                size="small"
-                                label="Class Name"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                                variant="filled"
-                            />
-                        </Grid>
-                        <Grid item xs={2}>
+            <button
+                onClick={handleClickOpen}
+                className="add-button">
+                Add New Class
+            </button>
+            <Dialog
+                open={open}
+                onClose={handleClose} >
+                <ClearIcon
+                    sx={{ my: 3, ml: "80%" }}
+                    className="delete-button"
+                    onClick={handleClose} />
+                <Typography
+                    sx={{ p: isMobile ? 1 : 3 }}
+                    variant="h5">
+                    Add Class Name:
+                </Typography>
+                <form onSubmit={handleAddClass}>
+                    <Stack
+                        sx={{ px: isMobile ? 1 : 3 }}
+                        direction="column">
+                        <Textfield
+                            fullWidth
+                            size="small"
+                            label="Class Name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            variant="filled"
+                        />
+                        <Box sx={{ ml: "25%", my:  3 }}>
                             <button
                                 style={{ marginTop: "5px" }} //override margin styles for better alignent
                                 className="add-button"
                                 type="submit">
                                 Add Class
                             </button>
-                        </Grid>
-                    </Grid>
+                        </Box>
+                    </Stack>
                 </form>
-            }
+            </Dialog>
         </div>
     )
 }

@@ -121,12 +121,14 @@ const MobileAllStudents = () => {
                                         <Typography variant="h6">
                                             Once you do it will be gone forever.
                                         </Typography>
-                                        <button
-                                            onClick={() => setDeleteAlert(false)}
-                                            className="add-button"
-                                            style={{ width: "150px" }}>
-                                            Keep Student
-                                        </button>
+                                        <Box sx={{ my: 3 }}>
+                                            <button
+                                                onClick={() => setDeleteAlert(false)}
+                                                className="add-button"
+                                                style={{ width: "150px" }}>
+                                                Keep Student
+                                            </button>
+                                        </Box>
                                         <button
                                             onClick={() => deleteStudent(student.id)}
                                             className="delete-button"

@@ -89,8 +89,8 @@ const ProgressChart = () => {
                                     <Box sx={{ width: '100%' }}>
                                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                                <Tab label="Average Progress Across All Classes" {...a11yProps(0)} />
-                                                <Tab label="Compare Students' Progress" {...a11yProps(1)} />
+                                                <Tab label="All Progress" {...a11yProps(0)} />
+                                                <Tab label="Objective's Progress" {...a11yProps(1)} />
                                             </Tabs>
                                         </Box>
                                         <CustomTabPanel value={value} index={0}>

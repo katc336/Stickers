@@ -1,6 +1,5 @@
 import Alert from "@mui/material/Alert"
 import Card from "@mui/material/Card"
-import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Accordion from '@mui/material/Accordion';
@@ -119,18 +118,20 @@ const MobileAllLessons = () => {
                                                             <Typography variant="h6">
                                                                 Once you do it will be gone forever.
                                                             </Typography>
+                                                            <Stack direction="column">
                                                             <button
                                                                 onClick={() => setDelteAlert(false)}
                                                                 className="add-button"
-                                                                style={{ width: "150px" }}>
+                                                                style={{ marginTop: "10px", width: "150px" }}>
                                                                 Keep Lesson
                                                             </button>
                                                             <button
                                                                 onClick={() => deleteLesson(lesson.id)}
                                                                 className="delete-button"
-                                                                style={{ width: "150px" }}>
+                                                                style={{marginTop: "20px", width: "150px" }}>
                                                                 Delete Forever
                                                             </button>
+                                                            </Stack>
                                                         </Alert>}
                                                 </Card>
                                             </AccordionDetails>

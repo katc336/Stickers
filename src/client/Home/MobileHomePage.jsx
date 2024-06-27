@@ -2,7 +2,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import Logo from "./images/Logo.png"
-import MobileAuth from "./components/MobileAuth"
+import MobileAuth from "../Authorization/MobileAuth"
 import teacherImg from "./images/Teacher.png"
 import { motion } from "framer-motion"
 import MobileHowToGetStarted from "../InformationPages/HowToGetStarted/MobileHowToGetStarted"
@@ -17,23 +17,27 @@ const MobileHomePage = () => {
                 <Stack direction="column">
                     <img
                         src={Logo}
-                        width="250px"
+                        width="70%"
                     />
 
                     <img
                         src={teacherImg}
-                        width="400px"
-                        style={{ marginLeft: "20vw", position: "absolute" }}
+                        width="60%"
+                        style={{ marginLeft: "45vw", position: "absolute" }}
                     />
-                    <Typography 
-                    variant="h5"
-                    sx={{ color: "#0A1D56", my: 3, marginRight: "40vw", }}>
-                        Track student's progress to make sure your learning objectives stick!
+                    <Typography
+                        variant="h5"
+                        sx={{ fontWeight: "bold", color: "#0A1D56", marginRight: "30vw" }}>
+                        Tracking every student's progress
+                    </Typography>
+                    <Typography
+                        sx={{ color: "#0A1D56",  marginRight: "40vw" }}>
+                        to make sure your learning objectives stick!
                     </Typography>
                 </Stack>
             </Box>
             <Box sx={{ mt: 30 }}>
-            <MobileHowToGetStarted />
+                <MobileHowToGetStarted />
             </Box>
         </motion.div>
     )

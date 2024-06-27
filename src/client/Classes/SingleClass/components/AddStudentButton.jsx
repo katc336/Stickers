@@ -1,14 +1,19 @@
 import Alert from "@mui/material/Alert"
+import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
+import ClearIcon from '@mui/icons-material/Clear';
+import Dialog from '@mui/material/Dialog';
 import { usePostNewStudentMutation } from "../../../../redux/api"
 import { useState } from "react"
-import { Typography } from "@mui/material"
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const AddStudentButton = ({ id, data }) => {
-    const [clearStudentButton, setClearStudentButton] = useState(true);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const [open, setOpen] = useState(false);
     const [addError, setAddError] = useState(null);
     const [addAlreadyExistsError, setAddAlreadyExistsError] = useState(false)
-    const [addStudent, setAddStudent] = useState(false);
     const [addStudentToClass] = usePostNewStudentMutation();
     const [name, setName] = useState("")
 
@@ -30,8 +35,6 @@ const AddStudentButton = ({ id, data }) => {
                     if (result.data) {
                         setAddError(false)
                         setAddAlreadyExistsError(false)
-                        setAddStudent(false)
-                        setClearStudentButton(true)
                         setName("");
                         console.log("Success!");
                     } else {
@@ -44,15 +47,14 @@ const AddStudentButton = ({ id, data }) => {
             console.error(error)
         }
     }
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <div>
-            {clearStudentButton &&
-                <button
-                    className="add-button"
-                    onClick={() => { setAddStudent(true), setClearStudentButton(false) }}>
-                    Add New Student
-                </button>
-            }
             {addAlreadyExistsError &&
                 <Alert severity="error">
                     <Typography>
@@ -66,22 +68,44 @@ const AddStudentButton = ({ id, data }) => {
                     </Typography>
                 </Alert>}
             {addError &&
-                <Alert severity="error">Please make sure you enter a name that is 1 to 30 characters.</Alert>}
-            {addStudent &&
+                <Alert severity="error">
+                    Please make sure you enter a name that is 1 to 30 characters.
+                </Alert>}
+            <button
+                className="add-button"
+                onClick={handleClickOpen}>
+                Add New Student
+            </button>
+            <Dialog
+                open={open}
+                onClose={handleClose} >
+                    <Box sx={{ p: 3 }}>
+                <ClearIcon
+                    sx={{ my: 1, ml: "80%" }}
+                    className="delete-button"
+                    onClick={handleClose} />
+                <Typography
+                    sx={{ p: isMobile ? 1 : 3 }}
+                    variant="h5">
+                    Add Student:
+                </Typography>
                 <form onSubmit={handleAddStudent}>
                     <TextField
-                        fullWidth
                         label="Student Name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         variant="filled"
                         sx={{ my: 1 }} />
+                        <Box sx={{ mx: "20%"}}>
                     <button
                         className="add-button"
                         type="submit">
                         Add Student
                     </button>
-                </form>}
+                    </Box>
+                </form>
+                </Box>
+            </Dialog>
         </div>
     )
 }
