@@ -47,7 +47,7 @@ const ParentRegisterForm = () => {
                 <Typography
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
-                    Parent Sign Up:
+                    Parent Sign Up
                 </Typography>
                 {
                     registerError &&

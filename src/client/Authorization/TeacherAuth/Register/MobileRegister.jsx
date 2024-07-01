@@ -49,7 +49,7 @@ const MobileRegisterForm = () => {
                 <Typography
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
-                    Sign Up
+                  Teacher Sign Up
                 </Typography>
                 {
                     registerError &&

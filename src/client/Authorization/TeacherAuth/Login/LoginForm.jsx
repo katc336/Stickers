@@ -36,7 +36,7 @@ const LoginForm = ({ switchForm }) => {
             <Typograpgy
                 variant="h4"
                 sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
-                Login
+                Teacher Login
             </Typograpgy>
             {loginError && <Alert severity="error">Incorrect username or password. Please try again</Alert>}
             <form onSubmit={handleSubmit}>

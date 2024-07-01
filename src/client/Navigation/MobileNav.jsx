@@ -65,7 +65,7 @@ const MobileNav = () => {
                                         sx={{ ml: 1 }}
                                         direction="column">
                                         <Link to="/">
-                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 5, textDecoration: activePage === "/" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 10, textDecoration: activePage === "/" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Home
                                             </Button>
                                         </Link>
@@ -86,12 +86,7 @@ const MobileNav = () => {
                                         </Link>
                                         <Link to="/login">
                                             <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 1, textDecoration: activePage === "/login" ? "orange wavy underline" : "", borderRadius: "50px" }}>
-                                                Login
-                                            </Button>
-                                        </Link>
-                                        <Link to="/register">
-                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 1, textDecoration: activePage === "/register" ? "orange wavy underline" : "", borderRadius: "50px" }}>
-                                                Sign Up
+                                                Login / Sign Up
                                             </Button>
                                         </Link>
                                     </Stack>

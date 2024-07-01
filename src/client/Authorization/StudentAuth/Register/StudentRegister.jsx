@@ -47,7 +47,7 @@ const StudentRegisterForm = () => {
                 <Typography
                     variant="h4"
                     sx={{ textAlign: "center", color: "#0A1D56", mb: 3 }}>
-                    Student Sign Up:
+                    Student Sign Up
                 </Typography>
                 {
                     registerError &&
