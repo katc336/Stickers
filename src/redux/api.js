@@ -78,7 +78,7 @@ const api = createApi({
         }),
         //<------------GET USER'S ACCOUNT------------>
         //GET TEACHER'S ACCOUNT
-        getUser: builder.query({
+        getTeacher: builder.query({
             query: () => ({
                 url: `/auth/account`,
                 method: 'GET',
@@ -283,7 +283,7 @@ export const {
     useStudentLoginMutation,
     useStudentRegisterMutation,
     //Get User Accounts
-    useGetUserQuery,
+    useGetTeacherQuery,
     useGetParentQuery,
     useGetStudentAccountQuery,
     //Update User Information

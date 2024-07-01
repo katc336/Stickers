@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack"
 import Logo from "./images/Logo.png"
 import teacherImg from "./images/Teacher.png"
 import { motion } from "framer-motion"
-import MobileHowToGetStarted from "../InformationPages/HowToGetStarted/MobileHowToGetStarted"
+import MobileHowToGetStarted from "./InformationPages/HowToGetStarted/MobileHowToGetStarted"
 
 const MobileHomePage = () => {
     return (
@@ -18,7 +18,6 @@ const MobileHomePage = () => {
                         src={Logo}
                         width="70%"
                     />
-
                     <img
                         src={teacherImg}
                         width="60%"
