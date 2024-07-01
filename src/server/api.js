@@ -91,7 +91,15 @@ apiRouter.post("/class", requireUser, async (req, res, next) => {
 });
 //<-----------------ADD STUDNETS TO A CLASS----------------->
 apiRouter.post("/add_student", requireUser, async (req, res, next) => {
-    const generateRandomCode = () => {
+    const generateParentCode = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = "";
+        for (let i = 0; i < 8; i++) {
+            code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return code;
+    }
+    const generateStudentCode = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let code = "";
         for (let i = 0; i < 8; i++) {
@@ -101,12 +109,14 @@ apiRouter.post("/add_student", requireUser, async (req, res, next) => {
     }
     try {
         const { name, id } = req.body;
-        studentCode = generateRandomCode();
+        studentCode = generateParentCode();
+        parentCode = generateStudentCode();
         const newStudent = await prisma.student.create({
             data: {
                 name: name,
                 class: { connect: { id: id } },
-                studentCode: studentCode
+                studentCode: studentCode,
+                parentCode: parentCode
             }
         });
         res.send(newStudent);

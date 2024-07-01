@@ -1,4 +1,5 @@
 import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
@@ -48,20 +49,15 @@ const HomeNav = () => {
                             </Typography>
                         </Button>
                     </Link>
-                    <Link to="/login">
-                        <button
-                            style={{ width: 80 }}
-                            className="add-button">
-                            Login
-                        </button>
-                    </Link>
-                    <Link to="/register">
-                        <button
-                            style={{ width: 80 }}
-                            className="add-button">
-                            Sign Up
-                        </button>
-                    </Link>
+                    <Box sx={{mt: 2, mr: 3 }}>
+                        <Link to="/login">
+                            <button
+                                style={{ width: 170 }}
+                                className="add-button">
+                                Login / Sign Up
+                            </button>
+                        </Link>
+                    </Box>
                 </Stack>
             </AppBar>
         </div>

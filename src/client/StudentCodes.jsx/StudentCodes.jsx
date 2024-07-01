@@ -41,7 +41,7 @@ const StudentCodes = () => {
                     sx={{ mx: 1, borderRadius: "20px" }}
                     severity="info">
                     <Typography variant={isMobile ? "" : "h5"}>
-                        In order to give parents access to see their student's progress, give them this code to register an account.
+                        In order to give access to either parent or student accounts, give the corresponding codes in order to register.
                     </Typography>
                 </Alert>
                 {data && data.map((student) => (
@@ -59,15 +59,20 @@ const StudentCodes = () => {
                                 </Grid>
                                 <Grid item xs={isMobile ? 5 : 6}>
                                     <Stack direction="row">
-                                        <Typography variant={isMobile ? "" : "h5"}>
-                                            Parent Code:
+                                        <Typography sx={{ p: 0.5 }}>
+                                            Student Code:
                                         </Typography>
-                                        <Typography
-                                            variant={isMobile ? "" : "h6"}
-                                            sx={{ ml: isMobile ? 1 : 2, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}
-                                        >
+                                        <Typography sx={{ mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
                                             {student.studentCode}
                                         </Typography>
+                                        <Stack direction="row">
+                                            <Typography sx={{ p: 0.5 }}>
+                                                Parent Code:
+                                            </Typography>
+                                            <Typography sx={{ mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
+                                                {student.parentCode}
+                                            </Typography>
+                                        </Stack>
                                     </Stack>
                                 </Grid>
                             </Grid>

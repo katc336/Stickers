@@ -13,7 +13,6 @@ import SingleLesson from "./Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./AllProgress/AllProgress";
 import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./InformationPages/Story/Story";
-import LoginPage from "./Authorization/Login/LoginPage";
 import MobileNav from "./Navigation/MobileNav";
 import NavDrawer from "./Navigation/NavDrawer";
 import ParentRegisterForm from "./Parents/ParentAuth/ParentRegisterForm";
@@ -23,18 +22,20 @@ import StudentCodes from "./StudentCodes.jsx/StudentCodes";
 import ParentDashboard from "./Parents/ParentDashboard/ParentDashboard";
 import { useLocation } from "react-router-dom";
 import ParentAttendanceScore from "./Parents/ParentDashboard/ParentAttendanceScore";
-import RegisterPage from "./Authorization/Register/RegisterPage";
+import RegisterPage from "./Authorization/RegisterPage";
+import AuthPage from "./Authorization/AuthPage";
+import HomeNav from "./Navigation/HomeNav";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
-  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent" ];
+  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent"];
   const hideNavDrawer = NoNavDrawerPages.includes(location.pathname);
   return (
     <div>
-      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <NavDrawer /> : null}
+      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <NavDrawer /> : <HomeNav />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about_teachers" element={<HowToGetStarted />} />
@@ -45,8 +46,8 @@ function App() {
         <Route path="/parent_auth" element={<ParentAuthPage />} />
         <Route path="/login_parent" element={<ParentLoginForm />} />
         <Route path="/register_parent" element={<ParentRegisterForm />} />
-        <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<AuthPage />} />
         <Route path="/progress" element={<AllProgress />} />
         <Route path="/account" element={<Dashboard />} />
         <Route path="/account_parent" element={<ParentDashboard />} />

@@ -16,11 +16,11 @@ const api = createApi({
             return headers
         },
     }),
-    tagTypes: ["User", "Parent", "Class", "Student", "Lesson", "Objective", "Progress"],
+    tagTypes: ["User", "Parent", "Class", "Student", "Lesson", "Objective", "Progress", "StudentAccount"],
 
     endpoints: (builder) => ({
-        //<-----------AUTHORIZATION----------->
-        //REGISTER ACCOUNT ENDPOINT
+        //<-----------TEACHER'S AUTHORIZATION----------->
+        //REGISTER TEACHER'S ACCOUNT
         register: builder.mutation({
             query: (user) => ({
                 url: `/auth/register`,
@@ -29,7 +29,7 @@ const api = createApi({
             }),
             providesTags: ["User"]
         }),
-        //LOGIN ACCOUNT 
+        //LOGIN TEACHER'S ACCOUNT 
         login: builder.mutation({
             query: (user) => ({
                 url: `/auth/login`,
@@ -39,7 +39,7 @@ const api = createApi({
             providesTags: ["User"]
         }),
         //<-----------PARENT AUTHORIZATION----------->
-        //REGISTER ACCOUNT ENDPOINT
+        //REGISTER PARENT ACCOUNT 
         parentRegister: builder.mutation({
             query: (parent) => ({
                 url: `/auth/register_parent`,
@@ -48,7 +48,7 @@ const api = createApi({
             }),
             providesTags: ["Parent"]
         }),
-        //LOGIN ACCOUNT 
+        //LOGIN PARENT ACCOUNT 
         parentLogin: builder.mutation({
             query: (parent) => ({
                 url: `/auth/login_parent`,
@@ -57,7 +57,35 @@ const api = createApi({
             }),
             providesTags: ["Parent"]
         }),
-        //<------------GET PARENT INFO------------>
+        //<-----------STUDENT'S AUTHORIZATION----------->
+        //REGISTER STUDNET'S ACCOUNT
+        studentRegister: builder.mutation({
+            query: (user) => ({
+                url: `/auth/register_student`,
+                method: 'POST',
+                body: user,
+            }),
+            providesTags: ["StudentAccount"]
+        }),
+        //LOGIN TEACHER'S ACCOUNT 
+        studentLogin: builder.mutation({
+            query: (user) => ({
+                url: `/auth/login_student`,
+                method: 'POST',
+                body: user,
+            }),
+            providesTags: ["StudentAccount"]
+        }),
+        //<------------GET USER'S ACCOUNT------------>
+        //GET TEACHER'S ACCOUNT
+        getUser: builder.query({
+            query: () => ({
+                url: `/auth/account`,
+                method: 'GET',
+            }),
+            providesTags: ["User"]
+        }),
+        //GET PARENT'S ACCOUNT
         getParent: builder.query({
             query: () => ({
                 url: `/auth/account_parent`,
@@ -65,14 +93,13 @@ const api = createApi({
             }),
             providesTags: ["Parent"]
         }),
-        //<------------GET USER INFO------------>
-        //GET USER
-        getUser: builder.query({
+        //GET STUDNET'S ACCOUNT
+        getStudentAccount: builder.query({
             query: () => ({
-                url: `/auth/account`,
+                url: `/auth/account_student`,
                 method: 'GET',
             }),
-            providesTags: ["User"]
+            providesTags: ["StudentAccount"]
         }),
         //<------------UPDATE USER INFO------------>
         postNewUserProfile: builder.mutation({
@@ -252,10 +279,13 @@ export const {
     //Parent Authorization
     useParentLoginMutation,
     useParentRegisterMutation,
-    //Parent Information
-    useGetParentQuery,
-    //User Information
+    //Student Authorization
+    useStudentLoginMutation,
+    useStudentRegisterMutation,
+    //Get User Accounts
     useGetUserQuery,
+    useGetParentQuery,
+    useGetStudentAccountQuery,
     //Update User Information
     usePostNewUserProfileMutation,
     //Classes

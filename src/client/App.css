@@ -182,7 +182,13 @@
   transition: 0.5s;
   border-radius: 50px;
 }
-
+/* <---------------------------TEXT LINK---------------------------> */
+.text-link:hover{
+  cursor: pointer;
+  transition: .5s;
+  text-decoration: underline;
+  scale: 1.3;
+}
 /* <---------------------------UPLOAD FILE---------------------------> */
 input[type="file"] {
   display: none;
@@ -191,3 +197,4 @@ input[type="file"] {
   padding: 100;
   cursor: pointer;
 }
+

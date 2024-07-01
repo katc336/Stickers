@@ -1,7 +1,7 @@
 const express = require('express');
 const authRouter = express.Router();
 
-const { requireUser, requireParent } = require("./utils")
+const { requireUser, requireParent, requireStudent } = require("./utils")
 
 const jwt = require("jsonwebtoken")
 
@@ -80,10 +80,10 @@ authRouter.get("/account", requireUser, async (req, res, next) => {
 //<--------------------------------REGISTER PARENT-------------------------------->
 authRouter.post("/register_parent", async (req, res, next) => {
     try {
-        const { username, password, studentCode } = req.body;
-        // Find the student by studentCode
+        const { username, password, parentCode } = req.body;
+        // Find the student by parentCode
         const student = await prisma.student.findFirst({
-            where: { studentCode: studentCode }
+            where: { parentCode: parentCode }
         });
         if (!student) {
             return res.send({ message: "Student not found" });
@@ -93,8 +93,8 @@ authRouter.post("/register_parent", async (req, res, next) => {
                 data: {
                     username: username,
                     password: hashedPassword,
-                    studentId: student.id,  // Assign the student's id to parent's studentId
-                    studentCode: studentCode
+                    studentId: student.id,
+                    parentCode: parentCode
                 }
             });
             delete parent.password;
@@ -155,5 +155,67 @@ authRouter.get("/account_parent", requireParent, async (req, res, next) => {
         next(error)
     }
 });
+//<--------------------------------REGISTER STUDENT-------------------------------->
+authRouter.post("/register_student", async (req, res, next) => {
+    try {
+        const { username, password, studentCode } = req.body;
+        // Find the student by studentCode
+        const student = await prisma.student.findFirst({
+            where: { studentCode: studentCode }
+        });
+        if (!student) {
+            return res.send({ message: "Student not found" });
+        } else {
+            const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+            const studentAccount = await prisma.studentAccount.create({
+                data: {
+                    username: username,
+                    password: hashedPassword,
+                    studentId: student.id,
+                    studentCode: studentCode
+                }
+            });
+            delete studentAccount.password;
+            const token = jwt.sign({ id: studentAccount.id, username, studentId: student.id, role: "student" }, process.env.JWT_SECRET)
+            res.send({ token, message: "Student registration successful!" });
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+//<--------------------------------LOGIN STUDENT-------------------------------->
+authRouter.post("/login_student", async (req, res, next) => {
+    try {
+        const { username, password } = req.body;
+        const student = await prisma.studentAccount.findUnique({
+            where: { username: username },
+        });
+        if (!student) {
+            return res.status(401).send("There is no student with that username.");
+        }
+        const validPassword = await bcrypt.compare(password, student.password);
+        if (!validPassword) {
+            return res.status(401).send("Incorrect password.");
+        }
+        const token = jwt.sign({ id: student.id, role: "student" }, process.env.JWT_SECRET);
+        res.send({ token });
+        console.log("Student login successful!");
+    } catch (error) {
+        next(error);
+    }
+});
+//<--------------------------------GET STUDENT ACCOUNT-------------------------------->
+authRouter.get("/account_student", requireStudent, async (req, res, next) => {
+    try {
+        const student = await prisma.studentAccount.findUnique({
+            where: { id: req.studentAccount.id },
+        });
+        delete student.password
+        res.send(student);
+    } catch (error) {
+        next(error)
+    }
+});
+
 
 module.exports = authRouter;
