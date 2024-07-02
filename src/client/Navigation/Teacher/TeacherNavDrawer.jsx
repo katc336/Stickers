@@ -4,9 +4,9 @@ import Button from '@mui/material/Button';
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Logo from "./images/Logo.png"
+import Logo from "../images/Logo.png"
 
-const NavDrawer = () => {
+const TeacherNavDrawer = () => {
     const [activePage, setActivePage] = useState("");
     const location = useLocation();
     useEffect(() => {
@@ -57,4 +57,4 @@ const NavDrawer = () => {
         </div>
     );
 }
-export default NavDrawer
+export default TeacherNavDrawer

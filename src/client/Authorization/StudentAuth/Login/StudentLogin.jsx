@@ -20,7 +20,7 @@ const StudentLoginForm = () => {
             if (result.data) {
                 setLoginError(false);
                 console.log("Success!");
-                navigate("/account");
+                navigate("/account_student");
             } else {
                 setLoginError(true);
                 console.log("Incorrect login credentials");

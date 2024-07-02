@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { motion } from 'framer-motion';
 import { useGetTeacherQuery } from '../../../redux/api';
 import HelloCard from './components/HelloCard';
-import SearchBar from './components/SearchBar';
+// import SearchBar from './components/SearchBar';
 import ProgressChart from './components/ProgressChart';
 import MyClasses from './components/MyClasses';
 
@@ -20,7 +20,7 @@ const WebDashboard = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeIn" }}>
             <Box sx={{ ml: 20, mr: 3 }}>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 <HelloCard name={data.name} />
                 <ProgressChart />
                 <MyClasses />

@@ -15,11 +15,11 @@ import AllProgress from "./TeacherAccount/AllProgress/AllProgress";
 import HowToGetStarted from "./Home/InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./Home/InformationPages/Story/Story";
 import MobileNav from "./Navigation/MobileNav";
-import NavDrawer from "./Navigation/NavDrawer";
+import TeacherNavDrawer from "./Navigation/Teacher/TeacherNavDrawer";
 import StudentCodes from "./TeacherAccount/StudentCodes.jsx/StudentCodes";
 import RegisterPage from "./Authorization/RegisterPage";
 import AuthPage from "./Authorization/AuthPage";
-import HomeNav from "./Navigation/HomeNav";
+import HomeNav from "./Navigation/HomeNoAccount/HomeNav";
 import ParentDashboard from "./ParentAccount/Dashboard/ParentDashboard";
 import StudentDashboard from "./StudentAccount/Dashboard/StudentDashboard";
 
@@ -28,11 +28,16 @@ function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
-  const NoNavDrawerPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent"];
-  const hideNavDrawer = NoNavDrawerPages.includes(location.pathname);
+  const HomeNoAccountPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent"];
+  const hideNavDrawer = HomeNoAccountPages.includes(location.pathname);
+  const ParentPages = ["/account_parent", ];
+  const parentNav = ParentPages.includes(location.pathname);
+  const StudentPages = ["/account_student", ];
+  const studentNav = StudentPages.includes(location.pathname);
+ 
   return (
     <div>
-      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <NavDrawer /> : <HomeNav />}
+      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <TeacherNavDrawer /> : <HomeNav />}
       <Routes>
         {/* Home Page Paths */}
         <Route path="/" element={<HomePage />} />
@@ -54,9 +59,9 @@ function App() {
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
         {/* Parent's Account Page Paths */}
-        <Route path="/parent_dashboard" element={<ParentDashboard/>} />
+        <Route path="/account_parent" element={<ParentDashboard/>} />
         {/* Students's Account Page Paths */}
-        <Route path="/student_dashboard" element={<StudentDashboard />} />
+        <Route path="/account_student" element={<StudentDashboard />} />
       </Routes>
     </div>
   );

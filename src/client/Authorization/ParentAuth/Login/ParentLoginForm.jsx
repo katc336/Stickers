@@ -20,7 +20,7 @@ const ParentLoginForm = () => {
             if (result.data) {
                 setLoginError(false);
                 console.log("Success!");
-                navigate("/account");
+                navigate("/account_parent");
             } else {
                 setLoginError(true);
                 console.log("Incorrect login credentials");

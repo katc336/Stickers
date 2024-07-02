@@ -32,7 +32,7 @@ const StudentRegisterForm = () => {
                     setNameError(false);
                     setPasswordError(false);
                     console.log("Success!");
-                    navigate("/account_parent");
+                    navigate("/account_student");
                 } else {
                     setRegisterError(true);
                     console.log("Incorrect login credentials");

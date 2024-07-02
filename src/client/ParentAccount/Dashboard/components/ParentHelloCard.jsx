@@ -1,33 +1,35 @@
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-// import UploadAvatar from './UpLoadAvatar';
+import { useMediaQuery, useTheme } from "@mui/material";
 
-const HelloCard = ({ name }) => {
+const ParentHelloCard = ({ name }) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
     return (
-        <div>
+        <Box sx={{ mt: isMobile ? 15: 20 }}>
             <Card
                 elevation={10}
-                sx={{ borderRadius: "20px", p: 3, m: 3 }}>
+                sx={{ borderRadius: "20px", p: isMobile ? 1 : 3, m: isMobile ? 1 : 3 }}>
                 <Grid container>
                     <Grid item xs={9}>
                         <Stack direction="row">
-                        {/* Updating Code: Temporarily Removing functionality */}
-                            {/* <UploadAvatar /> */} 
                             <Typography
-                                variant="h3"
+                                variant="h5"
                                 sx={{ ml: 3, mt: 1, color: "#0A1D56" }}>
-                                Hello {name}.
+                                Hello {name}'s Parent/Guardian
                             </Typography>
                         </Stack>
                     </Grid>
                     <Grid item xs={3}>
-                      
+
                     </Grid>
                 </Grid>
             </Card>
-        </div>
+        </Box>
     )
 }
-export default HelloCard
+export default ParentHelloCard

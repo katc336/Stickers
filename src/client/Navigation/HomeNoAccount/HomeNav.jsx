@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack"
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom"
-import Logo from "./images/Logo.png"
+import Logo from "../images/Logo.png"
 
 const HomeNav = () => {
     const [activePage, setActivePage] = useState("");

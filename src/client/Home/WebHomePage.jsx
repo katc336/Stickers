@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import teacherImg from "./images/Teacher.png"
 import Logo from "./images/Logo.png"
-import HomeNav from "../Navigation/HomeNav"
+import HomeNav from "../Navigation/HomeNoAccount/HomeNav"
 import HowToGetStarted from "./InformationPages/HowToGetStarted/HowToGetStarted"
 import { motion } from "framer-motion"
 
