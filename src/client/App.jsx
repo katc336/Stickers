@@ -22,6 +22,8 @@ import AuthPage from "./Authorization/AuthPage";
 import HomeNav from "./Navigation/HomeNoAccount/HomeNav";
 import ParentDashboard from "./ParentAccount/Dashboard/ParentDashboard";
 import StudentDashboard from "./StudentAccount/Dashboard/StudentDashboard";
+import ParentNavDrawer from "./Navigation/Parent/ParentNavDrawer";
+import StudentNavDrawer from "./Navigation/Student/StudentNaveDrawer"
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -30,14 +32,24 @@ function App() {
   const location = useLocation();
   const HomeNoAccountPages = ["/", "/about_teachers", "/about_parents", "/story", "/account_parent"];
   const hideNavDrawer = HomeNoAccountPages.includes(location.pathname);
-  const ParentPages = ["/account_parent", ];
+  const ParentPages = ["/account_parent",];
   const parentNav = ParentPages.includes(location.pathname);
-  const StudentPages = ["/account_student", ];
+  const StudentPages = ["/account_student",];
   const studentNav = StudentPages.includes(location.pathname);
- 
+
   return (
     <div>
-      {isMobile ? <MobileNav /> : (!hideNavDrawer && token) ? <TeacherNavDrawer /> : <HomeNav />}
+      {isMobile
+        ? <MobileNav />
+        : (!parentNav && !studentNav && !hideNavDrawer && token)
+          ? // If there is a teacher account 
+          <TeacherNavDrawer />
+          : (!studentNav && token)
+            ? <ParentNavDrawer />
+            : (!parentNav && token) 
+            ? <StudentNavDrawer />
+              : <HomeNav />
+      }
       <Routes>
         {/* Home Page Paths */}
         <Route path="/" element={<HomePage />} />
@@ -59,7 +71,7 @@ function App() {
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
         {/* Parent's Account Page Paths */}
-        <Route path="/account_parent" element={<ParentDashboard/>} />
+        <Route path="/account_parent" element={<ParentDashboard />} />
         {/* Students's Account Page Paths */}
         <Route path="/account_student" element={<StudentDashboard />} />
       </Routes>

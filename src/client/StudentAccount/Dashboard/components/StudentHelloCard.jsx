@@ -4,10 +4,9 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import { useMediaQuery, useTheme } from "@mui/material";
 
-const ParentHelloCard = ({ name }) => {
+const StudentHelloCard = ({ name }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
     return (
             <Card
                 elevation={10}
@@ -18,7 +17,7 @@ const ParentHelloCard = ({ name }) => {
                             <Typography
                                 variant="h5"
                                 sx={{ ml: 3, mt: 1, color: "#0A1D56" }}>
-                                Hello {name}'s Parent/Guardian
+                                Hello {name}!
                             </Typography>
                         </Stack>
                     </Grid>
@@ -29,4 +28,4 @@ const ParentHelloCard = ({ name }) => {
             </Card>
     )
 }
-export default ParentHelloCard
+export default StudentHelloCard

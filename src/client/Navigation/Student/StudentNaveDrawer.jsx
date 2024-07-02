@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Logo from "../images/Logo.png"
-const ParentNavDrawer = () => {
+
+const StudentNavDrawer = () => {
     const [activePage, setActivePage] = useState("");
     const location = useLocation();
     useEffect(() => {
@@ -21,9 +22,9 @@ const ParentNavDrawer = () => {
                 <img
                     src={Logo}
                     width="110px"
-                    style={{ margin: 15 }} />
-                <Link to="/account_parent">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: "10%", my: 3, border: activePage === "/account_parent" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                    style={{ margin: 15 }}/>
+                <Link to="/account_student">
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/account_student" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         Home
                     </Button>
                 </Link>
@@ -31,4 +32,4 @@ const ParentNavDrawer = () => {
         </div>
     );
 }
-export default ParentNavDrawer
+export default StudentNavDrawer

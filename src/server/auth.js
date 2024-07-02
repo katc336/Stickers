@@ -198,8 +198,7 @@ authRouter.post("/login_student", async (req, res, next) => {
             return res.status(401).send("Incorrect password.");
         }
         const token = jwt.sign({ id: student.id, role: "student" }, process.env.JWT_SECRET);
-        res.send({ token });
-        console.log("Student login successful!");
+        res.send({ token, message: "Student login successful!" });
     } catch (error) {
         next(error);
     }
@@ -209,6 +208,19 @@ authRouter.get("/account_student", requireStudent, async (req, res, next) => {
     try {
         const student = await prisma.studentAccount.findUnique({
             where: { id: req.studentAccount.id },
+            include: {
+                student: {
+                    include: {
+                        studentProgress: {
+                            include: {
+                                learningObjective: true,
+                                combinedObjective: true
+                            }
+                        },
+                        submissions: true
+                    }
+                }
+            }
         });
         delete student.password
         res.send(student);
@@ -216,6 +228,7 @@ authRouter.get("/account_student", requireStudent, async (req, res, next) => {
         next(error)
     }
 });
+
 
 
 module.exports = authRouter;

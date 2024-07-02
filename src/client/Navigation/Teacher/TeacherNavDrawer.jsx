@@ -24,33 +24,33 @@ const TeacherNavDrawer = () => {
                     width="110px"
                     style={{ marginLeft: 10 }}/>
                 <Link to="/dashboard">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/dashboard" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1,  my: 3, border: activePage === "/dashboard" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         Home
                     </Button>
                 </Link>
                 <Link to="/progress">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/progress" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/progress" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         Progress Overview
                     </Button>
                 </Link>
                 <Link to="/my_classes">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_classes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/my_classes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Classes
                     </Button>
                 </Link>
                 <Link to="/my_students">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_students" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/my_students" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Students
                     </Button>
                 </Link>
                 <Link to="/my_lessons">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/my_lessons" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/my_lessons" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                         My Lessons
                     </Button>
                 </Link>
                 <Link to="/student_codes">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", my: 3, border: activePage === "/student_codes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
-                        Parents
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/student_codes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                        Student Accounts
                     </Button>
                 </Link>
             </Drawer>

@@ -26,7 +26,7 @@ const authMiddleware = async (req, res, next) => {
             where: { id }
           });
         } else if (role === "student") {
-          req.parent = await prisma.studentAccount.findUnique({
+          req.studentAccount = await prisma.studentAccount.findUnique({
             where: { id }
           });
         }
@@ -62,7 +62,7 @@ const requireParent = (req, res, next) => {
   else next();
 };
 const requireStudent = (req, res, next) => {
-  if (!req.student) {
+  if (!req.studentAccount) {
     res.status(401).send("You do not have access to this student account")
   }
   else next();

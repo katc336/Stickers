@@ -35,7 +35,7 @@ const StudentCodes = () => {
                 <Typography
                     sx={{ textAlign: "center" }}
                     variant={isMobile ? "h5" : "h3"}>
-                    Student's Parent Codes:
+                    Student and Parent Codes:
                 </Typography>
                 <Alert
                     sx={{ mx: 1, borderRadius: "20px" }}

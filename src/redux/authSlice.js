@@ -13,14 +13,21 @@ const authSlice = createSlice({
     reducers: {},
 
     extraReducers: (builder) => {
+        //Teacher Auth
         builder.addMatcher(
             api.endpoints.register.matchFulfilled, storeToken);
         builder.addMatcher(
             api.endpoints.login.matchFulfilled, storeToken);
+        //Parent Auth
         builder.addMatcher(
             api.endpoints.parentLogin.matchFulfilled, storeToken);
         builder.addMatcher(
             api.endpoints.parentRegister.matchFulfilled, storeToken);
+        //Student Auth
+        builder.addMatcher(
+            api.endpoints.studentLogin.matchFulfilled, storeToken);
+        builder.addMatcher(
+            api.endpoints.studentRegister.matchFulfilled, storeToken);
     }
 });
 

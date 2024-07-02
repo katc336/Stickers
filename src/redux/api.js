@@ -67,7 +67,7 @@ const api = createApi({
             }),
             providesTags: ["StudentAccount"]
         }),
-        //LOGIN TEACHER'S ACCOUNT 
+        //LOGIN STUDNET'S ACCOUNT 
         studentLogin: builder.mutation({
             query: (user) => ({
                 url: `/auth/login_student`,

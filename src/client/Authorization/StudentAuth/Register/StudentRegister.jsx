@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { useParentRegisterMutation } from "../../../../redux/api";
+import { useStudentRegisterMutation } from "../../../../redux/api";
 import { useNavigate } from "react-router-dom";
 
 const StudentRegisterForm = () => {
@@ -13,7 +13,7 @@ const StudentRegisterForm = () => {
     const [registerError, setRegisterError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [signup] = useParentRegisterMutation();
+    const [signup] = useStudentRegisterMutation();
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -26,7 +26,7 @@ const StudentRegisterForm = () => {
                 setPasswordError(true);
                 setNameError(false);
             } else {
-                const result = await signup({ studentCode, username, password })
+                const result = await signup({ username, password, studentCode })
                 if (result.data) {
                     setRegisterError(false);
                     setNameError(false);
