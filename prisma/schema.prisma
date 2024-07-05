@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,26 +11,58 @@ model User {
   id       Int     @id @default(autoincrement())
   name     String
   username String  @unique
+  profile  String?
   password String
   classes  Class[]
 }
 
 model Class {
-  id        Int       @id @default(autoincrement())
-  name      String
-  teacher   User      @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-  teacherId Int
-  students  Student[]
-  lessons   Lesson[]
+  id         Int          @id @default(autoincrement())
+  name       String
+  teacher    User         @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacherId  Int
+  students   Student[]
+  lessons    Lesson[]
+  Assignment Assignment[]
 }
 
 model Student {
   id              Int               @id @default(autoincrement())
   name            String
+  parentCode      String?           @unique
+  studentCode     String            @unique
   class           Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId         Int
   attendances     Attendance[]
   studentProgress StudentProgress[]
+  parents         Parent[]
+  submissions     Submission[]
+  StudentAccount  StudentAccount[]
+}
+
+model Assignment {
+  id                Int                @id @default(autoincrement())
+  name              String
+  task              String
+  dueDate           String?
+  class             Class              @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId           Int
+  submissions       Submission[]
+  lesson            Lesson             @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId          Int
+  learningObjective LearningObjective? @relation(fields: [objectiveId], references: [id], onDelete: Cascade)
+  objectiveId       Int?
+}
+
+model Submission {
+  id           Int        @id @default(autoincrement())
+  name         String
+  createdAt    DateTime   @default(now())
+  content      String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  assignmentId Int
+  student      Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId    Int
 }
 
 model CombinedObjective {
@@ -47,10 +76,12 @@ model Lesson {
   id                 Int                 @id @default(autoincrement())
   createdAt          DateTime            @default(now())
   lessonName         String
+  date               String              @default("")
   class              Class               @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId            Int
   learningObjectives LearningObjective[]
   attendances        Attendance[]
+  Assignment         Assignment[]
 }
 
 model Attendance {
@@ -71,6 +102,7 @@ model LearningObjective {
   combinedObjective   CombinedObjective @relation(fields: [combinedObjectiveId], references: [id], onDelete: Cascade)
   combinedObjectiveId Int
   studentProgress     StudentProgress[]
+  Assignment          Assignment[]
 }
 
 model StudentProgress {
@@ -83,4 +115,22 @@ model StudentProgress {
   combinedObjectiveId Int
   progressPrecent     Int
   createdAt           DateTime          @default(now())
+}
+
+model Parent {
+  id         Int     @id @default(autoincrement())
+  username   String  @unique
+  password   String
+  parentCode String  @unique
+  student    Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId  Int
+}
+
+model StudentAccount {
+  id          Int     @id @default(autoincrement())
+  username    String  @unique
+  password    String
+  studentCode String  @unique
+  student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId   Int
 }

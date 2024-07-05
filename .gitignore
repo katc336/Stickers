@@ -1,4 +1,7 @@
+# Env secrets
 .env
+# Cloud API/secrets
+cloud.js 
 # Logs
 logs
 *.log

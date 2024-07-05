@@ -56,7 +56,7 @@ const ProgressChart = () => {
                                 <Stack direction="row">
                                     <Typography
                                         variant="h5">
-                                           There is no student data yet. Go to a class to get started!
+                                        There is no student data yet. Go to a class to get started!
                                     </Typography>
                                     <Link to="/my_classes">
                                         <button
@@ -74,25 +74,34 @@ const ProgressChart = () => {
                         <Card
                             elevation={10}
                             sx={{ borderRadius: "20px", p: 3, m: 3 }}>
-                            <Card
-                                elevation={10}
-                                sx={{ borderRadius: "20px", m: 1, p: 1 }}
-                            >
-                                <Box sx={{ width: '100%' }}>
-                                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                            <Tab label="Average Progress Across All Classes" {...a11yProps(0)} />
-                                            <Tab label="Compare Students' Progress" {...a11yProps(1)} />
-                                        </Tabs>
+                            <Stack direction="column">
+                                <Link to="/student_codes">
+                                    <button
+                                        style={{ float: "right", width: 240, fontSize: "16px", margin: 0 }}
+                                        className="auth-button">
+                                        Share Progress With Parents
+                                    </button>
+                                </Link>
+                                <Card
+                                    elevation={10}
+                                    sx={{ borderRadius: "20px", mt: 5, p: 1 }}
+                                >
+                                    <Box sx={{ width: '100%' }}>
+                                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                                <Tab label="All Progress" {...a11yProps(0)} />
+                                                <Tab label="Objective's Progress" {...a11yProps(1)} />
+                                            </Tabs>
+                                        </Box>
+                                        <CustomTabPanel value={value} index={0}>
+                                            <AllProgressPercents data={data} />
+                                        </CustomTabPanel>
+                                        <CustomTabPanel value={value} index={1}>
+                                            <CompareStudentProgress data={data} />
+                                        </CustomTabPanel>
                                     </Box>
-                                    <CustomTabPanel value={value} index={0}>
-                                        <AllProgressPercents data={data} />
-                                    </CustomTabPanel>
-                                    <CustomTabPanel value={value} index={1}>
-                                        <CompareStudentProgress data={data} />
-                                    </CustomTabPanel>
-                                </Box>
-                            </Card>
+                                </Card>
+                            </Stack>
                         </Card>
                     </div>
             }

@@ -8,13 +8,26 @@ const passwordHash = async () => {
     return adminPass;
 }
 
+const generateRandomCode = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let code = "";
+    for (let i = 0; i < 8; i++) {
+        code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return code;
+}
+
 passwordHash();
 
 const seed = async () => {
     console.log("Seeding the database.");
+    await prisma.studentAccount.deleteMany();
+    await prisma.assignment.deleteMany();
+    await prisma.submission.deleteMany();
     await prisma.studentProgress.deleteMany();
     await prisma.learningObjective.deleteMany();
     await prisma.lesson.deleteMany();
+    await prisma.parent.deleteMany();
     await prisma.student.deleteMany();
     await prisma.class.deleteMany();
     await prisma.user.deleteMany();
@@ -36,26 +49,26 @@ const seed = async () => {
                 teacher: { connect: { id: testAccount.id } },
                 students: {
                     create: [
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
-                        { name: faker.person.firstName() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
+                        { name: faker.person.firstName(), studentCode: generateRandomCode() },
                     ]
                 },
                 lessons: {

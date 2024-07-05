@@ -1,11 +1,33 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-const { requireUser } = require("./utils")
+const { requireUser, requireParent, requireStudent } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+//<-----------------ADD PROFILE IMAGE----------------->
+apiRouter.patch("/add_profile", requireUser, async (req, res, next) => {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: req.user.id }
+        });
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+        const { profileImg } = req.body;
+        const updatedUser = await prisma.user.update({
+            where: { id: req.user.id },
+            data: {
+                profile: profileImg
+            }
+        });
+        delete updatedUser.password;
+        res.json({ message: "Profile image added successfully" });
+    } catch (error) {
+        next(error);
+    }
+});
 //<-----------------GET ALL CLASSES----------------->
 apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     try {
@@ -13,7 +35,9 @@ apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
             where: { teacherId: req.user.id },
             include: {
                 students: true,
-                lessons: true
+                lessons: {
+                    include: { Assignment: true }
+                }
             }
         })
         res.send(classes)
@@ -69,20 +93,39 @@ apiRouter.post("/class", requireUser, async (req, res, next) => {
 });
 //<-----------------ADD STUDNETS TO A CLASS----------------->
 apiRouter.post("/add_student", requireUser, async (req, res, next) => {
+    const generateParentCode = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = "";
+        for (let i = 0; i < 8; i++) {
+            code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return code;
+    }
+    const generateStudentCode = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = "";
+        for (let i = 0; i < 8; i++) {
+            code = code + characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return code;
+    }
     try {
-        const { name, id } = req.body
+        const { name, id } = req.body;
+        studentCode = generateParentCode();
+        parentCode = generateStudentCode();
         const newStudent = await prisma.student.create({
             data: {
                 name: name,
-                class: { connect: { id: id } }
+                class: { connect: { id: id } },
+                studentCode: studentCode,
+                parentCode: parentCode
             }
-        })
-        res.send(newStudent)
+        });
+        res.send(newStudent);
     } catch (error) {
         next(error);
     }
 });
-
 //<-----------------GET ALL STUDNETS FOR A TEACHER----------------->
 apiRouter.get("/my_students", requireUser, async (req, res, next) => {
     try {
@@ -195,9 +238,11 @@ apiRouter.get("/student/:id", requireUser, async (req, res, next) => {
             include: {
                 studentProgress: {
                     include: {
-                        combinedObjective: true
+                        combinedObjective: true,
                     }
-                }
+                },
+                class: true,
+                attendances: true
             }
         });
         // Array to hold combinedObjectives average data
@@ -589,6 +634,24 @@ apiRouter.patch("/attendance", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
- });
+});
+//<-----------------POST AN ASSIGNMENT----------------->
+apiRouter.post('/new_assignment', requireUser, async (req, res, next) => {
+    const { name, task, dueDate, classId, lessonId } = req.body;
+    try {
+        const newAssignment = await prisma.assignment.create({
+            data: {
+                name: name,
+                task: task,
+                dueDate: dueDate,
+                class: { connect: { id: classId } },
+                lesson: { connect: { id: lessonId } },
+            }
+        });
+        res.send(newAssignment);
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = apiRouter;

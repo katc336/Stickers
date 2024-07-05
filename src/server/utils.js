@@ -15,12 +15,21 @@ const authMiddleware = async (req, res, next) => {
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
     try {
-      const { id } = jwt.verify(token, JWT_SECRET);
-
+      const { id, role } = jwt.verify(token, JWT_SECRET);
       if (id) {
-        req.user = await prisma.user.findUnique({
-          where: { id }
-        });
+        if (role === "user") {
+          req.user = await prisma.user.findUnique({
+            where: { id }
+          });
+        } else if (role === "parent") {
+          req.parent = await prisma.parent.findUnique({
+            where: { id }
+          });
+        } else if (role === "student") {
+          req.studentAccount = await prisma.studentAccount.findUnique({
+            where: { id }
+          });
+        }
         next();
       } else {
         next({
@@ -46,8 +55,22 @@ const requireUser = (req, res, next) => {
   }
   else next();
 };
+const requireParent = (req, res, next) => {
+  if (!req.parent) {
+    res.status(401).send("Parents only!")
+  }
+  else next();
+};
+const requireStudent = (req, res, next) => {
+  if (!req.studentAccount) {
+    res.status(401).send("You do not have access to this student account")
+  }
+  else next();
+};
 
 module.exports = {
   requireUser,
+  requireParent,
+  requireStudent,
   authMiddleware
 }
