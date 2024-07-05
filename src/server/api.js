@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-const { requireUser, requireStudent } = require("./utils")
+const { requireUser, requireParent, requireStudent } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();

@@ -203,8 +203,8 @@ authRouter.post("/login_student", async (req, res, next) => {
             return res.status(401).send("Incorrect password.");
         }
         const token = jwt.sign({ id: student.id, role: "student" }, process.env.JWT_SECRET);
-        delete studentAccount.password;
-        delete studentAccount.studentCode;
+        delete student.password;
+        delete student.studentCode;
         res.send({ token, message: "Student login successful!" });
     } catch (error) {
         next(error);
@@ -224,13 +224,20 @@ authRouter.get("/account_student", requireStudent, async (req, res, next) => {
                                 combinedObjective: true
                             }
                         },
-                        submissions: true
+                        submissions: true,
+                        class: {
+                            include: { Assignment: true }
+                        }
                     }
                 }
             }
         });
         delete student.password;
         delete student.studentCode;
+        delete student.parentCode;
+        delete student.student.class.teacherId;
+        delete student.student.parentCode;
+        delete student.student.studentCode;
         res.send(student);
     } catch (error) {
         next(error)
