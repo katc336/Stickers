@@ -56,7 +56,7 @@ const ClassLessonObjective = ({ id }) => {
                                 sx={{ m: 1 }}>
                                 <Stack direction="column">
                                     <Typography variant="h6">
-                                        Are you sure you want to delete this class?
+                                        Are you sure you want to delete this lesson objective?
                                     </Typography>
                                     <Typography variant="h6">
                                         Once you do it will be gone forever.
@@ -65,13 +65,13 @@ const ClassLessonObjective = ({ id }) => {
                                         <button
                                             onClick={() => setDelteObjectiveAlert(false)}
                                             className="add-button"
-                                            style={{ width: "150px" }}>
+                                            style={{ width: "150px", margin: "10px" }}>
                                             Keep Objective
                                         </button>
                                         <button
                                             onClick={() => deleteObjective(objective.id)}
                                             className="delete-button"
-                                            style={{ width: "150px" }}>
+                                            style={{ width: "150px", margin: "10px" }}>
                                             Delete Forever
                                         </button>
                                     </Stack>

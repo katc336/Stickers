@@ -25,6 +25,13 @@ app.get("/test", (req, res) => {
 //Backend Routes
 app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
+app.use("/teacherClass", require("./teacherApi/class"));
+app.use("/teacherStudents", require("./teacherApi/students"));
+app.use("/teacherLesson", require("./teacherApi/lesson"));
+app.use("/teacherObjective", require("./teacherApi/objective"));
+app.use("/teacherProgress", require("./teacherApi/progress"));
+app.use("/teacherAssignment", require("./teacherApi/assignment"));
+
 
 app.use((error, req, res, next) => {
   console.error('SERVER ERROR: ', error);
