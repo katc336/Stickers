@@ -98,6 +98,7 @@ authRouter.post("/register_parent", async (req, res, next) => {
                 }
             });
             delete parent.password;
+            delete parent.parentCode;
             const token = jwt.sign({ id: parent.id, username, studentId: student.id, role: "parent" }, process.env.JWT_SECRET)
             res.send({ token, message: "Parent registration successful!" });
         }
@@ -120,6 +121,8 @@ authRouter.post("/login_parent", async (req, res, next) => {
             return res.status(401).send("Incorrect password.");
         }
         const token = jwt.sign({ id: parent.id, role: "parent" }, process.env.JWT_SECRET);
+        delete parent.password;
+        delete parent.parentCode;
         res.send({ token });
         console.log("Parent login successful!");
     } catch (error) {
@@ -150,6 +153,7 @@ authRouter.get("/account_parent", requireParent, async (req, res, next) => {
             }
         });
         delete parent.password
+        delete parent.parentCode;
         res.send(parent);
     } catch (error) {
         next(error)
@@ -176,6 +180,7 @@ authRouter.post("/register_student", async (req, res, next) => {
                 }
             });
             delete studentAccount.password;
+            delete studentAccount.studentCode;
             const token = jwt.sign({ id: studentAccount.id, username, studentId: student.id, role: "student" }, process.env.JWT_SECRET)
             res.send({ token, message: "Student registration successful!" });
         }
@@ -198,6 +203,8 @@ authRouter.post("/login_student", async (req, res, next) => {
             return res.status(401).send("Incorrect password.");
         }
         const token = jwt.sign({ id: student.id, role: "student" }, process.env.JWT_SECRET);
+        delete studentAccount.password;
+        delete studentAccount.studentCode;
         res.send({ token, message: "Student login successful!" });
     } catch (error) {
         next(error);
@@ -222,7 +229,8 @@ authRouter.get("/account_student", requireStudent, async (req, res, next) => {
                 }
             }
         });
-        delete student.password
+        delete student.password;
+        delete student.studentCode;
         res.send(student);
     } catch (error) {
         next(error)

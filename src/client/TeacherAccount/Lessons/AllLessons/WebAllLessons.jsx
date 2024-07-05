@@ -126,7 +126,7 @@ const WebAllLessons = () => {
                                                                         Are you sure you want to delete this lesson?
                                                                         Once you do it will be gone forever.
                                                                     </Typography>
-                                                                    <Stack sx={{ my: 3, ml:"40%"} }spacing={5} direction="row">
+                                                                    <Stack sx={{ my: 3, ml: "40%" }} spacing={5} direction="row">
                                                                         <button
                                                                             onClick={() => setDelteAlert(false)}
                                                                             className="add-button"
@@ -136,7 +136,7 @@ const WebAllLessons = () => {
                                                                         <button
                                                                             onClick={() => deleteLesson(lesson.id)}
                                                                             className="delete-button"
-                                                                            style={{ width: "150px"  }}>
+                                                                            style={{ width: "150px" }}>
                                                                             Delete Forever
                                                                         </button>
                                                                     </Stack>
@@ -147,9 +147,6 @@ const WebAllLessons = () => {
                                             </div>
                                         ))}
                                     </div>}
-
-
-
                             </Accordion>
                         </div>
                     ))}

@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-const { requireUser } = require("./utils")
+const { requireUser, requireStudent } = require("./utils")
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
@@ -27,7 +27,7 @@ apiRouter.patch("/add_profile", requireUser, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
- });
+});
 //<-----------------GET ALL CLASSES----------------->
 apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
     try {
@@ -35,7 +35,9 @@ apiRouter.get("/my_classes", requireUser, async (req, res, next) => {
             where: { teacherId: req.user.id },
             include: {
                 students: true,
-                lessons: true
+                lessons: {
+                    include: { Assignment: true }
+                }
             }
         })
         res.send(classes)
@@ -629,6 +631,24 @@ apiRouter.patch("/attendance", requireUser, async (req, res, next) => {
             });
             res.send({ newAttendance, message: "New attendance created!" });
         }
+    } catch (error) {
+        next(error);
+    }
+});
+//<-----------------POST AN ASSIGNMENT----------------->
+apiRouter.post('/new_assignment', requireUser, async (req, res, next) => {
+    const { name, task, dueDate, classId, lessonId } = req.body;
+    try {
+        const newAssignment = await prisma.assignment.create({
+            data: {
+                name: name,
+                task: task,
+                dueDate: dueDate,
+                class: { connect: { id: classId } },
+                lesson: { connect: { id: lessonId } },
+            }
+        });
+        res.send(newAssignment);
     } catch (error) {
         next(error);
     }

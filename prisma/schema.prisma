@@ -29,7 +29,7 @@ model Class {
 model Student {
   id              Int               @id @default(autoincrement())
   name            String
-  parentCode      String
+  parentCode      String?           @unique
   studentCode     String            @unique
   class           Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId         Int
@@ -41,14 +41,17 @@ model Student {
 }
 
 model Assignment {
-  id                Int               @id @default(autoincrement())
+  id                Int                @id @default(autoincrement())
   name              String
   task              String
-  class             Class             @relation(fields: [classId], references: [id], onDelete: Cascade)
+  dueDate           String?
+  class             Class              @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId           Int
   submissions       Submission[]
-  learningObjective LearningObjective @relation(fields: [objectivetId], references: [id], onDelete: Cascade)
-  objectivetId      Int
+  lesson            Lesson             @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId          Int
+  learningObjective LearningObjective? @relation(fields: [objectiveId], references: [id], onDelete: Cascade)
+  objectiveId       Int?
 }
 
 model Submission {
@@ -78,6 +81,7 @@ model Lesson {
   classId            Int
   learningObjectives LearningObjective[]
   attendances        Attendance[]
+  Assignment         Assignment[]
 }
 
 model Attendance {
@@ -117,7 +121,7 @@ model Parent {
   id         Int     @id @default(autoincrement())
   username   String  @unique
   password   String
-  parentCode String
+  parentCode String  @unique
   student    Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
   studentId  Int
 }
@@ -126,7 +130,7 @@ model StudentAccount {
   id          Int     @id @default(autoincrement())
   username    String  @unique
   password    String
-  studentCode String
+  studentCode String  @unique
   student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
   studentId   Int
 }

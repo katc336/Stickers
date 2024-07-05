@@ -21,9 +21,13 @@ passwordHash();
 
 const seed = async () => {
     console.log("Seeding the database.");
+    await prisma.studentAccount.deleteMany();
+    await prisma.assignment.deleteMany();
+    await prisma.submission.deleteMany();
     await prisma.studentProgress.deleteMany();
     await prisma.learningObjective.deleteMany();
     await prisma.lesson.deleteMany();
+    await prisma.parent.deleteMany();
     await prisma.student.deleteMany();
     await prisma.class.deleteMany();
     await prisma.user.deleteMany();

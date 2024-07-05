@@ -268,6 +268,15 @@ const api = createApi({
                 method: "PATCH",
                 body: { attendance, lessonId, studentId }
             })
+        }),
+          //<------------ASSIGNMENTS------------>
+          teacherPostAssignment: builder.mutation({
+            query: ({ name, task, classId, lessonId }) => ({
+                url: `/api/new_assignment`,
+                method: "POST",
+                body: { name, task, classId, lessonId }
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         })
     })
 });
@@ -316,4 +325,6 @@ export const {
     useDeleteProgressMutation,
     //Attendance
     useUpdateAttendanceMutation,
+    //Assignments
+    useTeacherPostAssignmentMutation,
 } = api

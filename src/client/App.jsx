@@ -24,6 +24,7 @@ import ParentDashboard from "./ParentAccount/Dashboard/ParentDashboard";
 import StudentDashboard from "./StudentAccount/Dashboard/StudentDashboard";
 import ParentNavDrawer from "./Navigation/Parent/ParentNavDrawer";
 import StudentNavDrawer from "./Navigation/Student/StudentNaveDrawer"
+import AllAssignments from "./TeacherAccount/Assignments/AllAssignments";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -70,6 +71,7 @@ function App() {
         <Route path="/student/:id" element={<SingleStudent />} />
         <Route path="/my_lessons" element={<AllLessons />} />
         <Route path="/lesson/:id" element={<SingleLesson />} />
+        <Route path="/assignments" element={<AllAssignments />} />
         {/* Parent's Account Page Paths */}
         <Route path="/account_parent" element={<ParentDashboard />} />
         {/* Students's Account Page Paths */}
