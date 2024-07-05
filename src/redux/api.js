@@ -113,7 +113,7 @@ const api = createApi({
         //<------------CLASSES------------>
         postNewClass: builder.mutation({
             query: (newClass) => ({
-                url: `/api/class`,
+                url: `/teacherClass/class`,
                 method: 'POST',
                 body: newClass,
             }),
@@ -121,14 +121,14 @@ const api = createApi({
         }),
         getClasses: builder.query({
             query: () => ({
-                url: `/api/my_classes`,
+                url: `/teacherClass/my_classes`,
                 method: 'GET'
             }),
             providesTags: ["Class"]
         }),
         getSingleClass: builder.query({
             query: (id) => ({
-                url: `/api/my_classes/${id}`,
+                url: `/teacherClass/my_classes/${id}`,
                 method: 'GET'
             }),
             providesTags: ["Class", "Student", "Lesson"]
@@ -136,7 +136,7 @@ const api = createApi({
         //<------------STUDENTS------------>
         postNewStudent: builder.mutation({
             query: ({ name, id }) => ({
-                url: `/api/add_student`,
+                url: `/teacherClass/add_student`,
                 method: 'POST',
                 body: { name, id },
             }),
@@ -144,21 +144,21 @@ const api = createApi({
         }),
         getAllStudentsByTeacher: builder.query({
             query: () => ({
-                url: `/api/my_students`,
+                url: `/teacherStudents/my_students`,
                 method: 'GET'
             }),
             providesTags: ["Student"]
         }),
         getAllStudentsByClass: builder.query({
             query: () => ({
-                url: `/api/students`,
+                url: `/teacherStudents/students`,
                 method: 'GET'
             }),
             providesTags: ["Student"]
         }),
         getSingleStudent: builder.query({
             query: (id) => ({
-                url: `/api/student/${id}`,
+                url: `/teacherStudents/student/${id}`,
                 method: 'GET'
             }),
             providesTags: ["Class", "Student", "Lesson", "Objective"]
@@ -166,7 +166,7 @@ const api = createApi({
         //<------------LESSONS------------>
         postNewLesson: builder.mutation({
             query: ({ id, lessonName }) => ({
-                url: `/api/lesson`,
+                url: `/teacherLesson/lesson`,
                 method: 'POST',
                 body: { id, lessonName },
             }),
@@ -174,14 +174,14 @@ const api = createApi({
         }),
         getAllLessons: builder.query({
             query: () => ({
-                url: `/api/lessons`,
+                url: `/teacherLesson/lessons`,
                 method: 'GET'
             }),
             providesTags: ["Lesson"]
         }),
         getSingleLesson: builder.query({
             query: (id) => ({
-                url: `/api/lesson/${id}`,
+                url: `/teacherLesson/lesson/${id}`,
                 method: 'GET'
             }),
             providesTags: ["Lesson"]
@@ -189,7 +189,7 @@ const api = createApi({
         //<------------LEARNING OBJECTIVES------------>
         postNewObjective: builder.mutation({
             query: ({ id, objectiveName }) => ({
-                url: `/api/objective`,
+                url: `/teacherObjective/objective`,
                 method: 'POST',
                 body: { id, objectiveName },
             }),
@@ -197,14 +197,14 @@ const api = createApi({
         }),
         getAllObjectives: builder.query({
             query: () => ({
-                url: `/api/my_lesson-objecives`,
+                url: `/teacherObjective/my_lesson-objecives`,
                 method: 'GET'
             }),
             providesTags: ["Objective"]
         }),
         getSingleObjective: builder.query({
             query: (id) => ({
-                url: `/api/lesson/objective/${id}`,
+                url: `/teacherObjective/lesson/objective/${id}`,
                 method: 'GET'
             }),
             providesTags: ["Objective"]
@@ -212,14 +212,14 @@ const api = createApi({
         //<------------STUDNET PROGRESS------------>
         getAllProgress: builder.query({
             query: () => ({
-                url: `/api/progress`,
+                url: `/teacherProgress/progress`,
                 method: 'GET'
             }),
             providesTags: ["Progress"]
         }),
         postProgress: builder.mutation({
             query: ({ studentId, objectiveId, progressPercent, combinedObjectiveId }) => ({
-                url: `/api/studentProgress`,
+                url: `/teacherProgress/studentProgress`,
                 method: 'POST',
                 body: { studentId, objectiveId, progressPercent, combinedObjectiveId },
             }),
@@ -228,35 +228,35 @@ const api = createApi({
         //<------------ALL DELETE------------>
         deleteClass: builder.mutation({
             query: (id) => ({
-                url: `/api/delete_class/${id}`,
+                url: `/teacherClass/delete_class/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         deleteStudent: builder.mutation({
             query: (id) => ({
-                url: `/api/delete_student/${id}`,
+                url: `/teacherStudents/delete_student/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         deleteLesson: builder.mutation({
             query: (id) => ({
-                url: `/api/delete_lesson/${id}`,
+                url: `/teacherLesson/delete_lesson/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         deleteObjective: builder.mutation({
             query: (id) => ({
-                url: `/api/delete_objective/${id}`,
+                url: `/teacherObjective/delete_objective/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
         deleteProgress: builder.mutation({
             query: (id) => ({
-                url: `/api/delete_progress/${id}`,
+                url: `/teacherProgress/delete_progress/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
@@ -269,10 +269,10 @@ const api = createApi({
                 body: { attendance, lessonId, studentId }
             })
         }),
-          //<------------ASSIGNMENTS------------>
-          teacherPostAssignment: builder.mutation({
+        //<------------ASSIGNMENTS------------>
+        teacherPostAssignment: builder.mutation({
             query: ({ name, task, classId, lessonId }) => ({
-                url: `/api/new_assignment`,
+                url: `/teacherAssignment/new_assignment`,
                 method: "POST",
                 body: { name, task, classId, lessonId }
             }),

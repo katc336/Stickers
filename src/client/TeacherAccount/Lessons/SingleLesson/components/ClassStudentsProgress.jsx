@@ -99,13 +99,13 @@ const ClassStudentsProgress = ({ id }) => {
                                                         <button
                                                             onClick={() => setDelteProgressAlert(false)}
                                                             className="add-button"
-                                                            style={{ width: "150px" }}>
+                                                            style={{ width: "150px", margin: "10px" }}>
                                                             Keep Progress
                                                         </button>
                                                         <button
                                                             onClick={() => deleteProgress(progress.id)}
                                                             className="delete-button"
-                                                            style={{ width: "150px" }}>
+                                                            style={{ width: "150px", margin: "10px" }}>
                                                             Delete Forever
                                                         </button>
                                                     </Stack>
