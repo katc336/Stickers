@@ -49,7 +49,7 @@ const TeacherNavDrawer = () => {
                     </Button>
                 </Link>
                 <Link to="/assignments">
-                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/student_codes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
+                    <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/assignments" ? "5px solid orange" : "", borderRadius: "50px"  }}>
                        Assignments
                     </Button>
                 </Link>

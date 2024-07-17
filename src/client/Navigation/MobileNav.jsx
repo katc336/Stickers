@@ -74,11 +74,11 @@ const MobileNav = () => {
                                                 Teachers
                                             </Button>
                                         </Link>
-                                        <Link to="/about_parents">
+                                        {/* <Link to="/about_parents">
                                             <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 1, textDecoration: activePage === "/about_parents" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Parents
                                             </Button>
-                                        </Link>
+                                        </Link> */}
                                         <Link to="/story">
                                             <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mt: 1, textDecoration: activePage === "/story" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Story
