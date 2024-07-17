@@ -23,7 +23,7 @@ apiRouter.patch("/add_profile", requireUser, async (req, res, next) => {
             }
         });
         delete updatedUser.password;
-        res.json({ message: "Profile image added successfully" });
+        res.send({ message: "Profile image added successfully" });
     } catch (error) {
         next(error);
     }

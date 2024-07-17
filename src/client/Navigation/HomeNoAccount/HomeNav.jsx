@@ -35,13 +35,13 @@ const HomeNav = () => {
                             </Typography>
                         </Button>
                     </Link>
-                    <Link to="/about_parents">
+                    {/* <Link to="/about_parents">
                         <Button sx={{ color: "white", textTransform: "none", ml: 10, mt: 1.5, textDecoration: activePage === "/about_parents" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
                                 Parents
                             </Typography>
                         </Button>
-                    </Link>
+                    </Link> */}
                     <Link to="/story">
                         <Button sx={{ color: "white", textTransform: "none", mt: 1.5, textDecoration: activePage === "/story" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                             <Typography variant="h6">
