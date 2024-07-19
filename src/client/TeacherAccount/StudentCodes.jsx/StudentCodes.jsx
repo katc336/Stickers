@@ -58,18 +58,18 @@ const StudentCodes = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={isMobile ? 5 : 6}>
-                                    <Stack direction="row">
+                                    <Stack direction={isMobile ? "column" : "row"}>
                                         <Typography sx={{ p: 0.5 }}>
                                             Student Code:
                                         </Typography>
-                                        <Typography sx={{ mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
+                                        <Typography sx={{ textAlign: "center", mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
                                             {student.studentCode}
                                         </Typography>
-                                        <Stack direction="row">
-                                            <Typography sx={{ p: 0.5 }}>
+                                        <Stack direction={isMobile ? "column" : "row"}>
+                                            <Typography sx={{ mt: isMobile ? 2 : 0, p: 0.5 }}>
                                                 Parent Code:
                                             </Typography>
-                                            <Typography sx={{ mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
+                                            <Typography sx={{ textAlign: "center", mx: 1, p: 0.5, color: "#850202", backgroundColor: "#fafd99", borderRadius: "20px" }}>
                                                 {student.parentCode}
                                             </Typography>
                                         </Stack>

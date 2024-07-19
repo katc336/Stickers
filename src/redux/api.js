@@ -270,11 +270,21 @@ const api = createApi({
             })
         }),
         //<------------ASSIGNMENTS------------>
+        //Teacher Assignment
         teacherPostAssignment: builder.mutation({
             query: ({ name, task, classId, lessonId }) => ({
                 url: `/teacherAssignment/new_assignment`,
                 method: "POST",
                 body: { name, task, classId, lessonId }
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
+        //Student Assignment
+        studentPostSubmission: builder.mutation({
+            query: ({ name, content, assignmentId, studentId }) => ({
+                url: `/teacherAssignment/new_assignment`,
+                method: "POST",
+                body: { name, content, assignmentId, studentId }
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         })
@@ -327,4 +337,5 @@ export const {
     useUpdateAttendanceMutation,
     //Assignments
     useTeacherPostAssignmentMutation,
+    useStudentPostSubmissionMutation,
 } = api
