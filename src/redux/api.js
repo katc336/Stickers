@@ -272,10 +272,10 @@ const api = createApi({
         //<------------ASSIGNMENTS------------>
         //Teacher Assignment
         teacherPostAssignment: builder.mutation({
-            query: ({ name, task, classId, lessonId }) => ({
+            query: ({ name, task, dueDate, dueTime, classId, lessonId }) => ({
                 url: `/teacherAssignment/new_assignment`,
                 method: "POST",
-                body: { name, task, classId, lessonId }
+                body: { name, task, dueDate, dueTime, classId, lessonId }
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
