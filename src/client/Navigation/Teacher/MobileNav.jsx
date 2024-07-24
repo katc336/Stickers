@@ -94,36 +94,41 @@ const MobileNav = () => {
                                 :
                                 <div>
                                     <Stack
-                                        sx={{ mt: 3, ml: 1 }}
+                                        sx={{ mt: 3, ml: 1, }}
                                         direction="column">
                                         <Link to="/dashboard">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", mt: 5, mb: 1, color: "white", textDecoration: activePage === "/dashboard" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", mt: 5, mb: 1, color: "white", textDecoration: activePage === "/dashboard" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Home
                                             </Button>
                                         </Link>
                                         <Link to="/progress">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/progress" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/progress" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 Progress Overview
                                             </Button>
                                         </Link>
                                         <Link to="/my_classes">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_classes" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_classes" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 My Classes
                                             </Button>
                                         </Link>
                                         <Link to="/my_students">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_students" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_students" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 My Students
                                             </Button>
                                         </Link>
                                         <Link to="/my_lessons">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_lessons" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/my_lessons" ? "orange wavy underline" : "", borderRadius: "50px" }}>
                                                 My Lessons
                                             </Button>
                                         </Link>
+                                        <Link to="/assignments">
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/assignments" ? "5px solid orange" : "", borderRadius: "50px" }}>
+                                                Assignments
+                                            </Button>
+                                        </Link>
                                         <Link to="/student_codes">
-                                            <Button sx={{ fontSize: 24, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/student_codes" ? "orange wavy underline" : "", borderRadius: "50px" }}>
-                                                Parents
+                                            <Button sx={{ fontSize: 18, textTransform: "none", color: "white", mb: 1, textDecoration: activePage === "/student_codes" ? "orange wavy underline" : "", borderRadius: "50px" }}>
+                                                Parent/Student Codes
                                             </Button>
                                         </Link>
                                     </Stack>

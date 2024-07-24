@@ -14,7 +14,7 @@ import SingleLesson from "./TeacherAccount/Lessons/SingleLesson/SingleLesson";
 import AllProgress from "./TeacherAccount/AllProgress/AllProgress";
 import HowToGetStarted from "./Home/InformationPages/HowToGetStarted/HowToGetStarted";
 import Story from "./Home/InformationPages/Story/Story";
-import MobileNav from "./Navigation/MobileNav";
+import MobileNav from "./Navigation/Teacher/MobileNav";
 import TeacherNavDrawer from "./Navigation/Teacher/TeacherNavDrawer";
 import StudentCodes from "./TeacherAccount/StudentCodes.jsx/StudentCodes";
 import RegisterPage from "./Authorization/RegisterPage";

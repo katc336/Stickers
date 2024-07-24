@@ -21,7 +21,7 @@ const MapAssignments = () => {
     return (
         <div>
             {data && data.map((className) => (
-                <Accordion>
+                <Accordion key={className.id}>
                     <AccordionSummary
                         expandIcon={<ArrowDownwardIcon />}
                         aria-controls="class-content"
@@ -31,7 +31,7 @@ const MapAssignments = () => {
                     <AccordionDetails>
                         <Typography>
                             {className.lessons.map((lesson) => (
-                                <div>
+                                <div key={lesson.id}>
                                     <Card sx={{ p: 1, m: 1 }}>
                                         <Typography variant="h6">{lesson.lessonName} </Typography>
                                         {lesson.Assignment.map((assignment) => (

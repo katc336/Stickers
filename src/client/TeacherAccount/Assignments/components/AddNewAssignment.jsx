@@ -26,7 +26,7 @@ const AddNewAssignment = ({ objectiveId }) => {
     const [selectedLessonName, setSelectedLessonName] = useState("");
     const [selectedDate, setSelectedDate] = useState(null);
     const [addNewAssignment] = useTeacherPostAssignmentMutation();
-
+console.log(selectedDate)
     const { data, error, isLoading } = useGetClassesQuery();
     if (isLoading) {
         return <div />
@@ -75,7 +75,6 @@ const AddNewAssignment = ({ objectiveId }) => {
     const handleLessonSelectAnchor = () => {
         setAnchorEl(null);
     };
-    console.log(data)
     return (
         <div>
             <button
