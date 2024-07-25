@@ -146,24 +146,16 @@ const AddNewAssignment = ({ objectiveId }) => {
                                 Assignment's Lesson: {selectedLessonName}
                             </Alert>}
                         <DatePicker
+                        sx={{ mr: 3 }}
                             label="Due Date"
                             onChange={(date) => setSelectedDate(date.$d.toISOString())}
-                            slotProps={{
-                                textField: {
-                                    helperText: 'MM/DD/YYYY',
-                                },
-                            }}
+                            slotProps={{ textField: { helperText: 'MM/DD/YYYY' } }}
                         />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <TimePicker
                                 onChange={(time) => setSelectedTime(time.$d.toISOString())}
                                 label="Select Time"
-                                viewRenderers={{
-                                    hours: renderTimeViewClock,
-                                    minutes: renderTimeViewClock,
-                                    seconds: renderTimeViewClock,
-                                }}
-                            />
+                                viewRenderers={{ hours: renderTimeViewClock, minutes: renderTimeViewClock, seconds: renderTimeViewClock }} />
                         </LocalizationProvider>
                         <TextField
                             fullWidth

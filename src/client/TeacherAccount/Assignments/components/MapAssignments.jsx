@@ -32,7 +32,7 @@ const MapAssignments = () => {
                         <Typography>
                             {className.lessons.map((lesson) => (
                                 <div key={lesson.id}>
-                                    <Card sx={{ p: 1, m: 1 }}>
+                                    <Card key={lesson.id} sx={{ p: 1, m: 1 }}>
                                         <Typography variant="h6">{lesson.lessonName} </Typography>
                                         {lesson.Assignment.map((assignment) => (
                                             <Button 
