@@ -11,6 +11,11 @@ import { DatePicker } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
 
 const AddNewAssignment = ({ objectiveId }) => {
     const theme = useTheme();
@@ -24,9 +29,10 @@ const AddNewAssignment = ({ objectiveId }) => {
     const [selectedLessonId, setSelectedLessonId] = useState(null);
     const [selectedLesson, setSelectedLesson] = useState(false);
     const [selectedLessonName, setSelectedLessonName] = useState("");
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [selectedTime, setSelectedTime] = useState("");
     const [addNewAssignment] = useTeacherPostAssignmentMutation();
-
+    console.log(selectedDate)
     const { data, error, isLoading } = useGetClassesQuery();
     if (isLoading) {
         return <div />
@@ -40,8 +46,15 @@ const AddNewAssignment = ({ objectiveId }) => {
             if (assignmentName.trim() === "" || assignmentName.length > 50 || task.trim() === "") {
                 setAddError(true);
             } else {
-                const result = await addNewAssignment({ name: assignmentName, task, dueDate: selectedDate.$d, classId: Number(selectedClassId), lessonId: Number(selectedLessonId) })
-                console.log(result)
+                const result = await addNewAssignment({
+                    name: assignmentName,
+                    task,
+                    dueDate: selectedDate,
+                    dueTime: selectedTime,
+                    classId: Number(selectedClassId),
+                    lessonId: Number(selectedLessonId)
+                });
+                console.log(result);
                 if (result.data) {
                     setAddError(false);
                     setAssignmentName("");
@@ -53,7 +66,7 @@ const AddNewAssignment = ({ objectiveId }) => {
                 }
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
     const handleOpenClass = () => {
@@ -75,7 +88,7 @@ const AddNewAssignment = ({ objectiveId }) => {
     const handleLessonSelectAnchor = () => {
         setAnchorEl(null);
     };
-    console.log(data)
+    console.log(selectedTime);
     return (
         <div>
             <button
@@ -133,15 +146,17 @@ const AddNewAssignment = ({ objectiveId }) => {
                                 Assignment's Lesson: {selectedLessonName}
                             </Alert>}
                         <DatePicker
-                            value={selectedDate}
+                        sx={{ mr: 3 }}
                             label="Due Date"
-                            onChange={(date) => setSelectedDate(date)}
-                            slotProps={{
-                                textField: {
-                                    helperText: 'MM/DD/YYYY',
-                                },
-                            }}
+                            onChange={(date) => setSelectedDate(date.$d.toISOString())}
+                            slotProps={{ textField: { helperText: 'MM/DD/YYYY' } }}
                         />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <TimePicker
+                                onChange={(time) => setSelectedTime(time.$d.toISOString())}
+                                label="Select Time"
+                                viewRenderers={{ hours: renderTimeViewClock, minutes: renderTimeViewClock, seconds: renderTimeViewClock }} />
+                        </LocalizationProvider>
                         <TextField
                             fullWidth
                             label="Assignment Name"

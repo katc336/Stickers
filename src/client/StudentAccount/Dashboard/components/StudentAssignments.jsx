@@ -1,5 +1,7 @@
+import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
+import Stack from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import { useMediaQuery, useTheme } from "@mui/material";
 
@@ -13,13 +15,19 @@ const StudentAssignments = ({ assingmentData }) => {
                 elevation={10}
                 sx={{ borderRadius: "20px", p: isMobile ? 1 : 3, m: isMobile ? 1 : 3 }}>
                 {assingmentData.map((assignment) => (
-                    <div key={assignment.id}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }} key={assignment.id}>
                         <Grid container>
                             <Grid item xs={2}>
-                                <Typography>
-                                    {assignment.dueDate}
-                                </Typography>
+                                <Stack direction="column">
+                                    <Typography>
+                                        {new Date(assignment.dueDate).toLocaleDateString()}
+                                    </Typography>
+                                    <Typography>
+                                        {new Date(assignment.dueTime).toLocaleTimeString()}
+                                    </Typography>
+                                </Stack>
                             </Grid>
+
                             <Grid item xs={4}>
                                 <Typography>
                                     {assignment.name}
@@ -31,7 +39,7 @@ const StudentAssignments = ({ assingmentData }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                    </div>
+                    </Box>
                 ))}
             </Card>
         </div>

@@ -1,5 +1,6 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import WebAssignmentPage from "./WebAssignmentPage";
+import MobileAssignmentPage from "./MobileAssignmentPage";
 
 
 const AllAssignments = () => {
@@ -12,7 +13,7 @@ const AllAssignments = () => {
             {isMobile
                 ?
                 <div>
-                    
+                    <MobileAssignmentPage />
                 </div>
                 :
                 <div>

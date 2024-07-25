@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import AddNewAssignment from "./components/AddNewAssignment"
 import MapAssignments from "./components/MapAssignments"
 
-const WebAssignmentPage = () => {
+const MobileAssignmentPage = () => {
     // const { data, error, isLoading } = 
     // if (isLoading) {
     //     return <div></div>
@@ -20,7 +20,7 @@ const WebAssignmentPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeIn" }}>
-            <Box sx={{ ml: 20, mr: 3 }}>
+            <Box sx={{ mt: 15, ml: 1, mr: 1 }}>
                 <Card sx={{ borderRadius: "20px", p: 1 }} elevation={10}>
                     <Typography sx={{ textAlign: "center" }} variant="h3">
                         All Assignments:
@@ -34,4 +34,4 @@ const WebAssignmentPage = () => {
         </motion.div>
     )
 }
-export default WebAssignmentPage
+export default MobileAssignmentPage

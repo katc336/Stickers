@@ -55,7 +55,7 @@ const TeacherNavDrawer = () => {
                 </Link>
                 <Link to="/student_codes">
                     <Button sx={{ textTransform: "none", color: "#0A1D56", mx: 1, my: 3, border: activePage === "/student_codes" ? "5px solid orange" : "", borderRadius: "50px"  }}>
-                        Student Accounts
+                       Account Codes
                     </Button>
                 </Link>
             </Drawer>

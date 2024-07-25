@@ -45,6 +45,7 @@ model Assignment {
   name              String
   task              String
   dueDate           String?
+  dueTime           String?
   class             Class              @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId           Int
   submissions       Submission[]
