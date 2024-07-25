@@ -261,6 +261,13 @@ const api = createApi({
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
         }),
+        deleteAssignment: builder.mutation({
+            query: (id) => ({
+                url: `/teacherAssignment/delete_assignment/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
+        }),
         //<------------ATTENDANCE------------>
         updateAttendance: builder.mutation({
             query: ({ studentId, lessonId, attendance }) => ({
@@ -333,6 +340,7 @@ export const {
     useDeleteLessonMutation,
     useDeleteObjectiveMutation,
     useDeleteProgressMutation,
+    useDeleteAssignmentMutation,
     //Attendance
     useUpdateAttendanceMutation,
     //Assignments

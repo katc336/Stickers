@@ -15,7 +15,7 @@ const MyClasses = () => {
     const { data, error, isLoading } = useGetClassesQuery();
     const [deleteClass] = useDeleteClassMutation();
     if (isLoading) {
-        return <div></div>
+        return <div/>
     }
     if (error) {
         console.error(error)

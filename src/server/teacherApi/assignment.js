@@ -25,6 +25,20 @@ teacherAssignmentRouter.post('/new_assignment', requireUser, async (req, res, ne
         next(error);
     }
 });
+//<-----------------DELETE AN ASSIGNMENT----------------->
+teacherAssignmentRouter.delete("/delete_assignment/:id", requireUser, async (req, res, next) => {
+    try {
+        const deleteAssignment = await prisma.assignment.delete({
+            where: { id: Number(req.params.id) },
+        });
+        if (!deleteAssignment) {
+            return res.status(404).send("Assignment not found!");
+        }
+        res.send({ deleteAssignment, message: "Deleted!" });
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 module.exports = teacherAssignmentRouter;
