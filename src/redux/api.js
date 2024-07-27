@@ -294,7 +294,14 @@ const api = createApi({
                 body: { name, content, assignmentId, studentId }
             }),
             invalidatesTags: ["Class", "Student", "Lesson", "Objective"]
-        })
+        }),
+        getSingleAssignmentsForStudent: builder.query({
+            query: (id) => ({
+                url: `studentAssignment//student_submission/${id}`,
+                method: 'GET'
+            }),
+            providesTags: ["Assignment"]
+        }),
     })
 });
 export default api;
@@ -346,4 +353,5 @@ export const {
     //Assignments
     useTeacherPostAssignmentMutation,
     useStudentPostSubmissionMutation,
+    useGetSingleAssignmentsForStudentQuery,
 } = api

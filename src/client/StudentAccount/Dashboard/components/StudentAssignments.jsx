@@ -3,6 +3,7 @@ import Card from "@mui/material/Card"
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
+import { Link } from "react-router-dom"
 import { useMediaQuery, useTheme } from "@mui/material";
 
 const StudentAssignments = ({ assingmentData }) => {
@@ -27,16 +28,24 @@ const StudentAssignments = ({ assingmentData }) => {
                                     </Typography>
                                 </Stack>
                             </Grid>
-
                             <Grid item xs={4}>
                                 <Typography>
                                     {assignment.name}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={4}>
                                 <Typography>
                                     {assignment.task}
                                 </Typography>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Link to={`/account_student/assignment/${assignment.id}`}>
+                                    <button className="details-button">
+                                        <Typography>
+                                            See Assignment
+                                        </Typography>
+                                    </button>
+                                </Link>
                             </Grid>
                         </Grid>
                     </Box>

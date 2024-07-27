@@ -25,6 +25,7 @@ import StudentDashboard from "./StudentAccount/Dashboard/StudentDashboard";
 import ParentNavDrawer from "./Navigation/Parent/ParentNavDrawer";
 import StudentNavDrawer from "./Navigation/Student/StudentNaveDrawer"
 import AllAssignments from "./TeacherAccount/Assignments/AllAssignments";
+import PostSubmission from "./StudentAccount/Assignments/PostSubmission";
 
 function App() {
   const token = useSelector((state) => state.auth.token);
@@ -47,8 +48,8 @@ function App() {
           <TeacherNavDrawer />
           : (!studentNav && token)
             ? <ParentNavDrawer />
-            : (!parentNav && token) 
-            ? <StudentNavDrawer />
+            : (!parentNav && token)
+              ? <StudentNavDrawer />
               : <HomeNav />
       }
       <Routes>
@@ -76,6 +77,7 @@ function App() {
         <Route path="/account_parent" element={<ParentDashboard />} />
         {/* Students's Account Page Paths */}
         <Route path="/account_student" element={<StudentDashboard />} />
+        <Route path="/account_student/assignment/:id" element={<PostSubmission />} />
       </Routes>
     </div>
   );

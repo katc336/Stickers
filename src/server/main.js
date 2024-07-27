@@ -31,6 +31,7 @@ app.use("/teacherLesson", require("./teacherApi/lesson"));
 app.use("/teacherObjective", require("./teacherApi/objective"));
 app.use("/teacherProgress", require("./teacherApi/progress"));
 app.use("/teacherAssignment", require("./teacherApi/assignment"));
+app.use("/studentAssignment", require("./studentApi/studentAssignment"));
 
 
 app.use((error, req, res, next) => {

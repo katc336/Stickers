@@ -12,7 +12,6 @@ import AddLessonButton from "./components/AddLessonButton"
 
 const WebSingleClass = () => {
     const { id } = useParams()
-
     const { data, error, isLoading } = useGetSingleClassQuery(id)
     if (isLoading) {
         return <div></div>
