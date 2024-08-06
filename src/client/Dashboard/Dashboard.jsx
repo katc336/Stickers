@@ -3,10 +3,8 @@ import MobileDashboard from "./MobileDashboard";
 import WebDashboard from "./WebDashboard";
 
 const Dashboard = () => {
-
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
     return (
         <div>
             {isMobile

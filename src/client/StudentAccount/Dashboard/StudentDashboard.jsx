@@ -19,8 +19,8 @@ const StudentDashboard = () => {
     return (
         <div>
             <Box sx={{ mt: isMobile ? 15 : 0, mx: isMobile ? 0 : 20 }}>
-                <StudentHelloCard name={data.student.name} />
-            <StudentAssignments assingmentData={data.student.class.Assignment} />
+                <StudentHelloCard name={data && data.student.name} />
+            <StudentAssignments assingmentData={data && data.student.class.Assignment} />
             </Box>
         </div>
     )

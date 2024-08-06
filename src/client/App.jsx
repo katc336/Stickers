@@ -36,7 +36,7 @@ function App() {
   const hideNavDrawer = HomeNoAccountPages.includes(location.pathname);
   const ParentPages = ["/account_parent",];
   const parentNav = ParentPages.includes(location.pathname);
-  const StudentPages = ["/account_student",];
+  const StudentPages = ["/account_student","/account_student/assignment/:id"];
   const studentNav = StudentPages.includes(location.pathname);
 
   return (
